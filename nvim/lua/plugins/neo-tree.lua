@@ -66,5 +66,12 @@ require('neo-tree').setup({
         end
       end,
     },
+    {
+      event = "file_opened",
+      handler = function(file_path)
+        --auto close
+        require("neo-tree").focus()
+      end
+    }
   },
 })

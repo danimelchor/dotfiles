@@ -1,0 +1,5 @@
+require('globals')
+require('settings')
+require('plugins')
+require('commands')
+require('keyboard')

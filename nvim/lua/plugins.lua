@@ -91,7 +91,7 @@ packer.startup(function(use)
             'hrsh7th/cmp-vsnip',
             'hrsh7th/vim-vsnip'
         },
-        config = function() require('plugins/completion') end,
+        config = function() require('plugins.completion') end,
     }
 
     -- Autmomatically complete quotes or parens
@@ -107,11 +107,9 @@ packer.startup(function(use)
         'JoosepAlviste/nvim-ts-context-commentstring'
     }
 
-    -- Comment out lines 
-    use 'tpope/vim-commentary'
-
-    -- Wrap selection around chars
-    use 'tpope/vim-surround'
+    
+    use 'tpope/vim-commentary' -- Comment out lines 
+    use 'tpope/vim-surround' -- Wrap selection around chars
 
     -- File tree
     use {

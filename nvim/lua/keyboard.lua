@@ -21,10 +21,19 @@ km.set('n', 'gs', '<Cmd>lua require("lspsaga.signaturehelp").signature_help()<CR
 km.set('n', 'ge', '<Cmd>lua require("lspsaga.diagnostic").show_cursor_diagnostics()<CR>', opts)
 
 -- Neo tree
-km.set('n', '<LEADER>n', '<CMD>:Neotree toggle filesystem left<CR>')
+km.set('n', '<LEADER>n', function()
+    local windowsOpened = vim.api.nvim_command_output("echo map(range(1, winnr('$')), 'getwinvar(v:val, \"&ft\")')")
+    local isNerdTreeFocused = vim.api.nvim_command_output("echo &ft") == "neo-tree"
+    local isNertTreeOpened = string.find(windowsOpened, "neo%-tree")
+
+    if isNertTreeOpened and isNerdTreeFocused
+    then vim.cmd(':Neotree close')
+    else vim.cmd(':Neotree show focus filesystem left')
+    end
+end)
 
 -- Git
-km.set('n', '<LEADER>gb', '<Cmd>:VGit toggle_live_blame<CR>')
+km.set('n', '<LEADER>gb', '<Cmd>:GitBlameToggle<CR>')
 
 -- Terminal
 km.set('n', '<LEADER>t', '<Cmd>:ToggleTerm size=15 direction=horizontal<CR>')

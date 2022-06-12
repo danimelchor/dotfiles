@@ -19,7 +19,6 @@ require'lspconfig'.html.setup({
 
 require'lspconfig'.tsserver.setup({
   capabilities = capabilities,
-  filetypes = { "typescript", "typescriptreact", "typescript.tsx" }
 })
 
 require'lspconfig'.sumneko_lua.setup({
@@ -28,10 +27,6 @@ require'lspconfig'.sumneko_lua.setup({
 
 require'lspconfig'.diagnosticls.setup({
   capabilities = capabilities,
-})
-
-require'lspconfig'.eslint.setup({
-  capabilities = capabilities
 })
 
 require'lspconfig'.jsonls.setup({

@@ -142,7 +142,10 @@ packer.startup(function(use)
         "lewis6991/gitsigns.nvim",
         config = function() require('gitsigns').setup() end
     }
-    use "f-person/git-blame.nvim"
+    use {
+        "f-person/git-blame.nvim",
+        config = function() require('plugins.git-blame') end
+    }
     use "rhysd/conflict-marker.vim"
 
     -- Git diffs

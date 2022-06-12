@@ -2,8 +2,15 @@ local km = vim.keymap
 
 km.set('n','<SPACE>','<Nop>')
 
--- Search files
-km.set('n', '<LEADER>ff', '<Cmd>:GFiles<CR>')
+-- Search files with GFiles fallback
+km.set('n', '<LEADER>ff', function()
+    local isInGitRepo = vim.api.nvim_command_output("echo (len(system('git rev-parse --is-inside-work-tree')) == 5)")
+
+    if isInGitRepo == "1"
+    then vim.cmd(":GFiles")
+    else vim.cmd(":Files")
+    end
+end)
 km.set('n', '<LEADER>fw', '<Cmd>:Rg<CR>')
 
 -- Syntax

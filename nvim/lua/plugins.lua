@@ -29,6 +29,8 @@ packer.startup(function(use)
     use "nathom/filetype.nvim" -- Better filetype
     use "nvim-lua/plenary.nvim" -- Necessary dependency
     use 'kyazdani42/nvim-web-devicons' -- Cool icons
+    use "antoinemadec/FixCursorHold.nvim" -- Fix cursor holds
+    use 'RRethy/vim-illuminate' -- Iluminate words like the one you are hovering
 
     -- Line at the bottom with status
     use {
@@ -45,6 +47,7 @@ packer.startup(function(use)
         config = function() require('plugins.fzf') end,
     }
     
+    -- LSP Stuff
     use {
         'jose-elias-alvarez/null-ls.nvim',
         config = function() require('plugins.null-ls') end,
@@ -57,19 +60,15 @@ packer.startup(function(use)
         config = function() require("plugins.nvim-lsp-installer") end
     }
 
-    -- LSP Stuff
     use {
         'neovim/nvim-lspconfig',
         config = function() require('plugins.nvim-lspconfig') end
     }
     use {
-        'tami5/lspsaga.nvim',
-        config = function() require('plugins.lspsaga') end
-    }
-    use {
         'folke/lsp-colors.nvim',
         'onsails/lspkind-nvim',
-        requires = 'kyazdani42/nvim-web-devicons',
+        'ray-x/lsp_signature.nvim',
+        'tamago324/nlsp-settings.nvim',
     }
 
     -- Syntax plugin
@@ -140,12 +139,11 @@ packer.startup(function(use)
 
     -- Git blame and gutters
     use {
-        'tanvirtin/vgit.nvim',
-        requires = {
-            'nvim-lua/plenary.nvim'
-        },
-        config = function() require('plugins.vgit') end
+        "lewis6991/gitsigns.nvim",
+        config = function() require('gitsigns').setup() end
     }
+    use "f-person/git-blame.nvim"
+    use "rhysd/conflict-marker.vim"
 
     -- Git diffs
     use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }

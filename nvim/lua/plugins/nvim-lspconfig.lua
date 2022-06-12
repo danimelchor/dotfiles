@@ -1,5 +1,5 @@
 local nvim_lsp = require('lspconfig')
-local protocol = require'vim.lsp.protocol'
+local protocol = require('vim.lsp.protocol')
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(
   protocol.make_client_capabilities()
@@ -36,8 +36,8 @@ require'lspconfig'.eslint.setup({
 
 require'lspconfig'.jsonls.setup({
   capabilities = capabilities,
-}
+})
 
 require'lspconfig'.vimls.setup({
   capabilities = capabilities,
-}))
+})

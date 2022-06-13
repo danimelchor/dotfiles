@@ -32,6 +32,24 @@ packer.startup(function(use)
     use "antoinemadec/FixCursorHold.nvim" -- Fix cursor holds
     use 'RRethy/vim-illuminate' -- Iluminate words like the one you are hovering
 
+
+    -- Auto save files
+    use {
+        "Pocco81/AutoSave.nvim",
+        config = function() require("autosave").setup() end
+    }
+
+    -- Hightlight color codes with their code #ff00ff
+    use {
+        'norcalli/nvim-colorizer.lua',
+        config = function() require('colorizer').setup() end
+    }
+    use {
+        'akinsho/bufferline.nvim',
+        tag = "v2.*",
+        config = function() require('plugins.bufferline') end
+    }
+
     -- Line at the bottom with status
     use {
         'nvim-lualine/lualine.nvim',
@@ -46,7 +64,7 @@ packer.startup(function(use)
         requires = { 'junegunn/fzf', run = vim.fn['fzf#install'] },
         config = function() require('plugins.fzf') end,
     }
-    
+
     -- LSP Stuff
     use {
         'jose-elias-alvarez/null-ls.nvim',
@@ -107,7 +125,6 @@ packer.startup(function(use)
         'JoosepAlviste/nvim-ts-context-commentstring'
     }
 
-    
     use 'tpope/vim-commentary' -- Comment out lines 
     use 'tpope/vim-surround' -- Wrap selection around chars
 

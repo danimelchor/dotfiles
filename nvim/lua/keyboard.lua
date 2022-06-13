@@ -42,6 +42,7 @@ km.set('n', '<LEADER>t', '<Cmd>:ToggleTerm size=15 direction=horizontal<CR>')
 km.set('n','<LEADER>o','o<ESC>k')
 km.set('n','<LEADER>O','O<ESC>j')
 km.set('n','<LEADER>q','<Cmd>:tabclose<CR>')
+km.set('n','<LEADER>r','<Cmd>:Run<CR>')
 
 -- Wrap around keys
 km.set('v','<LEADER>"','di"<ESC>gpa"<ESC>')
@@ -50,11 +51,16 @@ km.set('v','<LEADER>(','di(<ESC>gpa)<ESC>')
 km.set('v','<LEADER>[','di[<ESC>gpa]<ESC>')
 km.set('v','<LEADER>{','di{<ESC>gpa}<ESC>')
 
--- Switch between tab
+-- Switch between splits 
 km.set('n', '<S-Up>', '<C-W>k')
 km.set('n', '<S-Right>', '<C-W>l')
 km.set('n', '<S-Left>', '<C-W>h')
 km.set('n', '<S-Down>', '<C-W>j')
+
+-- Switch between tabs
+km.set('n', '<TAB>', '<Cmd>:BufferLineCycleNext<CR>')
+km.set('n', '<S-TAB>', '<Cmd>:BufferLineCyclePrev<CR>')
+km.set('n', 'g<TAB>', '<Cmd>:BufferLinePick<CR>')
 
 -- For practice
 km.set('n', '<UP>', '<Nop>')

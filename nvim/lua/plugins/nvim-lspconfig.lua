@@ -36,3 +36,7 @@ require'lspconfig'.jsonls.setup({
 require'lspconfig'.vimls.setup({
   capabilities = capabilities,
 })
+
+require'lspconfig'.golangci_lint_ls.setup({
+  capabilities = capabilities
+})

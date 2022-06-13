@@ -12,5 +12,16 @@ null_ls.setup({
     },
     formatting.black.with { extra_args = { "--fast" } },
     formatting.stylua,
+    formatting.rubocop,
+    formatting.codespell,
+    formatting.goftm,
+    diagnostics.eslint,
+    diagnostics.codespell,
+    diagnostics.flake8,
+    diagnostics.golangci_lint,
+    diagnostics.jsonlint,
+    diagnostics.luacheck,
+    diagnostics.rubocop,
+  diagnostics.yamllint
   },
 })

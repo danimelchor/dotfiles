@@ -15,6 +15,7 @@ null_ls.setup({
     formatting.rubocop,
     formatting.codespell,
     formatting.goftm,
+    formatting.scalafmt,
     diagnostics.eslint,
     diagnostics.codespell,
     diagnostics.flake8,
@@ -22,6 +23,6 @@ null_ls.setup({
     diagnostics.jsonlint,
     diagnostics.luacheck,
     diagnostics.rubocop,
-  diagnostics.yamllint
+    diagnostics.yamllint
   },
 })

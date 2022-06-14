@@ -121,6 +121,8 @@ alias proj="cd ~/Documents/CodeProjects"
 alias c="clear"
 alias e="exit"
 alias v="nvim"
+alias zoo="cd ~/stripe/zoolander"
+alias ps="cd ~/stripe/pay-server"
 
 export EDITOR="nvim"
 

@@ -20,7 +20,7 @@ require'nvim-treesitter.configs'.setup {
   autopairs = {
     enable = true
   },
-  hightlight = {
+  highlight = {
     enable = true,
     additional_vim_regex_highlighting = true
   },
@@ -33,9 +33,6 @@ require'nvim-treesitter.configs'.setup {
   rainbow = {
     enable = true,
     extended_mode = false,
-  },
-  indent = {
-    enable = true
   },
   endwise = {
     enable = true

@@ -30,7 +30,7 @@ packer.startup(function(use)
     use "nvim-lua/plenary.nvim" -- Necessary dependency
     use 'kyazdani42/nvim-web-devicons' -- Cool icons
     use "antoinemadec/FixCursorHold.nvim" -- Fix cursor holds
-    use 'RRethy/vim-illuminate' -- Iluminate words like the one you are hovering
+    use 'RRethy/vim-illuminate' -- Illuminate words like the one you are hovering
 
     -- Auto save files
     use {

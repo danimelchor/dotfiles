@@ -10,6 +10,8 @@ prompt() {
 
 INSTALL_DIR=$( dirname -- "$0"; )
 
+echo "Install dir: $INSTALL_DIR"
+
 # nvim
 prompt "Do you want to install my nvim config?"
 if [ "$result" = true ]; then
@@ -25,5 +27,7 @@ fi
 # zshrc
 prompt "Do you want to install my .zshrc?"
 if [ "$result" = true ]; then
+  [ -f ~/.zshrc.old ] rm ~/.zshrc
+  [ -f ~/.zshrc ] mv ~/.zshrc ~/.zshrc.old
   ln -s $INSTALL_DIR/.zshrc ~/.zshrc
 fi

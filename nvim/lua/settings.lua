@@ -27,9 +27,10 @@ opt.tabstop = 4
 opt.expandtab = true
 opt.fileencoding = 'utf-8'
 opt.wrap = true
-g.mapleader = " "
 opt.mouse = "a"
+opt.clipboard = "unnamed"
 
+g.mapleader = " "
 -- Theme settings
 opt.termguicolors = true
 g.sonokai_style = 'andromeda'

@@ -31,6 +31,7 @@ packer.startup(function(use)
     use 'kyazdani42/nvim-web-devicons' -- Cool icons
     use "antoinemadec/FixCursorHold.nvim" -- Fix cursor holds
     use 'RRethy/vim-illuminate' -- Illuminate words like the one you are hovering
+    use 'farmergreg/vim-lastplace' -- Remember last cursor place
 
     -- Auto save files
     use {

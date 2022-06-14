@@ -124,16 +124,16 @@ packer.startup(function(use)
         'JoosepAlviste/nvim-ts-context-commentstring'
     }
 
-    use 'tpope/vim-commentary' -- Comment out lines 
+    use 'tpope/vim-commentary' -- Comment out lines
     use 'tpope/vim-surround' -- Wrap selection around chars
 
     -- File tree
     use {
         'nvim-neo-tree/neo-tree.nvim',
         branch = "v2.x",
-        requires = { 
+        requires = {
             "nvim-lua/plenary.nvim",
-            "kyazdani42/nvim-web-devicons", 
+            "kyazdani42/nvim-web-devicons",
             "MunifTanjim/nui.nvim",
         },
         config = function() require('plugins.neo-tree') end

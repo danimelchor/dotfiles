@@ -51,7 +51,7 @@ km.set('v','<LEADER>(','di(<ESC>gpa)<ESC>')
 km.set('v','<LEADER>[','di[<ESC>gpa]<ESC>')
 km.set('v','<LEADER>{','di{<ESC>gpa}<ESC>')
 
--- Switch between splits 
+-- Switch between splits
 km.set('n', '<S-Up>', '<C-W>k')
 km.set('n', '<S-Right>', '<C-W>l')
 km.set('n', '<S-Left>', '<C-W>h')

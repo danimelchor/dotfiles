@@ -25,4 +25,5 @@ fi
 # zshrc
 prompt "Do you want to install my .zshrc?"
 if [ "$result" = true ]; then
+  ln -s $INSTALL_DIR/.zshrc ~/.zshrc
 fi

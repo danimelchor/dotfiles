@@ -8,7 +8,7 @@ prompt() {
   done
 }
 
-INSTALL_DIR=$( dirname -- "$0"; )
+INSTALL_DIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 echo "Install dir: $INSTALL_DIR"
 

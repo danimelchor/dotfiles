@@ -17,6 +17,6 @@ if [ "$result" = true ]; then
   git clone --depth 1 https://github.com/wbthomason/packer.nvim $packer_path
   nvim_dir="$(pwd)/nvim"
   cd ~/.config
-  [ -d "nvim" ] && mv ./nvim ./nvim.old 
+  [ -d "nvim" ] && mv -f ./nvim ./nvim.old 
   ln -s $nvim_dir
 fi

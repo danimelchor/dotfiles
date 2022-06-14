@@ -2,8 +2,8 @@ prompt() {
   echo $1 
   select yn in "Yes" "No"; do
     case $yn in
-      Yes ) result = true;;
-      No ) result = false;;
+      Yes ) result = true; break;;
+      No ) result = false; break;;
     esac
   done
 }

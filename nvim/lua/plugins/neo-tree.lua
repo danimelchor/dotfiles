@@ -57,6 +57,9 @@ require('neo-tree').setup({
       position = "float",
     },
   },
+  buffers = {
+    follow_current_file = true,
+  },
   event_handlers = {
     {
       event = "vim_buffer_enter",
@@ -69,8 +72,13 @@ require('neo-tree').setup({
     {
       event = "file_opened",
       handler = function(file_path)
-        --auto close
         require("neo-tree").focus()
+      end
+    },
+    {
+      event = "vim_win_enter",
+      handler = function(file_path)
+        require("neo-tree").close_all()
       end
     }
   },

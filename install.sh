@@ -18,7 +18,7 @@ if [ "$result" = true ]; then
   ! [ -x "$(command -v nvim)" ] && brew install nvim
   rm -rf ~/.local/share/nvim/site/pack/packer/start/packer.nvim
   git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-  [ -d ~./config/nvim.old ] && rm -rf ~/.config/nvim.old
+  [ -d ~/.config/nvim.old ] && rm -rf ~/.config/nvim.old
   [ -d ~/.config/nvim ] && mv -f ~/.config/nvim ~/.config/nvim.old 
   cp -R $INSTALL_DIR/nvim ~/.config/nvim
   mkdir -p ~/.config/nvim/undo

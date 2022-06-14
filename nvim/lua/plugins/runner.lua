@@ -10,7 +10,8 @@ local run_command_table = {
     ['sh'] = 'sh %',
     ['rust'] = 'rustc % && ./%:r',
     ['go'] = 'go run %',
-    ['javascript'] = 'node %'
+    ['javascript'] = 'node %',
+    ['ruby'] = 'ruby %'
 }
 
 local extra = 'echo \"\\\\n\\\\033[0;33mPlease press ENTER to continue \\\\033[0m\"; read; exit;'

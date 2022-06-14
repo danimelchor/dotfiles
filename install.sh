@@ -17,5 +17,5 @@ if [ "$result" = true ]; then
   cd ~/.config
   [ -d "nvim" ] && mv ./nvim ./nvim.old 
   rm nvim
-  ln -s $nvim_dird ~/.config
+  ln -s $nvim_dir
 fi

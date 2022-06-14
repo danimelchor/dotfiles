@@ -27,7 +27,9 @@ fi
 # zshrc
 prompt "Do you want to install my .zshrc?"
 if [ "$result" = true ]; then
+  ! [ -x "$(command -v p10k)" ] && git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
   [ -f ~/.zshrc.old ] && rm ~/.zshrc
   [ -f ~/.zshrc ] && mv ~/.zshrc ~/.zshrc.old
-  cp $INSTALL_DIR/.zshrc ~/.zshrc
+  cp $INSTALL_DIR/zshrc/.zshrc ~/.zshrc
+  cp $INSTALL_DIR/zshrc/.p10k.zsh ~/.p10k.zsh
 fi

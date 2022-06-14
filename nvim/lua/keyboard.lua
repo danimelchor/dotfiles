@@ -15,10 +15,10 @@ km.set('n', '<LEADER>fw', '<Cmd>:Rg<CR>')
 
 -- Syntax
 local opts = { noremap=true, silent=true }
-km.set('n', 'gd', '<Cmd>lua require("lspsaga.provider").preview_definition()<CR>', opts)
-km.set('n', 'gi', '<Cmd>lua require("lspsaga.hover").render_hover_doc()<CR>', opts)
-km.set('n', 'gs', '<Cmd>lua require("lspsaga.signaturehelp").signature_help()<CR>', opts)
-km.set('n', 'ge', '<Cmd>lua require("lspsaga.diagnostic").show_cursor_diagnostics()<CR>', opts)
+km.set('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+km.set('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+km.set('n', 'gi', '<Cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+km.set('n', 'gr', '<Cmd>lua vim.lsp.buf.references()<CR>', opts)
 
 -- Neo tree
 km.set('n', '<LEADER>n', function()

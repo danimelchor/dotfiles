@@ -32,7 +32,6 @@ packer.startup(function(use)
     use "antoinemadec/FixCursorHold.nvim" -- Fix cursor holds
     use 'RRethy/vim-illuminate' -- Iluminate words like the one you are hovering
 
-
     -- Auto save files
     use {
         "Pocco81/AutoSave.nvim",

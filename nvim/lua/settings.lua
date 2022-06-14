@@ -26,7 +26,7 @@ opt.softtabstop = 4
 opt.tabstop = 4
 opt.expandtab = true
 opt.fileencoding = 'utf-8'
-
+opt.wrap = true
 g.mapleader = " "
 opt.mouse = "a"
 

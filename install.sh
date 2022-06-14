@@ -20,7 +20,7 @@ if [ "$result" = true ]; then
   git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
   [ -d ~./config/nvim.old ] && rm -rf ~/.config/nvim.old
   [ -d ~/.config/nvim ] && mv -f ~/.config/nvim ~/.config/nvim.old 
-  ln -s $INSTALL_DIR/nvim ~/.config/nvim
+  cp $INSTALL_DIR/nvim ~/.config/nvim
   mkdir -p ~/.config/nvim/undo
 fi
 
@@ -29,5 +29,5 @@ prompt "Do you want to install my .zshrc?"
 if [ "$result" = true ]; then
   [ -f ~/.zshrc.old ] && rm ~/.zshrc
   [ -f ~/.zshrc ] && mv ~/.zshrc ~/.zshrc.old
-  ln -s $INSTALL_DIR/.zshrc ~/.zshrc
+  cp $INSTALL_DIR/.zshrc ~/.zshrc
 fi

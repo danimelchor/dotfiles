@@ -37,6 +37,6 @@ require'lspconfig'.vimls.setup({
   capabilities = capabilities,
 })
 
-require'lspconfig'.golangci_lint_ls.setup({
+require'lspconfig'.gopls.setup({
   capabilities = capabilities
 })

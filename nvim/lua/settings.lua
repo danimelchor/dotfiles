@@ -16,6 +16,7 @@ opt.errorbells = false
 opt.swapfile = false
 opt.backup = false
 opt.undodir = '~/.config/nvim/undodir'
+opt.undofile = true
 opt.incsearch = true
 opt.scrolloff = 10
 opt.signcolumn = 'yes'

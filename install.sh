@@ -1,16 +1,17 @@
 prompt() {
-  echo $1 
-  select yn in "Yes" "No"; do
-    case $yn in
-      Yes ) result=true; break;;
-      No ) result=false; break;;
-    esac
-  done
+  echo "\033[1m\033[0;93m$1 [Y/n] \033[0m\c"
+  read yn
+  if [ "$yn" = "" ]; then
+    yn='Y'
+  fi
+  case $yn in
+    [Yy]* ) result=true; break;;
+    [Nn]* ) result=false; break;;
+    * ) echo "Please answer yes or no.";;
+  esac
 }
 
 INSTALL_DIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
-
-echo "Install dir: $INSTALL_DIR"
 
 # nvim
 prompt "Do you want to install my nvim config?"

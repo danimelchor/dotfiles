@@ -107,6 +107,13 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Fix path issues
+PATH=/opt/homebrew/bin:$PATH
+PATH="/usr/local/bin:$PATH"
+
+# Disable weird cds
+unsetopt autocd
+
 alias gaa="git add ."
 alias gcm="git cm"
 alias gp="git push"

@@ -1,11 +1,11 @@
 prompt() {
-  read -p $1 yn 
-  if [[ $yn =~ ^[Yy]$ ]]
-  then
-    result = true
-  else
-    retult = false
-  fi
+  echo $1 
+  select yn in "Yes" "No"; do
+    case $yn in
+      Yes ) result = true;;
+      No ) result = false;;
+    esac
+  done
 }
 
 # nvim

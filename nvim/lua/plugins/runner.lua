@@ -13,11 +13,12 @@ local run_command_table = {
     ['javascript'] = 'node %'
 }
 
-local extra = 'echo \"\\\\n\\\\033[0;33mPlease Press ENTER to continue \\\\033[0m\"; read; exit;'
+local command = 'echo \"\\\\033[0;33mExecuting \\\\"' .. run_command_table[vim.bo.filetype] .. '\\\\"\\\\033[0m\\\\n\";'
+local extra = 'echo \"\\\\n\\\\033[0;33mPlease press ENTER to continue \\\\033[0m\"; read; exit;'
 
 function M.run()
     if (run_command_table[vim.bo.filetype]) then
-       vim.cmd("2TermExec cmd='clear;".. run_command_table[vim.bo.filetype].."; " .. extra .. "' direction=float")
+       vim.cmd("2TermExec cmd='clear;" .. command .. run_command_table[vim.bo.filetype].."; " .. extra .. "' direction=float")
    else
        print("\nFileType not supported\n")
    end

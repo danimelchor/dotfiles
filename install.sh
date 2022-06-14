@@ -19,7 +19,7 @@ if [ "$result" = true ]; then
   rm -rf ~/.local/share/nvim/site/pack/packer/start/packer.nvim
   git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
   [ -d ~./config/nvim.old ] && rm -rf ~/.config/nvim.old
-  [ -d ~/.config/nvim ] && mv -f ~/.config/nvim ~/.config/nvim.old 
+  [ -d ~/.config/nvim ] && mv -r -f ~/.config/nvim ~/.config/nvim.old 
   cp -R $INSTALL_DIR/nvim ~/.config/nvim
   mkdir -p ~/.config/nvim/undo
 fi
@@ -27,7 +27,7 @@ fi
 # zshrc
 prompt "Do you want to install my .zshrc?"
 if [ "$result" = true ]; then
-  ! [ -x "$(command -v p10k)" ] && git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+  ! [ -x "$(command -v p10k)" ] && rm -rf ~/powerlevel10k && git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
   [ -f ~/.zshrc.old ] && rm ~/.zshrc
   [ -f ~/.zshrc ] && mv ~/.zshrc ~/.zshrc.old
   cp $INSTALL_DIR/zshrc/.zshrc ~/.zshrc

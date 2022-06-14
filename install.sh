@@ -1,6 +1,6 @@
 prompt() {
-  read -p $1 -n 1 -r
-  if [[ $REPLY =~ ^[Yy]$ ]]
+  read -p $1 yn 
+  if [[ $yn =~ ^[Yy]$ ]]
   then
     result = true
   else

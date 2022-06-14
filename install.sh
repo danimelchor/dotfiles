@@ -17,7 +17,7 @@ if [ "$result" = true ]; then
   nvim_dir="$(pwd)/nvim"
   cd ~/.config
   rm -rf ./nvim.old
-  [ -d "nvim" ] && mv -f ./nvim ./nvim.old 
-  mkdir -p ./nvim/undo
+  [ -d ./nvim ] && mv -f ./nvim ./nvim.old 
   ln -s $nvim_dir
+  mkdir -p ./nvim/undo
 fi

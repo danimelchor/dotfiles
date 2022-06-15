@@ -28,8 +28,7 @@ require('neo-tree').setup({
     },
   },
   window = {
-    width = "fit_content",
-    max_width = "100",
+    width = "50",
     mappings = {
       ["o"] = "open",
       ["a"] = "add",

@@ -117,6 +117,7 @@ unsetopt autocd
 alias gaa="git add ."
 alias gcm="git cm"
 alias gp="git push"
+alias gs="git status"
 alias proj="cd ~/Documents/CodeProjects"
 alias c="clear"
 alias e="exit"

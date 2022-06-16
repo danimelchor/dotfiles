@@ -6,7 +6,7 @@ km.set('n','<SPACE>','<Nop>', opts)
 -- Search files with GFiles fallback
 -- km.set('n', '<LEADER>ff', '<Cmd>lua require"plugins.telescope".project_files()<CR>', opts)
 km.set('n', '<LEADER>ff', function()
-    local isInGitRepo = vim.api.nvim_command_output("echo (len(system('git rev-parse --is-inside-work-tree', opts)) == 5)")
+    local isInGitRepo = vim.api.nvim_command_output("echo (len(system('git rev-parse --is-inside-work-tree')) == 5)")
 
     if isInGitRepo == "1"
     then vim.cmd(":GFiles")
@@ -47,6 +47,7 @@ km.set('n','<LEADER>O','O<ESC>j', opts)
 km.set('n','<LEADER>q','<Cmd>:tabclose<CR>', opts)
 km.set('n','<LEADER>r','<Cmd>:Run<CR>', opts)
 km.set('n','<LEADER>pc','<Cmd>:PackerCompile<CR>', opts)
+km.set('n','<LEADER>cp','<Cmd>:let @+ = expand("%")<CR>', opts)
 
 -- Wrap around keys
 km.set('v','<LEADER>"','di"<ESC>gpa"<ESC>', opts)

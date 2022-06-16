@@ -64,6 +64,10 @@ packer.startup(function(use)
         requires = { 'junegunn/fzf', run = vim.fn['fzf#install'] },
         config = function() require('plugins.fzf') end,
     }
+    use {
+        'nvim-telescope/telescope.nvim',
+        config = function() require('plugins.telescope') end
+    }   
 
     -- LSP Stuff
     use {

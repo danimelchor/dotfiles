@@ -1,4 +1,9 @@
-require('neo-tree').setup({
+local status_ok, neo_tree = pcall(require, "neo-tree")
+if not status_ok then
+  return
+end
+
+neo_tree.setup({
   close_if_last_window = true,
   popup_border_style = "rounded",
   enable_diagnostics = false,

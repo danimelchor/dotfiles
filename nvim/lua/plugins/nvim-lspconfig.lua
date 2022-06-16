@@ -1,42 +1,55 @@
-local nvim_lsp = require('lspconfig')
-local protocol = require('vim.lsp.protocol')
+local status_ok, lspconfig = pcall(require, "lspconfig")
+if not status_ok then
+  return
+end
 
-local capabilities = require('cmp_nvim_lsp').update_capabilities(
+local status_ok, protocol = pcall(require, "vim.lsp.protocol")
+if not status_ok then
+  return
+end
+
+
+local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if not status_ok then
+  return
+end
+
+local capabilities = cmp_nvim_lsp.update_capabilities(
   protocol.make_client_capabilities()
 )
 
-require'lspconfig'.pylsp.setup({
+lspconfig.pylsp.setup({
   capabilities = capabilities
 })
 
-require'lspconfig'.typeprof.setup({
+lspconfig.typeprof.setup({
   capabilities = capabilities
 })
 
-require'lspconfig'.html.setup({
+lspconfig.html.setup({
   capabilities = capabilities
 })
 
-require'lspconfig'.tsserver.setup({
+lspconfig.tsserver.setup({
   capabilities = capabilities,
 })
 
-require'lspconfig'.sumneko_lua.setup({
+lspconfig.sumneko_lua.setup({
   capabilities = capabilities
 })
 
-require'lspconfig'.diagnosticls.setup({
+lspconfig.diagnosticls.setup({
   capabilities = capabilities,
 })
 
-require'lspconfig'.jsonls.setup({
+lspconfig.jsonls.setup({
   capabilities = capabilities,
 })
 
-require'lspconfig'.vimls.setup({
+lspconfig.vimls.setup({
   capabilities = capabilities,
 })
 
-require'lspconfig'.gopls.setup({
+lspconfig.gopls.setup({
   capabilities = capabilities
 })

@@ -5,6 +5,8 @@ km.set('n','<SPACE>','<Nop>')
 -- Search files with GFiles fallback
 km.set('n', '<LEADER>ff', '<Cmd>Telescope find_files<CR>')
 km.set('n', '<LEADER>fw', '<Cmd>Telescope live_grep<CR>')
+km.set('n', '<LEADER>fb', '<Cmd>Telescope git_branches<CR>')
+km.set('n', '<LEADER>fh', '<Cmd>Telescope old_files<CR>')
 
 -- Syntax
 local opts = { noremap=true, silent=true }

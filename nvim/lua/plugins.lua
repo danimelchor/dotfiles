@@ -68,6 +68,7 @@ packer.startup(function(use)
         'nvim-telescope/telescope.nvim',
         config = function() require('plugins.telescope') end
     }   
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
     -- LSP Stuff
     use {

@@ -16,11 +16,13 @@ end, opts)
 km.set('n', '<LEADER>fw', '<Cmd>:Rg<CR>', opts)
 km.set('n', '<LEADER>fb', '<Cmd>Telescope git_branches<CR>', opts)
 km.set('n', '<LEADER>fh', '<Cmd>Telescope oldfiles<CR>', opts)
+km.set('n', '<LEADER>fe', '<Cmd>Telescope diagnostics<CR>', opts)
 
 -- Syntax
 km.set('n', 'gd', '<Cmd>Telescope lsp_definitions<CR>', opts)
 km.set('n', 'gi', '<Cmd>Telescope lsp_implementations<CR>', opts)
 km.set('n', 'gr', '<Cmd>Telescope lsp_references<CR>', opts)
+km.set('n', 'gt', '<Cmd>Telescope lsp_type_definitions<CR>', opts)
 
 -- Neo tree
 km.set('n', '<LEADER>n', '<Cmd>Neotree toggle filesystem left focus<CR>', opts)
@@ -48,6 +50,7 @@ km.set('n','<LEADER>q','<Cmd>:tabclose<CR>', opts)
 km.set('n','<LEADER>r','<Cmd>:Run<CR>', opts)
 km.set('n','<LEADER>pc','<Cmd>:PackerCompile<CR>', opts)
 km.set('n','<LEADER>cp','<Cmd>:let @+ = expand("%")<CR>', opts)
+km.set('n', '<LEADER>fn', '<Cmd>enew<CR>', opts)
 
 -- Wrap around keys
 km.set('v','<LEADER>"','di"<ESC>gpa"<ESC>', opts)

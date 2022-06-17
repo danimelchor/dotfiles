@@ -11,12 +11,12 @@ vim.cmd [[
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
-  return
+    return
 end
 
 -- Install your plugins here
 packer.startup(function(use)
-    -- Plugin manager 
+    -- Plugin manager
     use "wbthomason/packer.nvim" -- Have packer manage itself
 
     -- ** My plugins **
@@ -39,7 +39,7 @@ packer.startup(function(use)
         config = function() require("autosave").setup() end
     }
 
-    -- Hightlight color codes with their code #ff00ff
+    -- Highlight color codes with their code #ff00ff
     use {
         'norcalli/nvim-colorizer.lua',
         config = function() require('colorizer').setup() end
@@ -67,8 +67,8 @@ packer.startup(function(use)
     use {
         'nvim-telescope/telescope.nvim',
         config = function() require('plugins.telescope') end
-    }   
-    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+    }
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
     -- LSP Stuff
     use {
@@ -188,6 +188,13 @@ packer.startup(function(use)
         "akinsho/toggleterm.nvim",
         tag = 'v1.*',
         config = function() require("plugins.toggleterm") end
+    }
+
+    -- Starting page
+    use {
+        'goolord/alpha-nvim',
+        requires = { 'kyazdani42/nvim-web-devicons' },
+        config = function() require('plugins.alpha') end
     }
 
     -- Theme

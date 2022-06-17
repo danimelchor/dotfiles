@@ -30,8 +30,13 @@ packer.startup(function(use)
     use "nvim-lua/plenary.nvim" -- Necessary dependency
     use 'kyazdani42/nvim-web-devicons' -- Cool icons
     use "antoinemadec/FixCursorHold.nvim" -- Fix cursor holds
-    use 'RRethy/vim-illuminate' -- Illuminate words like the one you are hovering
     use 'farmergreg/vim-lastplace' -- Remember last cursor place
+
+ -- Illuminate words like the one you are hovering
+    use {
+        'RRethy/vim-illuminate',
+        config = function() require('plugins.illuminate') end
+    }
 
     -- Auto save files
     use {
@@ -140,6 +145,7 @@ packer.startup(function(use)
         requires = {
             "nvim-lua/plenary.nvim",
             "kyazdani42/nvim-web-devicons",
+
             "MunifTanjim/nui.nvim",
         },
         config = function() require('plugins.neo-tree') end

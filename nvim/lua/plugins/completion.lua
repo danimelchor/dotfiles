@@ -29,10 +29,7 @@ cmp.setup({
   },
   mapping = {
     ['<Tab>'] = next,
-    ['<C-n>'] = next,
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    ["<S-Tab>"] = prev,
-    ["<C-p>"] = prev,
+    ["<S-Tab>"] = prev
   },
   sources = {
     { name = 'nvim_lsp' },

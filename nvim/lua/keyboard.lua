@@ -19,7 +19,7 @@ map('n', '<LEADER>fh', '<Cmd>Telescope oldfiles<CR>', opts)
 map('n', '<LEADER>fe', '<Cmd>Telescope diagnostics<CR>', opts)
 
 -- Syntax
-map('n', 'gd', '<Cmd>Telescope lsp_definitions<CR>', opts)
+map('n', 'gd', '<Cmd>Telescope lsp_definitions jump_type=tab<CR>', opts)
 map('n', 'gi', '<Cmd>Telescope lsp_implementations<CR>', opts)
 map('n', 'gr', '<Cmd>Telescope lsp_references<CR>', opts)
 map('n', 'gt', '<Cmd>Telescope lsp_type_definitions<CR>', opts)

@@ -25,17 +25,7 @@ km.set('n', 'gr', '<Cmd>Telescope lsp_references<CR>', opts)
 km.set('n', 'gt', '<Cmd>Telescope lsp_type_definitions<CR>', opts)
 
 -- Neo tree
-km.set('n', '<LEADER>n', '<Cmd>Neotree toggle filesystem left focus<CR>', opts)
--- km.set('n', '<LEADER>n', function()
---     local windowsOpened = vim.api.nvim_command_output("echo map(range(1, winnr('$', opts)), 'getwinvar(v:val, \"&ft\")')")
---     local isNerdTreeFocused = vim.api.nvim_command_output("echo &ft") == "neo-tree"
---     local isNertTreeOpened = string.find(windowsOpened, "neo%-tree")
-
---     if isNertTreeOpened and isNerdTreeFocused
---     then vim.cmd(':Neotree close', opts)
---     else vim.cmd(':Neotree show focus filesystem left', opts)
---     end
--- end)
+km.set('n', '<LEADER>n', '<Cmd>Neotree toggle filesystem left focus reveal<CR>', opts)
 
 -- Git
 km.set('n', '<LEADER>gb', '<Cmd>:GitBlameToggle<CR>', opts)

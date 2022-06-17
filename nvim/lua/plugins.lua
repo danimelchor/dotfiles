@@ -190,6 +190,12 @@ packer.startup(function(use)
         config = function() require("plugins.toggleterm") end
     }
 
+    -- Smooth scrolling
+    use {
+        'declancm/cinnamon.nvim',
+        config = function() require('cinnamon').setup() end
+    }
+
     -- Starting page
     use {
         'goolord/alpha-nvim',

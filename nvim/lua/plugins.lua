@@ -153,14 +153,7 @@ packer.startup(function(use)
 
     -- Add end keyword for ruby
     use {
-        'RRethy/nvim-treesitter-endwise',
-        config = function()
-            require('nvim-treesitter.configs').setup {
-                endwise = {
-                    enable = true,
-                },
-            }
-        end
+        'RRethy/nvim-treesitter-endwise'
     }
 
     -- Git blame and gutters

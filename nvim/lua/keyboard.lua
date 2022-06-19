@@ -15,14 +15,15 @@ map('n', '<LEADER>ff', function()
 end, opts)
 map('n', '<LEADER>fw', '<Cmd>:Rg<CR>', opts)
 map('n', '<LEADER>fb', '<Cmd>Telescope git_branches<CR>', opts)
-map('n', '<LEADER>fh', '<Cmd>Telescope oldfiles<CR>', opts)
+map('n', '<LEADER>fh', '<Cmd>Telescope oldfiles only_cwd=true<CR>', opts)
 map('n', '<LEADER>fe', '<Cmd>Telescope diagnostics<CR>', opts)
 
 -- Syntax
-map('n', 'gd', '<Cmd>Telescope lsp_definitions jump_type=tab<CR>', opts)
+map('n', 'gd', '<Cmd>Telescope lsp_definitions<CR>', opts)
 map('n', 'gi', '<Cmd>Telescope lsp_implementations<CR>', opts)
 map('n', 'gr', '<Cmd>Telescope lsp_references<CR>', opts)
 map('n', 'gt', '<Cmd>Telescope lsp_type_definitions<CR>', opts)
+map('n', 'gb', '<C-o>', opts)
 
 -- Neo tree
 map('n', '<LEADER>n', '<Cmd>Neotree toggle filesystem left focus reveal<CR>', opts)

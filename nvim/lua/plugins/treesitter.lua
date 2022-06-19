@@ -3,8 +3,8 @@ if not status_ok then
   return
 end
 
-local status_ok, nvim_treesitter_parsers = pcall(require, "nvim-treesitter.parsers")
-if not status_ok then
+local status_ok_2, nvim_treesitter_parsers = pcall(require, "nvim-treesitter.parsers")
+if not status_ok_2 then
   return
 end
 

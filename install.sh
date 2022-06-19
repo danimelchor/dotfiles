@@ -33,6 +33,6 @@ if [ "$result" = true ]; then
   [ -f ~/.zshrc.old ] && rm ~/.zshrc.old
   [ -f ~/.zshrc ] && mv ~/.zshrc ~/.zshrc.old
   [ -h ~/.zshrc ] && rm ~/.zshrc
-  ls -s $INSTALL_DIR/zshrc/.zshrc ~/.zshrc
-  ls -s $INSTALL_DIR/zshrc/.p10k.zsh ~/.p10k.zsh
+  ln -s $INSTALL_DIR/zshrc/.zshrc ~/.zshrc
+  ln -s $INSTALL_DIR/zshrc/.p10k.zsh ~/.p10k.zsh
 fi

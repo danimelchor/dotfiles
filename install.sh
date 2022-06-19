@@ -7,7 +7,7 @@ prompt() {
   case $yn in
     [Yy]* ) result=true; break;;
     [Nn]* ) result=false; break;;
-    * ) echo "Please answer yes or no.";;
+    * ) result=true; break;;
   esac
 }
 
@@ -21,7 +21,8 @@ if [ "$result" = true ]; then
   git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
   [ -d ~/.config/nvim.old ] && rm -rf ~/.config/nvim.old
   [ -d ~/.config/nvim ] && mv -f ~/.config/nvim ~/.config/nvim.old 
-  cp -R $INSTALL_DIR/nvim ~/.config/nvim
+  [ -h ~/.config/nvim ] && rm ~/.config/nvim
+  ln -s $INSTALL_DIR/nvim ~/.config/nvim
   mkdir -p ~/.config/nvim/undo
 fi
 
@@ -29,8 +30,9 @@ fi
 prompt "Do you want to install my .zshrc?"
 if [ "$result" = true ]; then
   ! [ -x "$(command -v p10k)" ] && rm -rf ~/powerlevel10k && git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
-  [ -f ~/.zshrc.old ] && rm ~/.zshrc
+  [ -f ~/.zshrc.old ] && rm ~/.zshrc.old
   [ -f ~/.zshrc ] && mv ~/.zshrc ~/.zshrc.old
-  cp $INSTALL_DIR/zshrc/.zshrc ~/.zshrc
-  cp $INSTALL_DIR/zshrc/.p10k.zsh ~/.p10k.zsh
+  [ -h ~/.zshrc ] && rm ~/.zshrc
+  ls -s $INSTALL_DIR/zshrc/.zshrc ~/.zshrc
+  ls -s $INSTALL_DIR/zshrc/.p10k.zsh ~/.p10k.zsh
 fi

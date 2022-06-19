@@ -8,13 +8,16 @@ local diagnostics = null_ls.builtins.diagnostics
 
 null_ls.setup({
   debug = false,
+  diagnostics_format = "#{m} (#{s})",
   sources = {
     formatting.black.with { extra_args = { "--fast" } },
     formatting.stylua,
     formatting.rubocop,
     formatting.codespell,
     formatting.gofmt,
-    diagnostics.eslint,
+    diagnostics.eslint.with {
+        diagnostics_format = "[#c] #{m} (#{s})",
+    },
     diagnostics.codespell,
     diagnostics.flake8,
     diagnostics.jsonlint,

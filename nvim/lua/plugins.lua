@@ -176,15 +176,6 @@ packer.startup(function(use)
     use 'tpope/vim-sleuth' -- Automatically adjust tab size
     use 'tpope/vim-repeat' -- . reruns not only native commands
 
-    -- Emmet snippets
-    use {
-        'mattn/emmet-vim',
-        config = function()
-            vim.g.user_emmet_leader_key = '<leader>e'
-            vim.g.user_emmet_mode = 'nv'
-        end,
-    }
-
     -- Toggle terminals
     use {
         "akinsho/toggleterm.nvim",

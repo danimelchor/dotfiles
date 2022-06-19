@@ -29,7 +29,7 @@ map('n', 'gb', '<C-o>', opts)
 map('n', '<LEADER>n', '<Cmd>Neotree toggle filesystem left focus reveal<CR>', opts)
 
 -- Git
-map('n', '<LEADER>gb', '<Cmd>GitBlameToggle<CR>', opts)
+map('n', '<LEADER>gb', '<Cmd>Gitsigns blame_line<CR>', opts)
 
 -- Terminal
 map('n', '<LEADER>t', '<Cmd>ToggleTerm size=15 direction=horizontal<CR>', opts)

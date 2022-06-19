@@ -166,11 +166,7 @@ packer.startup(function(use)
     -- Git blame and gutters
     use {
         "lewis6991/gitsigns.nvim",
-        config = function() require('gitsigns').setup() end
-    }
-    use {
-        "f-person/git-blame.nvim",
-        config = function() require('plugins.git-blame') end
+        config = function() require('plugins.gitsigns') end
     }
     use "rhysd/conflict-marker.vim"
 

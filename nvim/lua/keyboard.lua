@@ -15,13 +15,13 @@ map('n', '<LEADER>ff', function()
 end, opts)
 map('n', '<LEADER>fw', '<Cmd>:Rg<CR>', opts)
 map('n', '<LEADER>fb', '<Cmd>Telescope git_branches<CR>', opts)
-map('n', '<LEADER>fh', '<Cmd>Telescope oldfiles only_cwd=true<CR>', opts)
-map('n', '<LEADER>fe', '<Cmd>Telescope diagnostics<CR>', opts)
+map('n', '<LEADER>fh', '<Cmd>Telescope oldfiles only_cwd=true initial_mode=normal<CR>', opts)
+map('n', '<LEADER>fe', '<Cmd>Telescope diagnostics initial_mode=normal<CR>', opts)
 
 -- Syntax
 map('n', 'gd', '<Cmd>Telescope lsp_definitions<CR>', opts)
-map('n', 'gi', '<Cmd>Telescope lsp_implementations<CR>', opts)
-map('n', 'gr', '<Cmd>Telescope lsp_references<CR>', opts)
+map('n', 'gi', '<Cmd>Telescope lsp_implementations initial_mode=normal<CR>', opts)
+map('n', 'gr', '<Cmd>Telescope lsp_references initial_mode=normal<CR>', opts)
 map('n', 'gt', '<Cmd>Telescope lsp_type_definitions<CR>', opts)
 map('n', 'gb', '<C-o>', opts)
 

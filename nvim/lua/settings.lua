@@ -2,6 +2,15 @@ local opt = vim.opt
 local g = vim.g
 
 -- General settings
+opt.autoread      = true -- reload changes from disk
+opt.autowriteall  = true -- Writes on make/shell commands
+opt.hidden        = true -- Allow buffer switching without saving
+opt.linespace     = 0 -- No extra spaces between rows
+opt.showmatch     = true -- Show matching brackets/parentthesis
+opt.splitright    = true -- Vertical splits to the right
+opt.updatetime    = 300 -- Update swap file and CursorHold delay
+opt.timeoutlen    = 700 -- Timeout for keybindings
+opt.ttimeoutlen   = 0 -- Timeout for completing commands
 opt.ruler = false
 opt.exrc = true
 opt.relativenumber = true

@@ -129,6 +129,8 @@ alias e="exit"
 alias v="nvim"
 alias zoo="cd ~/stripe/zoolander"
 alias ps="cd ~/stripe/pay-server"
+alias ve="source venv/bin/activate"
+alias dve="deactivate"
 
 export EDITOR="nvim"
 

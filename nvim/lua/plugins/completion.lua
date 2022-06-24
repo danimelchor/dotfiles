@@ -10,7 +10,7 @@ cmp.setup({
     end,
   },
   mapping = {
-    ['<Tab>'] = cmp.select_next_item(),,
+    ['<Tab>'] = cmp.select_next_item(),
     ['<S-Tab>'] = cmp.select_prev_item(),
     ['<CR>'] = cmp.mapping.confirm({ select = true })
   },

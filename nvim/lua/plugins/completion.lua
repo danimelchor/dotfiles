@@ -3,7 +3,7 @@ if not status_ok then
   return
 end
 
-cmp.setup({
+cmp.setup{
   snippet = {
     expand = function(args)
       vim.fn["vsnip#anonymous"](args.body)
@@ -19,4 +19,4 @@ cmp.setup({
     { name = 'vsnip' },
     { name = 'buffer' },
   },
-})
+}

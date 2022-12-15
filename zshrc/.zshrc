@@ -115,20 +115,33 @@ export NVM_DIR="$HOME/.nvm"
 # Fix path issues
 PATH=/opt/homebrew/bin:$PATH
 PATH="/usr/local/bin:$PATH"
+export PYTORCH_ENABLE_MPS_FALLBACK=1
 
 # Disable weird cds
 unsetopt autocd
 
-alias gaa="git add ."
-alias gcm="git cm"
-alias gp="git push"
-alias gs="git status"
 alias proj="cd ~/Documents/CodeProjects"
 alias c="clear"
 alias e="exit"
 alias v="nvim"
-alias zoo="cd ~/stripe/zoolander"
-alias ps="cd ~/stripe/pay-server"
+alias bu="cd ~/Documents/BU/Fall\ 2022"
+alias survey="/Users/danielmelchor/Documents/CodeProjects/emmanuel/venv/bin/python3 /Users/danielmelchor/Documents/CodeProjects/emmanuel/survey.py;e"
+alias pdf="/Users/danielmelchor/Documents/CodeProjects/pdf-summary/venv/bin/python3 /Users/danielmelchor/Documents/CodeProjects/pdf-summary/pdf"
+
+# GIT ALIASES
+alias gaa="git add ."
+alias gcm="git cm"
+alias gp="git push"
+alias gs="git status"
+
+# PYTHON ALIASES
+alias ve="source venv/bin/activate"
+
+# DOCKER COMPOSE ALIASES
+alias dcub="docker compose up --build -d --force-recreate"
+alias dclogs="docker compose logs --follow"
+alias dcr="docker compose restart $1"
+alias dcrb="docker-compose up --detach --build $1"
 
 export EDITOR="nvim"
 
@@ -136,3 +149,9 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/danielmelchor/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/danielmelchor/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/danielmelchor/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/danielmelchor/google-cloud-sdk/completion.zsh.inc'; fi

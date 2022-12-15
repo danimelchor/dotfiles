@@ -140,6 +140,7 @@ alias dve="deactivate"
 alias pipr="pip install -r requirements.txt"
 
 # DOCKER COMPOSE ALIASES
+alias dcu="docker compose up -d"
 alias dcub="docker compose up --build -d --force-recreate"
 alias dclogs="docker compose logs --follow"
 alias dcr="docker compose restart $1"

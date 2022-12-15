@@ -124,7 +124,6 @@ alias proj="cd ~/Documents/CodeProjects"
 alias c="clear"
 alias e="exit"
 alias v="nvim"
-<<<<<<< HEAD
 alias bu="cd ~/Documents/BU/Fall\ 2022"
 alias survey="/Users/danielmelchor/Documents/CodeProjects/emmanuel/venv/bin/python3 /Users/danielmelchor/Documents/CodeProjects/emmanuel/survey.py;e"
 alias pdf="/Users/danielmelchor/Documents/CodeProjects/pdf-summary/venv/bin/python3 /Users/danielmelchor/Documents/CodeProjects/pdf-summary/pdf"
@@ -137,18 +136,14 @@ alias gs="git status"
 
 # PYTHON ALIASES
 alias ve="source venv/bin/activate"
+alias dve="deactivate"
+alias pipr="pip install -r requirements.txt"
 
 # DOCKER COMPOSE ALIASES
 alias dcub="docker compose up --build -d --force-recreate"
 alias dclogs="docker compose logs --follow"
 alias dcr="docker compose restart $1"
 alias dcrb="docker-compose up --detach --build $1"
-=======
-alias zoo="cd ~/stripe/zoolander"
-alias ps="cd ~/stripe/pay-server"
-alias ve="source venv/bin/activate"
-alias dve="deactivate"
->>>>>>> 6abefbd332272fb39405a41d9b60025396b39451
 
 export EDITOR="nvim"
 

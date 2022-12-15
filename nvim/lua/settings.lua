@@ -2,6 +2,10 @@ local opt = vim.opt
 local g = vim.g
 
 -- General settings
+opt.linespace     = 0 -- No extra spaces between rows
+opt.showmatch     = true -- Show matching brackets/parentthesis
+opt.splitright    = true -- Vertical splits to the right
+opt.ttimeoutlen   = 0 -- Timeout for completing commands
 opt.ruler = false
 opt.exrc = true
 opt.relativenumber = true

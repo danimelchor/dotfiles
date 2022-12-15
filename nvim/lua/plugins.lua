@@ -38,12 +38,6 @@ packer.startup(function(use)
         config = function() require('plugins.illuminate') end
     }
 
-    -- Auto save files
-    use {
-        "Pocco81/AutoSave.nvim",
-        config = function() require("autosave").setup() end
-    }
-
     -- Highlight color codes with their code #ff00ff
     use {
         'norcalli/nvim-colorizer.lua',

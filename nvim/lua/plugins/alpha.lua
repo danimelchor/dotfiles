@@ -54,7 +54,7 @@ if status_ok then
           alpha_button("LDR f w", "  Find Word  "),
           alpha_button("LDR f n", "  New File  "),
           alpha_button("LDR f b", "  Switch Branches  "),
-          alpha_button("  LDR n", "פּ  Show File Tree  "),
+          alpha_button("  LDR n", "פּ  Show File Tree  "),
         },
         opts = { spacing = 1 },
       },
@@ -62,3 +62,4 @@ if status_ok then
     opts = {},
   }
 end
+

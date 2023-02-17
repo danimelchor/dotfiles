@@ -10,8 +10,10 @@ end
 
 nvim_treesitter_configs.setup {
   ensure_installed = {
+      "help",
       "c",
       "lua",
+      "javascript",
       "typescript",
       "ruby",
       "go",
@@ -25,30 +27,23 @@ nvim_treesitter_configs.setup {
       "regex",
       "vim",
       "yaml",
-      "tsx"
+      "tsx",
+      "rust"
   },
   autopairs = {
     enable = true
   },
   highlight = {
     enable = true,
-    additional_vim_regex_highlighting = true
+    additional_vim_regex_highlighting = false
   },
   indent = {
-    enable = true
-  },
-  context_commentstring = {
     enable = true,
+    disable = { 'python' }
   },
   rainbow = {
     enable = true,
     extended_mode = false,
-  },
-  endwise = {
-    enable = true
-  },
-  autotag = {
-    enable = true
   }
 }
 

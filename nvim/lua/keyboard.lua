@@ -1,68 +1,56 @@
-local map = vim.keymap.set
-local opts = { noremap=true, silent=true }
+local map = function(keys, func, desc)
+    vim.keymap.set('n', keys, func, { desc = desc })
+end
 
-map('n','<SPACE>','<Nop>', opts)
+map('<SPACE>', '<Nop>')
 
 -- Search files with GFiles fallback
--- map('n', '<LEADER>ff', '<Cmd>lua require"plugins.telescope".project_files()<CR>', opts)
-map('n', '<LEADER>ff', function()
+-- map('n', '<LEADER>ff', '<Cmd>lua require"plugins.telescope".project_files()<CR>')
+map('<LEADER>ff', function()
     local isInGitRepo = vim.api.nvim_command_output("echo (len(system('git rev-parse --is-inside-work-tree')) == 5)")
 
     if isInGitRepo == "1"
-    then vim.cmd("GFiles")
-    else vim.cmd("Files")
+    then
+        vim.cmd("GFiles")
+    else
+        vim.cmd("Files")
     end
-end, opts)
-map('n', '<LEADER>fw', '<Cmd>:Rg<CR>', opts)
-map('n', '<LEADER>fb', '<Cmd>Telescope git_branches<CR>', opts)
-map('n', '<LEADER>fh', '<Cmd>Telescope oldfiles only_cwd=true initial_mode=normal<CR>', opts)
-map('n', '<LEADER>fe', '<Cmd>Telescope diagnostics initial_mode=normal<CR>', opts)
+end, "[F]ind [F]iles")
+map('<LEADER>fw', '<Cmd>:Rg<CR>', '[F]ind [W]ords')
+map('<LEADER>fb', '<Cmd>Telescope git_branches<CR>', '[F]ind [B]ranches')
+map('<LEADER>fh', '<Cmd>Telescope oldfiles only_cwd=true initial_mode=normal<CR>', '[F]ind [H]istory')
+map('<LEADER>fe', '<Cmd>Telescope diagnostics initial_mode=normal<CR>', '[F]ind [E]rrors')
+map('<LEADER>km', '<Cmd>Telescope keymaps<CR>', '[K]ey[M]apsF]ind [E]rrors')
 
 -- Syntax
-map('n', 'gd', '<Cmd>Telescope lsp_definitions<CR>', opts)
-map('n', 'gi', '<Cmd>Telescope lsp_implementations initial_mode=normal<CR>', opts)
-map('n', 'gr', '<Cmd>Telescope lsp_references initial_mode=normal<CR>', opts)
-map('n', 'gt', '<Cmd>Telescope lsp_type_definitions<CR>', opts)
-map('n', 'gb', '<C-o>', opts)
+map('gd', '<Cmd>Telescope lsp_definitions<CR>', '[G]o to [D]efinition')
+map('gi', '<Cmd>Telescope lsp_implementations initial_mode=normal<CR>', '[G]o to [I]mplementation')
+map('gr', '<Cmd>Telescope lsp_references initial_mode=normal<CR>', '[G]o to [R]eferences')
+map('gt', '<Cmd>Telescope lsp_type_definitions<CR>', '[G]o to [T]ype definitions')
+map('gb', '<C-o>', '[G]o [B]ack')
 
 -- Neo tree
-map('n', '<LEADER>n', '<Cmd>Neotree toggle filesystem left focus reveal<CR>', opts)
+map('<LEADER>n', '<Cmd>Neotree toggle filesystem left focus reveal<CR>', '[N]eotree')
 
 -- Git
-map('n', '<LEADER>gb', '<Cmd>Gitsigns blame_line<CR>', opts)
+map('<LEADER>gb', '<Cmd>Gitsigns blame_line<CR>', '[G]it [B]lame current line')
 
 -- Terminal
-map('n', '<LEADER>t', '<Cmd>ToggleTerm size=15 direction=horizontal<CR>', opts)
-
--- Utils
-map('n','<LEADER>o','o<ESC>k', opts)
-map('n','<LEADER>O','O<ESC>j', opts)
-map('n','<LEADER>q','<Cmd>tabclose<CR>', opts)
-map('n','<LEADER>r','<Cmd>Run<CR>', opts)
-map('n','<LEADER>pc','<Cmd>PackerCompile<CR>', opts)
-map('n','<LEADER>cp','<Cmd>let @+ = expand("%")<CR>', opts)
-map('n', '<LEADER>fn', '<Cmd>enew<CR>', opts)
-
--- Wrap around keys
-map('v','<LEADER>"','di"<ESC>gpa"<ESC>', opts)
-map('v','<LEADER>\'','di\'<ESC>gpa\'<ESC>', opts)
-map('v','<LEADER>(','di(<ESC>gpa)<ESC>', opts)
-map('v','<LEADER>[','di[<ESC>gpa]<ESC>', opts)
-map('v','<LEADER>{','di{<ESC>gpa}<ESC>', opts)
+map('<LEADER>t', '<Cmd>ToggleTerm size=15 direction=horizontal<CR>', '[T]oggle terminal')
 
 -- Switch between splits
-map('n', '<S-Up>', '<C-W>k', opts)
-map('n', '<S-Right>', '<C-W>l', opts)
-map('n', '<S-Left>', '<C-W>h', opts)
-map('n', '<S-Down>', '<C-W>j', opts)
+map('<S-Up>', '<C-W>k', 'Move to window above')
+map('<S-Right>', '<C-W>l', 'Move to window to the right')
+map('<S-Left>', '<C-W>h', 'Move to window to the left')
+map('<S-Down>', '<C-W>j', 'Move to window below')
 
 -- Switch between tabs
-map('n', '<TAB>', '<Cmd>:BufferLineCycleNext<CR>', opts)
-map('n', '<S-TAB>', '<Cmd>:BufferLineCyclePrev<CR>', opts)
-map('n', 'g<TAB>', '<Cmd>:BufferLinePick<CR>', opts)
+map('<TAB>', '<Cmd>:BufferLineCycleNext<CR>', 'Switch to next tab')
+map('<S-TAB>', '<Cmd>:BufferLineCyclePrev<CR>', 'Switch to previous tab')
+map('g<TAB>', '<Cmd>:BufferLinePick<CR>', 'Go to tab')
 
 -- For practice
-map('n', '<UP>', '<Nop>', opts)
-map('n', '<LEFT>', '<Nop>', opts)
-map('n', '<RIGHT>', '<Nop>', opts)
-map('n', '<DOWN>', '<Nop>', opts)
+map('<UP>', '<Nop>')
+map('<LEFT>', '<Nop>')
+map('<RIGHT>', '<Nop>')
+map('<DOWN>', '<Nop>')

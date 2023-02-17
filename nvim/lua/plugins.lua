@@ -1,38 +1,51 @@
-local fn = vim.fn
-
--- Autocommand that reloads neovim whenever you save the plugins.lua file
-vim.cmd [[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile 
-  augroup end
-]]
-
--- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
     return
 end
+
+vim.cmd [[packadd packer.nvim]]
 
 -- Install your plugins here
 packer.startup(function(use)
     -- Plugin manager
     use "wbthomason/packer.nvim" -- Have packer manage itself
 
-    -- ** My plugins **
-
-    -- Lazy load plugins
-    use {
-        'lewis6991/impatient.nvim',
-        config = function() require('impatient') end
-    }
     use "nathom/filetype.nvim" -- Better filetype
     use "nvim-lua/plenary.nvim" -- Necessary dependency
     use 'kyazdani42/nvim-web-devicons' -- Cool icons
-    use "antoinemadec/FixCursorHold.nvim" -- Fix cursor holds
     use 'farmergreg/vim-lastplace' -- Remember last cursor place
 
- -- Illuminate words like the one you are hovering
+    -- Comment lines with "gc"
+    use {
+        'numToStr/Comment.nvim',
+        config = function() require("Comment").setup() end
+    }
+
+    -- LSP + Autocomplete
+    use {
+        'VonHeikemen/lsp-zero.nvim',
+        branch = 'v1.x',
+        config = function() require('plugins.lsp') end,
+        requires = {
+            -- LSP Support
+            {'neovim/nvim-lspconfig'},             -- Required
+            {'williamboman/mason.nvim'},           -- Optional
+            {'williamboman/mason-lspconfig.nvim'}, -- Optional
+
+            -- Autocompletion
+            {'hrsh7th/nvim-cmp'},         -- Required
+            {'hrsh7th/cmp-nvim-lsp'},     -- Required
+            {'hrsh7th/cmp-buffer'},       -- Optional
+            {'hrsh7th/cmp-path'},         -- Optional
+            {'saadparwaiz1/cmp_luasnip'}, -- Optional
+            {'hrsh7th/cmp-nvim-lua'},     -- Optional
+
+            -- Snippets
+            {'L3MON4D3/LuaSnip'},             -- Required
+            {'rafamadriz/friendly-snippets'}, -- Optional
+        }
+    }
+    -- Illuminate words like the one you are hovering
     use {
         'RRethy/vim-illuminate',
         config = function() require('plugins.illuminate') end
@@ -43,6 +56,8 @@ packer.startup(function(use)
         'norcalli/nvim-colorizer.lua',
         config = function() require('colorizer').setup() end
     }
+
+    -- Tabs like Visual Studio Code
     use {
         'akinsho/bufferline.nvim',
         tag = "v2.*",
@@ -69,51 +84,11 @@ packer.startup(function(use)
     }
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
-    -- LSP Stuff
-    use {
-        'jose-elias-alvarez/null-ls.nvim',
-        config = function() require('plugins.null-ls') end,
-        after = "nvim-lspconfig"
-    }
-
-    use {
-        'williamboman/nvim-lsp-installer',
-        after = "nvim-lspconfig",
-        config = function() require("plugins.nvim-lsp-installer") end
-    }
-
-    use {
-        'neovim/nvim-lspconfig',
-        config = function() require('plugins.nvim-lspconfig') end
-    }
-    use {
-        'folke/lsp-colors.nvim',
-        'onsails/lspkind-nvim',
-        'ray-x/lsp_signature.nvim',
-        'tamago324/nlsp-settings.nvim',
-    }
-
     -- Syntax plugin
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
         config = function() require('plugins.treesitter') end
-    }
-
-    -- Autocompletion
-    use {
-        "hrsh7th/nvim-cmp",
-        requires = {
-            'neovim/nvim-lspconfig',
-            'hrsh7th/cmp-nvim-lsp',
-            'hrsh7th/cmp-buffer',
-            'hrsh7th/cmp-path',
-            'hrsh7th/cmp-cmdline',
-            'hrsh7th/nvim-cmp',
-            'hrsh7th/cmp-vsnip',
-            'hrsh7th/vim-vsnip'
-        },
-        config = function() require('plugins.completion') end,
     }
 
     -- Autmomatically complete quotes or parens
@@ -122,16 +97,6 @@ packer.startup(function(use)
         config = function() require("nvim-autopairs").setup {} end
     }
 
-    -- TS specific features
-    use {
-        'p00f/nvim-ts-rainbow',
-        'windwp/nvim-ts-autotag',
-        'JoosepAlviste/nvim-ts-context-commentstring'
-    }
-
-    use 'tpope/vim-commentary' -- Comment out lines
-    use 'tpope/vim-surround' -- Wrap selection around chars
-
     -- File tree
     use {
         'nvim-neo-tree/neo-tree.nvim',
@@ -139,7 +104,6 @@ packer.startup(function(use)
         requires = {
             "nvim-lua/plenary.nvim",
             "kyazdani42/nvim-web-devicons",
-
             "MunifTanjim/nui.nvim",
         },
         config = function() require('plugins.neo-tree') end
@@ -161,13 +125,11 @@ packer.startup(function(use)
     use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
 
     use 'tpope/vim-sleuth' -- Automatically adjust tab size
-    use 'tpope/vim-repeat' -- . reruns not only native commands
 
     -- Toggle terminals
-    use {
-        "akinsho/toggleterm.nvim",
-        tag = 'v1.*',
-        config = function() require("plugins.toggleterm") end
+    use {"akinsho/toggleterm.nvim",
+        tag = '*',
+        config = function() require("toggleterm").setup() end
     }
 
     -- Smooth scrolling
@@ -185,13 +147,4 @@ packer.startup(function(use)
 
     -- Theme
     use "sainnhe/sonokai"
-    use "morhetz/gruvbox"
-
-    -- Put this at the end after all plugins
-    if PACKER_BOOTSTRAP then
-        require("packer").sync()
-    end
 end)
-
-packer.install()
-return packer

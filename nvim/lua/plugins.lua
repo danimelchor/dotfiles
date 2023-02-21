@@ -154,6 +154,8 @@ packer.startup(function(use)
     -- Copilot
     use {
         "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
         config = function()
             require("plugins.copilot")
         end,

@@ -30,7 +30,7 @@ lsp.setup_nvim_cmp({
     ['<Down>'] = cmp.mapping.select_next_item(),
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
-        cmp.mapping.confirm({ select = false })
+        cmp.mapping.confirm({ select = true })
       elseif copilot.is_visible() then
         copilot.accept()
       else

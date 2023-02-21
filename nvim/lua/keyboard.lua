@@ -22,6 +22,7 @@ map('<LEADER>fh', '<Cmd>Telescope oldfiles only_cwd=true initial_mode=normal<CR>
 map('<LEADER>fe', '<Cmd>Telescope diagnostics initial_mode=normal<CR>', '[F]ind [E]rrors')
 map('<LEADER>km', '<Cmd>Telescope keymaps<CR>', '[K]ey[M]aps')
 map('<LEADER>fp', '<Cmd>Telescope projects<CR>', '[F]ind [P]rojects')
+map('<LEADER>fc', '<Cmd>Telescope current_buffer_fuzzy_find<CR>', '[F]ind words in [C]urrent buffer')
 
 -- Syntax
 map('gd', '<Cmd>Telescope lsp_definitions<CR>', '[G]o to [D]efinition')

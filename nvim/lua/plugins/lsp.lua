@@ -25,12 +25,12 @@ lsp.setup_nvim_cmp({
     { name = 'buffer' }
   },
   mapping = cmp.mapping.preset.insert({
-    ['<CR>'] = cmp.mapping.confirm({ select = false }),
-    ['<Up>'] = cmp.mapping.select_prev_item(),
-    ['<Down>'] = cmp.mapping.select_next_item(),
-    ["<Tab>"] = cmp.mapping(function(fallback)
+    ['<Up>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+    ['<Down>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+    ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
-        cmp.mapping.confirm({ select = true })
+        print("visible")
+        cmp.confirm({ select = false })
       elseif copilot.is_visible() then
         copilot.accept()
       else
@@ -38,7 +38,6 @@ lsp.setup_nvim_cmp({
       end
     end, {
       "i",
-      "s",
     }),
   })
 })

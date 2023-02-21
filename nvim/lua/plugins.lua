@@ -83,12 +83,7 @@ packer.startup(function(use)
         config = function() require('plugins.telescope') end
     }
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-    use {
-        "ahmedkhalf/project.nvim",
-        config = function()
-            require("project_nvim").setup()
-        end
-    }
+    use { "danimelchor/project.nvim" }
 
     -- Syntax plugin
     use {
@@ -147,7 +142,10 @@ packer.startup(function(use)
     -- Starting page
     use {
         'goolord/alpha-nvim',
-        requires = { 'kyazdani42/nvim-web-devicons' },
+        requires = {
+            'kyazdani42/nvim-web-devicons',
+            "danimelchor/project.nvim",
+        },
         config = function() require('plugins.alpha') end
     }
 
@@ -160,7 +158,7 @@ packer.startup(function(use)
     }
 
     -- Markdown previewer
-    use {'iamcco/markdown-preview.nvim'}
+    use { 'iamcco/markdown-preview.nvim' }
 
     -- Theme
     use "sainnhe/sonokai"

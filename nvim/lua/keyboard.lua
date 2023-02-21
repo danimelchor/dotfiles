@@ -20,7 +20,8 @@ map('<LEADER>fw', '<Cmd>:Rg<CR>', '[F]ind [W]ords')
 map('<LEADER>fb', '<Cmd>Telescope git_branches<CR>', '[F]ind [B]ranches')
 map('<LEADER>fh', '<Cmd>Telescope oldfiles only_cwd=true initial_mode=normal<CR>', '[F]ind [H]istory')
 map('<LEADER>fe', '<Cmd>Telescope diagnostics initial_mode=normal<CR>', '[F]ind [E]rrors')
-map('<LEADER>km', '<Cmd>Telescope keymaps<CR>', '[K]ey[M]apsF]ind [E]rrors')
+map('<LEADER>km', '<Cmd>Telescope keymaps<CR>', '[K]ey[M]aps')
+map('<LEADER>fp', '<Cmd>Telescope projects<CR>', '[F]ind [P]rojects')
 
 -- Syntax
 map('gd', '<Cmd>Telescope lsp_definitions<CR>', '[G]o to [D]efinition')

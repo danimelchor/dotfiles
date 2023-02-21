@@ -28,21 +28,21 @@ packer.startup(function(use)
         config = function() require('plugins.lsp') end,
         requires = {
             -- LSP Support
-            {'neovim/nvim-lspconfig'},             -- Required
-            {'williamboman/mason.nvim'},           -- Optional
-            {'williamboman/mason-lspconfig.nvim'}, -- Optional
+            { 'neovim/nvim-lspconfig' }, -- Required
+            { 'williamboman/mason.nvim' }, -- Optional
+            { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
             -- Autocompletion
-            {'hrsh7th/nvim-cmp'},         -- Required
-            {'hrsh7th/cmp-nvim-lsp'},     -- Required
-            {'hrsh7th/cmp-buffer'},       -- Optional
-            {'hrsh7th/cmp-path'},         -- Optional
-            {'saadparwaiz1/cmp_luasnip'}, -- Optional
-            {'hrsh7th/cmp-nvim-lua'},     -- Optional
+            { 'hrsh7th/nvim-cmp' }, -- Required
+            { 'hrsh7th/cmp-nvim-lsp' }, -- Required
+            { 'hrsh7th/cmp-buffer' }, -- Optional
+            { 'hrsh7th/cmp-path' }, -- Optional
+            { 'saadparwaiz1/cmp_luasnip' }, -- Optional
+            { 'hrsh7th/cmp-nvim-lua' }, -- Optional
 
             -- Snippets
-            {'L3MON4D3/LuaSnip'},             -- Required
-            {'rafamadriz/friendly-snippets'}, -- Optional
+            { 'L3MON4D3/LuaSnip' }, -- Required
+            { 'rafamadriz/friendly-snippets' }, -- Optional
         }
     }
     -- Illuminate words like the one you are hovering
@@ -83,6 +83,12 @@ packer.startup(function(use)
         config = function() require('plugins.telescope') end
     }
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+    use {
+        "ahmedkhalf/project.nvim",
+        config = function()
+            require("project_nvim").setup()
+        end
+    }
 
     -- Syntax plugin
     use {
@@ -127,7 +133,7 @@ packer.startup(function(use)
     use 'tpope/vim-sleuth' -- Automatically adjust tab size
 
     -- Toggle terminals
-    use {"akinsho/toggleterm.nvim",
+    use { "akinsho/toggleterm.nvim",
         tag = '*',
         config = function() require("toggleterm").setup() end
     }
@@ -145,6 +151,24 @@ packer.startup(function(use)
         config = function() require('plugins.alpha') end
     }
 
+    -- Copilot
+    use {
+        "zbirenbaum/copilot.lua",
+        config = function()
+            require("plugins.copilot")
+        end,
+    }
+
+    -- Markdown previewer
+    use {'iamcco/markdown-preview.nvim'}
+
     -- Theme
     use "sainnhe/sonokai"
 end)
+
+vim.cmd [[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerSync
+  augroup end
+]]

@@ -30,6 +30,7 @@ telescope.setup{
 }
 
 telescope.load_extension('fzf')
+telescope.load_extension('projects')
 
 -- Fallback for GFiles
 local M = {}

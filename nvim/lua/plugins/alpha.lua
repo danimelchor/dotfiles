@@ -50,6 +50,7 @@ if status_ok then
         type = "group",
         val = {
           alpha_button("LDR f f", "  Find File  "),
+          alpha_button("LDR f p", "  Recent Projects  "),
           alpha_button("LDR f h", "  File History  "),
           alpha_button("LDR f w", "  Find Word  "),
           alpha_button("LDR f n", "  New File  "),

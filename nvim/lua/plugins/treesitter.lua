@@ -41,10 +41,6 @@ nvim_treesitter_configs.setup {
     enable = true,
     disable = { 'python' }
   },
-  rainbow = {
-    enable = true,
-    extended_mode = false,
-  }
 }
 
 local parser_config = nvim_treesitter_parsers.get_parser_configs()

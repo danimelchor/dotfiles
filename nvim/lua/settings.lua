@@ -35,6 +35,7 @@ opt.wrap = true
 opt.mouse = "a"
 opt.clipboard = "unnamed"
 
+
 g.mapleader = " "
 -- Theme settings
 opt.termguicolors = true

@@ -11,7 +11,6 @@ end
 nvim_treesitter_configs.setup {
   ensure_installed = {
       "help",
-      "c",
       "lua",
       "javascript",
       "typescript",

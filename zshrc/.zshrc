@@ -124,7 +124,7 @@ alias proj="cd ~/Documents/CodeProjects"
 alias c="clear"
 alias e="exit"
 alias v="nvim"
-alias bu="cd ~/Documents/BU/Fall\ 2022"
+alias bu="cd ~/Documents/BU/Spring\ 2023"
 alias survey="/Users/danielmelchor/Documents/CodeProjects/emmanuel/venv/bin/python3 /Users/danielmelchor/Documents/CodeProjects/emmanuel/survey.py;e"
 alias pdf="/Users/danielmelchor/Documents/CodeProjects/pdf-summary/venv/bin/python3 /Users/danielmelchor/Documents/CodeProjects/pdf-summary/pdf"
 
@@ -140,11 +140,11 @@ alias dve="deactivate"
 alias pipr="pip install -r requirements.txt"
 
 # DOCKER COMPOSE ALIASES
-alias dcu="docker compose up -d"
-alias dcub="docker compose up --build -d --force-recreate"
-alias dclogs="docker compose logs --follow"
-alias dcr="docker compose restart $1"
-alias dcrb="docker-compose up --detach --build $1"
+alias dcu="docker-compose up -d;dclogs"
+alias dclogs="docker-compose logs --follow"
+alias dcr="docker-compose restart $1"
+alias dcrb="docker-compose up --no-deps --detach --build $1;dclogs"
+alias dcprune="docker system prune -a -f"
 
 export EDITOR="nvim"
 

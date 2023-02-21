@@ -4,7 +4,7 @@ if not status_ok then
 end
 lualine.setup {
     options = {
-        theme = vim.g.lualine_theme,
+        theme = 'material',
         component_separators = { left = '', right = ''},
         section_separators = { left = '', right = ''},
     },
@@ -19,7 +19,7 @@ lualine.setup {
                 path = 1,
             },
         },
-        lualine_x = {{ 'diagnostics', sources = {'nvim_diagnostic'}}, 'encoding', 'fileformat'},
+        lualine_x = {{ 'diagnostics', sources = {'nvim_lsp'}}, 'fileformat'},
         lualine_y = {'progress'},
     },
     inactive_sections = {

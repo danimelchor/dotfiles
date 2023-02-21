@@ -8,7 +8,7 @@ vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 neo_tree.setup({
   close_if_last_window = true,
   popup_border_style = "rounded",
-  enable_diagnostics = false,
+  enable_diagnostics = true,
   default_component_configs = {
     indent = {
       padding = 0,
@@ -38,9 +38,11 @@ neo_tree.setup({
     width = "50",
     mappings = {
       ["o"] = "open",
-      ["a"] = "add",
+      ["n"] = "add",
       ["d"] = "delete",
       ["r"] = "rename",
+      ["S"] = "open_split",
+      ["s"] = "open_vsplit",
     },
   },
   filesystem = {
@@ -57,7 +59,6 @@ neo_tree.setup({
     },
     follow_current_file = true,
     hijack_netrw_behavior = "open_current",
-    use_libuv_file_watcher = true,
   },
   git_status = {
     window = {
@@ -66,6 +67,7 @@ neo_tree.setup({
   },
   buffers = {
     follow_current_file = true,
+    group_empty_dirs = false
   },
   event_handlers = {
     {
@@ -78,16 +80,10 @@ neo_tree.setup({
     },
     {
       event = "file_opened",
-      handler = function(file_path)
+      handler = function(_)
         require("neo-tree").focus()
       end
     },
-    -- {
-    --   event = "vim_win_enter",
-    --   handler = function(file_path)
-    --     require("neo-tree").close_all()
-    --   end
-    -- }
   },
 })
 

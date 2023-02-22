@@ -43,7 +43,7 @@ map('<LEADER>t', '<Cmd>ToggleTerm size=15 direction=horizontal<CR>', '[T]oggle t
 -- Save and format
 map('<LEADER>w', function()
     vim.lsp.buf.format({ async = true })
-                    vim.cmd('w')
+    vim.cmd('w')
 end, 'Save and format')
 
 -- Switch between splits

@@ -36,26 +36,50 @@ local function alpha_button(sc, txt)
   }
 end
 
-local function file_button(idx, proj_name, long_fn, short_fn)
+local function section_header(title)
+  -- Upercase
+  title = title:upper()
   return {
+    type = "text",
+    val = title,
+    opts = {
+      position = "center",
+      text = title,
+      width = 90,
+      hl = "TSStrong",
+    },
+  }
+end
+
+local function file_button(idx, proj_name, long_fn, short_fn)
+  local full_text = "  " .. proj_name .. " (" .. short_fn .. ")"
+  local button = {
     type = "button",
-    val = proj_name .. " (" .. short_fn .. ")",
+    val = full_text,
     on_press = function()
       local cmd = "<cmd>e " .. long_fn .. " | cd %:p:h<cr>"
       local key = vim.api.nvim_replace_termcodes(cmd .. "<Ignore>", true, false, true)
       vim.api.nvim_feedkeys(key, "t", false)
     end,
     opts = {
-      text = proj_name .. " (" .. short_fn .. ")",
+      text = full_text,
       position = "center",
       shortcut = "[" .. idx .. "]",
-      cursor = 2,
+      cursor = 5,
       width = 90,
       align_shortcut = "right",
       hl = "DashboardCenter",
       hl_shortcut = "DashboardShortcut",
     },
   }
+  local fb_hl = {}
+  local fn_start = full_text:match("^[^(]*")
+  if fn_start ~= nil then
+    table.insert(fb_hl, { "DashboardCenter", 0, #fn_start })
+    table.insert(fb_hl, { "Comment", #fn_start, #full_text })
+  end
+  button.opts.hl = fb_hl
+  return button
 end
 
 local function get_project_name(fn)
@@ -102,7 +126,7 @@ end
 
 alpha.setup {
   layout = {
-    { type = "padding", val = vim.fn.max { 3, vim.fn.floor(vim.fn.winheight(0) * 0.3) } },
+    { type = "padding", val = vim.fn.floor(vim.fn.winheight(0) * 0.2) },
     {
       type = "text",
       val = {
@@ -112,15 +136,19 @@ alpha.setup {
         "██   ██ ██  ██  ██ ██      ██      ██      ██   ██ ██    ██ ██   ██",
         "██████  ██      ██ ███████ ███████  ██████ ██   ██  ██████  ██   ██",
       },
-      opts = { position = "center", hl = "DashboardHeader" },
+      opts = { position = "center", hl = "DashboardShortcut" },
     },
     { type = "padding", val = 5 },
+    section_header("Recent Projects"),
+    { type = "padding", val = 1 },
     {
       type = "group",
       val = get_recent(),
       opts = { spacing = 1 },
     },
     { type = "padding", val = 2 },
+    section_header("File Operations"),
+    { type = "padding", val = 1 },
     {
       type = "group",
       val = {

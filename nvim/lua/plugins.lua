@@ -15,6 +15,12 @@ packer.startup(function(use)
     use 'kyazdani42/nvim-web-devicons' -- Cool icons
     use 'farmergreg/vim-lastplace' -- Remember last cursor place
 
+    -- Theme
+    use {
+        "EdenEast/nightfox.nvim",
+        config = function() require('plugins.nightfox') end
+    }
+
     -- Comment lines with "gc"
     use {
         'numToStr/Comment.nvim',
@@ -91,6 +97,16 @@ packer.startup(function(use)
         run = ':TSUpdate',
         config = function() require('plugins.treesitter') end
     }
+    use "nvim-treesitter/nvim-treesitter-context"
+
+    -- Errors and diagnostics
+    use {
+        "folke/trouble.nvim",
+        requires = "nvim-tree/nvim-web-devicons",
+        config = function()
+            require("trouble").setup {}
+        end
+    }
 
     -- Autmomatically complete quotes or parens
     use {
@@ -159,9 +175,6 @@ packer.startup(function(use)
 
     -- Markdown previewer
     use { 'iamcco/markdown-preview.nvim' }
-
-    -- Theme
-    use "sainnhe/sonokai"
 end)
 
 vim.cmd [[

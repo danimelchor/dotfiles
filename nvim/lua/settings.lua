@@ -39,9 +39,6 @@ opt.clipboard = "unnamed"
 g.mapleader = " "
 -- Theme settings
 opt.termguicolors = true
-g.sonokai_style = 'andromeda'
-g.sonokai_better_performance = 1
-vim.cmd("silent! colorscheme sonokai")
 vim.cmd("silent! syntax enable")
 vim.cmd("silent! hi Normal guibg=NONE ctermbg=NONE")
 vim.cmd("silent! hi EndOfBuffer guibg=NONE ctermbg=NONE")

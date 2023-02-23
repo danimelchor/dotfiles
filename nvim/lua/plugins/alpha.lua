@@ -99,7 +99,6 @@ end
 
 local function get_recent()
   local project_nvim = require("project_nvim")
-  project_nvim.setup()
   local recent_projects = project_nvim.get_recent_projects_sync()
 
   local tbl = {}

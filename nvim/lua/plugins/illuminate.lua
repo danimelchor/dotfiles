@@ -1,1 +1,6 @@
-vim.g.Illuminate_ftblacklist = {'nerdtree', 'alpha'}
+require('illuminate').configure({
+  filetypes_denylist = {
+    'alpha',
+    'neo-tree',
+  }
+})

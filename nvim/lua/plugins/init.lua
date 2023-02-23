@@ -114,7 +114,13 @@ require('lazy').setup({
       dependencies = { "telescope-fzf-native.nvim" },
    },
    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make',    lazy = true },
-   { "danimelchor/project.nvim",                 event = "VimEnter" },
+   {
+      "danimelchor/project.nvim",
+      event = "VimEnter",
+      config = function ()
+         require('project')
+      end
+   },
 
    -- Syntax plugin
    {

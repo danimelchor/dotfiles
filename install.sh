@@ -17,13 +17,22 @@ INSTALL_DIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 prompt "Do you want to install my nvim config?"
 if [ "$result" = true ]; then
   ! [ -x "$(command -v nvim)" ] && brew install nvim
-  rm -rf ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-  git clone -q --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
   [ -d ~/.config/nvim.old ] && rm -rf ~/.config/nvim.old
   [ -d ~/.config/nvim ] && mv -f ~/.config/nvim ~/.config/nvim.old 
   [ -h ~/.config/nvim ] && rm ~/.config/nvim
   ln -s $INSTALL_DIR/nvim ~/.config/nvim
   mkdir -p ~/.config/nvim/undo
+  echo "\033[1m\033[92mDone.\033[0m\n"
+fi
+
+# kitty
+prompt "Do you want to install my kitty config?"
+if [ "$result" = true ]; then
+  ! [ -x "$(command -v kitty)" ] && brew install kitty
+  [ -d ~/.config/kitty.old ] && rm -rf ~/.config/kitty.old
+  [ -d ~/.config/kitty ] && mv -f ~/.config/kitty ~/.config/kitty.old 
+  [ -h ~/.config/kitty ] && rm ~/.config/kitty
+  ln -s $INSTALL_DIR/kitty ~/.config/kitty
   echo "\033[1m\033[92mDone.\033[0m\n"
 fi
 

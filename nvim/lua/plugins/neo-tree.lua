@@ -55,9 +55,12 @@ neo_tree.setup({
         "thumbs.db",
         "node_modules",
         "__pycache__",
+        ".git",
+        "venv",
       },
     },
     follow_current_file = true,
+    use_libuv_file_watcher = true,
     hijack_netrw_behavior = "open_current",
   },
   git_status = {

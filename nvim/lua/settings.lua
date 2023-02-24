@@ -1,5 +1,6 @@
 local opt = vim.opt
 local g = vim.g
+local o = vim.o
 
 -- General settings
 opt.linespace     = 0 -- No extra spaces between rows
@@ -34,7 +35,7 @@ opt.fileencoding = 'utf-8'
 opt.wrap = true
 opt.mouse = "a"
 opt.clipboard = "unnamed"
-
+o.showmode = false
 
 g.mapleader = " "
 -- Theme settings
@@ -42,3 +43,14 @@ opt.termguicolors = true
 vim.cmd("silent! syntax enable")
 vim.cmd("silent! hi Normal guibg=NONE ctermbg=NONE")
 vim.cmd("silent! hi EndOfBuffer guibg=NONE ctermbg=NONE")
+
+
+-- Dynamically set o.cmdheight on CmdlineEnter
+o.cmdheight = 0
+vim.cmd([[
+augroup DynamicCmdHeight
+  autocmd!
+  autocmd CmdlineEnter : set cmdheight=1
+  autocmd CmdlineLeave : set cmdheight=0
+augroup END
+]])

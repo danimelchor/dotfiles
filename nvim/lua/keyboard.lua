@@ -38,20 +38,11 @@ map('<LEADER>n', '<Cmd>Neotree toggle filesystem left focus reveal<CR>', '[N]eot
 -- Git
 map('<LEADER>gb', '<Cmd>Gitsigns blame_line<CR>', '[G]it [B]lame current line')
 
--- Terminal
-map('<LEADER>t', '<Cmd>ToggleTerm size=15 direction=horizontal<CR>', '[T]oggle terminal')
-
 -- Save and format
 map('<LEADER>w', function()
     vim.lsp.buf.formatting_sync()
     vim.cmd('w')
 end, 'Save and format')
-
--- Switch between splits
-map('<S-Up>', '<C-W>k', 'Move to window above')
-map('<S-Right>', '<C-W>l', 'Move to window to the right')
-map('<S-Left>', '<C-W>h', 'Move to window to the left')
-map('<S-Down>', '<C-W>j', 'Move to window below')
 
 -- Switch between tabs
 map('<TAB>', '<Cmd>:BufferLineCycleNext<CR>', 'Switch to next tab')

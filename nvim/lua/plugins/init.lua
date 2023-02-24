@@ -129,6 +129,7 @@ require('lazy').setup({
       event = "BufEnter"
    },
    "nvim-treesitter/nvim-treesitter-context",
+   'christoomey/vim-tmux-navigator',
 
    -- Errors and diagnostics
    {
@@ -168,15 +169,7 @@ require('lazy').setup({
 
    -- Git diffs
    'sindrets/diffview.nvim',
-
    'tpope/vim-sleuth', -- Automatically adjust tab size
-
-   -- Toggle terminals
-   { "akinsho/toggleterm.nvim",
-      version = '*',
-      config = true,
-      cmd = "ToggleTerm"
-   },
 
    -- Smooth scrolling
    {

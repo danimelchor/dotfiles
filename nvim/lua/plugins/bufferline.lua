@@ -13,6 +13,7 @@ bufferline.setup({
     offsets = {{filetype = "neo-tree", text = "File Explorer"}},
     hover = {
       enabled = false
-    }
+    },
+    always_show_bufferline = false
   }
 })

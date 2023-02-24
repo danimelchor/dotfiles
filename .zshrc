@@ -60,4 +60,4 @@ export ZLE_RPROMPT_INDENT=0
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/Documents/CodeProjects/dotfiles/zshrc/.p10k.zsh.
-[[ ! -f ~/Documents/CodeProjects/dotfiles/zshrc/.p10k.zsh ]] || source ~/Documents/CodeProjects/dotfiles/zshrc/.p10k.zsh
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

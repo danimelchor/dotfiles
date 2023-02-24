@@ -37,7 +37,7 @@ if [ "$result" = true ]; then
 fi
 
 # zshrc
-prompt "Do you want to install my .zshrc?"
+prompt "Do you want to install my zsh config?"
 if [ "$result" = true ]; then
   ! [ -x "$(command -v p10k)" ] && rm -rf ~/powerlevel10k && git clone -q --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
 
@@ -50,7 +50,18 @@ if [ "$result" = true ]; then
   [ -h ~/.zshrc ] && rm ~/.zshrc
   [ -h ~/.p10k.zsh ] && rm ~/.p10k.zsh
 
-  ln -s $INSTALL_DIR/zshrc/.zshrc ~/.zshrc
-  ln -s $INSTALL_DIR/zshrc/.p10k.zsh ~/.p10k.zsh
+  ln -s $INSTALL_DIR/.zshrc ~/.zshrc
+  ln -s $INSTALL_DIR/.p10k.zsh ~/.p10k.zsh
+  echo "\033[1m\033[92mDone.\033[0m\n"
+fi
+
+# tmux
+prompt "Do you want to install my tmux config?"
+if [ "$result" = true ]; then
+  ! [ -x "$(command -v tmux)" ] && brew install tmux
+  [ -f ~/.tmux.conf.old ] && rm ~/.tmux.conf.old
+  [ -f ~/.tmux.conf ] && mv -f ~/.tmux.conf ~/.tmux.conf.old
+  [ -h ~/.tmux.conf ] && rm ~/.tmux.conf
+  ln -s $INSTALL_DIR/.tmux.conf ~/.tmux.conf
   echo "\033[1m\033[92mDone.\033[0m\n"
 fi

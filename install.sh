@@ -18,9 +18,8 @@ prompt "Do you want to install my nvim config?"
 if [ "$result" = true ]; then
   ! [ -x "$(command -v nvim)" ] && brew install nvim
   [ -d ~/.config/nvim.old ] && rm -rf ~/.config/nvim.old
-  [ -d ~/.config/nvim ] && mv -f ~/.config/nvim ~/.config/nvim.old 
-  [ -h ~/.config/nvim ] && rm ~/.config/nvim
-  ln -s $INSTALL_DIR/nvim ~/.config/nvim
+  [ -d ~/.config/nvim ] && mv ~/.config/nvim ~/.config/nvim.old/
+  cp -r $INSTALL_DIR/nvim ~/.config/nvim
   mkdir -p ~/.config/nvim/undo
   echo "\033[1m\033[92mDone.\033[0m\n"
 fi
@@ -30,9 +29,8 @@ prompt "Do you want to install my kitty config?"
 if [ "$result" = true ]; then
   ! [ -x "$(command -v kitty)" ] && brew install kitty
   [ -d ~/.config/kitty.old ] && rm -rf ~/.config/kitty.old
-  [ -d ~/.config/kitty ] && mv -f ~/.config/kitty ~/.config/kitty.old 
-  [ -h ~/.config/kitty ] && rm ~/.config/kitty
-  ln -s $INSTALL_DIR/kitty ~/.config/kitty
+  [ -d ~/.config/kitty ] && mv ~/.config/kitty ~/.config/kitty.old/
+  cp -r $INSTALL_DIR/kitty ~/.config/kitty
   echo "\033[1m\033[92mDone.\033[0m\n"
 fi
 
@@ -44,14 +42,11 @@ if [ "$result" = true ]; then
   [ -f ~/.zshrc.old ] && rm ~/.zshrc.old
   [ -f ~/.p10k.zsh.old ] && rm ~/.p10k.zsh.old
 
-  [ -f ~/.p10k.zsh ] && mv -f ~/.p10k.zsh ~/.p10k.zsh.old 
-  [ -f ~/.zshrc ] && mv -f ~/.zshrc ~/.zshrc.old
+  [ -f ~/.p10k.zsh ] && mv ~/.p10k.zsh ~/.p10k.zsh.old 
+  [ -f ~/.zshrc ] && mv ~/.zshrc ~/.zshrc.old
 
-  [ -h ~/.zshrc ] && rm ~/.zshrc
-  [ -h ~/.p10k.zsh ] && rm ~/.p10k.zsh
-
-  ln -s $INSTALL_DIR/.zshrc ~/.zshrc
-  ln -s $INSTALL_DIR/.p10k.zsh ~/.p10k.zsh
+  cp -r $INSTALL_DIR/.p10k.zsh ~/.p10k.zsh
+  cp -r $INSTALL_DIR/.zshrc ~/.zshrc
   echo "\033[1m\033[92mDone.\033[0m\n"
 fi
 
@@ -60,8 +55,24 @@ prompt "Do you want to install my tmux config?"
 if [ "$result" = true ]; then
   ! [ -x "$(command -v tmux)" ] && brew install tmux
   [ -f ~/.tmux.conf.old ] && rm ~/.tmux.conf.old
-  [ -f ~/.tmux.conf ] && mv -f ~/.tmux.conf ~/.tmux.conf.old
-  [ -h ~/.tmux.conf ] && rm ~/.tmux.conf
-  ln -s $INSTALL_DIR/.tmux.conf ~/.tmux.conf
+  [ -f ~/.tmux.conf ] && mv ~/.tmux.conf ~/.tmux.conf.old
+  cp -r $INSTALL_DIR/.tmux.conf ~/.tmux.conf
+  echo "\033[1m\033[92mDone.\033[0m\n"
+fi
+
+# window manager
+prompt "Do you want to install my window manager config?"
+if [ "$result" = true ]; then
+  ! [ -x "$(command -v yabai)" ] && brew install koekeishiya/formulae/yabai
+  ! [ -x "$(command -v skhd)" ] && brew install koekeishiya/formulae/skhd
+
+  [ -f ~/.yabairc.old ] && rm ~/.yabairc.old
+  [ -f ~/.skhdrc.old ] && rm ~/.skhdrc.old
+
+  [ -f ~/.yabairc ] && mv ~/.yabairc ~/.yabairc.old
+  [ -f ~/.skhdrc ] && mv ~/.skhdrc ~/.skhdrc.old
+
+  cp -r $INSTALL_DIR/.yabairc ~/.yabairc
+  cp -r $INSTALL_DIR/.skhdrc ~/.skhdrc
   echo "\033[1m\033[92mDone.\033[0m\n"
 fi

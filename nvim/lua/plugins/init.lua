@@ -73,8 +73,8 @@ require('lazy').setup({
    -- Highlight color codes with their code #ff00ff
    {
       'norcalli/nvim-colorizer.lua',
-      config = true,
-      event = "BufEnter"
+      config = function() require('colorizer').setup() end,
+      event = "VimEnter"
    },
 
    -- Tabs like Visual Studio Code

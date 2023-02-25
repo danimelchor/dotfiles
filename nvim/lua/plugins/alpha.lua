@@ -125,7 +125,7 @@ end
 
 alpha.setup {
   layout = {
-    { type = "padding", val = vim.fn.floor(vim.fn.winheight(0) * 0.2) },
+    { type = "padding", val = vim.fn.floor(vim.fn.winheight(0) * 0.15) },
     {
       type = "text",
       val = {

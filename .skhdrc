@@ -57,5 +57,6 @@ ctrl + alt - right : yabai -m window --warp east
 shift + alt - s : yabai -m window --display south; yabai -m display --focus south;
 shift + alt - n : yabai -m window --display north; yabai -m display --focus north;
 
-# reload
-shift + alt - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
+# ------ NON YABAI RELATED ------ #
+hyper - t : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~ tmux new-session;
+hyper - v : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~ sh -c "tmux new-session 'nvim'" &;

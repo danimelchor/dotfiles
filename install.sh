@@ -69,19 +69,17 @@ fi
 # window manager
 prompt "Do you want to install my window manager config?"
 if [ "$result" = true ]; then
-  ! [ -x "$(command -v yabai)" ] && brew install koekeishiya/formulae/yabai
   ! [ -x "$(command -v skhd)" ] && brew install koekeishiya/formulae/skhd
-
-  [ -f ~/.yabairc.old ] && rm ~/.yabairc.old
   [ -f ~/.skhdrc.old ] && rm ~/.skhdrc.old
-
-  [ -f ~/.yabairc ] && mv -f ~/.yabairc ~/.yabairc.old
   [ -f ~/.skhdrc ] && mv -f ~/.skhdrc ~/.skhdrc.old
-
-  [ -h ~/.yabairc ] && rm ~/.yabairc
   [ -h ~/.skhdrc ] && rm ~/.skhdrc
-
-  ln -s $INSTALL_DIR/.yabairc ~/.yabairc
   ln -s $INSTALL_DIR/.skhdrc ~/.skhdrc
+
+  ! [ -x "$(command -v yabai)" ] && brew install koekeishiya/formulae/yabai
+  [ -d ~/.config/yabai.old ] && rm -rf ~/.config/yabai.old
+  [ -d ~/.config/yabai ] && mv -f ~/.config/kitty ~/.config/yabai.old 
+  [ -h ~/.config/yabai ] && rm ~/.config/yabai
+  ln -s $INSTALL_DIR/yabai ~/.config/yabai
+
   echo "\033[1m\033[92mDone.\033[0m\n"
 fi

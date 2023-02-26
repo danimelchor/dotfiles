@@ -19,10 +19,11 @@ require('lazy').setup({
 
    -- Theme
    {
-      "EdenEast/nightfox.nvim",
+      "catppuccin/nvim",
       lazy = false,
       priority = 1000,
-      config = function() require('plugins.nightfox') end
+      name = "catppuccin",
+      config = function() require('plugins.theme') end
    },
 
    -- Comment lines with "gc"

@@ -38,12 +38,6 @@ opt.clipboard = "unnamed"
 o.showmode = false
 
 g.mapleader = " "
--- Theme settings
-opt.termguicolors = true
-vim.cmd("silent! syntax enable")
-vim.cmd("silent! hi Normal guibg=NONE ctermbg=NONE")
-vim.cmd("silent! hi EndOfBuffer guibg=NONE ctermbg=NONE")
-
 
 -- Dynamically set o.cmdheight on CmdlineEnter
 o.cmdheight = 0
@@ -54,3 +48,4 @@ augroup DynamicCmdHeight
   autocmd CmdlineLeave : set cmdheight=0
 augroup END
 ]])
+

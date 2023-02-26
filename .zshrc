@@ -60,5 +60,7 @@ alias dcprune="docker system prune -a -f"
 export EDITOR="nvim"
 export ZLE_RPROMPT_INDENT=0
 
+eval "$(zoxide init zsh)"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

@@ -17,7 +17,7 @@ do
       LAST_SPACE=$((LAST_SPACE+1))
     done
   elif [ $MISSING_SPACES -lt 0 ]; then
-    for i in $(seq 1 $(-$MISSING_SPACES))
+    for i in $(seq 1 $((MISSING_SPACES*-1)))
     do
       yabai -m space --destroy "$LAST_SPACE"
       LAST_SPACE=$((LAST_SPACE-1))
@@ -25,3 +25,5 @@ do
   fi
   DELTA=$((DELTA+MISSING_SPACES))
 done <<< "$CURRENT_SPACES"
+
+osascript -e 'tell application id "tracesOf.Uebersicht" to refresh widget id "simple-bar-index-jsx"'

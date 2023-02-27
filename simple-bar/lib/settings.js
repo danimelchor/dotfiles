@@ -38,7 +38,7 @@ export const defaultSettings = {
     displayAllSpacesOnAllScreens: false,
     hideDuplicateAppsInSpaces: false,
     displayStickyWindowsSeparately: false,
-    hideEmptySpaces: true,
+    hideEmptySpaces: false,
     showOptionsOnHover: false,
     switchSpacesWithoutYabai: false,
   },

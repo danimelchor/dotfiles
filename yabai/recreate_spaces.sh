@@ -1,6 +1,6 @@
 #!/bin/sh
 
-DESIRED_SPACES_PER_DISPLAY=6
+DESIRED_SPACES_PER_DISPLAY=1
 CURRENT_SPACES="$(yabai -m query --displays | jq -r '.[].spaces | @sh')"
 
 DELTA=0
@@ -17,7 +17,7 @@ do
       LAST_SPACE=$((LAST_SPACE+1))
     done
   elif [ $MISSING_SPACES -lt 0 ]; then
-    for i in $(seq 1 $(-$MISSING_SPACES))
+    for i in $(seq 1 $((MISSING_SPACES*-1)))
     do
       yabai -m space --destroy "$LAST_SPACE"
       LAST_SPACE=$((LAST_SPACE-1))
@@ -25,3 +25,5 @@ do
   fi
   DELTA=$((DELTA+MISSING_SPACES))
 done <<< "$CURRENT_SPACES"
+
+sh ./create_spaces.sh

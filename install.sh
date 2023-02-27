@@ -81,5 +81,8 @@ if [ "$result" = true ]; then
   [ -h ~/.config/yabai ] && rm ~/.config/yabai
   ln -s $INSTALL_DIR/yabai ~/.config/yabai
 
+  [ -h ~/.config/yabai ] && rm ~/.config/yabai
+  ln -s $INSTALL_DIR/simple-bar ~/Library/Application\ Support/Übersicht/widgets/
+
   echo "\033[1m\033[92mDone.\033[0m\n"
 fi

@@ -39,8 +39,8 @@ export const soundStyles = /* css */ `
   background-color: var(--foreground);
 }
 .sound__slider::-webkit-slider-thumb {
-  width: 8px;
-  height: 8px;
+  width: 12px;
+  height: 12px;
   background-color: var(--foreground);
   border-radius: 50%;
   cursor: pointer;
@@ -51,8 +51,8 @@ export const soundStyles = /* css */ `
   background-color: var(--blue);
 }
 .sound__slider::-webkit-slider-thumb:hover {
-  width: 10px;
-  height: 10px;
+  width: 14px;
+  height: 14px;
 }
 .sound__slider-filler {
   position: absolute;

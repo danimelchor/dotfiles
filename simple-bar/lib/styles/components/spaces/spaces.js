@@ -1,5 +1,4 @@
 import { spaceStyles } from "./space";
-import { spaceOptionsStyles } from "./space-options";
 
 export const spacesStyles = /* css */ `
 .spaces {
@@ -24,7 +23,6 @@ export const spacesStyles = /* css */ `
   opacity: 0.35;
 }
 ${spaceStyles}
-${spaceOptionsStyles}
 .spaces__add > svg {
   width: 10px;
   height: 10px;

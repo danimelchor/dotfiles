@@ -1,8 +1,6 @@
 import Space from "./space.jsx";
 import Stickies from "./stickies.jsx";
-import * as Icons from "../icons.jsx";
 import * as Utils from "../../utils";
-import * as Yabai from "../../yabai";
 import * as Settings from "../../settings";
 
 export { spacesStyles as styles } from "../../styles/components/spaces/spaces";
@@ -25,11 +23,6 @@ export const Component = ({ spaces, windows, SIP, displayIndex }) => {
 
   return displays.map((display, i) => {
     if (display !== displayIndex) return null;
-
-    const onClick = async (e) => {
-      Utils.clickEffect(e);
-      await Yabai.createSpace(displayIndex);
-    };
 
     return (
       <div key={i} className="spaces">

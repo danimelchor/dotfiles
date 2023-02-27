@@ -34,7 +34,6 @@ export const data = {
   noBarBg: { label: "No bar background", type: "checkbox" },
   noColorInData: { label: "No colors in data", type: "checkbox" },
   bottomBar: { label: "Bottom bar", type: "checkbox" },
-  inlineSpacesOptions: { label: "Inline spaces options", type: "checkbox" },
   disableNotifications: { label: "Disable notifications", type: "checkbox" },
   compactMode: { label: "Compact mode", type: "checkbox" },
   widgetMaxWidth: { label: "Widget max width", type: "text" },
@@ -144,10 +143,6 @@ export const data = {
     fullWidth: true,
   },
   hideEmptySpaces: { label: "Hide empty spaces", type: "checkbox" },
-  showOptionsOnHover: {
-    label: "Show space options on hover",
-    type: "checkbox",
-  },
   switchSpacesWithoutYabai: {
     label: "Switch spaces with ^⭠/^⭢ instead of yabai",
     type: "checkbox",
@@ -368,7 +363,6 @@ export const defaultSettings = {
     noBarBg: false,
     noColorInData: false,
     bottomBar: false,
-    inlineSpacesOptions: false,
     disableNotifications: false,
     compactMode: true,
     widgetMaxWidth: "160px",

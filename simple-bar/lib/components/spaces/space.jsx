@@ -1,6 +1,5 @@
 import * as Uebersicht from "uebersicht";
 import OpenedApps from "./opened-apps.jsx";
-import SpaceOptions from "./space-options.jsx";
 import * as Utils from "../../utils";
 import * as Yabai from "../../yabai";
 import * as Settings from "../../settings";
@@ -151,13 +150,6 @@ const Space = ({
           />
           <OpenedApps apps={displayStickyWindowsSeparately ? apps : allApps} />
         </button>
-        {SIPDisabled && (
-          <SpaceOptions
-            index={index}
-            setHovered={setHovered}
-            displayIndex={displayIndex}
-          />
-        )}
       </div>
     </Uebersicht.React.Fragment>
   );

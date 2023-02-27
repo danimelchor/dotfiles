@@ -39,10 +39,10 @@ export const micStyles = /* css */ `
   background-color: var(--foreground);
 }
 .mic__slider::-webkit-slider-thumb {
-  width: 8px;
-  height: 8px;
+  width: 12px;
+  height: 12px;
   background-color: var(--foreground);
-  border-radius: 50%;
+  border-radius: 100%;
   cursor: pointer;
   -webkit-appearance: none;
   transition: width 160ms var(--transition-easing), height 160ms var(--transition-easing)
@@ -51,8 +51,8 @@ export const micStyles = /* css */ `
   background-color: var(--orange);
 }
 .mic__slider::-webkit-slider-thumb:hover {
-  width: 10px;
-  height: 10px;
+  width: 14px;
+  height: 14px;
 }
 .mic__slider-filler {
   position: absolute;

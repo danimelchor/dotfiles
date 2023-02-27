@@ -106,7 +106,6 @@ export const Widget = () => {
       onClick={onClick}
       onRightClick={onRightClick}
       onMiddleClick={onMiddleClick}
-      showSpecter={showSpecter && isPlaying}
     >
       {label}
     </DataWidget.Widget>

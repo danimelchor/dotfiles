@@ -1,4 +1,3 @@
-import UserWidgets from "./lib/components/data/user-widgets.jsx";
 import * as Error from "./lib/components/error.jsx";
 import * as Spaces from "./lib/components/spaces/spaces.jsx";
 import * as Process from "./lib/components/spaces/process.jsx";
@@ -14,7 +13,6 @@ import * as Mic from "./lib/components/data/mic.jsx";
 import * as Wifi from "./lib/components/data/wifi.jsx";
 import * as Spotify from "./lib/components/data/spotify.jsx";
 import * as Dnd from "./lib/components/data/dnd.jsx";
-import * as Specter from "./lib/components/data/specter.jsx";
 import * as DataWidgetLoader from "./lib/components/data/data-widget-loader.jsx";
 import * as DataWidget from "./lib/components/data/data-widget.jsx";
 import * as Utils from "./lib/utils";
@@ -33,7 +31,6 @@ Utils.injectStyles("simple-bar-index-styles", [
   Base.styles,
   Spaces.styles,
   Process.styles,
-  Settings.styles,
   settings.customStyles.styles,
   DataWidget.styles,
   DateDisplay.styles,
@@ -46,11 +43,11 @@ Utils.injectStyles("simple-bar-index-styles", [
   Sound.styles,
   Spotify.styles,
   Dnd.styles,
-  Specter.styles,
   DataWidgetLoader.styles,
 ]);
 
 const render = ({ output, error }) => {
+  try {
   const baseClasses = Utils.classnames("simple-bar", {
     "simple-bar--floating": settings.global.floatingBar,
     "simple-bar--no-bar-background": settings.global.noBarBg,
@@ -103,8 +100,6 @@ const render = ({ output, error }) => {
         />
       )}
       <div className="simple-bar__data">
-        <Settings.Wrapper />
-        <UserWidgets />
         <Zoom.Widget />
         <Spotify.Widget />
         <Weather.Widget />
@@ -118,6 +113,10 @@ const render = ({ output, error }) => {
       </div>
     </div>
   );
+  } catch (error) {
+    console.error("Error in spaces.jsx", error);
+    return <Error.Component type="error" classes={baseClasses} />;
+  }
 };
 
 export { command, refreshFrequency, render };

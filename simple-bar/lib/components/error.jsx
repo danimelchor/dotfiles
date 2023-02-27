@@ -1,4 +1,3 @@
-import * as Settings from "./settings/settings.jsx";
 import * as Utils from "../utils";
 
 const message = {
@@ -24,7 +23,6 @@ export const Component = ({ type, classes }) => {
   return (
     <div className={errorClasses}>
       <span>simple-bar-index.jsx: {message[type]}</span>
-      <Settings.Wrapper />
     </div>
   );
 };

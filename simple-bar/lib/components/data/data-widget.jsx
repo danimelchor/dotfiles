@@ -1,5 +1,4 @@
 import * as Uebersicht from "uebersicht";
-import * as Specter from "./specter.jsx";
 import * as Utils from "../../utils";
 
 export { dataWidgetStyles as styles } from "../../styles/components/data/data-widget";
@@ -32,7 +31,6 @@ export const Widget = ({
   onMiddleClick,
   style,
   disableSlider,
-  showSpecter,
   children,
 }) => {
   const ref = Uebersicht.React.useRef();
@@ -68,7 +66,6 @@ export const Widget = ({
       style={style}
     >
       {Icon && <Icon />}
-      {showSpecter && <Specter.Widget />}
       <Inner disableSlider={disableSlider}>{children}</Inner>
     </Tag>
   );

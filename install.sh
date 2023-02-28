@@ -12,12 +12,15 @@ prompt() {
 }
 
 moveAndLink() {
-  OLD=$2.old/
-  [ -L $OLD ] && rm $OLD
-  [ -e $OLD ] && rm -rf $OLD
+  OLD=$2.old
+  echo "Moving $2 to $OLD"
+  [ -h $OLD ] && rm $OLD
+  [ -d $OLD ] && rm -rf $OLD
+  [ -f $OLD ] && rm -rf $OLD
 
-  [ -L $2 ] && rm $2
-  [ -e $2 ] && mv $2 $OLD
+  [ -h $2 ] && rm $2
+  [ -d $2 ] && mv $2 $OLD
+  [ -f $2 ] && mv $2 $OLD
 
   ln -s $1 $2
 }

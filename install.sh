@@ -70,10 +70,12 @@ prompt "Do you want to install my window manager config?"
 if [ "$result" = true ]; then
   ! [ -x "$(command -v skhd)" ] && brew install koekeishiya/formulae/skhd
   ! [ -x "$(command -v yabai)" ] && brew install koekeishiya/formulae/yabai
+  ! [ -x "$(command -v sketchybar)" ] && brew install sketchybar
   ! [ -x /Applications/Hammerspoon.app ] && brew install hammerspoon --cask
 
   moveAndLink $INSTALL_DIR/.skhdrc ~/.config/.skhdrc
   moveAndLink $INSTALL_DIR/yabai ~/.config/yabai
+  moveAndLink $INSTALL_DIR/sketchybar ~/.config/sketchybar
   moveAndLink $INSTALL_DIR/.hammerspoon ~/.hammerspoon
   moveAndLink $INSTALL_DIR/yabai/toggle-wm /usr/local/bin/toggle-wm
 

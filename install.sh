@@ -13,7 +13,6 @@ prompt() {
 
 moveAndLink() {
   OLD=$2.old
-  echo "Moving $2 to $OLD"
   [ -h $OLD ] && rm $OLD
   [ -d $OLD ] && rm -rf $OLD
   [ -f $OLD ] && rm -rf $OLD

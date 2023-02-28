@@ -1,0 +1,21 @@
+YABAI_STATUS=$(brew services list | grep yabai | awk '{print $2}')
+if [ "$YABAI_STATUS" != "started" ]; then
+    echo "Starting yabai"
+    open -a /Applications/Übersicht.app
+    brew services start yabai
+    brew services start skhd
+    sleep 3 && osascript -e "tell application id \"tracesOf.Uebersicht\" to set hidden of widget id \"simple-bar-index-jsx\" to false"
+else
+    echo "Stopping yabai"
+    brew services stop skhd
+    osascript -e "tell application id \"tracesOf.Uebersicht\" to set hidden of widget id \"simple-bar-index-jsx\" to true"
+    yabai -m config window_border off \
+          top_padding 0 \
+          bottom_padding 0 \
+          left_padding 0 \
+          right_padding 0 \
+          window_gap 0
+
+    brew services stop yabai
+    pkill -KILL -f Übersicht
+fi

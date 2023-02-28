@@ -12,4 +12,16 @@ ev = hs.eventtap.new({hs.eventtap.event.types.mouseMoved}, function(e)
         end
     end
     return nearTop
-end):start()
+end)
+ev:start()
+
+-- Toggle with a hotkey
+hs.hotkey.bind({"shift", "cmd", "alt", "ctrl"}, "H", function()
+    if ev:isEnabled() then
+        hs.alert.show("Topbar enabled")
+        ev:stop()
+    else
+        hs.alert.show("Topbar disabled")
+        ev:start()
+    end
+end)

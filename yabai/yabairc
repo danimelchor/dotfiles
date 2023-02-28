@@ -20,11 +20,12 @@ yabai -m config layout bsp \
           window_border_width 3 \
           window_border_radius 12 \
           window_border on \
-          external_bar all:30:0 \
           window_opacity off \
           window_border_blur off \
           active_window_opacity 1 \
-          normal_window_opacity 1 
+          normal_window_opacity 1 \
+          window_topmost on 
+#          external_bar all:30:0 
 
 yabai -m mouse_drop_action swap
 

@@ -59,7 +59,7 @@ export const defaultSettings = {
     refreshFrequency: 1000 * 60 * 30,
     unit: "C",
     hideLocation: true,
-    hideGradient: false,
+    hideGradient: true,
     customLocation: "",
   },
   batteryWidgetOptions: {

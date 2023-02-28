@@ -11,68 +11,72 @@ prompt() {
   esac
 }
 
+moveAndLink() {
+  OLD=$2.old/
+  [ -L $OLD ] && rm $OLD
+  [ -e $OLD ] && rm -rf $OLD
+
+  [ -L $2 ] && rm $2
+  [ -e $2 ] && mv $2 $OLD
+
+  ln -s $1 $2
+}
+
+echoDone() {
+  echo "\033[1m\033[92mDone.\033[0m\n"
+}
+
 INSTALL_DIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 # nvim
 prompt "Do you want to install my nvim config?"
 if [ "$result" = true ]; then
   ! [ -x "$(command -v nvim)" ] && brew install nvim
-  [ -e ~/.config/nvim ] && rm -rf ~/.config/nvim
-  ln -s $INSTALL_DIR/nvim ~/.config/nvim
+  moveAndLink $INSTALL_DIR/nvim ~/.config/nvim
   mkdir -p ~/.config/nvim/undo
-  echo "\033[1m\033[92mDone.\033[0m\n"
+  echoDone
 fi
 
 # kitty
 prompt "Do you want to install my kitty config?"
 if [ "$result" = true ]; then
   ! [ -x "$(command -v kitty)" ] && brew install kitty
-  [ -e ~/.config/kitty ] && rm -rf ~/.config/kitty
-  ln -s $INSTALL_DIR/kitty ~/.config/kitty
-  echo "\033[1m\033[92mDone.\033[0m\n"
+  moveAndLink $INSTALL_DIR/kitty ~/.config/kitty
+  echoDone
 fi
 
 # zshrc
 prompt "Do you want to install my zsh config?"
 if [ "$result" = true ]; then
   ! [ -x "$(command -v p10k)" ] && rm -rf ~/powerlevel10k && git clone -q --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
-  [ -e ~/.zshrc ] && rm -rf ~/.zshrc
-  [ -e ~/.p10k.zsh ] && rm -rf ~/.p10k.zsh
-  ln -s $INSTALL_DIR/.zshrc ~/.zshrc
-  ln -s $INSTALL_DIR/.p10k.zsh ~/.p10k.zsh
-  echo "\033[1m\033[92mDone.\033[0m\n"
+  moveAndLink $INSTALL_DIR/.zshrc ~/.zshrc
+  moveAndLink $INSTALL_DIR/.p10k.zsh ~/.p10k.zsh
+  echoDone
 fi
 
 # tmux
 prompt "Do you want to install my tmux config?"
 if [ "$result" = true ]; then
   ! [ -x "$(command -v tmux)" ] && brew install tmux
-  [ -e ~/.tmux.conf ] && rm -rf ~/.tmux.conf
-  ln -s $INSTALL_DIR/.tmux.conf ~/.tmux.conf
-  echo "\033[1m\033[92mDone.\033[0m\n"
+  moveAndLink $INSTALL_DIR/.tmux.conf ~/.tmux.conf
+  echoDone
 fi
 
 # window manager
 prompt "Do you want to install my window manager config?"
 if [ "$result" = true ]; then
   ! [ -x "$(command -v skhd)" ] && brew install koekeishiya/formulae/skhd
-  [ -e ~/.skhdrc ] && rm -rf ~/.skhdrc
-  ln -s $INSTALL_DIR/.skhdrc ~/.skhdrc
-
   ! [ -x "$(command -v yabai)" ] && brew install koekeishiya/formulae/yabai
-  [ -e ~/.config/yabai ] && rm -rf ~/.config/yabai
-  ln -s $INSTALL_DIR/yabai ~/.config/yabai
-
   ! [ -x /Applications/Hammerspoon.app ] && brew install hammerspoon --cask
-  [ -e ~/.hammerspoon ] && rm -rf ~/.hammerspoon
-  ln -s $INSTALL_DIR/.hammerspoon ~/.hammerspoon
 
-  ! [ -x /Applications/Übersicht.app ] && brew install ubersicht --cask
-  [ -e ~/Library/Application\ Support/Übersicht/widgets/simple-bar ] && rm -rf ~/Library/Application\ Support/Übersicht/widgets/simple-bar
-  ln -s $INSTALL_DIR/simple-bar ~/Library/Application\ Support/Übersicht/widgets/
+  moveAndLink $INSTALL_DIR/.skhdrc ~/.config/.skhdrc
+  moveAndLink $INSTALL_DIR/yabai ~/.config/yabai
+  moveAndLink $INSTALL_DIR/.hammerspoon ~/.hammerspoon
+  moveAndLink $INSTALL_DIR/yabai/toggle-wm /usr/local/bin/toggle-wm
 
   brew services restart yabai
   brew services restart skhd
+  brew services restart sketchybar
 
-  echo "\033[1m\033[92mDone.\033[0m\n"
+  echoDone
 fi

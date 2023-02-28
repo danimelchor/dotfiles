@@ -76,3 +76,4 @@ alt - 8 : yabai -m window --space 8;\
 hyper - t : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~ tmux new-session;
 hyper - f : open -a Firefox
 hyper - v : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~ sh -c "tmux new-session 'nvim'" &;
+hyper - m : open -a Mimestream

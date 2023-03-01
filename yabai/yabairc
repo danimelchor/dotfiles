@@ -24,8 +24,8 @@ yabai -m config layout bsp \
           window_border_blur off \
           active_window_opacity 1 \
           normal_window_opacity 1 \
-          window_topmost on 
-#          external_bar all:30:0 
+          window_topmost on \
+          external_bar all:45:0 
 
 yabai -m mouse_drop_action swap
 
@@ -50,7 +50,9 @@ yabai -m rule --add app="Notes^ space=5
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 yabai -m signal --add event=display_added action="sleep 1 && ~/.config/yabai/create_spaces.sh"
 yabai -m signal --add event=display_removed action="sleep 1 && ~/.config/yabai/create_spaces.sh"
-yabai -m signal --add event=dock_did_restart action="osascript -e 'tell application id \"tracesOf.Uebersicht\" to refresh widget id \"simple-bar-index-jsx\"'"
 
-# Simple bar refresh
-osascript -e 'tell application id "tracesOf.Uebersicht" to refresh widget id "simple-bar-index-jsx"'
+# Sketchybar
+REFRESH_SKETCHYBAR="sketchybar --trigger windows_on_spaces"
+yabai -m signal --add event=window_focused action="$REFRESH_SKETCHYBAR"
+yabai -m signal --add event=window_created action="$REFRESH_SKETCHYBAR"
+yabai -m signal --add event=window_destroyed action="$REFRESH_SKETCHYBAR"

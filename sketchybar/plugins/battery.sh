@@ -9,7 +9,7 @@ if [ $PERCENTAGE = "" ]; then
   exit 0
 fi
 
-COLOR=$GREEN
+COLOR=$WHITE
 case ${PERCENTAGE} in
   9[0-9]|100) ICON=$BATTERY_100
   ;;
@@ -23,7 +23,7 @@ case ${PERCENTAGE} in
 esac
 
 if [[ $CHARGING != "" ]]; then
-  COLOR=$GREEN
+  COLOR=$WHITE
   ICON=$BATTERY_CHARGING
 fi
 

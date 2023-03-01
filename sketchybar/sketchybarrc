@@ -19,12 +19,12 @@ $HOME/.config/sketchybar/helper/helper $HELPER > /dev/null 2>&1 &
 launchctl unload -F /System/Library/LaunchAgents/com.apple.OSDUIHelper.plist > /dev/null 2>&1 &
 
 # Setting up the general bar appearance and default values
-sketchybar --bar     height=39                                         \
-                     color=$BASE                                  \
+sketchybar --bar     height=35                                         \
                      position=top                                      \
                      sticky=on                                         \
-                     blur_radius=20                                    \
-                     notch_width=0                                     \
+                     color=$TRANSPARENT                                \
+                     y_offset=15                                       \
+                     topmost=on                                        \
                                                                        \
            --default updates=when_shown                                \
                      icon.font="$FONT:Bold:14.0"                       \
@@ -37,7 +37,7 @@ sketchybar --bar     height=39                                         \
                      label.padding_right=$PADDINGS                     \
                      padding_right=$PADDINGS                           \
                      padding_left=$PADDINGS                            \
-                     background.height=30                              \
+                     background.height=35                              \
                      background.corner_radius=9                        \
                      popup.background.border_width=2                   \
                      popup.background.corner_radius=9                  \
@@ -49,6 +49,7 @@ sketchybar --bar     height=39                                         \
 source "$ITEM_DIR/apple.sh"
 source "$ITEM_DIR/spaces.sh"
 source "$ITEM_DIR/current_app.sh"
+source "$ITEM_DIR/left_group.sh"
 
 # Right
 source "$ITEM_DIR/calendar.sh"
@@ -62,8 +63,13 @@ source "$ITEM_DIR/cpu.sh"
 source "$ITEM_DIR/memory.sh"
 source "$ITEM_DIR/disk.sh"
 
+source "$ITEM_DIR/right_group.sh"
+
 # Forcing all item scripts to run (never do this outside of sketchybarrc)
 sketchybar --update
-sketchybar --trigger windows_on_spaces
 
 echo "sketchybar configuation loaded.."
+
+# Force triggers
+sleep 1 && sketchybar --trigger refresh_spaces
+sleep 1 && sketchybar --trigger refresh_focus

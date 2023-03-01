@@ -9,6 +9,7 @@ disk=(
 	icon.color="$MAROON"
 	update_freq=300
 	script="$PLUGIN_DIR/disk.sh"
+	padding_left=10
 )
 
 sketchybar --add item disk right 		\

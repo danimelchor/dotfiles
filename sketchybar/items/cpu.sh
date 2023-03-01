@@ -2,14 +2,19 @@
 
 source "$HOME/.config/sketchybar/colors.sh"
 
-cpu_percent=(
-	label.font="$FONT:Heavy:12"
-	label=-%
-	label.color="$WHITE"
-	icon="$CPU"
-	icon.color="$BLUE"
-	update_freq=30
-	mach_helper="$HELPER"
-)
-
-sketchybar 	--add item cpu.percent right --set cpu.percent "${cpu_percent[@]}"
+sketchybar --add item  cpu right                                                   \
+           --set cpu   update_freq=30                                              \
+                       icon.font="Hack Nerd Font:Regular:12.0"         \
+                       icon.padding_right=4                                        \
+                       icon.color=$YELLOW                                       \
+                       icon.y_offset=1                                             \
+                       label.y_offset=1                                            \
+                       label.font="$FONT:Bold:12"                                \
+                       label.color=$YELLOW                                    \
+                       label.padding_right=8                                       \
+                       background.color=$YELLOW                                 \
+                       background.height=2                                         \
+                       background.y_offset=-9                                      \
+                       background.padding_right=8                                  \
+                       script="$PLUGIN_DIR/cpu.sh"                                 \
+                       icon.padding_left=0 label.padding_right=2                   \

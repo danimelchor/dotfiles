@@ -17,8 +17,8 @@ export POPUP_BORDER_COLOR=$WHITE
 
 export SHADOW_COLOR=$BLACK
 
-# export BASE=0xff24273a
-export BASE=0xa0000000
+
+export BASE=0xff24273a
 export MANTLE=0xff1e2030
 export CRUST=0xff181926
 
@@ -26,9 +26,9 @@ export TEXT=0xffcad3f5
 export SUBTEXT0=0xffb8c0e0
 export SUBTEXT1=0xffa5adcb
 
-export SURFACE0=0x22ffffff
-export SURFACE1=0x07ffffff
-export SURFACE2=0x07ffffff
+export SURFACE0=0xff363a4f
+export SURFACE1=0xff494d64
+export SURFACE2=0xff5b6078
 
 export OVERLAY0=0xff6e738d
 export OVERLAY1=0xff8087a2
@@ -49,4 +49,4 @@ export PINK=0xfff5bde6
 export FLAMINGO=0xfff0c6c6
 export ROSEWATER=0xfff4dbd6
 
-export MAIN_ACCENT=$PEACH
+export MAIN_ACCENT=$MAUVE

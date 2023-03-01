@@ -2,14 +2,19 @@
 
 source "$HOME/.config/sketchybar/colors.sh"
 
-memory=(label.font="$FONT:Heavy:12"
-	label.color="$WHITE"
-	icon="$MEMORY"
-	icon.font="$FONT:Bold:16.0"
-	icon.color="$GREEN"
-	update_freq=30
-	script="$PLUGIN_DIR/memory.sh"
-)
-
-sketchybar 	--add item memory right 		\
-						--set memory "${memory[@]}"
+sketchybar --add item  memory right                                                   \
+           --set memory   update_freq=30                                              \
+                       icon.font="Hack Nerd Font:Regular:12.0"         \
+                       icon.padding_right=4                                        \
+                       icon.color=$PEACH                                      \
+                       icon.y_offset=1                                             \
+                       label.y_offset=1                                            \
+                       label.font="$FONT:Bold:12"                                \
+                       label.color=$PEACH                                      \
+                       label.padding_right=8                                       \
+                       background.color=$PEACH                                 \
+                       background.height=2                                         \
+                       background.y_offset=-9                                      \
+                       background.padding_right=8                                  \
+                       script="$PLUGIN_DIR/memory.sh"                                 \
+                       icon.padding_left=0 label.padding_right=2                   

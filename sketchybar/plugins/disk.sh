@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-sketchybar -m --set "$NAME" label="$(df -H | grep -E '^(/dev/disk3s5).' | awk '{ printf ("%s\n", $5) }')"
+TOPPROC=$(df -h "/" | awk 'NR==2{print $4}' | cut -c 1-4)
+sketchybar --set $NAME icon="" label="$TOPPROC"

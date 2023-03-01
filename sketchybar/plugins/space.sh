@@ -1,19 +1,16 @@
 #!/usr/bin/env bash
 
 update() {
-  WINDOWS=$(yabai -m query --windows --space $SID --display $DIS | jq length)
-  WIDTH="dynamic"
-  if [ "$WINDOWS" = 0 ]; then
-    WIDTH=0
-  fi
-
-  source "$HOME/.config/sketchybar/colors.sh"
-  COLOR=$WHITE
+  args=()
   if [ "$SELECTED" = "true" ]; then
-    COLOR=$MAIN_ACCENT
-  fi
+    args+=(--set $NAME icon.background.y_offset=-13)
+ else
+    args+=(--set $NAME icon.background.y_offset=-20)
+ fi
+  
+  args+=(--set $NAME icon.highlight=$SELECTED background.drawing=$SELECTED)
 
-  sketchybar --set $NAME icon.color=$COLOR label.width=$WIDTH
+  sketchybar -m --animate tanh 10 "${args[@]}"
 }
 
 mouse_clicked() {

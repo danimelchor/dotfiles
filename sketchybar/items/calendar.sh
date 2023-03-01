@@ -1,14 +1,19 @@
 #!/bin/sh
 
-sketchybar --add item     calendar right                    \
-           --set calendar icon=cal                          \
-                          icon.font="$FONT:Black:12.0"      \
-                          icon.padding_right=0              \
-                          label.width=45                    \
-                          label.align=right                 \
-                          padding_left=15                   \
-                          padding_right=10                  \
-                          update_freq=30                    \
-                          script="$PLUGIN_DIR/calendar.sh"  \
-                          click_script="$PLUGIN_DIR/zen.sh" \
-           --subscribe    calendar system_woke
+sketchybar --add item calendar right                                                  \
+           --set calendar update_freq=30                                               \
+                       icon="󰥔"                                                   \
+                       icon.font="Hack Nerd Font:Regular:12.0"                     \
+                       icon.padding_right=4                                        \
+                       icon.color=$BLUE                                       \
+                       icon.y_offset=2                                             \
+                       label.y_offset=2                                            \
+                       label.font="$FONT:Bold:12"                                \
+                       label.color=$BLUE                                      \
+                       label.padding_right=8                                       \
+                       background.color=$BLUE                                 \
+                       background.height=2                                         \
+                       background.padding_right=6                                  \
+                       background.y_offset=-9                                      \
+                       script="$PLUGIN_DIR/calendar.sh"                               \
+                       icon.padding_left=0 label.padding_right=1

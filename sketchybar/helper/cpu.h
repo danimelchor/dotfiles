@@ -91,25 +91,21 @@ static inline void cpu_update(struct cpu* cpu) {
     pclose(file);
 
     char color[16];
-    if (total_perc >= .7) {
+    if (total_perc >= .8) {
       snprintf(color, 16, "%s", getenv("RED"));
-    } else if (total_perc >= .3) {
-      snprintf(color, 16, "%s", getenv("ORANGE"));
-    } else if (total_perc >= .1) {
+    } else if (total_perc >= .5) {
+      snprintf(color, 16, "%s", getenv("PEACH"));
+    } else if (total_perc >= .2) {
       snprintf(color, 16, "%s", getenv("YELLOW"));
     } else {
       snprintf(color, 16, "%s", getenv("LABEL_COLOR"));
     }
 
-    snprintf(cpu->command, 256, "--push cpu.sys %.2f "
-                                "--push cpu.user %.2f "
-                                "--set cpu.percent label=%.0f%% label.color=%s "
-                                "--set cpu.top label=\"%s\"",
-                                sys_perc,
-                                user_perc,
+    snprintf(cpu->command, 256, 
+                                "--set cpu.percent label=%.0f%% label.color=%s ",
                                 total_perc*100.,
-                                color,
-                                topproc                                         );
+                                color
+             );
   }
   else {
     snprintf(cpu->command, 256, "");

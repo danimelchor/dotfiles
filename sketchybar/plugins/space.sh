@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 update() {
   WINDOWS=$(yabai -m query --windows --space $SID --display $DIS | jq length)

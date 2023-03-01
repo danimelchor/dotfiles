@@ -37,3 +37,8 @@ BATTERY_50=􀺶
 BATTERY_25=􀛩
 BATTERY_0=􀛪
 BATTERY_CHARGING=􀢋
+
+# Stats
+export CPU=
+export DISK=󰋊
+export MEMORY=﬙

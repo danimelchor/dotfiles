@@ -25,7 +25,7 @@ yabai -m config layout bsp \
           active_window_opacity 1 \
           normal_window_opacity 1 \
           window_topmost on \
-          external_bar all:50:0 
+          external_bar all:38:0 
 
 yabai -m mouse_drop_action swap
 

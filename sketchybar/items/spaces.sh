@@ -28,7 +28,7 @@ do
                               align=center \
                               icon.align=center \
                               icon.y_offset=2 \
-                              icon.font="Hack Nerd Font:Regular:16.0"         \
+                              icon.font="Hack Nerd Font:Regular:18.0"         \
                               icon.color=$WHITE \
                               icon.background.height=2 \
                               icon.background.color=$MAIN_ACCENT \

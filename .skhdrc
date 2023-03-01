@@ -17,11 +17,9 @@ shift + alt - y : yabai -m space --mirror y-axis
 # flip along x-axis
 shift + alt - x : yabai -m space --mirror x-axis
 
-# toggle window float
-shift + alt - f : yabai -m window --toggle float --grid 4:4:1:1:2:2
-
 # maximize a window
-shift + alt - m : yabai -m window --toggle zoom-fullscreen
+shift + alt - m : yabai -m window --toggle zoom-fullscreen && /usr/local/bin/toggle-wm toggle-focus
+shift + alt - f : /usr/local/bin/toggle-wm toggle-focus
 
 # move window and split
 shift + alt - j : yabai -m window --warp south

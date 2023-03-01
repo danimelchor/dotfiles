@@ -16,6 +16,40 @@ stop() {
     brew services stop sketchybar
 }
 
+HIDEABLE_PLUGINS=("battery" "cpu" "os" "memory" "disk" "updates")
+
+focusOff() {
+    yabai -m config top_padding 15 \
+          bottom_padding 15 \
+          left_padding 15 \
+          right_padding 15 \
+          window_gap 15
+
+    for plugin in "${HIDEABLE_PLUGINS[@]}"; do
+        sketchybar --set "$plugin" drawing=on
+    done
+}
+
+focusOn() {
+    yabai -m config top_padding 0 \
+          bottom_padding 0 \
+          left_padding 0 \
+          right_padding 0 \
+          window_gap 0
+
+    for plugin in "${HIDEABLE_PLUGINS[@]}"; do
+      sketchybar --set "$plugin" drawing=off
+    done
+}
+
+toggleFocus() {
+    CURRENT=$(yabai -m config top_padding)
+    if [ "$CURRENT" = "15" ]; then
+        focusOn
+    else
+        focusOff
+    fi
+}
 
 ACTION=$1
 
@@ -25,6 +59,8 @@ elif [ "$ACTION" = "start" ]; then
     start
 elif [ "$ACTION" = "stop" ]; then
     stop
+elif [ "$ACTION" = "toggle-focus" ]; then
+    toggleFocus
 else
-    echo "Usage: $0 [restart|start|stop]"
+    echo "Usage: $0 [restart|start|stop|toggle-gaps]"
 fi

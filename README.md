@@ -1,6 +1,6 @@
 # My dotfiles
 
-![How it looks](https://github.com/danimelchor/dotfiles/blob/main/assets/demo.jpg?raw=true)
+![How it looks](https://github.com/danimelchor/dotfiles/blob/main/assets/demo.png?raw=true)
 
 ## How to install
 

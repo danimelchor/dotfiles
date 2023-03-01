@@ -24,7 +24,6 @@ sketchybar --bar     height=35                                         \
                      sticky=on                                         \
                      color=$TRANSPARENT                                \
                      y_offset=15                                       \
-                     topmost=on                                        \
                                                                        \
            --default updates=when_shown                                \
                      icon.font="$FONT:Bold:14.0"                       \

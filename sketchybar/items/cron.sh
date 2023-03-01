@@ -3,5 +3,6 @@ sketchybar --add alias "Cron,Item-0" right                      \
            --set cron icon.drawing=off                           \
                               label.drawing=off                          \
                               alias.color=$WHITE                         \
-                              click_script="open -a 'Cron'"
+                              click_script="open -a 'Cron'" \
+                              alias.update_freq=60
 

@@ -5,7 +5,7 @@ source "$HOME/.config/sketchybar/colors.sh"
 cpu_percent=(
 	label.font="$FONT:Heavy:12"
 	label=-%
-	label.color="$TEXT"
+	label.color="$WHITE"
 	icon="$CPU"
 	icon.color="$BLUE"
 	update_freq=30

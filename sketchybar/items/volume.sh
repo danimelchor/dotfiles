@@ -27,4 +27,5 @@ sketchybar --add alias "Control Center,Sound" right                      \
 
 sketchybar --add bracket status brew battery volume volume_alias 1pass \
            --set status background.color=$SURFACE0               \
-                        background.corner_radius=100
+                        background.corner_radius=100 \
+                        background.height=30

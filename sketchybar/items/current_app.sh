@@ -25,4 +25,5 @@ sketchybar --add       item         current_app_icon left             \
            --set current_app    script="$PLUGIN_DIR/current_app.sh" \
                                      background.color=$SURFACE0         \
                                     background.corner_radius=100  \
+                                    background.height=30 \
            --subscribe current_app refresh_spaces space_change

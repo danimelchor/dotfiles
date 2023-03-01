@@ -1,19 +1,30 @@
-YABAI_STATUS=$(brew services list | grep yabai | awk '{print $2}')
-if [ "$YABAI_STATUS" != "started" ]; then
-    echo "Starting yabai"
+restart() {
+    brew services restart yabai
+    brew services restart skhd
+    brew services restart sketchybar
+}
+
+start() {
     brew services start yabai
     brew services start skhd
     brew services start sketchybar
-else
-    echo "Stopping yabai"
-    brew services stop skhd
-    yabai -m config window_border off \
-          top_padding 0 \
-          bottom_padding 0 \
-          left_padding 0 \
-          right_padding 0 \
-          window_gap 0
+}
 
+stop() {
     brew services stop yabai
+    brew services stop skhd
     brew services stop sketchybar
+}
+
+
+ACTION=$1
+
+if [ "$ACTION" = "restart" ]; then
+    restart
+elif [ "$ACTION" = "start" ]; then
+    start
+elif [ "$ACTION" = "stop" ]; then
+    stop
+else
+    echo "Usage: $0 [restart|start|stop]"
 fi

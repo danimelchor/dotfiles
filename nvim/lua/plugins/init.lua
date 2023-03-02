@@ -33,6 +33,12 @@ require('lazy').setup({
       event = "BufEnter"
    },
 
+   -- Practice plugin
+   {
+      'ThePrimeagen/vim-be-good',
+      cmd = "VimBeGood"
+   },
+
    -- LSP + Autocomplete
    {
       'VonHeikemen/lsp-zero.nvim',
@@ -176,23 +182,6 @@ require('lazy').setup({
    {
       'declancm/cinnamon.nvim',
       config = function() require('cinnamon').setup() end
-   },
-
-   -- Starting page
-   {
-      "danimelchor/project.nvim",
-      config = function()
-         require('plugins.project')
-      end
-   },
-   {
-      'goolord/alpha-nvim',
-      dependencies = {
-         'kyazdani42/nvim-web-devicons',
-         'danimelchor/project.nvim'
-      },
-      event = "VimEnter",
-      config = function() require('plugins.alpha') end
    },
 
    -- Copilot

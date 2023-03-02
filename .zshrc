@@ -34,10 +34,10 @@ unsetopt autocd
 alias proj="cd ~/Documents/CodeProjects"
 alias c="clear"
 alias e="exit"
-alias v="nvim"
+alias v="nvim ."
 alias bu="cd ~/Documents/BU/Spring\ 2023"
-alias survey="/Users/danielmelchor/Documents/CodeProjects/emmanuel/venv/bin/python3 /Users/danielmelchor/Documents/CodeProjects/emmanuel/survey.py;e"
-alias pdf="/Users/danielmelchor/Documents/CodeProjects/pdf-summary/venv/bin/python3 /Users/danielmelchor/Documents/CodeProjects/pdf-summary/pdf"
+alias survey="~/projects/emmanuel/venv/bin/python3 ~/projects/emmanuel/survey.py;e"
+alias cd="z $@"
 
 # GIT ALIASES
 alias gaa="git add ."
@@ -56,6 +56,9 @@ alias dclogs="docker-compose logs --follow"
 alias dcr="docker-compose restart $1"
 alias dcrb="docker-compose up --no-deps --detach --build $1;dclogs"
 alias dcprune="docker system prune -a -f"
+
+# TMUX WORKFLOW
+bindkey -s ^f "tmux-sessionizer\n"
 
 export EDITOR="nvim"
 export ZLE_RPROMPT_INDENT=0

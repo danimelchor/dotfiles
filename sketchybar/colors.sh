@@ -18,7 +18,7 @@ export POPUP_BORDER_COLOR=$WHITE
 export SHADOW_COLOR=$BLACK
 
 
-export BASE=0xff24273a
+export BASE=0xe61e1e2e
 export MANTLE=0xff1e2030
 export CRUST=0xff181926
 

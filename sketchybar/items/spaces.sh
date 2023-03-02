@@ -38,7 +38,7 @@ do
                               icon.background.color=$COLOR  \
                               icon.highlight_color=$COLOR \
                               icon.background.width=30 \
-                              icon.background.y_offset=-13 \
+                              icon.background.y_offset=-16 \
                               background.color=$SURFACE0 \
                               background.corner_radius=0 \
             --subscribe space.$sid mouse.clicked refresh_spaces                             

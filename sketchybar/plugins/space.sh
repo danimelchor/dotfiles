@@ -5,7 +5,7 @@ update() {
   if [ "$SELECTED" = "true" ]; then
     args+=(--set $NAME icon.background.y_offset=-13)
  else
-    args+=(--set $NAME icon.background.y_offset=-20)
+    args+=(--set $NAME icon.background.y_offset=-30)
  fi
   
   args+=(--set $NAME icon.highlight=$SELECTED background.drawing=$SELECTED)

@@ -16,10 +16,14 @@ cd $HOME/.config/sketchybar/helper && make
 $HOME/.config/sketchybar/helper/helper $HELPER > /dev/null 2>&1 &
 
 # Setting up the general bar appearance and default values
-sketchybar --bar     height=38                                         \
+sketchybar --bar     height=42                                         \
                      position=top                                      \
                      sticky=on                                         \
                      color=$BASE                                \
+                     border_width=2 \
+                     border_color=$LAVENDER \
+                     y_offset=-2 \
+                     margin=-2 \
                                                                        \
            --default updates=when_shown                                \
                      icon.font="$FONT:Bold:14.0"                       \

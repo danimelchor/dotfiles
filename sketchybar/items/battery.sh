@@ -4,13 +4,13 @@ sketchybar --add item battery right                                             
            --set battery update_freq=120                                             \
                        icon.font="Hack Nerd Font:Regular:12.0"                     \
                        icon.padding_right=3                                        \
-                       icon.color=$SKY                                       \
+                       icon.color=$GREEN                                       \
                        icon.y_offset=2                                             \
                        label.y_offset=1                                            \
                        label.font="$FONT:Bold:12"                                \
-                       label.color=$SKY                                      \
+                       label.color=$GREEN                                      \
                        label.padding_right=8                                       \
-                       background.color=$SKY                                 \
+                       background.color=$GREEN                                 \
                        background.height=2                                         \
                        background.y_offset=-9                                      \
                        background.padding_right=8                                  \

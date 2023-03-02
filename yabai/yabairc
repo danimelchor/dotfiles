@@ -14,10 +14,10 @@ yabai -m config layout bsp \
           mouse_action1 move \
           mouse_action2 resize \
           window_animation_duration 0 \
-          active_window_border_color 0xfffab387 \
+          active_window_border_color 0xffb4befe \
           normal_window_border_color 0xff313244 \
           insert_feedback_color 0xfffab387 \
-          window_border_width 3 \
+          window_border_width 2 \
           window_border_radius 12 \
           window_border on \
           window_opacity off \
@@ -39,20 +39,17 @@ yabai -m rule --add app="^FaceTime$" manage=off
 yabai -m rule --add app="^Messages$" manage=off
 yabai -m rule --add app="^Raycast$" manage=off
 
-yabai -m rule --add app="^Spotify$" space=6
-yabai -m rule --add app="^Slack$" space=6
-yabai -m rule --add app="^Discord$" space=6
-yabai -m rule --add app="^Microsoft To Do$" space=5
-yabai -m rule --add app="Notion^ space=5
-yabai -m rule --add app="Notes^ space=5
+yabai -m rule --add app="^Spotify$" space=^6
+yabai -m rule --add app="^Slack$" space=^5
+yabai -m rule --add app="^Discord$" space=^5
+yabai -m rule --add app="^Microsoft To Do$" space=^4
+yabai -m rule --add app="^Notion$" space=^4
+yabai -m rule --add app="^Notes$" space=^4
+yabai -m rule --add app="^kitty$" space=^2
+yabai -m rule --add app="^Mimestream$"space=^4
 
 # Signal hooks
+REFRESH_SKETCHYBAR="sketchybar --update"
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
-yabai -m signal --add event=display_added action="sleep 1 && ~/.config/yabai/create_spaces.sh"
-yabai -m signal --add event=display_removed action="sleep 1 && ~/.config/yabai/create_spaces.sh"
-
-# Sketchybar
-REFRESH_SKETCHYBAR="sketchybar --trigger windows_on_spaces"
-yabai -m signal --add event=window_focused action="$REFRESH_SKETCHYBAR"
-yabai -m signal --add event=window_created action="$REFRESH_SKETCHYBAR"
-yabai -m signal --add event=window_destroyed action="$REFRESH_SKETCHYBAR"
+yabai -m signal --add event=display_added action="sleep 1 && ~/.config/yabai/create_spaces.sh && $REFRESH_SKETCHYBAR"
+yabai -m signal --add event=display_removed action="sleep 1 && ~/.config/yabai/create_spaces.sh && $REFRESH_SKETCHYBAR"

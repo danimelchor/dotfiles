@@ -16,7 +16,7 @@ stop() {
     brew services stop sketchybar
 }
 
-HIDEABLE_PLUGINS=("battery" "cpu" "os" "memory" "disk" "updates")
+HIDEABLE_PLUGINS=("battery" "cpu" "memory" "disk" "updates")
 
 focusOff() {
     yabai -m config top_padding 15 \

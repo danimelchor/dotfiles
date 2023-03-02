@@ -135,7 +135,7 @@ alpha.setup {
         "██   ██ ██  ██  ██ ██      ██      ██      ██   ██ ██    ██ ██   ██",
         "██████  ██      ██ ███████ ███████  ██████ ██   ██  ██████  ██   ██",
       },
-      opts = { position = "center", hl = "DashboardShortcut" },
+      opts = { position = "center", hl = "DashboardHeader" },
     },
     { type = "padding", val = 5 },
     section_header("Recent Projects"),

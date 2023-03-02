@@ -46,10 +46,9 @@ source "$ITEM_DIR/spaces.sh"
 source "$ITEM_DIR/calendar.sh"
 source "$ITEM_DIR/battery.sh"
 source "$ITEM_DIR/updates.sh"
+source "$ITEM_DIR/disk.sh"
 source "$ITEM_DIR/cpu.sh"
 source "$ITEM_DIR/memory.sh"
-source "$ITEM_DIR/disk.sh"
-source "$ITEM_DIR/os.sh"
 
 # Forcing all item scripts to run (never do this outside of sketchybarrc)
 sketchybar --update

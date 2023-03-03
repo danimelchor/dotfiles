@@ -3,10 +3,11 @@ local g = vim.g
 local o = vim.o
 
 -- General settings
-opt.linespace     = 0 -- No extra spaces between rows
-opt.showmatch     = true -- Show matching brackets/parentthesis
-opt.splitright    = true -- Vertical splits to the right
-opt.ttimeoutlen   = 0 -- Timeout for completing commands
+opt.linespace = 0
+opt.showmatch = true
+opt.splitright = true
+opt.ttimeoutlen = 0
+opt.guicursor = ''
 opt.ruler = false
 opt.exrc = true
 opt.relativenumber = true
@@ -31,8 +32,9 @@ opt.shiftwidth = 4
 opt.softtabstop = 4
 opt.tabstop = 4
 opt.expandtab = true
+opt.smartindent = true
 opt.fileencoding = 'utf-8'
-opt.wrap = true
+opt.wrap = false
 opt.mouse = "a"
 opt.clipboard = "unnamed"
 o.showmode = false

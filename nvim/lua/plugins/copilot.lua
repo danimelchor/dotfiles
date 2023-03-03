@@ -10,8 +10,7 @@
     }
   },
   filetypes = {
-    yaml = true,
-    markdown = true
+    ["*"] = true
   },
   server_opts_overrides = {
     settings = {

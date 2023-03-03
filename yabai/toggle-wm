@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 restart() {
     brew services restart yabai
     brew services restart skhd

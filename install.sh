@@ -11,7 +11,7 @@ cp -fr $INSTALL_DIR/sketchybar ~/.config
 cp -fr $INSTALL_DIR/.hammerspoon ~
 
 # Install all scripts and chmod +x them
-cp -fr $INSTALL_DIR/scripts/* /usr/local/bin
-chmod +x /usr/local/bin/*
+cp -fr $INSTALL_DIR/scripts/* ~/.local/bin
+chmod +x ~/.local/bin/*
 
 echo "\033[1m\033[92mDone.\033[0m\n"

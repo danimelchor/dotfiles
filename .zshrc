@@ -25,7 +25,8 @@ export NVM_DIR="$HOME/.nvm"
 
 # Fix path issues
 PATH=/opt/homebrew/bin:$PATH
-PATH="/usr/local/bin:$PATH"
+PATH=/usr/local/bin:$PATH
+PATH=~/.local/bin:$PATH
 export PYTORCH_ENABLE_MPS_FALLBACK=1
 
 # Disable weird cds

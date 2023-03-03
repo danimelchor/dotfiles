@@ -66,3 +66,4 @@ hyper - f : open -a Firefox
 hyper - m : open -a Mimestream
 hyper - s : open -a Spotify
 hyper - l : open -a Slack
+hyper - p : open -a 1Password\ 7

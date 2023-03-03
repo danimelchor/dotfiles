@@ -121,13 +121,6 @@ require('lazy').setup({
       dependencies = { "telescope-fzf-native.nvim" },
    },
    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make',    lazy = true },
-   {
-      "danimelchor/project.nvim",
-      event = "VimEnter",
-      config = function ()
-         require('project')
-      end
-   },
 
    -- Syntax plugin
    {
@@ -194,5 +187,9 @@ require('lazy').setup({
    },
 
    -- Markdown previewer
-   { 'iamcco/markdown-preview.nvim', cmd = "MarkdownPreview" },
+   {
+      'iamcco/markdown-preview.nvim',
+      lazy = false,
+      build = function() vim.fn["mkdp#util#install"]() end
+   },
 })

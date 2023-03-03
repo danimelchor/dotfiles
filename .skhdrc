@@ -63,5 +63,6 @@ alt - 8 : yabai -m window --space 8 && sketchybar --trigger refresh_spaces
 # ------ NON YABAI RELATED ------ #
 hyper - t : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~;
 hyper - f : open -a Firefox
-hyper - v : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~ nvim;
 hyper - m : open -a Mimestream
+hyper - s : open -a Spotify
+hyper - l : open -a Slack

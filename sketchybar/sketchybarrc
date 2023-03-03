@@ -24,6 +24,7 @@ sketchybar --bar     height=42                                         \
                      border_color=$LAVENDER \
                      y_offset=-2 \
                      margin=-2 \
+                     notch_width=200 \
                                                                        \
            --default updates=when_shown                                \
                      icon.font="$FONT:Bold:14.0"                       \
@@ -53,6 +54,9 @@ source "$ITEM_DIR/updates.sh"
 source "$ITEM_DIR/disk.sh"
 source "$ITEM_DIR/cpu.sh"
 source "$ITEM_DIR/memory.sh"
+
+# Right of notch
+source "$ITEM_DIR/alias.sh"
 
 # Forcing all item scripts to run (never do this outside of sketchybarrc)
 sketchybar --update

@@ -7,15 +7,15 @@ mkdir -p $BACKUP_DIR
 
 # Dict relative_name -> destination
 declare -A files
-files["nvim"]="$HOME/.config/nvim"
-files["kitty"]="$HOME/.config/kitty"
-files[".zshrc"]="$HOME/.zshrc"
-files[".p10k.zsh"]="$HOME/.p10k.zsh"
-files[".tmux.conf"]="$HOME/.tmux.conf"
-files[".skhdrc"]="$HOME/.skhdrc"
-files["yabai"]="$HOME/.config/yabai"
-files["sketchybar"]="$HOME/.config/sketchybar"
-files[".hammerspoon"]="$HOME/.hammerspoon"
+files["nvim"]="$HOME/.config"
+files["kitty"]="$HOME/.config"
+files[".zshrc"]="$HOME"
+files[".p10k.zsh"]="$HOME"
+files[".tmux.conf"]="$HOME"
+files[".skhdrc"]="$HOME"
+files["yabai"]="$HOME/.config"
+files["sketchybar"]="$HOME/.config"
+files[".hammerspoon"]="$HOME"
 
 # cp -fr $INSTALL_DIR/nvim ~/.config/
 # cp -fr $INSTALL_DIR/kitty ~/.config/
@@ -32,8 +32,8 @@ echo -e "\033[1m\033[92mBacking up existing files...\033[0m"
 
 for file in "${!files[@]}"; do
     if [ -e "${files[$file]}" ]; then
-        echo "Backing up ${files[$file]} to $BACKUP_DIR"
-        cp -fr "${files[$file]}" "$BACKUP_DIR"
+        echo "Backing up ${files[$file]}/$file to $BACKUP_DIR"
+        cp -fr "${files[$file]}/$file" "$BACKUP_DIR"
     fi
 done
 

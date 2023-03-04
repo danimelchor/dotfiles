@@ -22,6 +22,7 @@ lsp.setup_nvim_cmp({
   sources = {
     { name = 'nvim_lsp' },
     { name = "luasnip" },
+    { name = "path" },
     { name = 'buffer' }
   },
   mapping = cmp.mapping.preset.insert({

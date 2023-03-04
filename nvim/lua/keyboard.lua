@@ -30,7 +30,6 @@ map('gi', '<Cmd>Telescope lsp_implementations initial_mode=normal<CR>', '[G]o to
 map('gr', '<Cmd>Telescope lsp_references initial_mode=normal<CR>', '[G]o to [R]eferences')
 map('gt', '<Cmd>Telescope lsp_type_definitions<CR>', '[G]o to [T]ype definitions')
 map('gb', '<C-o>', '[G]o [B]ack')
-map('<C-k>', vim.lsp.buf.hover, 'Hover')
 
 -- Neo tree
 map('<LEADER>n', '<Cmd>Neotree toggle filesystem left focus reveal<CR>', '[N]eotree')

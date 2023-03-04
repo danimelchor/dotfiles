@@ -29,7 +29,7 @@ require('lazy').setup({
    -- Comment lines with "gc"
    {
       'numToStr/Comment.nvim',
-      config = function ()
+      config = function()
          require("plugins.comment")
       end,
       event = "BufEnter"
@@ -64,6 +64,15 @@ require('lazy').setup({
          { 'L3MON4D3/LuaSnip' }, -- Required
          { 'rafamadriz/friendly-snippets' }, -- Optional
       }
+   },
+
+   -- Rust extras
+   {
+      'simrat39/rust-tools.nvim',
+      config = function()
+         require("plugins.rust-tools")
+      end,
+      event = "BufEnter"
    },
 
    -- Illuminate words like the one you are hovering
@@ -122,7 +131,7 @@ require('lazy').setup({
       cmd = "Telescope",
       dependencies = { "telescope-fzf-native.nvim" },
    },
-   { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make',    lazy = true },
+   { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make', lazy = true },
 
    -- Syntax plugin
    {

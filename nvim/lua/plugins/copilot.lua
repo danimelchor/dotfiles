@@ -1,16 +1,13 @@
- require('copilot').setup({
+require('copilot').setup({
   suggestion = {
     enabled = true,
     auto_trigger = true,
   },
   panel = {
     layout = {
-      position = "left",
+      position = "right",
       ratio = 0.3
     }
-  },
-  filetypes = {
-    ["*"] = true
   },
   server_opts_overrides = {
     settings = {

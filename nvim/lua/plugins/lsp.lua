@@ -26,8 +26,8 @@ lsp.setup_nvim_cmp({
     { name = 'buffer' }
   },
   mapping = cmp.mapping.preset.insert({
-    ['<Up>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-    ['<Down>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+    ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+    ['<C-j>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         print("visible")

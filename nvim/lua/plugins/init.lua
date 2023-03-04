@@ -29,7 +29,9 @@ require('lazy').setup({
    -- Comment lines with "gc"
    {
       'numToStr/Comment.nvim',
-      config = true,
+      config = function ()
+         require("plugins.comment")
+      end,
       event = "BufEnter"
    },
 

@@ -21,7 +21,6 @@ map('<LEADER>fb', '<Cmd>Telescope git_branches<CR>', '[F]ind [B]ranches')
 map('<LEADER>fh', '<Cmd>Telescope oldfiles only_cwd=true initial_mode=normal<CR>', '[F]ind [H]istory')
 map('<LEADER>fe', '<Cmd>Telescope diagnostics initial_mode=normal<CR>', '[F]ind [E]rrors')
 map('<LEADER>km', '<Cmd>Telescope keymaps<CR>', '[K]ey[M]aps')
-map('<LEADER>fp', '<Cmd>Telescope projects<CR>', '[F]ind [P]rojects')
 map('<LEADER>fc', '<Cmd>Telescope current_buffer_fuzzy_find<CR>', '[F]ind words in [C]urrent buffer')
 map('<LEADER>fn', '<Cmd>:enew<CR>', '[F]ile [N]ew')
 
@@ -31,6 +30,7 @@ map('gi', '<Cmd>Telescope lsp_implementations initial_mode=normal<CR>', '[G]o to
 map('gr', '<Cmd>Telescope lsp_references initial_mode=normal<CR>', '[G]o to [R]eferences')
 map('gt', '<Cmd>Telescope lsp_type_definitions<CR>', '[G]o to [T]ype definitions')
 map('gb', '<C-o>', '[G]o [B]ack')
+map('k', vim.lsp.bug.hover, 'Hover')
 
 -- Neo tree
 map('<LEADER>n', '<Cmd>Neotree toggle filesystem left focus reveal<CR>', '[N]eotree')
@@ -57,3 +57,10 @@ map('<UP>', '<Nop>')
 map('<LEFT>', '<Nop>')
 map('<RIGHT>', '<Nop>')
 map('<DOWN>', '<Nop>')
+
+-- Comment
+vim.keymap.set('n', 'gcc', function()
+  return vim.api.nvim_get_vvar('count') == 0 and '<Plug>(comment_toggle_linewise_current)'
+      or '<Plug>(comment_toggle_linewise_count)'
+end, { expr = true, desc = 'Toggle comment' })
+vim.keymap.set('x', 'gc', '<Plug>(comment_toggle_linewise_visual)', { desc = 'Toggle comment' })

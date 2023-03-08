@@ -46,7 +46,6 @@ lsp.setup_nvim_cmp({
     ['<C-j>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
-        print("visible")
         cmp.confirm({ select = false })
       elseif copilot.is_visible() then
         copilot.accept()

@@ -3,7 +3,8 @@
 INSTALL_DIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 BACKUP_DIR="$HOME/.dotfiles-backup"
 
-mkdir -p $BACKUP_DIR
+rm -rf $BACKUP_DIR
+mkdir $BACKUP_DIR
 
 # Dict relative_name -> destination
 declare -A files
@@ -33,7 +34,7 @@ echo -e "\033[1m\033[92mBacking up existing files...\033[0m"
 for file in "${!files[@]}"; do
     if [ -e "${files[$file]}" ]; then
         echo "Backing up ${files[$file]}/$file to $BACKUP_DIR"
-        cp -fr "${files[$file]}/$file" "$BACKUP_DIR"
+        mv "${files[$file]}/$file" "$BACKUP_DIR"
     fi
 done
 

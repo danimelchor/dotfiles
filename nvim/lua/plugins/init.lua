@@ -35,6 +35,13 @@ require('lazy').setup({
       event = "BufEnter"
    },
 
+   -- Leap (jump to words using two characters)
+   {
+      'ggandor/leap.nvim',
+      event = "BufEnter",
+      config = function() require('plugins.leap') end
+   },
+
    -- Practice plugin
    {
       'ThePrimeagen/vim-be-good',

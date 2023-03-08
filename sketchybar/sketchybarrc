@@ -58,6 +58,9 @@ source "$ITEM_DIR/memory.sh"
 # Right of notch
 source "$ITEM_DIR/alias.sh"
 
+# Left of notch
+source "$ITEM_DIR/todo.sh"
+
 # Forcing all item scripts to run (never do this outside of sketchybarrc)
 sketchybar --update
 

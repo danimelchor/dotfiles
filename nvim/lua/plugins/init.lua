@@ -70,16 +70,9 @@ require('lazy').setup({
          -- Snippets
          { 'L3MON4D3/LuaSnip' }, -- Required
          { 'rafamadriz/friendly-snippets' }, -- Optional
-      }
-   },
 
-   -- Rust extras
-   {
-      'simrat39/rust-tools.nvim',
-      config = function()
-         require("plugins.rust-tools")
-      end,
-      event = "BufEnter"
+         {'simrat39/rust-tools.nvim'}
+      }
    },
 
    -- Illuminate words like the one you are hovering

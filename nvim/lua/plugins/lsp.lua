@@ -1,22 +1,48 @@
-local lsp = require('lsp-zero').preset({
-  name = 'recommended',
-  set_lsp_keymaps = true,
-  manage_nvim_cmp = true,
-  suggest_lsp_servers = false,
-})
+local lsp = require('lsp-zero').preset('recommended')
 
 lsp.ensure_installed({
   'tsserver',
-  'rust_analyzer',
   'lua_ls',
   'gopls',
   'jdtls',
+  'rust_analyzer'
 })
 
-lsp.nvim_workspace()
+-- Preferences
+lsp.set_preferences({
+  suggest_lsp_servers = false
+})
+
+-- Autocompletion
+local cmp = require('cmp')
+local copilot = require('copilot.suggestion')
+lsp.setup_nvim_cmp({
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = "luasnip" },
+    { name = "path" },
+    { name = 'buffer' }
+  },
+  mapping = cmp.mapping.preset.insert({
+        ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+        ['<C-j>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+        ['<Tab>'] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.confirm({ select = false })
+        elseif copilot.is_visible() then
+          copilot.accept()
+        else
+          fallback()
+        end
+      end,
+      {
+        "i",
+      }),
+  })
+})
 
 -- Keybindings
-lsp.on_attach(function(_, bufnr)
+lsp.on_attach(function(client, bufnr)
   local opts = { buffer = bufnr, remap = false }
 
   vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
@@ -31,34 +57,21 @@ lsp.on_attach(function(_, bufnr)
   vim.keymap.set('n', 'gr', function() vim.lsp.buf.references() end, opts)
 end)
 
--- Autocompletion
-local cmp = require('cmp')
-local copilot = require('copilot.suggestion')
-lsp.setup_nvim_cmp({
-  sources = {
-    { name = 'nvim_lsp' },
-    { name = "luasnip" },
-    { name = "path" },
-    { name = 'buffer' }
-  },
-  mapping = cmp.mapping.preset.insert({
-    ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-    ['<C-j>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.confirm({ select = false })
-      elseif copilot.is_visible() then
-        copilot.accept()
-      else
-        fallback()
-      end
-    end, {
-      "i",
-    }),
-  })
+-- Custom configs
+local lsp_rust = lsp.build_options('rust_analyzer', {})
+lsp.configure('lua_ls', {
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { 'vim' }
+      }
+    }
+  }
 })
 
 lsp.setup()
+
+require('rust-tools').setup({ server = lsp_rust })
 
 vim.diagnostic.config({
   virtual_text = true,

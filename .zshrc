@@ -40,7 +40,7 @@ alias bu="cd ~/Documents/BU/Spring\ 2023"
 alias survey="~/projects/emmanuel/venv/bin/python3 ~/projects/emmanuel/survey.py;e"
 alias cd="z $@"
 
-# Create an alias v, If $1 is empty, open nvim ., else nvim $1
+# If arg is empty, open nvim ., else nvim $1
 function v() {
   if [ -z "$1" ]; then
     nvim .

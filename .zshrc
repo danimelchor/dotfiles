@@ -36,10 +36,18 @@ unsetopt autocd
 alias proj="cd ~/Documents/CodeProjects"
 alias c="clear"
 alias e="exit"
-alias v="nvim ."
 alias bu="cd ~/Documents/BU/Spring\ 2023"
 alias survey="~/projects/emmanuel/venv/bin/python3 ~/projects/emmanuel/survey.py;e"
 alias cd="z $@"
+
+# Create an alias v, If $1 is empty, open nvim ., else nvim $1
+function v() {
+  if [ -z "$1" ]; then
+    nvim .
+  else
+    nvim $1
+  fi
+}
 
 # GIT ALIASES
 alias gaa="git add ."

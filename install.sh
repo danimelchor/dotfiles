@@ -32,7 +32,10 @@ files[".hammerspoon"]="$HOME"
 echo -e "\033[1m\033[92mBacking up existing files...\033[0m"
 
 for file in "${!files[@]}"; do
-    if [ -e "${files[$file]}" ]; then
+    if [ -h "${files[$file]}/$file" ]; then
+        echo "Removing symlink ${files[$file]}/$file"
+        rm "${files[$file]}/$file"
+    elif [ -e "${files[$file]}" ]; then
         echo "Backing up ${files[$file]}/$file to $BACKUP_DIR"
         mv "${files[$file]}/$file" "$BACKUP_DIR"
     fi
@@ -43,7 +46,8 @@ echo -e "\n\033[1m\033[92mCopying new files...\033[0m"
 # Copy new files
 for file in "${!files[@]}"; do
     echo "Copying $file to ${files[$file]}"
-    cp -fr "$INSTALL_DIR/$file" "${files[$file]}"
+    # cp -fr "$INSTALL_DIR/$file" "${files[$file]}"
+    ln -s "$INSTALL_DIR/$file" "${files[$file]}"
 done
 
 # Install all scripts and chmod +x them

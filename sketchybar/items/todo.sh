@@ -7,4 +7,5 @@ sketchybar --add item todo q                                                \
                        script="$PLUGIN_DIR/todo.sh"                             \
                        background.height=20                                         \
                        background.padding_right=6                                  \
-                       padding_right=14
+                       padding_right=14 \
+                       click_script="$PLUGIN_DIR/mark-todo.sh"

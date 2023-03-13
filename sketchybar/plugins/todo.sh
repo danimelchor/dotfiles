@@ -12,9 +12,13 @@ elif [ "$PAST" != "null" ]; then
   LABEL=$PAST
   ICON="󰄱"
   COLOR=0xfff38ba8
-else
+elif [ "$TODAY" != "null" ]; then
   LABEL="$TODAY"
   ICON="󰄱"
+  COLOR=0xffffffff
+else
+  LABEL="All for today"
+  ICON="󰄲"
   COLOR=0xffffffff
 fi
 

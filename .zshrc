@@ -37,7 +37,7 @@ alias proj="cd ~/Documents/CodeProjects"
 alias c="clear"
 alias e="exit"
 alias bu="cd ~/Documents/BU/Spring\ 2023"
-alias survey="~/projects/emmanuel/venv/bin/python3 ~/projects/emmanuel/survey.py;e"
+alias survey="~/projects/emmanuel/venv/bin/python3 ~/projects/emmanuel/survey.py"
 alias cd="z $@"
 
 # If arg is empty, open nvim ., else nvim $1

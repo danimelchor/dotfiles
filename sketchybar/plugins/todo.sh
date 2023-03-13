@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-PAST=$(~/.local/bin/rust-todo ls --format json --filter past | jq -r '.[0].name')
-TODAY=$(~/.local/bin/rust-todo ls --format json --filter today | jq -r '.[0].name')
-LENGTH=$(~/.local/bin/rust-todo ls --format json --filter today | jq length)
+PAST=$(~/.local/bin/todo-rs ls --format json --filter past | jq -r '.[0].name')
+TODAY=$(~/.local/bin/todo-rs ls --format json --filter today | jq -r '.[0].name')
+LENGTH=$(~/.local/bin/todo-rs ls --format json --filter today | jq length)
 
 if [ "$PAST" = "null" && "$TODAY" = "null" ]; then
   LABEL="No tasks for today"

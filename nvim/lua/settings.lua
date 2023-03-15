@@ -7,7 +7,6 @@ opt.linespace = 0
 opt.showmatch = true
 opt.splitright = true
 opt.ttimeoutlen = 0
-opt.guicursor = ''
 opt.ruler = false
 opt.exrc = true
 opt.relativenumber = true
@@ -40,14 +39,3 @@ opt.clipboard = "unnamed"
 o.showmode = false
 
 g.mapleader = " "
-
--- Dynamically set o.cmdheight on CmdlineEnter
-o.cmdheight = 0
-vim.cmd([[
-augroup DynamicCmdHeight
-  autocmd!
-  autocmd CmdlineEnter : set cmdheight=1
-  autocmd CmdlineLeave : set cmdheight=0
-augroup END
-]])
-

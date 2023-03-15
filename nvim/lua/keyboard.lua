@@ -16,7 +16,7 @@ map('<LEADER>ff', function()
         vim.cmd("Files")
     end
 end, "[F]ind [F]iles")
-map('<LEADER>fw', '<Cmd>:Rg<CR>', '[F]ind [W]ords')
+map('<LEADER>fw', '<Cmd>Rg<CR>', '[F]ind [W]ords')
 map('<LEADER>fb', '<Cmd>Telescope git_branches<CR>', '[F]ind [B]ranches')
 map('<LEADER>fh', '<Cmd>Telescope oldfiles only_cwd=true initial_mode=normal<CR>', '[F]ind [H]istory')
 map('<LEADER>fe', '<Cmd>Telescope diagnostics initial_mode=normal<CR>', '[F]ind [E]rrors')

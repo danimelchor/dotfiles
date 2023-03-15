@@ -50,7 +50,7 @@ source "$ITEM_DIR/spaces.sh"
 # Right
 source "$ITEM_DIR/calendar.sh"
 source "$ITEM_DIR/battery.sh"
-source "$ITEM_DIR/updates.sh"
+source "$ITEM_DIR/brew.sh"
 source "$ITEM_DIR/disk.sh"
 source "$ITEM_DIR/cpu.sh"
 source "$ITEM_DIR/memory.sh"

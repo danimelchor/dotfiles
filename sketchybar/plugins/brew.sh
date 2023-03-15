@@ -4,24 +4,17 @@ source "$HOME/.config/sketchybar/icons.sh"
 source "$HOME/.config/sketchybar/colors.sh"
 
 PREV=$(sketchybar --query packages | jq -r .text.label)
-sketchybar --set $NAME label=$LOADING
+sketchybar --set brew label=$LOADING
 
-brewLIST=$(brew outdated)
-BREW=$(echo "$brewLIST" | wc -l)
-MAS='0'
-DEFAULT="0"
-
-# sum of all outdated packages
-SUM=$(( ${BREW:-DEFAULT} + ${MAS:-DEFAULT} ))
-
-if [[ $SUM -gt 0 ]]; then
-  FINAL="$SUM"
+BREW=$(brew outdated | wc -l)
+if [ "$BREW" -eq 0 ]; then
+  BREW="0"
 else
-  FINAL=0
+  BREW="$BREW"
 fi
 
-sketchybar --set $NAME label="$FINAL" 
+sketchybar --set brew label="$BREW" 
 
-if [ "$FINAL" != "$PREV" ]; then
-  sketchybar --animate tanh 15 --set $NAME label.y_offset=5 label.y_offset=1
+if [ "$BREW" != "$PREV" ]; then
+  sketchybar --animate tanh 15 --set brew label.y_offset=5 label.y_offset=1
 fi

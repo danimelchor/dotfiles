@@ -15,5 +15,6 @@ sketchybar --add item brew right                                                
                        background.height=2                                         \
                        background.y_offset=-9                                      \
                        background.padding_right=8                                  \
-                       script="$PLUGIN_DIR/updates.sh"                     \
-                       icon.padding_left=0 label.padding_right=2
+                       script="$PLUGIN_DIR/brew.sh"                     \
+                       icon.padding_left=0 label.padding_right=2 \
+                       click_script="$PLUGIN_DIR/install-brew.sh"

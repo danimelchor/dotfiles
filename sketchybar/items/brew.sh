@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-sketchybar --add item updates right                                                \
-           --set updates update_freq=1800                                          \
+sketchybar --add item brew right                                                \
+           --set brew update_freq=1800                                          \
                        icon="󰏔"                                                   \
                        icon.font="Hack Nerd Font:Regular:12.0"         \
                        icon.padding_right=2                                        \

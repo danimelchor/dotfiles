@@ -16,5 +16,8 @@ require('copilot').setup({
         inlineSuggestCount = 1
       }
     }
+  },
+  filetypes = {
+    ["*"] = true
   }
 })

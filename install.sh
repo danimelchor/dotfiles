@@ -14,6 +14,7 @@ files[".zshrc"]="$HOME"
 files[".tmux.conf"]="$HOME"
 files[".skhdrc"]="$HOME"
 files["yabai"]="$HOME/.config"
+files["fish"]="$HOME/.config"
 files["sketchybar"]="$HOME/.config"
 files[".hammerspoon"]="$HOME"
 

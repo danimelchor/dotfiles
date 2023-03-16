@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-ID=$(~/.local/bin/todo-rs ls --format json --filter today-and-past | jq -r '.[0].id')
+ID=$(~/.cargo/bin/todo-rs ls --format json --filter today-and-past | jq -r '.[0].id')
 
 if [ "$NAME" != "null" ]; then
   sketchybar -m --set todo label="󰄲"

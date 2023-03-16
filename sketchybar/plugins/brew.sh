@@ -3,11 +3,11 @@
 source "$HOME/.config/sketchybar/icons.sh"
 source "$HOME/.config/sketchybar/colors.sh"
 
-PREV=$(sketchybar --query packages | jq -r .text.label)
+PREV=$(sketchybar --query brew | jq -r .text.label)
 sketchybar --set brew label=$LOADING
 
-BREW=$(brew outdated | wc -l)
-if [ "$BREW" -eq 0 ]; then
+BREW=$(brew outdated | wc -l | xargs)
+if [ "$BREW" -eq "0" ]; then
   BREW="0"
 else
   BREW="$BREW"

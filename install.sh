@@ -11,7 +11,6 @@ declare -A files
 files["nvim"]="$HOME/.config"
 files["kitty"]="$HOME/.config"
 files[".zshrc"]="$HOME"
-files[".p10k.zsh"]="$HOME"
 files[".tmux.conf"]="$HOME"
 files[".skhdrc"]="$HOME"
 files["yabai"]="$HOME/.config"

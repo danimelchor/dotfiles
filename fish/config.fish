@@ -33,6 +33,8 @@ abbr -a gcm 'git commit -m'
 abbr -a gcam 'git commit -am'
 abbr -a gs 'git status'
 abbr -a gp 'git push'
+abbr -a gc 'git checkout'
+abbr -a gr 'git rebase'
 
 # Python aliases
 abbr -a ve "source venv/bin/activate.fish"
@@ -56,6 +58,10 @@ set -g fish_prompt_pwd_dir_length 3
 # tmux sessionizer
 bind \cf tmux-sessionizer
 setenv FZF_DEFAULT_OPTS "--border --color 'pointer:#B3E1A7,bg+:-1,fg+:#B3E1A7'"
+
+# Editor
+set -x EDITOR vim
+set -x GIT_EDITOR $EDITOR
 
 # colored man output
 # from http://linuxtidbits.wordpress.com/2009/03/23/less-colors-for-man-pages/

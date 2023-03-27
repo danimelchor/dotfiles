@@ -18,7 +18,6 @@ else
 	abbr -a ll 'ls -l'
 	abbr -a lll 'ls -la'
 end
-
 if command -v z > /dev/null
     abbr -a cd 'z'
 end
@@ -78,30 +77,15 @@ setenv LESS_TERMCAP_ue \e'[0m'           # end underline
 setenv LESS_TERMCAP_us \e'[04;38;5;146m' # begin underline
 
 zoxide init fish | source
-
-function fish_prompt
-	set_color brblack
-	echo -n "["(date "+%H:%M")"] "
-	set_color blue
-	echo -n (id -un)
-	if [ $PWD != $HOME ]
-		set_color brblack
-		echo -n ':'
-		set_color yellow
-		echo -n (basename $PWD)
-	end
-	set_color green
-	printf '%s ' (__fish_git_prompt)
-	set_color red
-	echo -n '~ '
-	set_color normal
-end
+starship init fish | source
 
 function fish_greeting
+	echo
 	neofetch
 
 	set_color green
 	echo "Today's tasks:"
 	set_color normal
 	todui ls --date-filter today-and-past
+	echo
 end

@@ -30,6 +30,7 @@ end
 # Git aliases
 abbr -a gaa 'git add --all'
 abbr -a gcm 'git commit -m'
+abbr -a gcam 'git commit -am'
 abbr -a gs 'git status'
 abbr -a gp 'git push'
 

@@ -17,6 +17,7 @@ files["yabai"]="$HOME/.config"
 files["fish"]="$HOME/.config"
 files["sketchybar"]="$HOME/.config"
 files[".hammerspoon"]="$HOME"
+files["starship.toml"]="$HOME/.config"
 
 # cp -fr $INSTALL_DIR/nvim ~/.config/
 # cp -fr $INSTALL_DIR/kitty ~/.config/

@@ -1,3 +1,7 @@
+fish_add_path ~/.local/bin
+fish_add_path ~/.cargo/bin
+fish_add_path /opt/homebrew/bin
+
 abbr -a proj 'cd ~/projects'
 abbr -a c clear
 abbr -a e exit

@@ -43,7 +43,7 @@ abbr -a gco 'git checkout (git branch --sort=-committerdate | sed "s/^\*//g" | f
 abbr -a gcb 'git checkout -b'
 abbr -a gcm 'git commit -m'
 abbr -a gcm! 'git commit -m --amend'
-abbt -a gd 'git diff'
+abbr -a gd 'git diff'
 abbr -a gds 'git diff --staged'
 abbr -a gl 'git pull'
 abbr -a grb 'git rebase'
@@ -92,12 +92,15 @@ zoxide init fish | source
 starship init fish | source
 
 function fish_greeting
-	echo
-	neofetch
+    echo
+    neofetch
 
-	set_color green
-	echo "Today's tasks:"
-	set_color normal
-	todui ls --date-filter today-and-past
-	echo
+    set todays_tasks (todui ls --date-filter today-and-past | string split0)
+
+    if test (echo $todays_tasks | wc -l) -gt 2
+        set_color green
+        echo "Today's tasks:"
+        set_color normal
+        echo $todays_tasks
+    end
 end

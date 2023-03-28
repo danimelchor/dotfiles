@@ -12,10 +12,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-   "nathom/filetype.nvim", -- Better filetype
-   "nvim-lua/plenary.nvim", -- Necessary dependency
+   "nathom/filetype.nvim",         -- Better filetype
+   "nvim-lua/plenary.nvim",        -- Necessary dependency
    'kyazdani42/nvim-web-devicons', -- Cool icons
-   'farmergreg/vim-lastplace', -- Remember last cursor place
+   'farmergreg/vim-lastplace',     -- Remember last cursor place
 
    -- Theme
    {
@@ -55,23 +55,23 @@ require('lazy').setup({
       config = function() require('plugins.lsp') end,
       dependencies = {
          -- LSP Support
-         { 'neovim/nvim-lspconfig' }, -- Required
-         { 'williamboman/mason.nvim' }, -- Optional
+         { 'neovim/nvim-lspconfig' },             -- Required
+         { 'williamboman/mason.nvim' },           -- Optional
          { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
          -- Autocompletion
-         { 'hrsh7th/nvim-cmp' }, -- Required
-         { 'hrsh7th/cmp-nvim-lsp' }, -- Required
-         { 'hrsh7th/cmp-buffer' }, -- Optional
-         { 'hrsh7th/cmp-path' }, -- Optional
+         { 'hrsh7th/nvim-cmp' },         -- Required
+         { 'hrsh7th/cmp-nvim-lsp' },     -- Required
+         { 'hrsh7th/cmp-buffer' },       -- Optional
+         { 'hrsh7th/cmp-path' },         -- Optional
          { 'saadparwaiz1/cmp_luasnip' }, -- Optional
-         { 'hrsh7th/cmp-nvim-lua' }, -- Optional
+         { 'hrsh7th/cmp-nvim-lua' },     -- Optional
 
          -- Snippets
-         { 'L3MON4D3/LuaSnip' }, -- Required
+         { 'L3MON4D3/LuaSnip' },             -- Required
          { 'rafamadriz/friendly-snippets' }, -- Optional
 
-         {'simrat39/rust-tools.nvim'}
+         { 'simrat39/rust-tools.nvim' }
       }
    },
 
@@ -202,4 +202,33 @@ require('lazy').setup({
       lazy = false,
       build = function() vim.fn["mkdp#util#install"]() end
    },
+
+   -- Highlights for
+   -- TODO: test
+   -- FIX: test
+   -- HACK: test
+   -- WARN: test
+   {
+      'folke/todo-comments.nvim',
+      config = function() require('todo-comments').setup() end,
+      event = "BufEnter"
+   },
+
+   -- Surround
+   {
+      'kylechui/nvim-surround',
+      version = "*", -- Use for stability; omit to use `main` branch for the latest features
+      event = "VeryLazy",
+      config = function()
+         require("nvim-surround").setup({
+            -- Configuration here, or leave empty to use defaults
+         })
+      end
+   },
+
+   -- Code snipet images
+   {
+      'narutoxy/silicon.lua',
+      config = function() require('plugins.silicon') end,
+   }
 })

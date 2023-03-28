@@ -15,7 +15,7 @@ lsp.set_preferences({
 
 -- Autocompletion
 local cmp = require('cmp')
-local copilot = require('copilot.suggestion')
+local luasnip = require('luasnip')
 lsp.setup_nvim_cmp({
   sources = {
     { name = 'nvim_lsp' },
@@ -27,10 +27,13 @@ lsp.setup_nvim_cmp({
         ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
         ['<C-j>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
         ['<Tab>'] = cmp.mapping(function(fallback)
+        local copilot_keys = vim.fn['copilot#Accept']()
         if cmp.visible() then
           cmp.confirm({ select = false })
-        elseif copilot.is_visible() then
-          copilot.accept()
+        elseif luasnip.expand_or_jumpable() then
+          luasnip.expand_or_jump()
+        elseif copilot_keys ~= '' and type(copilot_keys) == 'string' then
+          vim.api.nvim_feedkeys(copilot_keys, 'i', true)
         else
           fallback()
         end

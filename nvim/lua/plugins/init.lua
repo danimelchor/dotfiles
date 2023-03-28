@@ -189,7 +189,7 @@ require('lazy').setup({
 
    -- Copilot
    {
-      "zbirenbaum/copilot.lua",
+      "github/copilot.vim",
       event = "InsertEnter",
       config = function()
          require("plugins.copilot")

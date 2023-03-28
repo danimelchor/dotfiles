@@ -31,13 +31,21 @@ function v
 end
 
 # Git aliases
-abbr -a gaa 'git add --all'
-abbr -a gcm 'git commit -m'
-abbr -a gcam 'git commit -am'
 abbr -a gs 'git status'
 abbr -a gp 'git push'
-abbr -a gc 'git checkout'
-abbr -a gr 'git rebase'
+abbr -a gpu 'git push -u origin $(git rev-parse --abbrev-ref HEAD)'
+abbr -a gbd 'git branch -d'
+abbr -a gbD 'git branch -D'
+abbr -a gco 'git checkout (git branch --sort=-committerdate | sed "s/^\*//g" | fzf | xargs)'
+abbr -a gcb 'git checkout -b'
+abbr -a gcm 'git commit -m'
+abbr -a gcm! 'git commit -m --amend'
+abbt -a gd 'git diff'
+abbr -a gl 'git pull'
+abbr -a grb 'git rebase'
+abbr -a grbc 'git rebase --continue'
+abbr -a grba 'git rebase --abort'
+abbr -a grbi 'git rebase -i'
 
 # Python aliases
 abbr -a ve "source venv/bin/activate.fish"

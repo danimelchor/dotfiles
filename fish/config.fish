@@ -55,6 +55,7 @@ abbr -a grbc 'git rebase --continue'
 abbr -a grba 'git rebase --abort'
 abbr -a grbi 'git rebase -i'
 abbr -a gf 'git fetch'
+abbr -a gsur 'git submodule update --recursive'
 
 # Python aliases
 abbr -a ve "source venv/bin/activate.fish"

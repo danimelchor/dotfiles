@@ -19,16 +19,6 @@ files["sketchybar"]="$HOME/.config"
 files[".hammerspoon"]="$HOME"
 files["starship.toml"]="$HOME/.config"
 
-# cp -fr $INSTALL_DIR/nvim ~/.config/
-# cp -fr $INSTALL_DIR/kitty ~/.config/
-# cp -fr $INSTALL_DIR/.zshrc ~
-# cp -fr $INSTALL_DIR/.p10k.zsh ~
-# cp -fr $INSTALL_DIR/.tmux.conf ~
-# cp -fr $INSTALL_DIR/.skhdrc ~
-# cp -fr $INSTALL_DIR/yabai ~/.config
-# cp -fr $INSTALL_DIR/sketchybar ~/.config
-# cp -fr $INSTALL_DIR/.hammerspoon ~
-
 # Backup existing files
 echo -e "\033[1m\033[92mBacking up existing files...\033[0m"
 

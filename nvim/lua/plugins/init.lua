@@ -91,7 +91,7 @@ require('lazy').setup({
    -- Highlight color codes with their code #ff00ff
    {
       'norcalli/nvim-colorizer.lua',
-      config = function() require('colorizer').setup() end,
+      config = function() require('plugins.colorizer') end,
       event = "VimEnter"
    },
 
@@ -236,5 +236,26 @@ require('lazy').setup({
    {
       'stevearc/aerial.nvim',
       config = function() require('plugins.aerial') end
-   }
+   },
+
+   -- Better a/i movements
+   {
+      'echasnovski/mini.ai',
+      version = false,
+      config = function() require('mini.ai').setup() end,
+   },
+
+   -- Move forward and backwards
+   {
+      'echasnovski/mini.bracketed',
+      version = false,
+      config = function() require('mini.bracketed').setup() end,
+   },
+
+   -- Better increment
+   {
+      "monaqa/dial.nvim",
+      config = function() require('plugins.dial') end,
+      event = "BufEnter"
+   },
 })

@@ -40,4 +40,3 @@ opt.cmdheight = 0
 o.showmode = false
 
 g.mapleader = " "
-

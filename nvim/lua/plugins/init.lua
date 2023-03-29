@@ -230,5 +230,11 @@ require('lazy').setup({
    {
       'narutoxy/silicon.lua',
       config = function() require('plugins.silicon') end,
+   },
+
+   -- Navigate between functions, classes, etc.
+   {
+      'stevearc/aerial.nvim',
+      config = function() require('plugins.aerial') end
    }
 })

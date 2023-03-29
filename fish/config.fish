@@ -33,14 +33,18 @@ end
 # Git aliases
 abbr -a gs 'git status'
 abbr -a gp 'git push'
+abbr -a gp! 'git push --force-with-lease'
 abbr -a ga 'git add'
 abbr -a gaa 'git add --all'
 abbr -a grm 'git rm'
 abbr -a gpu 'git push -u origin $(git rev-parse --abbrev-ref HEAD)'
 abbr -a gbd 'git branch -d'
+abbr -a gbdf 'git branch -d (git branch --sort=-committerdate | sed -e "s/[\*[:space:]]//g" | fzf | xargs)'
 abbr -a gbD 'git branch -D'
-abbr -a gco 'git checkout (git branch --sort=-committerdate | sed "s/^\*//g" | fzf | xargs)'
-abbr -a gcb 'git checkout -b'
+abbr -a gbda 'git branch --merged | egrep -v "(^\*|master|main|dev)'
+abbr -a gswf 'git switch (git branch --sort=-committerdate | sed -e "s/[\*[:space:]]//g" | fzf | xargs)'
+abbr -a gsw 'git switch'
+abbr -a gswc 'git switch -c'
 abbr -a gcm 'git commit -m'
 abbr -a gcm! 'git commit -m --amend'
 abbr -a gd 'git diff'
@@ -50,6 +54,7 @@ abbr -a grb 'git rebase'
 abbr -a grbc 'git rebase --continue'
 abbr -a grba 'git rebase --abort'
 abbr -a grbi 'git rebase -i'
+abbr -a gf 'git fetch'
 
 # Python aliases
 abbr -a ve "source venv/bin/activate.fish"

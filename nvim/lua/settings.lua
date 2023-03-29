@@ -36,6 +36,8 @@ opt.fileencoding = 'utf-8'
 opt.wrap = false
 opt.mouse = "a"
 opt.clipboard = "unnamed"
+opt.cmdheight = 0
 o.showmode = false
 
 g.mapleader = " "
+

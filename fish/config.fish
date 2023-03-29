@@ -45,8 +45,9 @@ abbr -a gbda 'git branch --merged | egrep -v "(^\*|master|main|dev)'
 abbr -a gswf 'git switch (git branch --sort=-committerdate | sed -e "s/[\*[:space:]]//g" | fzf | xargs)'
 abbr -a gsw 'git switch'
 abbr -a gswc 'git switch -c'
-abbr -a gcm 'git commit -m'
-abbr -a gcm! 'git commit -m --amend'
+abbr -a --set-cursor=% gcm 'git commit -m "%"'
+abbr -a --set-cursor=% gcam 'git commit -am "%"'
+abbr -a --set-cursor=% gac 'git add --all && git commit -m "%"'
 abbr -a gd 'git diff'
 abbr -a gds 'git diff --staged'
 abbr -a gl 'git pull'
@@ -65,8 +66,8 @@ abbr -a pipr "pip install -r requirements.txt"
 # Docker compose aliases
 abbr -a dcu "docker-compose up -d;dclogs"
 abbr -a dclogs "docker-compose logs --follow"
-abbr -a dcr "docker-compose restart $1"
-abbr -a dcrb "docker-compose up --no-deps --detach --build $1;dclogs"
+abbr -a dcr "docker-compose restart"
+abbr -a --set-cursor=% dcrb "docker-compose up --no-deps --detach --build %;dclogs"
 abbr -a dcprune "docker system prune -a -f"
 
 # Fish git prompt

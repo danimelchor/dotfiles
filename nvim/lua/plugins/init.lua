@@ -95,14 +95,6 @@ require('lazy').setup({
       event = "VimEnter"
    },
 
-   -- Tabs like Visual Studio Code
-   {
-      'akinsho/bufferline.nvim',
-      version = "v3.*",
-      event = "BufEnter",
-      config = function() require('plugins.bufferline') end
-   },
-
    -- Line at the bottom with status
    {
       'nvim-lualine/lualine.nvim',
@@ -145,7 +137,7 @@ require('lazy').setup({
    -- Errors and diagnostics
    {
       "folke/trouble.nvim",
-      config = true,
+      config = function() require('plugins.trouble') end,
       cmd = "Trouble"
    },
 

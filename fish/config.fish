@@ -58,6 +58,13 @@ abbr -a grbi 'git rebase -i'
 abbr -a gf 'git fetch'
 abbr -a gsur 'git submodule update --recursive'
 
+# Tmux aliases
+abbr -a t 'tmux'
+abbr -a ta 'tmux attach'
+abbr -a tks 'tmux kill-session'
+abbr -a tksa 'tmux kill-session -a'
+abbr -a tmls 'tmux ls'
+
 # Python aliases
 abbr -a ve "source venv/bin/activate.fish"
 abbr -a dve "deactivate"

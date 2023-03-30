@@ -77,13 +77,6 @@ abbr -a dcr "docker-compose restart"
 abbr -a --set-cursor=% dcrb "docker-compose up --no-deps --detach --build %;dclogs"
 abbr -a dcprune "docker system prune -a -f"
 
-# Fish git prompt
-set __fish_git_prompt_showuntrackedfiles 'yes'
-set __fish_git_prompt_showdirtystate 'yes'
-set __fish_git_prompt_showstashstate ''
-set __fish_git_prompt_showupstream 'none'
-set -g fish_prompt_pwd_dir_length 3
-
 # tmux sessionizer
 bind \cf tmux-sessionizer
 setenv FZF_DEFAULT_OPTS "--border --color 'pointer:#B3E1A7,bg+:-1,fg+:#B3E1A7'"

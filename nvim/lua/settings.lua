@@ -40,3 +40,6 @@ opt.cmdheight = 0
 o.showmode = false
 
 g.mapleader = " "
+
+-- Toggle relative line numbering
+vim.cmd("command! ToggleRelLines set relativenumber!")

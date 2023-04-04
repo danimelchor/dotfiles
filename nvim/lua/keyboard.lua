@@ -30,11 +30,6 @@ map('<LEADER>n', '<Cmd>Neotree toggle filesystem left focus reveal<CR>', '[N]eot
 -- Git
 map('<LEADER>gb', '<Cmd>Gitsigns blame_line<CR>', '[G]it [B]lame current line')
 
--- Switch between tabs
-map('<TAB>', '<Cmd>:BufferLineCycleNext<CR>', 'Switch to next tab')
-map('<S-TAB>', '<Cmd>:BufferLineCyclePrev<CR>', 'Switch to previous tab')
-map('g<TAB>', '<Cmd>:BufferLinePick<CR>', 'Go to tab')
-
 -- Tmux
 map("<C-f>", "<Cmd>silent !tmux neww tmux-sessionizer<CR>", "Open tmux session")
 

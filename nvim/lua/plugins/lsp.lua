@@ -16,6 +16,7 @@ lsp.set_preferences({
 -- Autocompletion
 local cmp = require('cmp')
 local luasnip = require('luasnip')
+vim.g.copilot_no_tab_map = true
 lsp.setup_nvim_cmp({
   sources = {
     { name = 'nvim_lsp' },
@@ -23,7 +24,7 @@ lsp.setup_nvim_cmp({
     { name = "path" },
     { name = 'buffer' }
   },
-  mapping = cmp.mapping.preset.insert({
+  mapping = {
         ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
         ['<C-j>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
         ['<Tab>'] = cmp.mapping(function(fallback)
@@ -40,8 +41,9 @@ lsp.setup_nvim_cmp({
       end,
       {
         "i",
+        "s"
       }),
-  })
+  }
 })
 
 -- Keybindings

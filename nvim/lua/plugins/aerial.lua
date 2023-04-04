@@ -12,7 +12,7 @@ require('aerial').setup({
     update_delay = 100,
   },
   keymaps = {
-        ["<CR>"] = "actions.jump",
+        ["<CR>"] = "actions.scroll",
         ["q"] = "actions.close",
         ["o"] = "actions.tree_toggle",
         ["O"] = "actions.tree_toggle_recursive",

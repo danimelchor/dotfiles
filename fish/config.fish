@@ -7,6 +7,8 @@ abbr -a c clear
 abbr -a e exit
 abbr -a bu 'cd ~/BU/spring2023'
 abbr -a survey '~/projects/emmanuel/venv/bin/python3 ~/projects/emmanuel/survey.py'
+abbr -a td todui
+abbr -a tor 'open /Applications/Brave\ Browser.app/ -n --args --tor'
 
 if command -v exa > /dev/null
 	abbr -a l 'exa'

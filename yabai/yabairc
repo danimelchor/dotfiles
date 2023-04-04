@@ -24,7 +24,6 @@ yabai -m config layout bsp \
           window_border_blur off \
           active_window_opacity 1 \
           normal_window_opacity 1 \
-          window_topmost on \
           external_bar all:38:0 
 
 yabai -m mouse_drop_action swap
@@ -39,6 +38,7 @@ yabai -m rule --add app="^FaceTime$" manage=off
 yabai -m rule --add app="^Messages$" manage=off
 yabai -m rule --add app="^Raycast$" manage=off
 yabai -m rule --add app="^1Password 7$" manage=off
+yabai -m rule --add app="^NordVPN" manage=off
 
 yabai -m rule --add app="^Spotify$" space=^6
 yabai -m rule --add app="^Slack$" space=^5

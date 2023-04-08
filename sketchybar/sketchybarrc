@@ -24,7 +24,7 @@ sketchybar --bar     height=42                                         \
                      border_color=$LAVENDER \
                      y_offset=-2 \
                      margin=-2 \
-                     notch_width=200 \
+                     notch_width=170 \
                                                                        \
            --default updates=when_shown                                \
                      icon.font="$FONT:Bold:14.0"                       \

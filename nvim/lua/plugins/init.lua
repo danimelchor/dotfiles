@@ -250,11 +250,4 @@ require('lazy').setup({
       config = function() require('plugins.dial') end,
       event = "BufEnter"
    },
-
-   -- Harpoon
-   {
-      'ThePrimeagen/harpoon',
-      config = function() require('plugins.harpoon') end,
-      event = "BufEnter"
-   },
 })

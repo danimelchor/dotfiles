@@ -1,3 +1,4 @@
+#!/bin/bash
 sudo yabai --load-sa
 
 sh ~/.config/yabai/create_spaces.sh
@@ -38,7 +39,9 @@ yabai -m rule --add app="^FaceTime$" manage=off
 yabai -m rule --add app="^Messages$" manage=off
 yabai -m rule --add app="^Raycast$" manage=off
 yabai -m rule --add app="^1Password 7$" manage=off
-yabai -m rule --add app="^NordVPN" manage=off
+yabai -m rule --add app="^NordVPN$" manage=off
+yabai -m rule --add app="^Tor Browser$" manage=off
+yabai -m rule --add app="^KeePassXC$" manage=off
 
 yabai -m rule --add app="^Spotify$" space=^6
 yabai -m rule --add app="^Slack$" space=^5

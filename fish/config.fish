@@ -32,6 +32,11 @@ function v
     end
 end
 
+# Brew aliases
+abbr -a bstart 'brew services start'
+abbr -a bstop 'brew services stop'
+abbr -a brestart 'brew services restart'
+
 # Git aliases
 abbr -a gs 'git status'
 abbr -a gp 'git push'

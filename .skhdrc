@@ -19,7 +19,9 @@ shift + alt - x : yabai -m space --mirror x-axis
 
 # maximize a window
 shift + alt - m : yabai -m window --toggle zoom-fullscreen && /usr/local/bin/toggle-wm toggle-focus
-shift + alt - f : /usr/local/bin/toggle-wm toggle-focus
+
+# stop managing current window
+shift + alt - f : yabai -m window --toggle float
 
 # move window and split
 shift + alt - j : yabai -m window --warp south

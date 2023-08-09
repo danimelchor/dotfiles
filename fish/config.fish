@@ -1,14 +1,30 @@
-fish_add_path ~/.local/bin
-fish_add_path ~/.cargo/bin
-fish_add_path /opt/homebrew/bin
+# STRIPE CONFIG
+source (rbenv init -|psub)
+source ~/stripe/space-commander/bin/sc-env-activate.fish
+functions -e fish_right_prompt
 
-abbr -a proj 'cd ~/projects'
+set -Ux PYENV_ROOT $HOME/.pyenv
+pyenv init - | source
+
+fish_add_path "$PYENV_ROOT/bin"
+fish_add_path "$HOME/.rbenv/shims"
+fish_add_path "$HOME/.rbenv/bin"
+fish_add_path "$HOME/stripe/password-vault/bin"
+fish_add_path "$HOME/stripe/space-commander/bin"
+fish_add_path "$HOME/stripe/henson/bin"
+fish_add_path /opt/homebrew/bin
+# END STRIPE CONFIG
+
+fish_add_path ~/.local/bin
+fish_add_path /usr/local/bin
+fish_add_path "$HOME/.cargo/bin"
+
 abbr -a c clear
 abbr -a e exit
-abbr -a bu 'cd ~/BU/spring2023'
-abbr -a survey '~/projects/emmanuel/venv/bin/python3 ~/projects/emmanuel/survey.py'
-abbr -a td todui
-abbr -a tor 'open /Applications/Brave\ Browser.app/ -n --args --tor'
+abbr -a zoo 'cd ~/stripe/zoolander/'
+abbr -a dot 'cd ~/Documents/dotfiles/'
+abbr -a personal 'cd ~/personal/'
+abbr -a pipe 'cd ~/stripe/zoolander/src/python/pipeline/'
 
 if command -v exa > /dev/null
 	abbr -a l 'exa'
@@ -20,9 +36,6 @@ else
 	abbr -a ll 'ls -l'
 	abbr -a lll 'ls -la'
 end
-if command -v z > /dev/null
-    abbr -a cd 'z'
-end
 
 function v
     if test -z $argv[1]
@@ -32,10 +45,6 @@ function v
     end
 end
 
-# Brew aliases
-abbr -a bstart 'brew services start'
-abbr -a bstop 'brew services stop'
-abbr -a brestart 'brew services restart'
 
 # Git aliases
 abbr -a gs 'git status'
@@ -47,6 +56,7 @@ abbr -a grm 'git rm'
 abbr -a gpu 'git push -u origin $(git rev-parse --abbrev-ref HEAD)'
 abbr -a gbd 'git branch -d'
 abbr -a gbdf 'git branch -d (git branch --sort=-committerdate | fzf | sed -e "s/[\*[:space:]]//g" | xargs)'
+abbr -a gbDf 'git branch -D (git branch --sort=-committerdate | fzf | sed -e "s/[\*[:space:]]//g" | xargs)'
 abbr -a gbD 'git branch -D'
 abbr -a gbda 'git branch --merged | egrep -v "(^\*|master|main|dev)'
 abbr -a gswf 'git switch (git branch --sort=-committerdate | fzf | sed -e "s/[\*[:space:]]//g" | xargs)'
@@ -77,19 +87,12 @@ abbr -a ve "source venv/bin/activate.fish"
 abbr -a dve "deactivate"
 abbr -a pipr "pip install -r requirements.txt"
 
-# Docker compose aliases
-abbr -a dcu "docker-compose up -d;dclogs"
-abbr -a dclogs "docker-compose logs --follow"
-abbr -a dcr "docker-compose restart"
-abbr -a --set-cursor=% dcrb "docker-compose up --no-deps --detach --build %;dclogs"
-abbr -a dcprune "docker system prune -a -f"
-
 # tmux sessionizer
 bind \cf tmux-sessionizer
 setenv FZF_DEFAULT_OPTS "--border --color 'pointer:#B3E1A7,bg+:-1,fg+:#B3E1A7'"
 
 # Editor
-set -x EDITOR vim
+set -x EDITOR nvim
 set -x GIT_EDITOR $EDITOR
 
 # colored man output
@@ -102,19 +105,12 @@ setenv LESS_TERMCAP_so \e'[38;5;246m'    # begin standout-mode - info box
 setenv LESS_TERMCAP_ue \e'[0m'           # end underline
 setenv LESS_TERMCAP_us \e'[04;38;5;146m' # begin underline
 
-zoxide init fish | source
+set -Ux STARSHIP_LOG 'error'
 starship init fish | source
 
 function fish_greeting
     echo
     neofetch
-
-    set todays_tasks (todui ls --date-filter today-and-past | string split0)
-
-    if test (echo $todays_tasks | wc -l) -gt 2
-        set_color green
-        echo "Today's tasks:"
-        set_color normal
-        echo $todays_tasks
-    end
 end
+
+source ~/.config/fish/autogen.fish

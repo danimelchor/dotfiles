@@ -81,18 +81,5 @@ neo_tree.setup({
         end
       end,
     },
-    {
-      event = "file_opened",
-      handler = function(_)
-        require("neo-tree").focus()
-      end
-    },
   },
 })
-
-vim.cmd([[
-augroup CloseNeotreeOnTab
-  autocmd!
-  autocmd Tabenter * lua require('neo-tree').close_all()
-augroup END
-]])

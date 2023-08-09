@@ -3,9 +3,16 @@ local lsp = require('lsp-zero').preset('recommended')
 lsp.ensure_installed({
   'tsserver',
   'lua_ls',
-  'gopls',
   'jdtls',
-  'rust_analyzer'
+  'bashls',
+  'cssls',
+  'eslint',
+  'graphql',
+  'html',
+  'jsonls',
+  'pyright',
+  'rust_analyzer',
+  'yamlls',
 })
 
 -- Preferences
@@ -15,7 +22,6 @@ lsp.set_preferences({
 
 -- Autocompletion
 local cmp = require('cmp')
-local luasnip = require('luasnip')
 vim.g.copilot_no_tab_map = true
 lsp.setup_nvim_cmp({
   sources = {
@@ -25,9 +31,7 @@ lsp.setup_nvim_cmp({
     { name = 'buffer' }
   },
   mapping = {
-        ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-        ['<C-j>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-        ['<Tab>'] = cmp.mapping(function(fallback)
+        ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), ['<C-j>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), ['<Tab>'] = cmp.mapping(function(fallback)
         local copilot_keys = vim.fn['copilot#Accept']()
         if cmp.visible() then
           cmp.confirm({ select = false })
@@ -56,7 +60,7 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set('n', '<LEADER>D', function() vim.lsp.buf.type_definition() end, opts)
   vim.keymap.set('n', '<LEADER>r', function() vim.lsp.buf.rename() end, opts)
   vim.keymap.set('n', '<LEADER>a', function() vim.lsp.buf.code_action() end, opts)
-  vim.keymap.set('n', '<LEADER>f', function() vim.lsp.buf.formatting() end, opts)
+  vim.keymap.set('n', '<LEADER>f', function() vim.lsp.buf.formatting({ async = true }) end, opts)
   vim.keymap.set('n', '<LEADER>w', function()
     vim.lsp.buf.formatting()
     vim.cmd('w')
@@ -64,21 +68,31 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set('n', 'gr', function() vim.lsp.buf.references() end, opts)
 end)
 
--- Custom configs
-local lsp_rust = lsp.build_options('rust_analyzer', {})
-lsp.configure('lua_ls', {
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { 'vim' }
-      }
-    }
-  }
-})
-
 lsp.setup()
 
-require('rust-tools').setup({ server = lsp_rust })
+-- Setup 'payserver_sorbet'
+require("lspconfig_stripe")
+require("lspconfig")['payserver_sorbet'].setup({
+  capabilities = lsp.capabilities,
+  on_attach = lsp.on_attach,
+})
+
+-- Metals
+local metals_lsp = lsp.build_options('metals', {})
+local metals_config = require('metals').bare_config()
+
+metals_config.capabilities = metals_lsp.capabilities
+
+-- Autocmd that will actually be in charging of starting the whole thing
+local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "scala", "sbt", "java" },
+  callback = function()
+    require("metals").initialize_or_attach(metals_config)
+  end,
+  group = nvim_metals_group,
+})
+
 
 vim.diagnostic.config({
   virtual_text = true,

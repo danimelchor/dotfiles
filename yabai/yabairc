@@ -1,16 +1,9 @@
 #!/bin/bash
 sudo yabai --load-sa
 
-sh ~/.config/yabai/create_spaces.sh
-
 # Custom config
 yabai -m config layout bsp \
           window_placement second_child \
-          top_padding 15 \
-          bottom_padding 15 \
-          left_padding 15 \
-          right_padding 15 \
-          window_gap 15 \
           mouse_modifier alt \
           mouse_action1 move \
           mouse_action2 resize \
@@ -18,14 +11,10 @@ yabai -m config layout bsp \
           active_window_border_color 0xffb4befe \
           normal_window_border_color 0xff313244 \
           insert_feedback_color 0xfffab387 \
-          window_border_width 2 \
-          window_border_radius 12 \
-          window_border on \
           window_opacity off \
           window_border_blur off \
           active_window_opacity 1 \
-          normal_window_opacity 1 \
-          external_bar all:38:0 
+          normal_window_opacity 1
 
 yabai -m mouse_drop_action swap
 
@@ -40,8 +29,6 @@ yabai -m rule --add app="^Messages$" manage=off
 yabai -m rule --add app="^Raycast$" manage=off
 yabai -m rule --add app="^1Password 7$" manage=off
 yabai -m rule --add app="^NordVPN$" manage=off
-yabai -m rule --add app="^Tor Browser$" manage=off
-yabai -m rule --add app="^KeePassXC$" manage=off
 yabai -m rule --add app="^java$" manage=off
 
 yabai -m rule --add app="^Spotify$" space=^6
@@ -52,9 +39,3 @@ yabai -m rule --add app="^Notion$" space=^4
 yabai -m rule --add app="^Notes$" space=^4
 yabai -m rule --add app="^kitty$" space=^2
 yabai -m rule --add app="^Mimestream$"space=^4
-
-# Signal hooks
-REFRESH_SKETCHYBAR="sketchybar --update"
-yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
-yabai -m signal --add event=display_added action="sleep 1 && ~/.config/yabai/create_spaces.sh && $REFRESH_SKETCHYBAR"
-yabai -m signal --add event=display_removed action="sleep 1 && ~/.config/yabai/create_spaces.sh && $REFRESH_SKETCHYBAR"

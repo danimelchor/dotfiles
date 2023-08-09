@@ -10,7 +10,6 @@ end
 
 nvim_treesitter_configs.setup {
   ensure_installed = {
-    "help",
     "lua",
     "javascript",
     "typescript",
@@ -33,6 +32,7 @@ nvim_treesitter_configs.setup {
     "tsx",
     "rust"
   },
+  auto_install = true,
   autopairs = {
     enable = true
   },
@@ -42,7 +42,6 @@ nvim_treesitter_configs.setup {
   },
   indent = {
     enable = true,
-    disable = { 'python' }
   },
 }
 

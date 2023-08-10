@@ -20,6 +20,7 @@ map('<RIGHT>', '<Nop>')
 map('<DOWN>', '<Nop>')
 
 -- Search files with GFiles fallback
+map('<LEADER>ff', '<Cmd>Telescope project_files<CR>', '[F]ind [F]iles')
 map('<LEADER>fb', '<Cmd>Telescope git_branches<CR>', '[F]ind [B]ranches')
 map('<LEADER>fh', '<Cmd>Telescope oldfiles only_cwd=true initial_mode=normal<CR>', '[F]ind [H]istory')
 map('<LEADER>fe', '<Cmd>Telescope diagnostics initial_mode=normal<CR>', '[F]ind [E]rrors')

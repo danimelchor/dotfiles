@@ -46,7 +46,9 @@ telescope.load_extension('livegrep')
 local M = {}
 
 M.project_files = function()
-  local opts = {}
+  local opts = {
+    cwd = vim.fn.getcwd(),
+  }
   local ok = pcall(require "telescope.builtin".git_files, opts)
   if not ok then require "telescope.builtin".find_files(opts) end
 end

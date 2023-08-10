@@ -11,11 +11,14 @@ end
 
 map('<LEADER>ff', function()
   local isInGitRepo = vim.api.nvim_command_output("echo (len(system('git rev-parse --is-inside-work-tree')) == 5)")
+  opts = {
+    cwd = vim.fn.getcwd(),
+  }
   if isInGitRepo == "1"
   then
-    fzf.git_files()
+    fzf.git_files(opts)
   else
-    fzf.files()
+    fzf.files(opts)
   end
 end, "[F]ind [F]iles")
 map('<LEADER>fw', fzf.grep, '[F]ind [W]ords')

@@ -4,11 +4,11 @@ sudo yabai --load-sa
 # Custom config
 yabai -m config layout bsp \
           window_placement second_child \
-          top_padding 10 \
-          bottom_padding 10 \
-          left_padding 10 \
-          right_padding 10 \
-          window_gap 10 \
+          top_padding 7 \
+          bottom_padding 7 \
+          left_padding 7 \
+          right_padding 7 \
+          window_gap 7 \
           mouse_modifier alt \
           mouse_action1 move \
           mouse_action2 resize \
@@ -37,11 +37,9 @@ yabai -m rule --add app="^1Password 7$" manage=off
 yabai -m rule --add app="^NordVPN$" manage=off
 yabai -m rule --add app="^java$" manage=off
 
-yabai -m rule --add app="^Spotify$" space=^6
-yabai -m rule --add app="^Slack$" space=^5
-yabai -m rule --add app="^Discord$" space=^5
-yabai -m rule --add app="^Microsoft To Do$" space=^4
-yabai -m rule --add app="^Notion$" space=^4
-yabai -m rule --add app="^Notes$" space=^4
+yabai -m rule --add app="^Spotify$" space=^5
+yabai -m rule --add app="^Slack$" space=^4
+yabai -m rule --add app="^Discord$" space=^4
 yabai -m rule --add app="^kitty$" space=^2
 yabai -m rule --add app="^Mimestream$"space=^4
+yabai -m rule --add app="^zoom.us$"space=^6

@@ -15,7 +15,7 @@ else
     # Direct access folders
     files=(
         ~/stripe/zoolander/src/python/pipeline
-        ~/Documents/dotfiles/
+        ~/personal/dotfiles/
     )
     for file in "${files[@]}"; do
         command="echo $file"

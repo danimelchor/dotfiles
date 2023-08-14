@@ -4,6 +4,11 @@ sudo yabai --load-sa
 # Custom config
 yabai -m config layout bsp \
           window_placement second_child \
+          top_padding 10 \
+          bottom_padding 10 \
+          left_padding 10 \
+          right_padding 10 \
+          window_gap 10 \
           mouse_modifier alt \
           mouse_action1 move \
           mouse_action2 resize \
@@ -14,7 +19,8 @@ yabai -m config layout bsp \
           window_opacity off \
           window_border_blur off \
           active_window_opacity 1 \
-          normal_window_opacity 1
+          normal_window_opacity 1 \
+          external_bar all:38:0 
 
 yabai -m mouse_drop_action swap
 

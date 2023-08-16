@@ -6,9 +6,7 @@ end
 vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
 neo_tree.setup({
-  close_if_last_window = true,
-  popup_border_style = "rounded",
-  enable_diagnostics = true,
+  sort_case_insensitive = true,
   default_component_configs = {
     indent = {
       padding = 0,
@@ -32,6 +30,9 @@ neo_tree.setup({
         staged = "✓",
         conflict = "",
       },
+    },
+    name = {
+      trailing_slash = true,
     },
   },
   window = {
@@ -60,7 +61,6 @@ neo_tree.setup({
       },
     },
     follow_current_file = true,
-    use_libuv_file_watcher = true,
     hijack_netrw_behavior = "open_current",
   },
   git_status = {

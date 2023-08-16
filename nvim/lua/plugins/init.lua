@@ -315,12 +315,6 @@ require('lazy').setup({
    'sindrets/diffview.nvim',
    'tpope/vim-sleuth', -- Automatically adjust tab size
 
-   -- Smooth scrolling
-   {
-      'declancm/cinnamon.nvim',
-      config = function() require('cinnamon').setup() end
-   },
-
    -- Copilot
    {
       "github/copilot.vim",

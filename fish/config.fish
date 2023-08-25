@@ -1,5 +1,6 @@
 # STRIPE CONFIG
 source (rbenv init -|psub)
+source (nodenv init - | psub)
 source ~/stripe/space-commander/bin/sc-env-activate.fish
 functions -e fish_right_prompt
 
@@ -21,10 +22,14 @@ fish_add_path "$HOME/.cargo/bin"
 
 abbr -a c clear
 abbr -a e exit
-abbr -a zoo 'cd ~/stripe/zoolander/'
 abbr -a dot 'cd ~/Documents/dotfiles/'
 abbr -a personal 'cd ~/personal/'
 abbr -a pipe 'cd ~/stripe/zoolander/src/python/pipeline/'
+
+abbr -a zoo 'cd ~/stripe/zoolander/'
+abbr -a viz 'cd ~/stripe/viz/'
+abbr -a gocode 'cd ~/stripe/gocode/'
+abbr -a redshift 'cd ~/stripe/redshift/'
 
 if command -v exa > /dev/null
 	abbr -a l 'exa'
@@ -95,6 +100,12 @@ setenv FZF_DEFAULT_OPTS "--border --color 'pointer:#B3E1A7,bg+:-1,fg+:#B3E1A7'"
 set -x EDITOR nvim
 set -x GIT_EDITOR $EDITOR
 
+# Shell
+set -Ux SHELL /opt/homebrew/bin/fish
+
+# Todui
+abbr -a td 'todui'
+
 # colored man output
 # from http://linuxtidbits.wordpress.com/2009/03/23/less-colors-for-man-pages/
 setenv LESS_TERMCAP_mb \e'[01;31m'       # begin blinking
@@ -108,9 +119,20 @@ setenv LESS_TERMCAP_us \e'[04;38;5;146m' # begin underline
 set -Ux STARSHIP_LOG 'error'
 starship init fish | source
 
+# Postgres
+set -Ux PGDATA '/usr/local/var/postgres'
+
 function fish_greeting
     echo
     neofetch
+
+    # If output of `todui ls --format json` is not [], then print the output
+    set output $(todui ls --format json)
+    if test "$output" != "[]"
+	echo
+	todui ls
+	end
+    echo
 end
 
 source ~/.config/fish/autogen.fish

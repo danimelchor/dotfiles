@@ -1,4 +1,5 @@
 format = """
+$custom\
 $username\
 $hostname\
 $localip\
@@ -22,7 +23,6 @@ $python\
 $ruby\
 $rust\
 $scala\
-$custom\
 $sudo\
 $cmd_duration\
 $line_break\
@@ -31,5 +31,9 @@ $battery\
 $time\
 $status\
 $os\
-$shell\
 $character"""
+
+[custom.bash]
+command = 'echo bash'
+when = ''' test "$SHELL" = "/bin/bash" '''
+disabled = false

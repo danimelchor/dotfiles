@@ -292,15 +292,10 @@ require('lazy').setup({
 
    -- File tree
    {
-      'nvim-neo-tree/neo-tree.nvim',
-      branch = "v3.x",
-      dependencies = {
-         "nvim-lua/plenary.nvim",
-         "kyazdani42/nvim-web-devicons",
-         "MunifTanjim/nui.nvim",
-      },
+      'nvim-tree/nvim-tree.lua',
+      version = "*",
       lazy = false,
-      config = function() require('plugins.neo-tree') end,
+      config = function() require('plugins.nvim-tree') end,
    },
 
    -- Git blame and gutters

@@ -4,9 +4,6 @@ end
 
 map('<SPACE>', '<Nop>')
 
--- Neo tree
-map('<LEADER>n', '<Cmd>Neotree toggle filesystem left focus reveal<CR>', '[N]eotree')
-
 -- Git
 map('<LEADER>gb', '<Cmd>Gitsigns blame_line<CR>', '[G]it [B]lame current line')
 

@@ -5,7 +5,7 @@ if [[ $# -eq 1 ]]; then
     selected=$1
 else
     # Folders
-    folders=(~/stripe)
+    folders=(~/stripe ~/personal)
     commands=()
     for folder in "${folders[@]}"; do
         command="find $folder -mindepth 1 -maxdepth 1 -type d"
@@ -15,7 +15,6 @@ else
     # Direct access folders
     files=(
         ~/stripe/zoolander/src/python/pipeline
-        ~/personal/dotfiles/
     )
     for file in "${files[@]}"; do
         command="echo $file"

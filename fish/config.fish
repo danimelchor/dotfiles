@@ -53,7 +53,8 @@ end
 
 # Git aliases
 abbr -a gs 'git status'
-abbr -a gp 'git push'
+abbr -a gp 'git push --no-verify'
+abbr -a gpv 'git push'
 abbr -a gp! 'git push --force-with-lease'
 abbr -a ga 'git add'
 abbr -a gaa 'git add --all'

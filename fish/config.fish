@@ -102,7 +102,7 @@ set -x EDITOR nvim
 set -x GIT_EDITOR $EDITOR
 
 # Shell
-set -Ux SHELL /opt/homebrew/bin/fish
+set -gx SHELL /opt/homebrew/bin/fish
 
 # Todui
 abbr -a td 'todui'

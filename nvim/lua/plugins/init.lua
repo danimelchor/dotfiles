@@ -326,6 +326,13 @@ require('lazy').setup({
       build = function() vim.fn["mkdp#util#install"]() end
    },
 
+   -- To improve at vim
+   {
+      "m4xshen/hardtime.nvim",
+      dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+      opts = {}
+   },
+
    -- Highlights for
    -- TODO: test
    -- FIX: test

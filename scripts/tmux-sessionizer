@@ -1,23 +1,27 @@
 #!/usr/bin/env bash
 # vim: set ft=bash
 
+# If ~/stripe exists
+if [ -d ~/stripe ]; then
+    parents=(~/stripe ~/personal)
+    folders=(
+        ~/stripe/zoolander/src/python/pipeline
+    )
+else
+    parents=(~/projects)
+    folders=()
+fi
+
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    # Folders
-    folders=(~/stripe ~/personal)
     commands=()
-    for folder in "${folders[@]}"; do
-        command="find $folder -mindepth 1 -maxdepth 1 -type d"
+    for parent in "${parents[@]}"; do
+        command="find $parent -mindepth 1 -maxdepth 1 -type d"
         commands+=("$command")
     done
-
-    # Direct access folders
-    files=(
-        ~/stripe/zoolander/src/python/pipeline
-    )
-    for file in "${files[@]}"; do
-        command="echo $file"
+    for folder in "${folders[@]}"; do
+        command="echo $folder"
         commands+=("$command")
     done
 

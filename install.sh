@@ -48,7 +48,7 @@ for script in $INSTALL_DIR/scripts/*; do
         rm $HOME/.local/bin/$script
     fi
     echo "Symlinking $script to ~/.local/bin"
-    ln -s $INSTALL_DIR/$script $HOME/.local/bin/
+    ln -s $INSTALL_DIR/scripts/$script $HOME/.local/bin/
     chmod +x $HOME/.local/bin/$script
 done
 

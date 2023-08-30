@@ -128,17 +128,23 @@ starship init fish | source
 
 function fish_greeting
     echo
-    neofetch
+    neofetch && echo
 
     # If output of `todui ls --format json` is not [], then print the output
     set output $(todui ls --format json)
     if test "$output" != "[]"
-	echo
-	todui ls
-	echo
-	dotfiles-update-checker
+	# Todo list
+	set output (todui ls | string collect)
+	if test -n "$output"
+	    echo -e "$output\n"
 	end
-    echo
+	
+	# Dotfiles check
+	set output (dotfiles-update-checker | string collect)
+	if test -n "$output"
+	    echo -e "$output\n"
+	end
+    end
 end
 
 

@@ -58,8 +58,8 @@ if is_stripe then
 else
   local alternative_sources = {
     -- JavaScript, typescript
-    null_ls.diagnostics.eslint_d,
-    null_ls.formatting.eslint_d,
+    null_ls.builtins.diagnostics.eslint_d,
+    null_ls.builtins.formatting.eslint_d,
 
     -- Python
     null_ls.builtins.diagnostics.ruff,

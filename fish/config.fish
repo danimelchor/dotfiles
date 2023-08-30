@@ -1,45 +1,49 @@
-# STRIPE CONFIG
-source (rbenv init -|psub)
-source (nodenv init - | psub)
-source ~/stripe/space-commander/bin/sc-env-activate.fish
+if test -e ~/stripe
+    source (rbenv init -|psub)
+    source (nodenv init - | psub)
+    source ~/stripe/space-commander/bin/sc-env-activate.fish
+
+    set -Ux PYENV_ROOT $HOME/.pyenv
+    pyenv init - | source
+
+    fish_add_path "$PYENV_ROOT/bin"
+    fish_add_path "$HOME/.rbenv/shims"
+    fish_add_path "$HOME/.rbenv/bin"
+    fish_add_path "$HOME/stripe/password-vault/bin"
+    fish_add_path "$HOME/stripe/space-commander/bin"
+    fish_add_path "$HOME/stripe/henson/bin"
+
+    abbr -a pipe 'cd ~/stripe/zoolander/src/python/pipeline/'
+    abbr -a zoo 'cd ~/stripe/zoolander/'
+    abbr -a viz 'cd ~/stripe/viz/'
+    abbr -a gocode 'cd ~/stripe/gocode/'
+    abbr -a redshift 'cd ~/stripe/redshift/'
+    abbr -a dot 'cd ~/Documents/dotfiles/'
+    abbr -a personal 'cd ~/personal/'
+
+    # Postgres
+    set -Ux PGDATA '/usr/local/var/postgres'
+end
+
 functions -e fish_right_prompt
 
-set -Ux PYENV_ROOT $HOME/.pyenv
-pyenv init - | source
-
-fish_add_path "$PYENV_ROOT/bin"
-fish_add_path "$HOME/.rbenv/shims"
-fish_add_path "$HOME/.rbenv/bin"
-fish_add_path "$HOME/stripe/password-vault/bin"
-fish_add_path "$HOME/stripe/space-commander/bin"
-fish_add_path "$HOME/stripe/henson/bin"
 fish_add_path /opt/homebrew/bin
-# END STRIPE CONFIG
-
 fish_add_path ~/.local/bin
 fish_add_path /usr/local/bin
 fish_add_path "$HOME/.cargo/bin"
 
 abbr -a c clear
 abbr -a e exit
-abbr -a dot 'cd ~/Documents/dotfiles/'
-abbr -a personal 'cd ~/personal/'
-abbr -a pipe 'cd ~/stripe/zoolander/src/python/pipeline/'
-
-abbr -a zoo 'cd ~/stripe/zoolander/'
-abbr -a viz 'cd ~/stripe/viz/'
-abbr -a gocode 'cd ~/stripe/gocode/'
-abbr -a redshift 'cd ~/stripe/redshift/'
 
 if command -v exa > /dev/null
-	abbr -a l 'exa'
-	abbr -a ls 'exa'
-	abbr -a ll 'exa -l'
-	abbr -a lll 'exa -la'
+    abbr -a l 'exa'
+    abbr -a ls 'exa'
+    abbr -a ll 'exa -l'
+    abbr -a lll 'exa -la'
 else
-	abbr -a l 'ls'
-	abbr -a ll 'ls -l'
-	abbr -a lll 'ls -la'
+    abbr -a l 'ls'
+    abbr -a ll 'ls -l'
+    abbr -a lll 'ls -la'
 end
 
 function v
@@ -121,9 +125,6 @@ setenv LESS_TERMCAP_us \e'[04;38;5;146m' # begin underline
 
 set -Ux STARSHIP_LOG 'error'
 starship init fish | source
-
-# Postgres
-set -Ux PGDATA '/usr/local/var/postgres'
 
 function fish_greeting
     echo

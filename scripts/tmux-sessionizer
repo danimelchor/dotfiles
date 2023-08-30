@@ -8,7 +8,7 @@ if [ -d ~/stripe ]; then
         ~/stripe/zoolander/src/python/pipeline
     )
 else
-    parents=(~/projects)
+    parents=(~/projects ~/personal)
     folders=()
 fi
 

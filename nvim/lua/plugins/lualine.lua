@@ -23,7 +23,6 @@ lualine.setup {
             },
         },
         lualine_x = {
-            "pay_status",
             "filetype",
         },
     },

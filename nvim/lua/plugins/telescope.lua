@@ -3,15 +3,18 @@ if not status_ok then
   return
 end
 
+local is_stripe = require('utils').is_stripe()
 local actions = require "telescope.actions"
 
-local stripeproxy = os.getenv("HOME") .. "/.stripeproxy"
 local livegrep_config = {}
-if vim.fn.filereadable(stripeproxy) == 1 then
-  livegrep_config.url = "http://livegrep.corp.stripe.com/api/v1/search/stripe"
-  livegrep_config.raw_curl_opts = { "--unix-socket", stripeproxy }
-else
-  livegrep_config.url = "http://livegrep-srv.service.envoy:10080/api/v1/search/stripe"
+if is_stripe then
+  local stripeproxy = os.getenv("HOME") .. "/.stripeproxy"
+  if vim.fn.filereadable(stripeproxy) == 1 then
+    livegrep_config.url = "http://livegrep.corp.stripe.com/api/v1/search/stripe"
+    livegrep_config.raw_curl_opts = { "--unix-socket", stripeproxy }
+  else
+    livegrep_config.url = "http://livegrep-srv.service.envoy:10080/api/v1/search/stripe"
+  end
 end
 
 telescope.setup {

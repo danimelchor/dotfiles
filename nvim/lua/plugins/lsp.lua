@@ -1,4 +1,5 @@
 local lsp = require('lsp-zero').preset('recommended')
+local is_stripe = require('utils').is_stripe()
 
 lsp.ensure_installed({
   'tsserver',
@@ -70,28 +71,31 @@ end)
 
 lsp.setup()
 
--- Setup 'payserver_sorbet'
-require("lspconfig_stripe")
-require("lspconfig")['payserver_sorbet'].setup({
-  capabilities = lsp.capabilities,
-  on_attach = lsp.on_attach,
-})
 
--- Metals
-local metals_lsp = lsp.build_options('metals', {})
-local metals_config = require('metals').bare_config()
+if is_stripe then
+  -- Setup 'payserver_sorbet'
+  require("lspconfig_stripe")
+  require("lspconfig")['payserver_sorbet'].setup({
+    capabilities = lsp.capabilities,
+    on_attach = lsp.on_attach,
+  })
 
-metals_config.capabilities = metals_lsp.capabilities
+  -- Metals
+  local metals_lsp = lsp.build_options('metals', {})
+  local metals_config = require('metals').bare_config()
 
--- Autocmd that will actually be in charging of starting the whole thing
-local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "scala", "sbt", "java" },
-  callback = function()
-    require("metals").initialize_or_attach(metals_config)
-  end,
-  group = nvim_metals_group,
-})
+  metals_config.capabilities = metals_lsp.capabilities
+
+  -- Autocmd that will actually be in charging of starting the whole thing
+  local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "scala", "sbt", "java" },
+    callback = function()
+      require("metals").initialize_or_attach(metals_config)
+    end,
+    group = nvim_metals_group,
+  })
+end
 
 
 vim.diagnostic.config({

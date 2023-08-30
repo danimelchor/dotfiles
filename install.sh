@@ -8,15 +8,13 @@ mkdir $BACKUP_DIR
 
 # Dict relative_name -> destination
 declare -A files
-files["nvim"]="$HOME/.config"
+files["fish"]="$HOME/.config"
 files["kitty"]="$HOME/.config"
-files[".zshrc"]="$HOME"
+files["nvim"]="$HOME/.config"
+files["sketchybar"]="$HOME/.config"
+files["yabai"]="$HOME/.config"
 files[".tmux.conf"]="$HOME"
 files[".skhdrc"]="$HOME"
-files["yabai"]="$HOME/.config"
-files["fish"]="$HOME/.config"
-files["sketchybar"]="$HOME/.config"
-files[".hammerspoon"]="$HOME"
 files["starship.toml"]="$HOME/.config"
 
 # Backup existing files
@@ -36,13 +34,21 @@ echo -e "\n\033[1m\033[92mCopying new files...\033[0m"
 
 # Copy new files
 for file in "${!files[@]}"; do
-    echo "Copying $file to ${files[$file]}"
-    # cp -fr "$INSTALL_DIR/$file" "${files[$file]}"
+    echo "Symlinking $file to ${files[$file]}"
     ln -s "$INSTALL_DIR/$file" "${files[$file]}"
 done
 
-# Install all scripts and chmod +x them
-cp -fr $INSTALL_DIR/scripts/* ~/.local/bin
-chmod +x ~/.local/bin/*
+# For each script, symlink to ~/.local/bin
+echo -e "\n\033[1m\033[92mCopying scripts...\033[0m"
+for script in $INSTALL_DIR/scripts/*; do
+    script=$(basename "$script")
+    if [ -h $HOME/.local/bin/$script ]; then
+        echo "Removing symlink $HOME/.local/bin/$script"
+        rm $HOME/.local/bin/$script
+    fi
+    echo "Symlinking $script to ~/.local/bin"
+    ln -s $INSTALL_DIR/scripts/$script $HOME/.local/bin/
+    chmod +x $HOME/.local/bin/$script
+done
 
 echo -e "\n\033[1m\033[92mDone!\033[0m\n"

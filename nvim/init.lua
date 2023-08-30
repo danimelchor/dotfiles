@@ -1,4 +1,5 @@
 require('settings')
 require('commands')
 require('keyboard')
+require('utils')
 require('plugins')

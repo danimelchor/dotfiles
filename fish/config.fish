@@ -1,27 +1,49 @@
-fish_add_path ~/.local/bin
-fish_add_path ~/.cargo/bin
-fish_add_path /opt/homebrew/bin
+if test -e ~/stripe
+    source (rbenv init -|psub)
+    source (nodenv init - | psub)
+    source ~/stripe/space-commander/bin/sc-env-activate.fish
 
-abbr -a proj 'cd ~/projects'
+    set -Ux PYENV_ROOT $HOME/.pyenv
+    pyenv init - | source
+
+    fish_add_path "$PYENV_ROOT/bin"
+    fish_add_path "$HOME/.rbenv/shims"
+    fish_add_path "$HOME/.rbenv/bin"
+    fish_add_path "$HOME/stripe/password-vault/bin"
+    fish_add_path "$HOME/stripe/space-commander/bin"
+    fish_add_path "$HOME/stripe/henson/bin"
+
+    abbr -a pipe 'cd ~/stripe/zoolander/src/python/pipeline/'
+    abbr -a zoo 'cd ~/stripe/zoolander/'
+    abbr -a viz 'cd ~/stripe/viz/'
+    abbr -a gocode 'cd ~/stripe/gocode/'
+    abbr -a redshift 'cd ~/stripe/redshift/'
+    abbr -a dot 'cd ~/Documents/dotfiles/'
+    abbr -a personal 'cd ~/personal/'
+
+    # Postgres
+    set -Ux PGDATA '/usr/local/var/postgres'
+end
+
+functions -e fish_right_prompt
+
+fish_add_path /opt/homebrew/bin
+fish_add_path ~/.local/bin
+fish_add_path /usr/local/bin
+fish_add_path "$HOME/.cargo/bin"
+
 abbr -a c clear
 abbr -a e exit
-abbr -a bu 'cd ~/BU/spring2023'
-abbr -a survey '~/projects/emmanuel/venv/bin/python3 ~/projects/emmanuel/survey.py'
-abbr -a td todui
-abbr -a tor 'open /Applications/Brave\ Browser.app/ -n --args --tor'
 
 if command -v exa > /dev/null
-	abbr -a l 'exa'
-	abbr -a ls 'exa'
-	abbr -a ll 'exa -l'
-	abbr -a lll 'exa -la'
+    abbr -a l 'exa'
+    abbr -a ls 'exa'
+    abbr -a ll 'exa -l'
+    abbr -a lll 'exa -la'
 else
-	abbr -a l 'ls'
-	abbr -a ll 'ls -l'
-	abbr -a lll 'ls -la'
-end
-if command -v z > /dev/null
-    abbr -a cd 'z'
+    abbr -a l 'ls'
+    abbr -a ll 'ls -l'
+    abbr -a lll 'ls -la'
 end
 
 function v
@@ -32,21 +54,20 @@ function v
     end
 end
 
-# Brew aliases
-abbr -a bstart 'brew services start'
-abbr -a bstop 'brew services stop'
-abbr -a brestart 'brew services restart'
 
 # Git aliases
 abbr -a gs 'git status'
-abbr -a gp 'git push'
+abbr -a gp 'git push --no-verify'
+abbr -a gpv 'git push'
 abbr -a gp! 'git push --force-with-lease'
 abbr -a ga 'git add'
 abbr -a gaa 'git add --all'
 abbr -a grm 'git rm'
-abbr -a gpu 'git push -u origin $(git rev-parse --abbrev-ref HEAD)'
+abbr -a gpu 'git push -u origin $(git rev-parse --abbrev-ref HEAD) --no-verify'
+abbr -a gpuv 'git push -u origin $(git rev-parse --abbrev-ref HEAD)'
 abbr -a gbd 'git branch -d'
 abbr -a gbdf 'git branch -d (git branch --sort=-committerdate | fzf | sed -e "s/[\*[:space:]]//g" | xargs)'
+abbr -a gbDf 'git branch -D (git branch --sort=-committerdate | fzf | sed -e "s/[\*[:space:]]//g" | xargs)'
 abbr -a gbD 'git branch -D'
 abbr -a gbda 'git branch --merged | egrep -v "(^\*|master|main|dev)'
 abbr -a gswf 'git switch (git branch --sort=-committerdate | fzf | sed -e "s/[\*[:space:]]//g" | xargs)'
@@ -64,6 +85,7 @@ abbr -a grba 'git rebase --abort'
 abbr -a grbi 'git rebase -i'
 abbr -a gf 'git fetch'
 abbr -a gsur 'git submodule update --recursive'
+abbr -a gr&c 'git restore --staged . && git restore . && git clean -fdx'
 
 # Tmux aliases
 abbr -a t 'tmux'
@@ -77,20 +99,19 @@ abbr -a ve "source venv/bin/activate.fish"
 abbr -a dve "deactivate"
 abbr -a pipr "pip install -r requirements.txt"
 
-# Docker compose aliases
-abbr -a dcu "docker-compose up -d;dclogs"
-abbr -a dclogs "docker-compose logs --follow"
-abbr -a dcr "docker-compose restart"
-abbr -a --set-cursor=% dcrb "docker-compose up --no-deps --detach --build %;dclogs"
-abbr -a dcprune "docker system prune -a -f"
-
 # tmux sessionizer
 bind \cf tmux-sessionizer
 setenv FZF_DEFAULT_OPTS "--border --color 'pointer:#B3E1A7,bg+:-1,fg+:#B3E1A7'"
 
 # Editor
-set -x EDITOR vim
+set -x EDITOR nvim
 set -x GIT_EDITOR $EDITOR
+
+# Shell
+set -gx SHELL /opt/homebrew/bin/fish
+
+# Todui
+abbr -a td 'todui'
 
 # colored man output
 # from http://linuxtidbits.wordpress.com/2009/03/23/less-colors-for-man-pages/
@@ -102,19 +123,32 @@ setenv LESS_TERMCAP_so \e'[38;5;246m'    # begin standout-mode - info box
 setenv LESS_TERMCAP_ue \e'[0m'           # end underline
 setenv LESS_TERMCAP_us \e'[04;38;5;146m' # begin underline
 
-zoxide init fish | source
+set -Ux STARSHIP_LOG 'error'
 starship init fish | source
 
 function fish_greeting
     echo
     neofetch
 
-    set todays_tasks (todui ls --date-filter today-and-past | string split0)
-
-    if test (echo $todays_tasks | wc -l) -gt 2
-        set_color green
-        echo "Today's tasks:"
-        set_color normal
-        echo $todays_tasks
-    end
+    # If output of `todui ls --format json` is not [], then print the output
+    set output $(todui ls --format json)
+    if test "$output" != "[]"
+	echo
+	todui ls
+	echo
+	dotfiles-update-checker
+	end
+    echo
 end
+
+
+function npytest  
+    for i in (seq $argv[1])
+	echo ""
+	echo ""
+	echo "==== Running test $i ===="
+        pytest  
+    end  
+end
+
+source ~/.config/fish/autogen.fish

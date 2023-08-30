@@ -1,9 +1,45 @@
 #!/usr/bin/env bash
+# vim: set ft=bash
+
+# If ~/stripe exists
+if [ -d ~/stripe ]; then
+    parents=(~/stripe ~/personal)
+    folders=(
+        ~/stripe/zoolander/src/python/pipeline
+    )
+else
+    parents=(~/projects ~/personal)
+    folders=()
+fi
 
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$({ find ~/projects -mindepth 1 -maxdepth 1 -type d & find ~/school -mindepth 3 -maxdepth 3 -type d; } | fzf)
+    commands=()
+    for parent in "${parents[@]}"; do
+        command="find $parent -mindepth 1 -maxdepth 1 -type d"
+        commands+=("$command")
+    done
+    for folder in "${folders[@]}"; do
+        command="echo $folder"
+        commands+=("$command")
+    done
+
+    # Join array with " & "
+    joined_command=""
+    for (( i=0; i<${#commands[@]}; i++ )); do
+        joined_command+="${commands[$i]}"
+        if [[ $i -lt $((${#commands[@]} - 1)) ]]; then
+            joined_command+=" & "
+        fi
+    done
+
+    # Fzf
+    final="{ "
+    final+=$joined_command
+    final+="; } | fzf"
+
+    selected=$(eval $final)
 fi
 
 if [[ -z $selected ]]; then
@@ -28,3 +64,4 @@ if [[ -z $TMUX ]]; then
 else
     tmux switch-client -t $selected_name
 fi
+

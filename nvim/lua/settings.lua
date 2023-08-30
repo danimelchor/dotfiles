@@ -37,7 +37,10 @@ opt.wrap = false
 opt.mouse = "a"
 opt.clipboard = "unnamed"
 opt.cmdheight = 0
+
 o.showmode = false
+o.breakindent = true
+o.showbreak = "↳ "
 
 g.mapleader = " "
 

@@ -135,6 +135,8 @@ function fish_greeting
     if test "$output" != "[]"
 	echo
 	todui ls
+	echo
+	dotfiles-update-checker
 	end
     echo
 end

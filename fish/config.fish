@@ -126,11 +126,15 @@ setenv LESS_TERMCAP_us \e'[04;38;5;146m' # begin underline
 set -Ux STARSHIP_LOG 'error'
 starship init fish | source
 
-function fish_greeting
-    echo
-    neofetch && echo
+# === FISH GREETING ===
+function cached_neofetch
+    if ! test -e ~/.neofetch_cache
+	neofetch | string collect > ~/.neofetch_cache
+    end
+    cat ~/.neofetch_cache
+end
 
-    # If output of `todui ls --format json` is not [], then print the output
+function todo
     set output $(todui ls --format json)
     if test "$output" != "[]"
 	# Todo list
@@ -138,13 +142,21 @@ function fish_greeting
 	if test -n "$output"
 	    echo -e "$output\n"
 	end
-	
-	# Dotfiles check
-	set output (dotfiles-update-checker | string collect)
-	if test -n "$output"
-	    echo -e "$output\n"
-	end
     end
+end
+
+function dotfiles_updates
+    set output (dotfiles-update-checker | string collect)
+    if test -n "$output"
+	echo -e "$output\n"
+    end
+end
+
+function fish_greeting
+    echo
+    cached_neofetch
+    todo &
+    dotfiles_updates &
 end
 
 
@@ -152,7 +164,9 @@ function npytest
     for i in (seq $argv[1])
 	echo ""
 	echo ""
+	set_color green
 	echo "==== Running test $i ===="
+	set_color normal
         pytest  
     end  
 end

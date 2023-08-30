@@ -59,7 +59,8 @@ abbr -a gp! 'git push --force-with-lease'
 abbr -a ga 'git add'
 abbr -a gaa 'git add --all'
 abbr -a grm 'git rm'
-abbr -a gpu 'git push -u origin $(git rev-parse --abbrev-ref HEAD)'
+abbr -a gpu 'git push -u origin $(git rev-parse --abbrev-ref HEAD) --no-verify'
+abbr -a gpuv 'git push -u origin $(git rev-parse --abbrev-ref HEAD)'
 abbr -a gbd 'git branch -d'
 abbr -a gbdf 'git branch -d (git branch --sort=-committerdate | fzf | sed -e "s/[\*[:space:]]//g" | xargs)'
 abbr -a gbDf 'git branch -D (git branch --sort=-committerdate | fzf | sed -e "s/[\*[:space:]]//g" | xargs)'
@@ -80,6 +81,7 @@ abbr -a grba 'git rebase --abort'
 abbr -a grbi 'git rebase -i'
 abbr -a gf 'git fetch'
 abbr -a gsur 'git submodule update --recursive'
+abbr -a gr&c 'git restore --staged . && git restore . && git clean -fdx'
 
 # Tmux aliases
 abbr -a t 'tmux'
@@ -134,6 +136,16 @@ function fish_greeting
 	todui ls
 	end
     echo
+end
+
+
+function npytest  
+    for i in (seq $argv[1])
+	echo ""
+	echo ""
+	echo "==== Running test $i ===="
+        pytest  
+    end  
 end
 
 source ~/.config/fish/autogen.fish

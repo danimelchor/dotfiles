@@ -326,12 +326,6 @@ require('lazy').setup({
       build = function() vim.fn["mkdp#util#install"]() end
    },
 
-   -- To improve at vim
-   {
-      "m4xshen/hardtime.nvim",
-      dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-      opts = {}
-   },
 
    -- Highlights for
    -- TODO: test
@@ -373,6 +367,13 @@ require('lazy').setup({
       'echasnovski/mini.ai',
       version = false,
       config = function() require('mini.ai').setup() end,
+   },
+
+   -- To switch between single-line and multiline statements
+   {
+      'echasnovski/mini.splitjoin',
+      version = false,
+      config = function() require('mini.splitjoin').setup() end,
    },
 
    -- Move forward and backwards

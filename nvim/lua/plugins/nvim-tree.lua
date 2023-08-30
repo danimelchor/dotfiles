@@ -25,6 +25,27 @@ end
 require("nvim-tree").setup({
   on_attach = my_on_attach,
   disable_netrw = true,
+  view = {
+    width = {
+      min = 30,
+      max = -1,
+    },
+  },
+  filters = {
+    git_ignored = true,
+    dotfiles = false,
+    custom = {
+      "^.pytest_cache$",
+      "^.git$",
+      "^__pycache__$",
+      "^.*.egg-info$",
+    }
+  },
+  update_focused_file = {
+    enable = true,
+    update_root = false,
+    ignore_list = {},
+  },
 })
 
 -- https://github.com/nvim-tree/nvim-tree.lua/wiki/Auto-Close

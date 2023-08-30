@@ -89,7 +89,7 @@ local all_plugins = {
          { 'rafamadriz/friendly-snippets' }, -- Optional
 
          { 'simrat39/rust-tools.nvim' },
-         { url = "git@git.corp.stripe.com:nms/nvim-lspconfig-stripe.git" }
+         is_stripe and { url = "git@git.corp.stripe.com:nms/nvim-lspconfig-stripe.git" } or nil
       }
    },
 

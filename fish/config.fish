@@ -128,10 +128,20 @@ starship init fish | source
 
 # === FISH GREETING ===
 function cached_neofetch
-    if ! test -e ~/.neofetch_cache
-	neofetch | string collect > ~/.neofetch_cache
+    set today_date (date '+%Y-%m-%d')
+    set cache_file ~/.neofetch_cache
+
+    if test -e $cache_file  
+        read -l first_line <$cache_file  
+        if test "$first_line" = "$today_date"  
+	    tail -n +2 $cache_file
+            return  
+        end  
     end
-    cat ~/.neofetch_cache
+    
+    echo "$today_date" > $cache_file
+    neofetch | string collect >> $cache_file
+    tail -n +2 $cache_file
 end
 
 function todo
@@ -155,8 +165,8 @@ end
 function fish_greeting
     echo
     cached_neofetch
-    todo &
-    dotfiles_updates &
+    todo
+    dotfiles_updates
 end
 
 

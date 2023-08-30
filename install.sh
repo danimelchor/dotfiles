@@ -10,6 +10,7 @@ mkdir $BACKUP_DIR
 declare -A files
 files["fish"]="$HOME/.config"
 files["kitty"]="$HOME/.config"
+files["neofetch"]="$HOME/.config"
 files["nvim"]="$HOME/.config"
 files["sketchybar"]="$HOME/.config"
 files["yabai"]="$HOME/.config"
@@ -47,7 +48,7 @@ for script in $INSTALL_DIR/scripts/*; do
         rm $HOME/.local/bin/$script
     fi
     echo "Symlinking $script to ~/.local/bin"
-    ln -s $INSTALL_DIR/scripts/$script $HOME/.local/bin/
+    ln -s $INSTALL_DIR/$script $HOME/.local/bin/
     chmod +x $HOME/.local/bin/$script
 done
 

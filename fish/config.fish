@@ -25,6 +25,18 @@ if test -e ~/stripe
 
     # Postgres
     set -Ux PGDATA '/usr/local/var/postgres'
+
+    # Pay stack shorcuts
+    abbr -a psconvert 'pay stack convert'
+    abbr -a pscreate 'pay stack create'
+    abbr -a psshow 'pay stack show'
+    abbr -a pspr 'pay stack pr'
+    abbr -a psp 'pay stack push'
+    abbr -a pspush 'pay stack push'
+    abbr -a psrestack 'pay stack restack'
+    abbr -a pssw 'pay stack checkout'
+    abbr -a psrm 'pay stack delete'
+    abbr -a psprune 'pay stack sync --prune'
 end
 
 functions -e fish_right_prompt

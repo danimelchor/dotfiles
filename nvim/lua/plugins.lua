@@ -162,7 +162,7 @@ local all_plugins = {
       'nvim-treesitter/nvim-treesitter',
       config = function() require('plugins.treesitter') end,
       event = "BufEnter",
-      depenencies = {
+      dependencies = {
          "nvim-treesitter/nvim-treesitter-context",
          "nvim-treesitter/nvim-treesitter-textobjects",
       }
@@ -174,7 +174,7 @@ local all_plugins = {
    {
       "folke/trouble.nvim",
       config = function() require('plugins.trouble') end,
-      cmd = "Trouble"
+      event = "BufEnter"
    },
 
    -- Autmomatically complete quotes or parens
@@ -206,7 +206,7 @@ local all_plugins = {
 
    -- Copilot
    {
-      "github/copilot.vim",
+      "zbirenbaum/copilot.lua",
       event = "InsertEnter",
       config = function()
          require("plugins.copilot")

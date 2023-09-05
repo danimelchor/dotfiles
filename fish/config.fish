@@ -21,6 +21,8 @@ if test -e ~/stripe
     abbr -a dot 'cd ~/Documents/dotfiles/'
     abbr -a personal 'cd ~/personal/'
 
+    abbr -a cimypy 'bazel build //tools/build_rules/linting/private/py_tools:mypy && ~/stripe/zoolander/bazel-bin/tools/build_rules/linting/private/py_tools/mypy'
+
     # Postgres
     set -Ux PGDATA '/usr/local/var/postgres'
 end
@@ -54,6 +56,8 @@ function v
     end
 end
 
+zoxide init fish | source
+abbr -a cd 'z'
 
 # Git aliases
 abbr -a gs 'git status'
@@ -128,20 +132,14 @@ starship init fish | source
 
 # === FISH GREETING ===
 function cached_neofetch
-    set today_date (date '+%Y-%m-%d')
     set cache_file ~/.neofetch_cache
-
-    if test -e $cache_file  
-        read -l first_line <$cache_file  
-        if test "$first_line" = "$today_date"  
-	    tail -n +2 $cache_file
-            return  
-        end  
+    if test -e $cache_file
+	cat $cache_file
+    else
+	neofetch
     end
     
-    echo "$today_date" > $cache_file
-    neofetch | string collect >> $cache_file
-    tail -n +2 $cache_file
+    fish -c "neofetch | string collect > $cache_file" &
 end
 
 function todo
@@ -156,10 +154,13 @@ function todo
 end
 
 function dotfiles_updates
-    set output (dotfiles-update-checker | string collect)
-    if test -n "$output"
-	echo -e "$output\n"
+    set cache_file ~/.dotfiles_updates_cache
+    if test -e $cache_file
+	cat $cache_file
+    else
+	dotfiles-update-checker
     end
+    fish -c "dotfiles-update-checker | string collect > $cache_file" &
 end
 
 function fish_greeting
@@ -169,16 +170,5 @@ function fish_greeting
     dotfiles_updates
 end
 
-
-function npytest  
-    for i in (seq $argv[1])
-	echo ""
-	echo ""
-	set_color green
-	echo "==== Running test $i ===="
-	set_color normal
-        pytest  
-    end  
-end
-
 source ~/.config/fish/autogen.fish
+source ~/.config/fish/utils.fish

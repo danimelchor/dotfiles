@@ -8,6 +8,10 @@ if not status_ok_2 then
   return
 end
 
+require'treesitter-context'.setup{
+  max_lines = 5
+}
+
 nvim_treesitter_configs.setup {
   ensure_installed = {
     "lua",

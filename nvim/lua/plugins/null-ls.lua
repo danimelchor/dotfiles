@@ -35,12 +35,19 @@ local sources = {
       return null_utils.root_pattern(".vale.ini")(params.bufname)
     end),
   }),
+
+  -- Python
+  null_ls.builtins.diagnostics.ruff,
+  null_ls.builtins.diagnostics.flake8,
+  null_ls.builtins.diagnostics.mypy,
+  null_ls.builtins.formatting.black,
+  null_ls.builtins.formatting.isort,
 }
 
 if is_stripe then
   local nullls_stripe = require("lspconfig_stripe.null_ls")
   local stripe_sources = {
-      -- JavaScript, typescript
+    -- JavaScript, typescript
     nullls_stripe.diagnostics.eslint_d,
     nullls_stripe.formatting.eslint_d,
 
@@ -49,10 +56,6 @@ if is_stripe then
     nullls_stripe.formatting.format_build,
     nullls_stripe.formatting.format_scala,
     nullls_stripe.formatting.format_sql,
-
-    -- Python
-    nullls_stripe.formatting.black,
-    nullls_stripe.diagnostics.ruff,
   }
   vim.list_extend(sources, stripe_sources)
 else
@@ -60,10 +63,6 @@ else
     -- JavaScript, typescript
     null_ls.builtins.diagnostics.eslint_d,
     null_ls.builtins.formatting.eslint_d,
-
-    -- Python
-    null_ls.builtins.diagnostics.ruff,
-    null_ls.builtins.formatting.black
   }
   vim.list_extend(sources, alternative_sources)
 end

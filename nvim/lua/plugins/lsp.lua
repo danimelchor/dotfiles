@@ -4,11 +4,9 @@ local is_stripe = require('utils').is_stripe()
 lsp.ensure_installed({
   'tsserver',
   'lua_ls',
-  'jdtls',
   'bashls',
   'cssls',
   'eslint',
-  'graphql',
   'html',
   'jsonls',
   'pyright',

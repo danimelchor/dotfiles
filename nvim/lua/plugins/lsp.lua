@@ -72,6 +72,16 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set('n', 'gr', function() vim.lsp.buf.references() end, opts)
 end)
 
+lsp.configure("lua_ls", {
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { "vim" },
+      },
+    },
+  },
+})
+
 lsp.setup()
 
 

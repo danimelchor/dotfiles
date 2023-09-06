@@ -31,12 +31,9 @@ lsp.setup_nvim_cmp({
   },
   mapping = {
         ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), ['<C-j>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), ['<Tab>'] = cmp.mapping(function(fallback)
-        -- local copilot_keys = vim.fn['copilot#Accept']()
         local copilot = require("copilot.suggestion")
         if cmp.visible() then
           cmp.confirm({ select = false })
-        -- elseif copilot_keys ~= '' and type(copilot_keys) == 'string' then
-        --   vim.api.nvim_feedkeys(copilot_keys, 'i', true)
         elseif copilot.is_visible() then
           copilot.accept()
         else

@@ -3,9 +3,6 @@ if test -e ~/stripe
     source (nodenv init - | psub)
     source ~/stripe/space-commander/bin/sc-env-activate.fish
 
-    set -Ux PYENV_ROOT $HOME/.pyenv
-    pyenv init - | source
-
     fish_add_path "$PYENV_ROOT/bin"
     fish_add_path "$HOME/.rbenv/shims"
     fish_add_path "$HOME/.rbenv/bin"
@@ -31,6 +28,9 @@ if test -e ~/stripe
 end
 
 functions -e fish_right_prompt
+
+set -Ux PYENV_ROOT $HOME/.pyenv
+pyenv init - | source
 
 fish_add_path /opt/homebrew/bin
 fish_add_path ~/.local/bin

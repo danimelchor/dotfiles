@@ -27,16 +27,7 @@ if test -e ~/stripe
     set -Ux PGDATA '/usr/local/var/postgres'
 
     # Pay stack shorcuts
-    abbr -a psconvert 'pay stack convert'
-    abbr -a pscreate 'pay stack create'
-    abbr -a psshow 'pay stack show'
-    abbr -a pspr 'pay stack pr'
-    abbr -a psp 'pay stack push'
-    abbr -a pspush 'pay stack push'
-    abbr -a psrestack 'pay stack restack'
-    abbr -a pssw 'pay stack checkout'
-    abbr -a psrm 'pay stack delete'
-    abbr -a psprune 'pay stack sync --prune'
+    abbr -a ps 'pay stack'
 end
 
 functions -e fish_right_prompt
@@ -165,6 +156,19 @@ function todo
     end
 end
 
+
+function reminders
+    set output $(remind ls unread --json)
+    if test "$output" != "[]"
+	# Todo list
+	set output (remind ls unread | string collect)
+	if test -n "$output"
+	    echo -e "$output\n"
+	end
+    end
+end
+
+
 function dotfiles_updates
     set cache_file ~/.dotfiles_updates_cache
     if test -e $cache_file
@@ -178,7 +182,8 @@ end
 function fish_greeting
     echo
     cached_neofetch
-    todo
+    # todo
+    reminders
     dotfiles_updates
 end
 

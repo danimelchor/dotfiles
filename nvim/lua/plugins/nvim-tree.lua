@@ -38,7 +38,8 @@ require("nvim-tree").setup({
       "^.pytest_cache$",
       "^.git$",
       "^__pycache__$",
-      "^.*.egg-info$",
+      "^.*\\.egg-info$",
+      "^\\.null-ls.*$",
     }
   },
   update_focused_file = {

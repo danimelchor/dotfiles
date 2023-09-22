@@ -36,6 +36,7 @@ yabai -m rule --add app="^Raycast$" manage=off
 yabai -m rule --add app="^1Password 7$" manage=off
 yabai -m rule --add app="^NordVPN$" manage=off
 yabai -m rule --add app="^java$" manage=off
+yabai -m rule --add app="^Notes$" manage=off
 
 yabai -m rule --add app="^Spotify$" space=^4
 yabai -m rule --add app="^Slack$" space=^3

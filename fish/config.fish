@@ -20,6 +20,9 @@ if test -e ~/stripe
 
     abbr -a cimypy 'bazel build //tools/build_rules/linting/private/py_tools:mypy && ~/stripe/zoolander/bazel-bin/tools/build_rules/linting/private/py_tools/mypy'
 
+    abbr -a pjk 'pay job:kill'
+    abbr -a pjl 'pay job:list'
+
     # Postgres
     set -Ux PGDATA '/usr/local/var/postgres'
 

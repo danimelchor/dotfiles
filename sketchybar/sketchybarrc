@@ -59,7 +59,8 @@ source "$ITEM_DIR/brew.sh"
 source "$ITEM_DIR/alias.sh"
 
 # Left of notch
-source "$ITEM_DIR/todo.sh"
+# source "$ITEM_DIR/todo.sh"
+source "$ITEM_DIR/utc.sh"
 
 # Forcing all item scripts to run (never do this outside of sketchybarrc)
 sketchybar --update

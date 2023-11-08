@@ -23,6 +23,8 @@ if test -e ~/stripe
     abbr -a pjk 'pay job:kill'
     abbr -a pjl 'pay job:list'
 
+    abbr -a iceberg 'pay job:run bazel run src/scala/com/stripe/iceberg/cli --'
+
     # Postgres
     set -Ux PGDATA '/usr/local/var/postgres'
 
@@ -82,7 +84,7 @@ abbr -a gbD 'git branch -D'
 abbr -a gbda 'git branch --merged | egrep -v "(^\*|master|main|dev)'
 abbr -a gswf 'git switch (git branch --sort=-committerdate | fzf | sed -e "s/[\*[:space:]]//g" | xargs)'
 abbr -a gsw 'git switch'
-abbr -a gswc 'git switch -c dmelchor/'
+abbr -a --set-cursor=% gswc 'git switch -c dmelchor/%'
 abbr -a --set-cursor=% gcm 'git commit -m "%"'
 abbr -a --set-cursor=% gcam 'git commit -am "%"'
 abbr -a --set-cursor=% gac 'git add --all && git commit -m "%"'
@@ -145,7 +147,7 @@ function cached_neofetch
 	neofetch
     end
     
-    fish -c "neofetch | string collect > $cache_file" &
+    bash -c "neofetch > $cache_file &"
 end
 
 function todo
@@ -179,14 +181,14 @@ function dotfiles_updates
     else
 	dotfiles-update-checker
     end
-    fish -c "dotfiles-update-checker | string collect > $cache_file" &
+    bash -c "dotfiles-update-checker > $cache_file &"
 end
 
 function fish_greeting
     echo
     cached_neofetch
     # todo
-    reminders
+    # reminders
     dotfiles_updates
 end
 

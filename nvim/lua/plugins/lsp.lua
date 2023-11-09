@@ -114,13 +114,11 @@ vim.diagnostic.config({
 
 
 -- Autoformatting
-vim.api.nvim_create_augroup("FormatAutogroup", {
-  { "BufWritePost", "*", "FormatWrite" },
-})
+vim.api.nvim_create_augroup("FormatAutogroup", {})
 
-vim.api.nvim_create_autocmd("FormatWrite", {
+vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = { "*.js", "*.ts", "*.tsx", "*.jsx", "*.py" },
   callback = function()
-    vim.lsp.buf.formatting()
+    vim.lsp.buf.format()
   end,
 })

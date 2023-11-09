@@ -30,12 +30,17 @@ if test -e ~/stripe
 
     # Pay stack shorcuts
     abbr -a ps 'pay stack'
+else
+    abbr -a --set-cursor=% sv 'nvim scp://dmelchor@dmelchorpi.local/%'
 end
 
 functions -e fish_right_prompt
 
-set -Ux PYENV_ROOT $HOME/.pyenv
-pyenv init - | source
+# If pyenv exists
+if command -v pyenv > /dev/null
+    set -Ux PYENV_ROOT $HOME/.pyenv
+    pyenv init - | source
+end
 
 fish_add_path /opt/homebrew/bin
 fish_add_path ~/.local/bin
@@ -64,8 +69,10 @@ function v
     end
 end
 
-zoxide init fish | source
-abbr -a cd 'z'
+if command -v zoxide > /dev/null
+    zoxide init fish | source
+    abbr -a cd 'z'
+end
 
 # Git aliases
 abbr -a gs 'git status'
@@ -140,55 +147,76 @@ starship init fish | source
 
 # === FISH GREETING ===
 function cached_neofetch
-    set cache_file ~/.neofetch_cache
-    if test -e $cache_file
-	cat $cache_file
-    else
-	neofetch
+    if command -v neofetch > /dev/null
+	set cache_file ~/.neofetch_cache
+	if test -e $cache_file
+	    cat $cache_file
+	else
+	    neofetch
+	end
+	
+	fish -c "neofetch | string collect > $cache_file" &
     end
+<<<<<<< Updated upstream
     
     bash -c "neofetch > $cache_file &"
+=======
+>>>>>>> Stashed changes
 end
 
 function todo
-    set output $(todui ls --format json)
-    if test "$output" != "[]"
-	# Todo list
-	set output (todui ls | string collect)
-	if test -n "$output"
-	    echo -e "$output\n"
+    if command -v todui > /dev/null
+	set output $(todui ls --format json)
+	if test "$output" != "[]"
+	    # Todo list
+	    set output (todui ls | string collect)
+	    if test -n "$output"
+		echo -e "$output\n"
+	    end
 	end
     end
 end
 
 
 function reminders
-    set output $(remind ls unread --json)
-    if test "$output" != "[]"
-	# Todo list
-	set output (remind ls unread | string collect)
-	if test -n "$output"
-	    echo -e "$output\n"
+    if command -v remind > /dev/null
+	set output $(remind ls unread --json)
+	if test "$output" != "[]"
+	    # Todo list
+	    set output (remind ls unread | string collect)
+	    if test -n "$output"
+		echo -e "$output\n"
+	    end
 	end
     end
 end
 
 
 function dotfiles_updates
-    set cache_file ~/.dotfiles_updates_cache
-    if test -e $cache_file
-	cat $cache_file
-    else
-	dotfiles-update-checker
+    if command -v dotfiles-update-checker > /dev/null
+	set cache_file ~/.dotfiles_updates_cache
+	if test -e $cache_file
+	    cat $cache_file
+	else
+	    dotfiles-update-checker
+	end
+	fish -c "dotfiles-update-checker | string collect > $cache_file" &
     end
+<<<<<<< Updated upstream
     bash -c "dotfiles-update-checker > $cache_file &"
+=======
+>>>>>>> Stashed changes
 end
 
 function fish_greeting
     echo
     cached_neofetch
+<<<<<<< Updated upstream
     # todo
     # reminders
+=======
+    reminders
+>>>>>>> Stashed changes
     dotfiles_updates
 end
 

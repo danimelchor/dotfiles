@@ -154,10 +154,8 @@ function cached_neofetch
 	else
 	    neofetch
 	end
-	
-	fish -c "neofetch | string collect > $cache_file" &
+	bash -c "neofetch > $cache_file &"
     end
-    bash -c "neofetch > $cache_file &"
 end
 
 function todo
@@ -196,9 +194,8 @@ function dotfiles_updates
 	else
 	    dotfiles-update-checker
 	end
-	fish -c "dotfiles-update-checker | string collect > $cache_file" &
+	bash -c "dotfiles-update-checker > $cache_file &"
     end
-    bash -c "dotfiles-update-checker > $cache_file &"
 end
 
 function fish_greeting

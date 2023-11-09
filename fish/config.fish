@@ -157,11 +157,7 @@ function cached_neofetch
 	
 	fish -c "neofetch | string collect > $cache_file" &
     end
-<<<<<<< Updated upstream
-    
     bash -c "neofetch > $cache_file &"
-=======
->>>>>>> Stashed changes
 end
 
 function todo
@@ -202,21 +198,14 @@ function dotfiles_updates
 	end
 	fish -c "dotfiles-update-checker | string collect > $cache_file" &
     end
-<<<<<<< Updated upstream
     bash -c "dotfiles-update-checker > $cache_file &"
-=======
->>>>>>> Stashed changes
 end
 
 function fish_greeting
     echo
     cached_neofetch
-<<<<<<< Updated upstream
     # todo
     # reminders
-=======
-    reminders
->>>>>>> Stashed changes
     dotfiles_updates
 end
 

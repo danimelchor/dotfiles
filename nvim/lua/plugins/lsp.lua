@@ -30,7 +30,9 @@ lsp.setup_nvim_cmp({
     { name = 'buffer' }
   },
   mapping = {
-        ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), ['<C-j>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), ['<Tab>'] = cmp.mapping(function(fallback)
+    ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+    ['<C-j>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+    ['<Tab>'] = cmp.mapping(function(fallback)
         local copilot = require("copilot.suggestion")
         if cmp.visible() then
           cmp.confirm({ select = false })
@@ -60,10 +62,6 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set('n', '<LEADER>r', function() vim.lsp.buf.rename() end, opts)
   vim.keymap.set('n', '<LEADER>a', function() vim.lsp.buf.code_action() end, opts)
   vim.keymap.set('n', '<LEADER>f', function() vim.lsp.buf.format({ async = true }) end, opts)
-  vim.keymap.set('n', '<LEADER>w', function()
-    vim.lsp.buf.format()
-    vim.cmd('w')
-  end, opts)
   vim.keymap.set('n', 'gr', function() vim.lsp.buf.references() end, opts)
 end)
 
@@ -112,4 +110,17 @@ vim.diagnostic.config({
   update_in_insert = false,
   underline = true,
   float = true,
+})
+
+
+-- Autoformatting
+vim.api.nvim_create_augroup("FormatAutogroup", {
+  { "BufWritePost", "*", "FormatWrite" },
+})
+
+vim.api.nvim_create_autocmd("FormatWrite", {
+  pattern = { "*.js", "*.ts", "*.tsx", "*.jsx", "*.py" },
+  callback = function()
+    vim.lsp.buf.formatting()
+  end,
 })

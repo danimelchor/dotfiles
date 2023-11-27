@@ -20,16 +20,15 @@ if test -e ~/stripe
 
     abbr -a cimypy 'bazel build //tools/build_rules/linting/private/py_tools:mypy && ~/stripe/zoolander/bazel-bin/tools/build_rules/linting/private/py_tools/mypy'
 
+    abbr -a qapay 'pay --host-type qa-mydata-standard'
     abbr -a pjk 'pay job:kill'
     abbr -a pjl 'pay job:list'
+    abbr -a pu '~/payup.sh'
 
     abbr -a iceberg 'pay job:run bazel run src/scala/com/stripe/iceberg/cli --'
 
     # Postgres
     set -Ux PGDATA '/usr/local/var/postgres'
-
-    # Pay stack shorcuts
-    abbr -a ps 'pay stack'
 else
     abbr -a --set-cursor=% sv 'nvim scp://dmelchor@dmelchorpi.local/%'
 end

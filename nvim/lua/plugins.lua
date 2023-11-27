@@ -120,7 +120,9 @@ local all_plugins = {
    -- Highlight color codes with their code #ff00ff
    {
       'norcalli/nvim-colorizer.lua',
-      config = function() require('plugins.colorizer') end,
+      config = function()
+         require('colorizer').setup()
+      end,
       event = "VimEnter"
    },
 

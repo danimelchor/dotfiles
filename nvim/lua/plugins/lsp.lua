@@ -117,8 +117,8 @@ vim.diagnostic.config({
 vim.api.nvim_create_augroup("FormatAutogroup", {})
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = { "*.js", "*.ts", "*.tsx", "*.jsx", "*.py" },
+  pattern = { "*.js", "*.ts", "*.tsx", "*.jsx", "*.py", "*.lua" },
   callback = function()
-    vim.lsp.buf.format()
+    vim.cmd("silent! lua vim.lsp.buf.format()")
   end,
 })

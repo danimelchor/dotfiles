@@ -9,7 +9,7 @@ if [ -d ~/stripe ]; then
         ~/stripe/zoolander/src/python/notebook
     )
 else
-    parents=(~/projects ~/personal)
+    parents=(~/projects ~/personal ~/work)
     folders=()
 fi
 

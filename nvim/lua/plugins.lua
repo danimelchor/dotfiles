@@ -120,7 +120,9 @@ local all_plugins = {
    -- Highlight color codes with their code #ff00ff
    {
       'norcalli/nvim-colorizer.lua',
-      config = function() require('plugins.colorizer') end,
+      config = function()
+         require('colorizer').setup()
+      end,
       event = "VimEnter"
    },
 
@@ -289,123 +291,13 @@ local all_plugins = {
       config = function() require('plugins.harpoon') end,
       event = "BufEnter"
    },
+
+   -- Notifications
+   {
+      'rcarriga/nvim-notify',
+      config = function() require('plugins.notify') end,
+      event = "BufEnter",
+   },
 }
-
-if is_stripe then
-   local stripe_plugins = {
-      -- Useful :StripeOwner command
-      {
-         url = "git@git.corp.stripe.com:dbalatero/stripe-code-owner.nvim.git",
-         cmd = "StripeOwner",
-         config = function()
-            vim.api.nvim_create_user_command("StripeOwner", require("stripe-code-owner").showOverlay, {})
-         end,
-      },
-
-      -- Dagger window
-      {
-         url = "git@git.corp.stripe.com:stevearc/dagger.nvim.git",
-         ft = "java",
-         config = function()
-            local dagger = require("dagger")
-            dagger.setup()
-            vim.keymap.set("n", "<leader>dt", dagger.toggle, { desc = "[D]agger [T]oggle" })
-            vim.keymap.set("n", "<leader>do", dagger.open, { desc = "[D]agger [O]pen" })
-            vim.keymap.set("n", "<leader>dc", dagger.close, { desc = "[D]agger [C]lose" })
-         end,
-      },
-
-      -- Bazel tasks and fzf integration
-      {
-         url = "git@git.corp.stripe.com:stevearc/bazel.nvim.git",
-         config = function()
-            local bazel = require("bazel")
-            bazel.setup()
-            vim.keymap.set("n", "<leader>bp", function()
-               bazel.select_project("intellij/*.bazelproject")
-            end, { desc = "[B]azel [P]ick project" })
-            vim.keymap.set("n", "<leader>bc", function()
-               bazel.set_project(nil)
-            end, { desc = "[B]azel [C]lear project" })
-            vim.keymap.set("n", "<leader>fp", bazel.fzf_project_files, { desc = "[F]ind [P]roject files" })
-         end,
-      },
-
-      -- Task runner
-      {
-         "stevearc/overseer.nvim",
-         opts = {
-            templates = { "builtin", "bazel" },
-            default_neotest = {
-               { "on_complete_notify", on_change = true },
-               "default",
-            },
-         },
-         config = function(_, opts)
-            require("overseer").setup(opts)
-            vim.keymap.set("n", "<leader>ot", "<cmd>OverseerToggle<CR>", { desc = "[O]verseer [T]oggle" })
-            vim.keymap.set("n", "<leader>or", "<cmd>OverseerRun<CR>", { desc = "[O]verseer [R]un" })
-            vim.keymap.set("n", "<leader>oq", "<cmd>OverseerQuickAction<CR>", { desc = "[O]verseer [Q]uick action" })
-            vim.keymap.set("n", "<leader>oa", "<cmd>OverseerTaskAction<CR>", { desc = "[O]verseer task [A]ction" })
-         end,
-      },
-
-      -- Testing framework
-      {
-         "nvim-neotest/neotest",
-         dependencies = {
-            "haydenmeade/neotest-jest",
-            { url = "git@git.corp.stripe.com:stevearc/neotest-pay-test.git" },
-            "nvim-lua/plenary.nvim",
-            "stevearc/overseer.nvim",
-         },
-         config = function()
-            local neotest_jest = require("neotest-jest")
-            local neotest = require("neotest")
-            neotest.setup({
-               adapters = {
-                  neotest_jest({
-                     cwd = neotest_jest.root,
-                  }),
-                  require("neotest-pay-test")(),
-               },
-               discovery = {
-                  enabled = false,
-               },
-               consumers = {
-                  overseer = require("neotest.consumers.overseer"),
-               },
-               icons = {
-                  passed = " ",
-                  running = " ",
-                  failed = " ",
-                  unknown = " ",
-                  running_animated = vim.tbl_map(function(s)
-                     return s .. " "
-                  end, { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }),
-               },
-               output = {
-                  open_on_run = false,
-               },
-               quickfix = {
-                  open = false,
-               },
-            })
-            vim.keymap.set("n", "<leader>tf", function()
-               neotest.run.run({ vim.api.nvim_buf_get_name(0) })
-            end, { desc = "[T]est [F]ile" })
-            vim.keymap.set("n", "<leader>tn", function()
-               neotest.run.run({})
-            end, { desc = "[T]est [N]earest" })
-            vim.keymap.set("n", "<leader>tl", neotest.run.run_last, { desc = "[T]est [L]ast" })
-            vim.keymap.set("n", "<leader>ts", neotest.summary.toggle, { desc = "[T]est toggle [S]ummary" })
-            vim.keymap.set("n", "<leader>to", function()
-               neotest.output.open({ short = true })
-            end, { desc = "[T]est [O]utput" })
-         end,
-      },
-   }
-   vim.list_extend(all_plugins, stripe_plugins)
-end
 
 require('lazy').setup(all_plugins)

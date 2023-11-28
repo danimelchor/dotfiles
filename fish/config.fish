@@ -20,16 +20,15 @@ if test -e ~/stripe
 
     abbr -a cimypy 'bazel build //tools/build_rules/linting/private/py_tools:mypy && ~/stripe/zoolander/bazel-bin/tools/build_rules/linting/private/py_tools/mypy'
 
+    abbr -a qapay 'pay --host-type qa-mydata-standard'
     abbr -a pjk 'pay job:kill'
     abbr -a pjl 'pay job:list'
+    abbr -a pu '~/payup.sh'
 
     abbr -a iceberg 'pay job:run bazel run src/scala/com/stripe/iceberg/cli --'
 
     # Postgres
     set -Ux PGDATA '/usr/local/var/postgres'
-
-    # Pay stack shorcuts
-    abbr -a ps 'pay stack'
 else
     abbr -a --set-cursor=% sv 'nvim scp://dmelchor@dmelchorpi.local/%'
 end
@@ -146,64 +145,14 @@ set -Ux STARSHIP_LOG 'error'
 starship init fish | source
 
 # === FISH GREETING ===
-function cached_neofetch
-    if command -v neofetch > /dev/null
-	set cache_file ~/.neofetch_cache
-	if test -e $cache_file
-	    cat $cache_file
-	else
-	    neofetch
-	end
-	bash -c "neofetch > $cache_file &"
-    end
-end
-
-function todo
-    if command -v todui > /dev/null
-	set output $(todui ls --format json)
-	if test "$output" != "[]"
-	    # Todo list
-	    set output (todui ls | string collect)
-	    if test -n "$output"
-		echo -e "$output\n"
-	    end
-	end
-    end
-end
-
-
-function reminders
-    if command -v remind > /dev/null
-	set output $(remind ls unread --json)
-	if test "$output" != "[]"
-	    # Todo list
-	    set output (remind ls unread | string collect)
-	    if test -n "$output"
-		echo -e "$output\n"
-	    end
-	end
-    end
-end
-
-
-function dotfiles_updates
-    if command -v dotfiles-update-checker > /dev/null
-	set cache_file ~/.dotfiles_updates_cache
-	if test -e $cache_file
-	    cat $cache_file
-	else
-	    dotfiles-update-checker
-	end
-	bash -c "dotfiles-update-checker > $cache_file &"
-    end
-end
+set NEOFETCH_CACHE ~/.neofetch_cache
+set DOTFILES_UPDATES_CACHE ~/.dotfiles_updates_cache
 
 function fish_greeting
     echo
-    cached_neofetch
-    # todo
-    # reminders
-    dotfiles_updates
+    cat $NEOFETCH_CACHE && echo
+    cat $DOTFILES_UPDATES_CACHE
+    ~/.local/bin/async-prompt
 end
 
 source ~/.config/fish/autogen.fish

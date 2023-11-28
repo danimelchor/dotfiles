@@ -120,5 +120,9 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = { "*.js", "*.ts", "*.tsx", "*.jsx", "*.py", "*.lua" },
   callback = function()
     vim.cmd("silent! lua vim.lsp.buf.format()")
+    vim.notify("Formatted!", "info", {
+      title = "LSP",
+      timeout = 1000,
+    })
   end,
 })

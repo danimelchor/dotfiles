@@ -88,12 +88,15 @@ return {
         javascriptreact = { "prettierd" },
         typescriptreact = { "prettierd" },
         html = { "prettierd" },
+        css = { "prettierd" },
         json = { "prettierd" },
         jsonc = { "prettierd" },
         graphql = { "prettierd" },
         go = { "goimports", "gofmt" },
         lua = { "stylua" },
         python = { "isort", "black" },
+        sh = { "shfmt" },
+        ["_"] = { "trim_whitespace", "trim_newlines" },
       }
       local formatters = nil
 
@@ -128,17 +131,7 @@ return {
       require("conform").setup({
         formatters_by_ft = formatters_by_ft,
         formatters = formatters,
-      })
-
-      local FormatGroup = vim.api.nvim_create_augroup("FormatGroup", { clear = true })
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        pattern = "*",
-        callback = function(args)
-          require("conform").format({ bufnr = args.buf })
-          local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(args.buf), ":t")
-          vim.notify("Formatted " .. filename, vim.log.levels.INFO)
-        end,
-        group = FormatGroup,
+        format_after_save = { timeout_ms = 5000, lsp_fallback = true },
       })
     end,
   },

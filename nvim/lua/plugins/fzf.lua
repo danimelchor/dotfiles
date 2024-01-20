@@ -17,7 +17,13 @@ map('<C-p>', function()
   }
   local ok = pcall(fzf.git_files, opts)
   if not ok then fzf.files(opts) end
-end, "[F]ind [F]iles")
+end, "Find project files")
+
+map('<C-S-p>', function()
+  local ok = pcall(fzf.git_files)
+  if not ok then fzf.files() end
+end, "Find files")
+
 map('<LEADER>fw', fzf.grep, '[F]ind [W]ords')
 map('<LEADER>fb', fzf.git_branches, '[F]ind [B]ranches')
 map('<LEADER>fs', fzf.lsp_document_symbols, '[F]ind [S]ymbols')

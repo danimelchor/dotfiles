@@ -255,6 +255,13 @@ local all_plugins = {
       config = function() require('plugins.harpoon') end,
       event = "BufEnter"
    },
+
+   -- Hide important stuff
+   {
+      'laytan/cloak.nvim',
+      config = function() require('plugins.cloak') end,
+      event = "BufEnter"
+   }
 }
 
 require('lazy').setup(all_plugins)

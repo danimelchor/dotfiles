@@ -60,27 +60,25 @@ local all_plugins = {
 
    -- LSP + Autocomplete
    {
-      'VonHeikemen/lsp-zero.nvim',
-      branch = 'v1.x',
+      "neovim/nvim-lspconfig",
       config = function() require('plugins.lsp') end,
       dependencies = {
          -- LSP Support
-         { 'neovim/nvim-lspconfig' },             -- Required
-         { 'williamboman/mason.nvim' },           -- Optional
-         { 'williamboman/mason-lspconfig.nvim' }, -- Optional
+         "williamboman/mason.nvim",
+         "williamboman/mason-lspconfig.nvim",
 
          -- Autocompletion
-         { 'hrsh7th/nvim-cmp' },     -- Required
-         { 'hrsh7th/cmp-nvim-lsp' }, -- Required
-         { 'hrsh7th/cmp-buffer' },   -- Optional
-         { 'hrsh7th/cmp-path' },     -- Optional
-         { 'hrsh7th/cmp-nvim-lua' }, -- Optional
+         'hrsh7th/nvim-cmp',     -- Required
+         'hrsh7th/cmp-nvim-lsp', -- Required
+         'hrsh7th/cmp-buffer',   -- Optional
+         'hrsh7th/cmp-path',     -- Optional
+         'hrsh7th/cmp-nvim-lua', -- Optional
 
          -- Snippets
-         { 'L3MON4D3/LuaSnip' },             -- Required
-         { 'rafamadriz/friendly-snippets' }, -- Optional
+         'L3MON4D3/LuaSnip',             -- Required
+         'rafamadriz/friendly-snippets', -- Optional
 
-         { 'simrat39/rust-tools.nvim' },
+         'simrat39/rust-tools.nvim',
          is_stripe and { url = "git@git.corp.stripe.com:nms/nvim-lspconfig-stripe.git" } or nil
       }
    },

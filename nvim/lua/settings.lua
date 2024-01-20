@@ -42,6 +42,8 @@ opt.cmdheight = 0
 o.showmode = false
 o.breakindent = true
 o.showbreak = "↳ "
+o.gdefault = true
+o.showbreak = "↳ "
 
 g.mapleader = " "
 

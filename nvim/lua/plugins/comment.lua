@@ -1,4 +1,11 @@
-require('Comment').setup({
-  mappings = false
-})
-
+return {
+  {
+    'numToStr/Comment.nvim',
+    config = function()
+      require('Comment').setup({
+        mappings = false
+      })
+    end,
+    event = "BufEnter"
+  }
+}

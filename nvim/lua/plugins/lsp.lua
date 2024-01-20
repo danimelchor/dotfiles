@@ -75,7 +75,14 @@ require("mason-lspconfig").setup_handlers({
     })
   end
 })
-require("fidget").setup({})
+require("fidget").setup({
+  notification = {
+    poll_rate = 3,
+    window = {
+      winblend = 0,
+    }
+  },
+})
 
 if is_stripe then
   -- Setup 'payserver_sorbet'

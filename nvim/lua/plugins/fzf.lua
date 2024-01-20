@@ -29,12 +29,13 @@ return {
         end,
         desc = 'Find files'
       },
-      { '<LEADER>fw', function() require('fzf-lua').grep() end,                        desc = '[F]ind [W]ords' },
-      { '<LEADER>fb', function() require('fzf-lua').git_branches() end,                desc = '[F]ind [B]ranches' },
-      { '<LEADER>fs', function() require('fzf-lua').lsp_document_symbols() end,        desc = '[F]ind [S]ymbols' },
-      { '<LEADER>fd', function() require('fzf-lua').diagnostics_document() end,        desc = '[F]ind [D]iagnostics' },
-      { '<LEADER>km', function() require('fzf-lua').keymaps() end,                     desc = '[K]ey[M]aps' },
-      { '<LEADER>fh', function() require('fzf-lua').oldfiles({ cwd_only = true }) end, desc = '[F]ind [H]istory' }
+      { '<LEADER>fh', function() require('fzf-lua').oldfiles({ cwd_only = true }) end, desc = '[F]ind [H]istory' },
+      { '<LEADER>fw', '<cmd>FzfLua grep<CR>',                                          desc = '[F]ind [W]ords' },
+      { '<LEADER>fb', '<cmd>FzfLua git_branches<CR>',                                  desc = '[F]ind [B]ranches' },
+      { '<LEADER>fs', '<cmd>FzfLua lsp_document_symbols<CR>',                          desc = '[F]ind [S]ymbols' },
+      { '<LEADER>fd', '<cmd>FzfLua diagnostics_document<CR>',                          desc = '[F]ind [D]iagnostics' },
+      { '<LEADER>km', '<cmd>FzfLua keymaps<CR>',                                       desc = '[K]ey[M]aps' },
+      { '<LEADER>fv', '<cmd>FzfLua help_tags<CR>',                                     desc = '[F]ind [V]im help_tags' }
     }
   }
 }

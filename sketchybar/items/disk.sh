@@ -3,7 +3,7 @@
 source "$HOME/.config/sketchybar/colors.sh"
 
 sketchybar --add item  disk right                                                  \
-           --set disk  update_freq=600                                              \
+           --set disk  update_freq=1000                                              \
                        icon.font="Hack Nerd Font:Regular:12.0"                     \
                        icon.padding_right=4                                        \
                        icon.color=$RED                                       \

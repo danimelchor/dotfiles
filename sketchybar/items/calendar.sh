@@ -1,7 +1,7 @@
 #!/bin/sh
 
 sketchybar --add item calendar right                                                  \
-           --set calendar update_freq=30                                               \
+           --set calendar update_freq=10                                               \
                        icon="󰥔"                                                   \
                        icon.font="Hack Nerd Font:Regular:12.0"                     \
                        icon.padding_right=4                                        \

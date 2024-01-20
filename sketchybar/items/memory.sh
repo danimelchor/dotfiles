@@ -3,7 +3,7 @@
 source "$HOME/.config/sketchybar/colors.sh"
 
 sketchybar --add item  memory right                                                   \
-           --set memory   update_freq=30                                              \
+           --set memory   update_freq=60                                              \
                        icon.font="Hack Nerd Font:Regular:12.0"         \
                        icon.padding_right=4                                        \
                        icon.color=$MAUVE                                      \

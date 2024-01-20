@@ -1,6 +1,4 @@
 if test -e ~/stripe
-    source (rbenv init -|psub)
-    source (nodenv init - | psub)
     source ~/stripe/space-commander/bin/sc-env-activate.fish
 
     fish_add_path "$PYENV_ROOT/bin"
@@ -29,6 +27,8 @@ if test -e ~/stripe
 
     # Postgres
     set -Ux PGDATA '/usr/local/var/postgres'
+
+    set -x PIPELINE_MODE dev
 else
     abbr -a --set-cursor=% sv 'nvim scp://dmelchor@dmelchorpi.local/%'
 end
@@ -145,14 +145,9 @@ set -Ux STARSHIP_LOG 'error'
 starship init fish | source
 
 # === FISH GREETING ===
-set NEOFETCH_CACHE ~/.neofetch_cache
-set DOTFILES_UPDATES_CACHE ~/.dotfiles_updates_cache
-
 function fish_greeting
     echo
-    cat $NEOFETCH_CACHE && echo
-    cat $DOTFILES_UPDATES_CACHE
-    ~/.local/bin/async-prompt
+    neofetch
 end
 
 source ~/.config/fish/autogen.fish

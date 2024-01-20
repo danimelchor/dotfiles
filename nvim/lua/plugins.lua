@@ -52,13 +52,6 @@ local all_plugins = {
       depenencies = { "nvim-lua/plenary.nvim" }
    },
 
-   -- Leap (jump to words using two characters)
-   {
-      'ggandor/leap.nvim',
-      event = "BufEnter",
-      config = function() require('plugins.leap') end
-   },
-
    -- Practice plugin
    {
       'ThePrimeagen/vim-be-good',
@@ -77,12 +70,11 @@ local all_plugins = {
          { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
          -- Autocompletion
-         { 'hrsh7th/nvim-cmp' },         -- Required
-         { 'hrsh7th/cmp-nvim-lsp' },     -- Required
-         { 'hrsh7th/cmp-buffer' },       -- Optional
-         { 'hrsh7th/cmp-path' },         -- Optional
-         { 'saadparwaiz1/cmp_luasnip' }, -- Optional
-         { 'hrsh7th/cmp-nvim-lua' },     -- Optional
+         { 'hrsh7th/nvim-cmp' },     -- Required
+         { 'hrsh7th/cmp-nvim-lsp' }, -- Required
+         { 'hrsh7th/cmp-buffer' },   -- Optional
+         { 'hrsh7th/cmp-path' },     -- Optional
+         { 'hrsh7th/cmp-nvim-lua' }, -- Optional
 
          -- Snippets
          { 'L3MON4D3/LuaSnip' },             -- Required
@@ -142,21 +134,6 @@ local all_plugins = {
    {
       "ibhagwan/fzf-lua",
       config = function() require('plugins.fzf') end,
-      cmd = {
-         "Files",
-         "GFiles",
-         "Rg",
-      },
-   },
-
-   {
-      'nvim-telescope/telescope.nvim',
-      config = function() require('plugins.telescope') end,
-      cmd = "Telescope",
-      dependencies = { "telescope-fzf-native.nvim",
-         "nathanmsmith/livegrep.nvim",
-         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-      },
    },
 
    -- Syntax plugin
@@ -202,8 +179,6 @@ local all_plugins = {
    },
    "rhysd/conflict-marker.vim",
 
-   -- Git diffs
-   'sindrets/diffview.nvim',
    'tpope/vim-sleuth', -- Automatically adjust tab size
 
    -- Copilot
@@ -231,18 +206,6 @@ local all_plugins = {
       'folke/todo-comments.nvim',
       config = function() require('todo-comments').setup() end,
       event = "BufEnter"
-   },
-
-   -- Surround
-   {
-      'kylechui/nvim-surround',
-      version = "*", -- Use for stability; omit to use `main` branch for the latest features
-      event = "VeryLazy",
-      config = function()
-         require("nvim-surround").setup({
-            -- Configuration here, or leave empty to use defaults
-         })
-      end
    },
 
    -- Code snipet images
@@ -288,15 +251,9 @@ local all_plugins = {
    -- Harpoon
    {
       'ThePrimeagen/harpoon',
+      branch = "harpoon2",
       config = function() require('plugins.harpoon') end,
       event = "BufEnter"
-   },
-
-   -- Notifications
-   {
-      'rcarriga/nvim-notify',
-      config = function() require('plugins.notify') end,
-      event = "BufEnter",
    },
 }
 

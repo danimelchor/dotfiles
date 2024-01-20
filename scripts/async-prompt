@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-# vi: ft=bash
-
-NEOFETCH_CACHE=~/.neofetch_cache
-nohup neofetch > $NEOFETCH_CACHE &
-
-DOTFILES_UPDATES_CACHE=~/.dotfiles_updates_cache
-nohup dotfiles-update-checker > $DOTFILES_UPDATES_CACHE &

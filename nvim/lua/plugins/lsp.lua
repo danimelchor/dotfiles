@@ -86,6 +86,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
+      require("neodev").setup()
       require("mason").setup()
       require("mason-lspconfig").setup({
         ensure_installed = {
@@ -101,7 +102,8 @@ return {
           'yamlls',
         },
       })
-      local capabilities = require('cmp_nvim_lsp').default_capabilities()
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
       require("mason-lspconfig").setup_handlers({
         function(server_name) -- default handler (optional)
@@ -111,7 +113,7 @@ return {
         end,
         ['lua_ls'] = function()
           require('lspconfig')['lua_ls'].setup({
-            capabilities = capabilities,
+            -- capabilities = capabilities,
             settings = {
               Lua = {
                 diagnostics = {
@@ -135,22 +137,8 @@ return {
       "williamboman/mason-lspconfig.nvim",
 
       'simrat39/rust-tools.nvim',
-      is_stripe and { url = "git@git.corp.stripe.com:nms/nvim-lspconfig-stripe.git" } or nil
+      is_stripe and { url = "git@git.corp.stripe.com:nms/nvim-lspconfig-stripe.git" } or nil,
+      'folke/neodev.nvim',
     }
-  },
-
-  -- LSP loading indicators
-  {
-    "j-hui/fidget.nvim",
-    config = function()
-      require("fidget").setup({
-        notification = {
-          poll_rate = 3,
-          window = {
-            winblend = 0,
-          }
-        },
-      })
-    end,
   },
 }

@@ -19,4 +19,19 @@ return {
     version = false,
     config = function() require('mini.bracketed').setup() end,
   },
+
+  -- Notification pluggin & lsp loading
+  {
+    'echasnovski/mini.notify',
+    version = false,
+    config = function()
+      local notify = require('mini.notify')
+      notify.setup()
+      vim.notify = notify.make_notify({
+        ERROR = { duration = 5000 },
+        WARN = { duration = 4000 },
+        INFO = { duration = 2000 },
+      })
+    end,
+  },
 }

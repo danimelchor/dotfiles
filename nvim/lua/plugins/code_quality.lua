@@ -29,8 +29,8 @@ return {
       }
 
       -- Add "codespell" to all filetypes
-      for ft, linters in pairs(linters_by_ft) do
-        linters_by_ft[ft] = vim.tbl_extend("force", linters, { "codespell" })
+      for _, linters in pairs(linters_by_ft) do
+        table.insert(linters, "codespell")
       end
 
       local lint = require("lint")
@@ -38,9 +38,9 @@ return {
 
       local timer = assert(vim.loop.new_timer())
       local DEBOUNCE_MS = 500
-      local lintAug = vim.api.nvim_create_augroup("Lint", { clear = true })
+      local LintGroup = vim.api.nvim_create_augroup("LintGroup", { clear = true })
       vim.api.nvim_create_autocmd({ "BufWritePost", "TextChanged", "InsertLeave" }, {
-        group = lintAug,
+        group = LintGroup,
         callback = function()
           local buf = vim.api.nvim_get_current_buf()
           timer:stop()
@@ -128,9 +128,17 @@ return {
       require("conform").setup({
         formatters_by_ft = formatters_by_ft,
         formatters = formatters,
+      })
 
-        -- Automatically sets autocmd
-        format_after_save = { lsp_fallback = true },
+      local FormatGroup = vim.api.nvim_create_augroup("FormatGroup", { clear = true })
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        pattern = "*",
+        callback = function(args)
+          require("conform").format({ bufnr = args.buf })
+          local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(args.buf), ":t")
+          vim.notify("Formatted " .. filename, vim.log.levels.INFO)
+        end,
+        group = FormatGroup,
       })
     end,
   },

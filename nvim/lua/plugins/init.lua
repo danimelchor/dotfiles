@@ -21,8 +21,12 @@ return {
   -- Markdown previewer
   {
     'iamcco/markdown-preview.nvim',
-    lazy = false,
-    build = function() vim.fn["mkdp#util#install"]() end
+    ft = { "markdown" },
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = "cd app && yarn install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
   },
 
   -- Highlights for

@@ -1,8 +1,5 @@
 vim.keymap.set("n", '<SPACE>', '<Nop>')
 
--- Git
-vim.keymap.set("n", '<LEADER>gb', '<Cmd>Gitsigns blame_line<CR>', { desc = '[G]it [B]lame current line' })
-
 -- Tmux
 vim.keymap.set("n", "<C-f>", "<Cmd>silent !tmux neww tmux-sessionizer<CR>", { desc = "Open tmux session" })
 

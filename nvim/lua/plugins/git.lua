@@ -2,17 +2,14 @@ return {
   -- Git blame and gutters
   {
     "lewis6991/gitsigns.nvim",
-    event = "BufEnter",
-    config = function()
-      local status_ok, gitsigns = pcall(require, "gitsigns")
-      if not status_ok then
-        return
-      end
-
-      gitsigns.setup({
-        current_line_blame_formatter = '<author> - <author_time:%Y-%m-%d> - <summary>',
-      })
-    end,
+    config = true,
+    keys = {
+      {
+        "<LEADER>gb",
+        "<Cmd>Gitsigns blame_line<CR>",
+        desc = "[G]it [B]lame current line",
+      },
+    }
   },
   "rhysd/conflict-marker.vim",
 }

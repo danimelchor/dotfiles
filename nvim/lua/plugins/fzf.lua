@@ -2,38 +2,39 @@ return {
   {
     "ibhagwan/fzf-lua",
     config = function()
-      local fzf = require('fzf-lua')
-      fzf.setup({
-        'telescope',
-      })
-
+      require('fzf-lua').setup({ 'telescope' })
       if vim.fn.executable("fzf") ~= 1 then
         vim.notify("fzf not found. brew install fzf", vim.log.levels.WARN)
       end
-
-      local map = function(keys, func, desc)
-        vim.keymap.set('n', keys, func, { desc = desc })
-      end
-
-      map('<C-p>', function()
-        local opts = {
-          cwd = vim.fn.getcwd(),
-        }
-        local ok = pcall(fzf.git_files, opts)
-        if not ok then fzf.files(opts) end
-      end, "Find project files")
-
-      map('<C-S-p>', function()
-        local ok = pcall(fzf.git_files)
-        if not ok then fzf.files() end
-      end, "Find files")
-
-      map('<LEADER>fw', fzf.grep, '[F]ind [W]ords')
-      map('<LEADER>fb', fzf.git_branches, '[F]ind [B]ranches')
-      map('<LEADER>fs', fzf.lsp_document_symbols, '[F]ind [S]ymbols')
-      map('<LEADER>fd', fzf.diagnostics_document, '[F]ind [D]iagnostics')
-      map('<LEADER>km', fzf.keymaps, '[K]ey[M]aps')
-      map('<LEADER>fh', function() fzf.oldfiles({ cwd_only = true }) end, '[F]ind [H]istory')
     end,
+    keys = {
+      {
+        '<C-p>',
+        function()
+          local opts = {
+            cwd = vim.fn.getcwd(),
+          }
+          local fzf = require('fzf-lua')
+          local ok = pcall(fzf.git_files, opts)
+          if not ok then fzf.files(opts) end
+        end,
+        desc = 'Find project files'
+      },
+      {
+        '<C-S-p>',
+        function()
+          local fzf = require('fzf-lua')
+          local ok = pcall(fzf.git_files)
+          if not ok then fzf.files() end
+        end,
+        desc = 'Find files'
+      },
+      { '<LEADER>fw', function() require('fzf-lua').grep() end,                        desc = '[F]ind [W]ords' },
+      { '<LEADER>fb', function() require('fzf-lua').git_branches() end,                desc = '[F]ind [B]ranches' },
+      { '<LEADER>fs', function() require('fzf-lua').lsp_document_symbols() end,        desc = '[F]ind [S]ymbols' },
+      { '<LEADER>fd', function() require('fzf-lua').diagnostics_document() end,        desc = '[F]ind [D]iagnostics' },
+      { '<LEADER>km', function() require('fzf-lua').keymaps() end,                     desc = '[K]ey[M]aps' },
+      { '<LEADER>fh', function() require('fzf-lua').oldfiles({ cwd_only = true }) end, desc = '[F]ind [H]istory' }
+    }
   }
 }

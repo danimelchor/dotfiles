@@ -1,6 +1,7 @@
 return {
   {
     'stevearc/aerial.nvim',
+    cmd = "AerialToggle",
     config = function()
       vim.keymap.set("n", "<Leader>ae", "<cmd>AerialToggle<CR>", { silent = true, desc = "Open code outline " })
       require('aerial').setup({

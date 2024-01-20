@@ -2,6 +2,7 @@ return {
   -- Hide important stuff
   {
     'laytan/cloak.nvim',
+    cmd = { "CloakEnable", "CloakDisable", "CloakToggle" },
     config = function()
       require('cloak').setup({
         enabled = true,

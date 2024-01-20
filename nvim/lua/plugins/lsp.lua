@@ -1,4 +1,46 @@
 local is_stripe = require('utils').is_stripe()
+
+require("luasnip.loaders.from_vscode").lazy_load()
+
+-- Autocompletion
+vim.g.copilot_no_tab_map = true
+local cmp = require('cmp')
+cmp.setup({
+  completion = {
+    completeopt = 'menu,menuone',
+  },
+  snippet = {
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body)
+    end,
+  },
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = "luasnip" },
+    { name = "path" },
+    { name = 'buffer' }
+  },
+  mapping = {
+    ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+    ['<C-j>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+    ['<Tab>'] = cmp.mapping(function(fallback)
+        local copilot = require("copilot.suggestion")
+        if cmp.visible() then
+          cmp.confirm({ select = true })
+        elseif copilot.is_visible() then
+          copilot.accept()
+        else
+          fallback()
+        end
+      end,
+      {
+        "i",
+        "s"
+      }),
+  },
+})
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
 require("mason").setup()
 require("mason-lspconfig").setup({
   ensure_installed = {
@@ -15,11 +57,14 @@ require("mason-lspconfig").setup({
   },
 })
 require("mason-lspconfig").setup_handlers({
-  function (server_name) -- default handler (optional)
-    require("lspconfig")[server_name].setup {}
+  function(server_name) -- default handler (optional)
+    require("lspconfig")[server_name].setup({
+      capabilities = capabilities,
+    })
   end,
   ['lua_ls'] = function()
     require('lspconfig')['lua_ls'].setup({
+      capabilities = capabilities,
       settings = {
         Lua = {
           diagnostics = {
@@ -30,45 +75,13 @@ require("mason-lspconfig").setup_handlers({
     })
   end
 })
+require("fidget").setup({})
 
--- Autocompletion
-vim.g.copilot_no_tab_map = true
-local cmp = require('cmp')
-cmp.setup({
-  sources = {
-    { name = 'nvim_lsp' },
-    { name = "luasnip" },
-    { name = "path" },
-    { name = 'buffer' }
-  },
-  mapping = {
-    ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-    ['<C-j>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-    ['<Tab>'] = cmp.mapping(function(fallback)
-        local copilot = require("copilot.suggestion")
-        if cmp.visible() then
-          cmp.confirm({ select = false })
-        elseif copilot.is_visible() then
-          copilot.accept()
-        else
-          fallback()
-        end
-      end,
-      {
-        "i",
-        "s"
-      }),
-  }
-})
-
-
--- Language configs
 if is_stripe then
   -- Setup 'payserver_sorbet'
   require("lspconfig_stripe")
   require("lspconfig")['payserver_sorbet'].setup({})
 end
-
 
 vim.diagnostic.config({
   virtual_text = true,

@@ -76,9 +76,11 @@ local all_plugins = {
 
          -- Snippets
          'L3MON4D3/LuaSnip',             -- Required
+         'saadparwaiz1/cmp_luasnip',     -- Required
          'rafamadriz/friendly-snippets', -- Optional
 
          'simrat39/rust-tools.nvim',
+         "j-hui/fidget.nvim",
          is_stripe and { url = "git@git.corp.stripe.com:nms/nvim-lspconfig-stripe.git" } or nil
       }
    },

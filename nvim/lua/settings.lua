@@ -36,6 +36,7 @@ opt.fileencoding = 'utf-8'
 opt.wrap = false
 opt.mouse = "a"
 opt.clipboard = "unnamed"
+opt.completeopt = "menu,menuone"
 opt.cmdheight = 0
 
 o.showmode = false
@@ -43,6 +44,7 @@ o.breakindent = true
 o.showbreak = "↳ "
 
 g.mapleader = " "
+
 
 -- Toggle relative line numbering
 vim.cmd("command! ToggleRelLines set relativenumber!")

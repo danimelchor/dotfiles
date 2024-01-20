@@ -11,13 +11,24 @@ autocmd BufEnter * :set wrap
 augroup END
 ]])
 
-local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+local YankHighlight = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
     vim.highlight.on_yank({
       higroup = "Search",
     })
   end,
-  group = highlight_group,
+  group = YankHighlight,
   pattern = "*",
+})
+
+local VertHelp = vim.api.nvim_create_augroup("VertHelp", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function()
+    if vim.bo.filetype == "help" then
+      vim.api.nvim_command("wincmd L")
+    end
+  end,
+  group = VertHelp,
+  pattern = "help",
 })

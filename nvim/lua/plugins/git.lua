@@ -15,7 +15,4 @@ return {
     end,
   },
   "rhysd/conflict-marker.vim",
-  {
-    "tpope/vim-fugitive",
-  },
 }

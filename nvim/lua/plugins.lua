@@ -156,13 +156,6 @@ local all_plugins = {
       event = "BufEnter"
    },
 
-   -- Autmomatically complete quotes or parens
-   {
-      'windwp/nvim-autopairs',
-      event = "InsertEnter",
-      config = true
-   },
-
    -- File tree
    {
       'nvim-tree/nvim-tree.lua',

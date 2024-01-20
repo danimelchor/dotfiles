@@ -6,10 +6,11 @@ return {
     'hrsh7th/nvim-cmp',
     config = function()
       require("luasnip.loaders.from_vscode").lazy_load()
-
-      -- Autocompletion
-      vim.g.copilot_no_tab_map = true
+      local luasnip = require("luasnip")
       local cmp = require('cmp')
+      local copilot = require("copilot.suggestion")
+      vim.g.copilot_no_tab_map = true
+
       cmp.setup({
         completion = {
           completeopt = 'menu,menuone',
@@ -29,11 +30,10 @@ return {
           ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
           ['<C-j>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
           ['<Tab>'] = cmp.mapping(function(fallback)
-              local copilot = require("copilot.suggestion")
               if cmp.visible() then
                 cmp.confirm({ select = true })
-              elseif copilot.is_visible() then
-                copilot.accept()
+              elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
               else
                 fallback()
               end
@@ -43,7 +43,6 @@ return {
               "s"
             }),
           ['<S-Tab>'] = cmp.mapping(function(fallback)
-              local copilot = require("copilot.suggestion")
               if copilot.is_visible() then
                 copilot.accept()
               elseif cmp.visible() then
@@ -136,7 +135,7 @@ return {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
 
-      'simrat39/rust-tools.nvim',
+      { 'mrcjkb/rustaceanvim', version = '^3', ft = { 'rust' }, },
       is_stripe and { url = "git@git.corp.stripe.com:nms/nvim-lspconfig-stripe.git" } or nil,
       'folke/neodev.nvim',
     }

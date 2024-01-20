@@ -21,6 +21,13 @@ return {
             prev = false,
             dismiss = false,
           }
+        },
+        server_opts_overrides = {
+          settings = {
+            advanced = {
+              inlineSuggestCount = 1,
+            }
+          }
         }
       })
     end,

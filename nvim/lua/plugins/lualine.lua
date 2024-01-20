@@ -12,6 +12,15 @@ return {
             if not status_ok then
                 return
             end
+
+            local lint_progress = function()
+                local linters = require("lint").get_running()
+                if #linters == 0 then
+                    return ""
+                end
+                return " " .. table.concat(linters, ", ")
+            end
+
             lualine.setup({
                 options = {
                     theme = "auto",
@@ -34,6 +43,9 @@ return {
                     },
                     lualine_x = {
                         "filetype",
+                    },
+                    lualine_y = {
+                        lint_progress,
                     },
                 },
                 extensions = { "aerial", "nvim-tree", "fugitive", "fzf", "toggleterm", "quickfix", "overseer" },

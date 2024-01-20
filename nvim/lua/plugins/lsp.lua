@@ -1,8 +1,9 @@
 local is_stripe = require('utils').is_stripe()
 
 return {
+  -- Autocompletion
   {
-    "neovim/nvim-lspconfig",
+    'hrsh7th/nvim-cmp',
     config = function()
       require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -41,10 +42,50 @@ return {
               "i",
               "s"
             }),
+          ['<S-Tab>'] = cmp.mapping(function(fallback)
+              local copilot = require("copilot.suggestion")
+              if copilot.is_visible() then
+                copilot.accept()
+              elseif cmp.visible() then
+                cmp.confirm({ select = true })
+              else
+                fallback()
+              end
+            end,
+            {
+              "i",
+              "s"
+            }),
         },
       })
-      local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+      -- Copilot stuff
+      cmp.event:on("menu_opened", function()
+        vim.b.copilot_suggestion_hidden = false
+      end)
+
+      cmp.event:on("menu_closed", function()
+        vim.b.copilot_suggestion_hidden = false
+      end)
+    end,
+    dependencies = {
+      -- Autocompletion
+      'hrsh7th/cmp-nvim-lsp', -- Required
+      'hrsh7th/cmp-buffer',   -- Optional
+      'hrsh7th/cmp-path',     -- Optional
+      'hrsh7th/cmp-nvim-lua', -- Optional
+
+      -- Snippets
+      'L3MON4D3/LuaSnip',             -- Required
+      'saadparwaiz1/cmp_luasnip',     -- Required
+      'rafamadriz/friendly-snippets', -- Optional
+    }
+  },
+
+  -- LSP
+  {
+    "neovim/nvim-lspconfig",
+    config = function()
       require("mason").setup()
       require("mason-lspconfig").setup({
         ensure_installed = {
@@ -60,6 +101,8 @@ return {
           'yamlls',
         },
       })
+      local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
       require("mason-lspconfig").setup_handlers({
         function(server_name) -- default handler (optional)
           require("lspconfig")[server_name].setup({
@@ -79,6 +122,27 @@ return {
           })
         end
       })
+
+      if is_stripe then
+        -- Setup 'payserver_sorbet'
+        require("lspconfig_stripe")
+        require("lspconfig")['payserver_sorbet'].setup({})
+      end
+    end,
+    dependencies = {
+      -- LSP Support
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+
+      'simrat39/rust-tools.nvim',
+      is_stripe and { url = "git@git.corp.stripe.com:nms/nvim-lspconfig-stripe.git" } or nil
+    }
+  },
+
+  -- LSP loading indicators
+  {
+    "j-hui/fidget.nvim",
+    config = function()
       require("fidget").setup({
         notification = {
           poll_rate = 3,
@@ -87,41 +151,6 @@ return {
           }
         },
       })
-
-      if is_stripe then
-        -- Setup 'payserver_sorbet'
-        require("lspconfig_stripe")
-        require("lspconfig")['payserver_sorbet'].setup({})
-      end
-
-      vim.diagnostic.config({
-        virtual_text = true,
-        signs = true,
-        update_in_insert = false,
-        underline = true,
-        float = true,
-      })
     end,
-    dependencies = {
-      -- LSP Support
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
-
-      -- Autocompletion
-      'hrsh7th/nvim-cmp',   -- Required
-      'hrsh7th/cmp-nvim-lsp', -- Required
-      'hrsh7th/cmp-buffer', -- Optional
-      'hrsh7th/cmp-path',   -- Optional
-      'hrsh7th/cmp-nvim-lua', -- Optional
-
-      -- Snippets
-      'L3MON4D3/LuaSnip',           -- Required
-      'saadparwaiz1/cmp_luasnip',   -- Required
-      'rafamadriz/friendly-snippets', -- Optional
-
-      'simrat39/rust-tools.nvim',
-      "j-hui/fidget.nvim",
-      is_stripe and { url = "git@git.corp.stripe.com:nms/nvim-lspconfig-stripe.git" } or nil
-    }
-  }
+  },
 }

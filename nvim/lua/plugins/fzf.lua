@@ -1,91 +1,3 @@
-local is_stripe = require("utils").is_stripe()
-
-local M = {}
-M.__index = M
-M.results = {}
-
-function M.find_repo_name()
-  return vim.fn.fnamemodify(vim.fn.finddir(".git", ".;"), ":p:h:h:t")
-end
-
-function M.get_livegrep_url(selected)
-  local base = "https://livegrep.corp.stripe.com/view/stripe-internal/"
-  local repo = M.find_repo_name()
-
-  -- Remove icon (match until char)
-  local icon = selected:match("^[^0-9A-Za-z]+")
-  selected = selected:sub(#icon + 1)
-
-  -- Get until first colon
-  local path = selected:match("^[^:]+")
-  selected = selected:sub(#path + 2)
-
-  -- Get until second colon
-  local row = selected:match("^[^:]+")
-  selected = selected:sub(#row + 2)
-
-  return base .. repo .. "/" .. path .. "\\#L" .. row
-end
-
-function M.live_grep(query)
-  M.results = {}
-  M.results[query] = {}
-
-  local function f(cb)
-    local fzf = require('fzf-lua')
-
-    if not is_stripe then
-      return
-    end
-
-    if #query < 5 then
-      return
-    end
-
-    local stripeproxy = os.getenv("HOME") .. "/.stripeproxy"
-    local livegrep_args = {}
-    if vim.fn.filereadable(stripeproxy) == 1 then
-      livegrep_args.url = "http://livegrep.corp.stripe.com/api/v1/search/stripe"
-      livegrep_args.raw_curl_opts = "--unix-socket ~/.stripeproxy"
-    else
-      livegrep_args.url = "http://livegrep-srv.service.envoy:10080/api/v1/search/stripe"
-    end
-
-    local query_params = {
-      repo = M.find_repo_name(),
-      q = query,
-    }
-    local raw_query_params = ""
-    for k, v in pairs(query_params) do
-      raw_query_params = "--data-urlencode '" .. k .. "=" .. v .. "' " .. raw_query_params
-    end
-
-    local cmd = "curl -s -G " ..
-        livegrep_args.raw_curl_opts ..
-        " " ..
-        raw_query_params ..
-        " " ..
-        livegrep_args.url ..
-        " | jq -r '.results.[] | \"\\(.path):\\(.lno):\\(.bounds[0] + 1):\\(.line)\"'"
-
-    local handle = io.popen(cmd)
-    if handle == nil then
-      return
-    end
-    local output = handle:read('*a')
-    handle:close()
-
-    local lines = output:gmatch("[^\r\n]+")
-    for line in lines do
-      local file_line = fzf.make_entry.file(line, { file_icons = true, color_icons = true })
-      table.insert(M.results[query], file_line)
-      cb(file_line)
-    end
-  end
-
-  return M.debounce_trailing(f, 500)
-end
-
 return {
   {
     "ibhagwan/fzf-lua",
@@ -121,16 +33,8 @@ return {
         '<LEADER>lg',
         function()
           local fzf = require('fzf-lua')
-          fzf.fzf_live(M.live_grep, {
-            prompt = 'LiveGrep> ',
-            previewer = "builtin",
-            actions = {
-              ['default'] = function(selected, _)
-                local url = M.get_livegrep_url(selected[1])
-                vim.cmd("silent !open '" .. url .. "'")
-              end
-            }
-          })
+          local fzf_lg = require('extensions.fzf_live_grep')
+          fzf.fzf_live(fzf_lg.search, fzf_lg.opts)
         end,
         desc = '[L]ive[G]rep'
       },

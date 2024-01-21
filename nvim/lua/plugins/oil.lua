@@ -1,5 +1,6 @@
 local function get_ignored(dir)
-  local cmd = string.format('git -C %s ls-files --ignored --exclude-standard --others --directory', dir)
+  local cmd = string.format('git -C %s ls-files --ignored --exclude-standard --others --directory | grep -v \"/.*\\/\"',
+    dir)
 
   local handle = io.popen(cmd)
   if handle == nil then
@@ -9,14 +10,21 @@ local function get_ignored(dir)
   local output = handle:read('*a')
   handle:close()
 
-  output = string.gsub(output, '%s', '')
-  output = string.gsub(output, '/$', '')
-
-  return vim.split(output, '\n')
+  local lines = vim.split(output, '\n')
+  local ignored_files = {}
+  for _, line in ipairs(lines) do
+    -- Remove trailing slash
+    line = line:gsub('/$', '')
+    table.insert(ignored_files, line)
+  end
+  table.insert(ignored_files, '.git')
+  table.insert(ignored_files, '..')
+  return ignored_files
 end
 
 local Cache = require('utils').Cache
 local cache = Cache.new(get_ignored)
+
 
 return {
   {
@@ -31,8 +39,7 @@ return {
         view_options = {
           is_hidden_file = function(name, _)
             local ignored_files = cache:call(oil.get_current_dir())
-            local is_ignored = vim.tbl_contains(ignored_files, name)
-            return is_ignored or name == '..'
+            return vim.tbl_contains(ignored_files, name)
           end,
         },
         keymaps = {

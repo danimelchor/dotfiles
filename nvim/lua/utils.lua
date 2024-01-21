@@ -48,7 +48,7 @@ M.Cache.call = function(self, args)
       self.results = {}
       self:_call(args)
    end
-   return self.results
+   return self.results[args]
 end
 
 

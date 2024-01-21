@@ -1,10 +1,14 @@
 local is_stripe = require("utils").is_stripe()
 
-local M = {}
-M.__index = M
-M.results = {}
+-- @class FzfLiveGrep
+-- @field results table
+local FzfLiveGrep = {}
+FzfLiveGrep.__index = FzfLiveGrep
+FzfLiveGrep.results = {}
 
-function M._get_path_from_selected(selected)
+-- @param selected string
+-- @return string, number, number
+function FzfLiveGrep._get_path_from_selected(selected)
   -- Remove icon (match until char)
   local icon = selected:match("^[^0-9A-Za-z]+")
   selected = selected:sub(#icon + 1)
@@ -16,39 +20,48 @@ function M._get_path_from_selected(selected)
   -- Get until second colon
   local row = selected:match("^[^:]+")
   selected = selected:sub(#row + 2)
+  row = tonumber(row)
 
-  return path, row
+  -- Get until third colon
+  local col = selected:match("^[^:]+")
+  col = tonumber(col) + 1
+
+  return path, row, col
 end
 
-function M.get_livegrep_url(selected)
+-- @param selected string
+-- @return string
+function FzfLiveGrep.get_livegrep_url(selected)
   local base = "https://livegrep.corp.stripe.com/view/stripe-internal/"
-  local repo = M.find_repo_name()
-
-  local path, row = M._get_path_from_selected(selected)
-
+  local repo = FzfLiveGrep.find_repo_name()
+  local path, row = FzfLiveGrep._get_path_from_selected(selected)
   return base .. repo .. "/" .. path .. "\\#L" .. row
 end
 
-function M.previewer()
+-- @return Previewer
+function FzfLiveGrep.previewer()
   local builtin = require("fzf-lua.previewer.builtin")
 
-  -- Inherit from "base" instead of "buffer_or_file"
   local MyPreviewer = builtin.base:extend()
 
+  -- @param o table
+  -- @param opts table
+  -- @param fzf_win table
   function MyPreviewer:new(o, opts, fzf_win)
     MyPreviewer.super.new(self, o, opts, fzf_win)
     setmetatable(self, MyPreviewer)
     return self
   end
 
+  -- @param selected string
+  -- @return nil
   function MyPreviewer:populate_preview_buf(selected)
     local tmpbuf = self:get_tmp_buffer()
 
-    local lines = {}
-    local path = M._get_path_from_selected(selected)
+    local path, lno = FzfLiveGrep._get_path_from_selected(selected)
     local obj = nil
-    for _, o in ipairs(M.results) do
-      if o.path == path then
+    for _, o in ipairs(FzfLiveGrep.results) do
+      if o.path == path and o.lno == lno then
         obj = o
         break
       end
@@ -58,33 +71,31 @@ function M.previewer()
       return
     end
 
-    -- Add lines before line
-    local context_before = obj.context_before
-    for _, line in ipairs(context_before) do
-      if line ~= "" then
-        table.insert(lines, line)
-      end
-    end
+    local lines = {}
 
-    -- Add actual line
+    -- Add context lines
+    table.insert(lines, "...")
+    for _, line in ipairs(obj.context_before) do
+      table.insert(lines, 2, line)
+    end
+    local lineNum = #lines + 1
     table.insert(lines, obj.line)
-
-    -- Add lines after line
-    local context_after = obj.context_after
-    for _, line in ipairs(context_after) do
-      if line ~= "" then
-        table.insert(lines, line)
-      end
+    for _, line in ipairs(obj.context_after) do
+      table.insert(lines, line)
     end
+    table.insert(lines, "...")
 
     -- Add line to buffer
     vim.api.nvim_buf_set_lines(tmpbuf, 0, -1, false, lines)
+
+    -- Highlight search line
+    vim.api.nvim_buf_add_highlight(tmpbuf, -1, "Search", lineNum - 1, 0, -1)
 
     self:set_preview_buf(tmpbuf)
     self.win:update_scrollbar()
   end
 
-  -- Disable line numbering and word wrap
+  -- @return table
   function MyPreviewer:gen_winopts()
     local new_winopts = {
       wrap   = false,
@@ -96,76 +107,114 @@ function M.previewer()
   return MyPreviewer
 end
 
-function M.find_repo_name()
+-- @return string
+function FzfLiveGrep.find_repo_name()
   return vim.fn.fnamemodify(vim.fn.finddir(".git", ".;"), ":p:h:h:t")
 end
 
-function M.live_grep(query)
+-- @param query string
+-- @return function
+function FzfLiveGrep.search(query)
+  -- @param cb function
+  -- @return nil
   return function(cb)
-    local fzf = require('fzf-lua')
+    local stripeproxy = os.getenv("HOME") .. "/.stripeproxy"
+    local url = ""
+    local raw = {}
 
     if not is_stripe then
-      cb("Not in Stripe laptop")
+      cb("Not on Stripe")
       return
     end
 
-    if #query < 5 then
-      return
-    end
-
-    local stripeproxy = os.getenv("HOME") .. "/.stripeproxy"
-    local livegrep_args = {}
     if vim.fn.filereadable(stripeproxy) == 1 then
-      livegrep_args.url = "http://livegrep.corp.stripe.com/api/v1/search/stripe"
-      livegrep_args.raw_curl_opts = "--unix-socket ~/.stripeproxy"
+      url = "http://livegrep.corp.stripe.com/api/v1/search/stripe"
+      raw = { "--unix-socket", stripeproxy }
     else
-      livegrep_args.url = "http://livegrep-srv.service.envoy:10080/api/v1/search/stripe"
+      url = "http://livegrep-srv.service.envoy:10080/api/v1/search/stripe"
     end
 
-    local query_params = {
-      repo = M.find_repo_name(),
+    local params = {
+      repo = FzfLiveGrep.find_repo_name(),
       q = query,
+      regex = "true",
+      context = "true",
     }
-    local raw_query_params = ""
-    for k, v in pairs(query_params) do
-      raw_query_params = "--data-urlencode '" .. k .. "=" .. v .. "' " .. raw_query_params
-    end
 
-    local cmd = "curl -s -G " ..
-        livegrep_args.raw_curl_opts ..
-        " " ..
-        raw_query_params ..
-        " " ..
-        livegrep_args.url ..
-        " | jq -c -r '.results | map({path,lno,col: .bounds[0],context_before,context_after,line})'"
+    -- Use plenary curl
+    local curl = require("plenary.curl")
+    local res = curl.get({
+      url = url,
+      accept = "application/json",
+      query = params,
+      raw = raw,
+    })
+    local json = vim.fn.json_decode(res.body) or {}
+    local results = json.results or {}
 
-    local handle = io.popen(cmd)
-    if handle == nil then
-      return
-    end
-    local output = handle:read('*a')
-    handle:close()
+    local clean_results = {}
+    for _, obj in ipairs(results) do
+      local clean_obj = {
+        path = obj.path,
+        lno = obj.lno,
+        col = obj.bounds[1],
+        context_before = obj.context_before,
+        context_after = obj.context_after,
+        line = obj.line,
+      }
 
-    local json = vim.fn.json_decode(output) or {}
-    M.results = json
+      table.insert(clean_results, clean_obj)
 
-    for _, obj in ipairs(json) do
-      local line = obj.path .. ":" .. obj.lno .. ":" .. obj.col .. " " .. obj.line
-      local file_line = fzf.make_entry.file(line, { file_icons = true, color_icons = true })
+      -- Format line
+      local line = clean_obj.path .. ":" .. clean_obj.lno .. ":" .. clean_obj.col .. ":" .. clean_obj.line
+      local file_line = require("fzf-lua").make_entry.file(line, {
+        file_icons = true,
+        color_icons = true,
+      })
       cb(file_line)
     end
+
+    FzfLiveGrep.results = clean_results
   end
 end
 
-function M.open(selected)
-  local url = M.get_livegrep_url(selected[1])
+-- @param selected string
+function FzfLiveGrep.open_browser(selected)
+  local url = FzfLiveGrep.get_livegrep_url(selected[1])
   vim.cmd("silent !open '" .. url .. "'")
 end
 
-M.opts = {
-  prompt = 'LiveGrep> ',
-  previewer = M.previewer(),
-  actions = {
-    ['default'] = M.fzf_lg.open
+-- @param selected string
+function FzfLiveGrep.open_local(selected)
+  local path, row, col = FzfLiveGrep._get_path_from_selected(selected[1])
+  local repo = FzfLiveGrep.find_repo_name()
+
+  -- ~/stripe/{repo}/{path}
+  local full = os.getenv("HOME") .. "/stripe/" .. repo .. "/" .. path
+
+  vim.cmd("e " .. full)
+
+  -- Move cursor to line
+  local row_str = tostring(row)
+  vim.cmd(row_str)
+
+  -- Move cursor to column
+  local col_str = tostring(col)
+  vim.cmd("normal " .. col_str .. "|")
+end
+
+-- @param opts table
+function FzfLiveGrep.opts(opts)
+  local defaults = {
+    prompt = 'LiveGrep> ',
+    previewer = FzfLiveGrep.previewer(),
+    actions = {
+      ['default'] = FzfLiveGrep.open_browser,
+      ['ctrl-e'] = FzfLiveGrep.open_local,
+    }
   }
-}
+  defaults = vim.tbl_extend("force", defaults, opts)
+  return defaults
+end
+
+return FzfLiveGrep

@@ -34,7 +34,7 @@ return {
         function()
           local fzf = require('fzf-lua')
           local fzf_lg = require('extensions.fzf_live_grep')
-          fzf.fzf_live(fzf_lg.search, fzf_lg.opts)
+          fzf.fzf_live(fzf_lg.search, fzf_lg.opts())
         end,
         desc = '[L]ive[G]rep'
       },

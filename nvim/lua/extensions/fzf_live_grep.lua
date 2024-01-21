@@ -2,15 +2,21 @@ local is_stripe = require("utils").is_stripe()
 
 -- @class FzfLiveGrep
 -- @field results table
+-- @field min_chars number
 local FzfLiveGrep = {}
 FzfLiveGrep.__index = FzfLiveGrep
 FzfLiveGrep.results = {}
+FzfLiveGrep.min_chars = 5
 
 -- @param selected string
 -- @return string, number, number
 function FzfLiveGrep._get_path_from_selected(selected)
   -- Remove icon (match until char)
   local icon = selected:match("^[^0-9A-Za-z]+")
+  if icon == nil then
+    return nil, nil, nil
+  end
+
   selected = selected:sub(#icon + 1)
 
   -- Get until first colon
@@ -35,6 +41,9 @@ function FzfLiveGrep.get_livegrep_url(selected)
   local base = "https://livegrep.corp.stripe.com/view/stripe-internal/"
   local repo = FzfLiveGrep.find_repo_name()
   local path, row = FzfLiveGrep._get_path_from_selected(selected)
+  if path == nil then
+    return nil
+  end
   return base .. repo .. "/" .. path .. "\\#L" .. row
 end
 
@@ -127,6 +136,11 @@ function FzfLiveGrep.search(query)
       return
     end
 
+    if #query < M.min_chars then
+      cb("Query must be at least 3 characters")
+      return
+    end
+
     if vim.fn.filereadable(stripeproxy) == 1 then
       url = "http://livegrep.corp.stripe.com/api/v1/search/stripe"
       raw = { "--unix-socket", stripeproxy }
@@ -181,6 +195,9 @@ end
 -- @param selected string
 function FzfLiveGrep.open_browser(selected)
   local url = FzfLiveGrep.get_livegrep_url(selected[1])
+  if url == nil then
+    return
+  end
   vim.cmd("silent !open '" .. url .. "'")
 end
 
@@ -213,6 +230,8 @@ function FzfLiveGrep.opts(opts)
       ['ctrl-e'] = FzfLiveGrep.open_local,
     }
   }
+  opts = opts or {}
+  FzfLiveGrep.min_chars = opts.min_chars or FzfLiveGrep.min_chars
   defaults = vim.tbl_extend("force", defaults, opts)
   return defaults
 end

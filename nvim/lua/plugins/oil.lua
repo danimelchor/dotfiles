@@ -13,9 +13,12 @@ local function get_ignored(dir)
   local lines = vim.split(output, '\n')
   local ignored_files = {}
   for _, line in ipairs(lines) do
-    -- Remove trailing slash
-    line = line:gsub('/$', '')
-    table.insert(ignored_files, line)
+    -- If line is a nested dir/file skip
+    if not line:match('/[^/]+$/?') then
+      -- Remove trailing slash
+      line = line:gsub('/$', '')
+      table.insert(ignored_files, line)
+    end
   end
   table.insert(ignored_files, '.git')
   table.insert(ignored_files, '..')
@@ -23,7 +26,7 @@ local function get_ignored(dir)
 end
 
 local Cache = require('utils').Cache
-local cache = Cache.new(get_ignored)
+local cache = Cache:new(get_ignored)
 
 
 return {

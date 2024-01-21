@@ -24,32 +24,32 @@ end
 -- @field func function
 -- @field results table
 M.Cache = {}
-M.Cache.__index = M.Cache
 
 -- @param func function
 -- @return Cache
-M.Cache.new = function(func)
-   local tbl = {}
-   tbl.func = func
-   tbl.results = {}
-   setmetatable(tbl, M.Cache)
+function M.Cache:new(func)
+   local tbl = {
+      func = func,
+      results = {}
+   }
+   self.__index = self
+   setmetatable(tbl, self)
    return tbl
 end
 
 -- @param args table
-M.Cache._call = function(self, args)
+function M.Cache:_call(args)
    self.results[args] = self.func(args)
 end
 
 -- @param args table
 -- @return table
-M.Cache.call = function(self, args)
+function M.Cache:call(args)
    if self.results[args] == nil then
       self.results = {}
       self:_call(args)
    end
    return self.results[args]
 end
-
 
 return M

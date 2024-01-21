@@ -9,6 +9,7 @@ return {
         skip_confirm_for_simple_edits = true,
         keymaps = {
           ["g?"] = "actions.show_help",
+          ["g."] = "actions.toggle_hidden",
           ["<CR>"] = "actions.select",
           ["-"] = "actions.parent",
           ["_"] = "actions.open_cwd",
@@ -22,6 +23,23 @@ return {
             require('oil.actions').select_split.callback()
             require('oil.actions').close.callback()
           end,
+          ["h"] = function()
+            -- Function to add oil entry to harpoon
+            local oil = require('oil')
+            local Path = require("plenary.path")
+
+            -- Get file under cursor
+            local entry = oil.get_cursor_entry()
+            local filename = entry and entry.name
+            local dir = oil.get_current_dir()
+
+            -- Add to harpoon
+            local listItem = {
+              context = { row = 1, col = 0 },
+              value = Path:new(dir .. filename):make_relative(vim.fn.getcwd()),
+            }
+            require("harpoon"):list():append(listItem)
+          end
         }
       })
 

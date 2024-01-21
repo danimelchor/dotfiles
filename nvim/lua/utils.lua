@@ -22,8 +22,7 @@ end
 
 -- @class Cache
 -- @field func function
--- @field checked boolean
--- @field result table
+-- @field results table
 M.Cache = {}
 M.Cache.__index = M.Cache
 
@@ -32,25 +31,24 @@ M.Cache.__index = M.Cache
 M.Cache.new = function(func)
    local tbl = {}
    tbl.func = func
-   tbl.checked = false
-   tbl.result = {}
+   tbl.results = {}
    setmetatable(tbl, M.Cache)
    return tbl
 end
 
 -- @param args table
 M.Cache._call = function(self, args)
-   self.result = self.func(args)
-   self.checked = true
+   self.results[args] = self.func(args)
 end
 
 -- @param args table
 -- @return table
 M.Cache.call = function(self, args)
-   if not self.checked then
+   if self.results[args] == nil then
+      self.results = {}
       self:_call(args)
    end
-   return self.result
+   return self.results
 end
 
 

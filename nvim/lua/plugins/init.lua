@@ -12,6 +12,20 @@ return {
     cmd = "VimBeGood"
   },
 
+  -- Improve at vim
+  {
+    "m4xshen/hardtime.nvim",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim"
+    },
+    opts = {
+      disabled_filetypes = { "oil" },
+      restriction_mode = "hint",
+      disable_mouse = false,
+    }
+  },
+
   -- Disable some features for big files
   {
     "LunarVim/bigfile.nvim",

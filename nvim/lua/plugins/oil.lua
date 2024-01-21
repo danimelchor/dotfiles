@@ -1,15 +1,43 @@
+local function get_ignored(dir)
+  local cmd = string.format('git -C %s ls-files --ignored --exclude-standard --others --directory', dir)
+
+  local handle = io.popen(cmd)
+  if handle == nil then
+    return
+  end
+
+  local output = handle:read('*a')
+  handle:close()
+
+  output = string.gsub(output, '%s', '')
+  output = string.gsub(output, '/$', '')
+
+  return vim.split(output, '\n')
+end
+
+local Cache = require('utils').Cache
+local cache = Cache.new(get_ignored)
+
 return {
   {
     'stevearc/oil.nvim',
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      require('oil').setup({
+      local oil = require('oil')
+      oil.setup({
         use_default_keymaps = false,
         delete_to_trash = true,
         skip_confirm_for_simple_edits = true,
+        view_options = {
+          is_hidden_file = function(name, _)
+            local ignored_files = cache:call(oil.get_current_dir())
+            local is_ignored = vim.tbl_contains(ignored_files, name)
+            return is_ignored or name == '..'
+          end,
+        },
         keymaps = {
           ["g?"] = "actions.show_help",
-          ["g."] = "actions.toggle_hidden",
+          ["I"] = "actions.toggle_hidden",
           ["<CR>"] = "actions.select",
           ["-"] = "actions.parent",
           ["_"] = "actions.open_cwd",
@@ -25,7 +53,6 @@ return {
           end,
           ["h"] = function()
             -- Function to add oil entry to harpoon
-            local oil = require('oil')
             local Path = require("plenary.path")
 
             -- Get file under cursor

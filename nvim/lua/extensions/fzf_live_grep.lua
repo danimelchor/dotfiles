@@ -136,7 +136,7 @@ function FzfLiveGrep.search(query)
       return
     end
 
-    if #query < M.min_chars then
+    if #query < FzfLiveGrep.min_chars then
       cb("Query must be at least 3 characters")
       return
     end

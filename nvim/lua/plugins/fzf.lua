@@ -38,17 +38,6 @@ return {
         end,
         desc = '[L]ive[G]rep'
       },
-      {
-        '<LEADER>t',
-        function()
-          require 'fzf-lua'.fzf_live("rg --column --color=always -- <query>", {
-            fn_transform = function(x)
-              return require 'fzf-lua'.make_entry.file(x, { file_icons = true, color_icons = true })
-            end,
-          })
-        end,
-        desc = '[T]ext'
-      },
       { '<LEADER>fh', function() require('fzf-lua').oldfiles({ cwd_only = true }) end, desc = '[F]ind [H]istory' },
       { '<LEADER>fw', '<cmd>FzfLua grep<CR>',                                          desc = '[F]ind [W]ords' },
       { '<LEADER>fb', '<cmd>FzfLua git_branches<CR>',                                  desc = '[F]ind [B]ranches' },

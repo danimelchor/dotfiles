@@ -185,4 +185,14 @@ return {
       'folke/neodev.nvim',
     }
   },
+
+  -- Automatic docstrings
+  {
+    "danymat/neogen",
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    config = true,
+    keys = {
+      { '<leader>ds', function() require('neogen').generate() end, desc = 'Generate [D]oc[S]tring' },
+    }
+  }
 }

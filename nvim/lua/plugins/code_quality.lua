@@ -26,6 +26,7 @@ return {
         yaml = { "yamllint" },
         markdown = { "markdownlint" },
         json = { "jsonlint" },
+        proto = { "buf_lint" },
       }
 
       -- Add "codespell" to all filetypes
@@ -97,6 +98,7 @@ return {
         python = { "isort", "black" },
         sh = { "shfmt" },
         ["_"] = { "trim_whitespace", "trim_newlines" },
+        proto = { "buf" },
       }
       local formatters = nil
 

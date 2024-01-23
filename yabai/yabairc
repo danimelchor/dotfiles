@@ -38,7 +38,7 @@ yabai -m rule --add app="^NordVPN$" manage=off
 yabai -m rule --add app="^java$" manage=off
 yabai -m rule --add app="^Notes$" manage=off
 
-yabai -m rule --add app="^Spotify$" space=^4
+yabai -m rule --add app="^Spotify$" space=^5
 yabai -m rule --add app="^Slack$" space=^3
 yabai -m rule --add app="^Discord$" space=^3
 yabai -m rule --add app="^kitty$" space=^2

@@ -42,5 +42,6 @@ yabai -m rule --add app="^Spotify$" space=^5
 yabai -m rule --add app="^Slack$" space=^3
 yabai -m rule --add app="^Discord$" space=^3
 yabai -m rule --add app="^kitty$" space=^2
-yabai -m rule --add app="^Mimestream$"space=^3
-yabai -m rule --add app="^zoom.us$"space=^5
+yabai -m rule --add app="^Mimestream$" space=^3
+yabai -m rule --add app="^zoom.us$" space=^5
+yabai -m rule --add app="^IntelliJ IDEA$" space=^4

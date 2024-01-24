@@ -133,9 +133,16 @@ return {
       require("conform").setup({
         formatters_by_ft = formatters_by_ft,
         formatters = formatters,
-        format_after_save = { timeout_ms = 5000, lsp_fallback = true },
+        format_after_save = function(bufnr)
+          -- Disable with a global or buffer-local variable
+          if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+            return
+          end
+          return { timeout_ms = 500, lsp_fallback = true }
+        end,
       })
 
+      -- https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md
       vim.api.nvim_create_user_command("FormatDisable", function(args)
         if args.bang then
           -- FormatDisable! will disable formatting just for this buffer
@@ -147,6 +154,7 @@ return {
         desc = "Disable autoformat-on-save",
         bang = true,
       })
+
       vim.api.nvim_create_user_command("FormatEnable", function()
         vim.b.disable_autoformat = false
         vim.g.disable_autoformat = false

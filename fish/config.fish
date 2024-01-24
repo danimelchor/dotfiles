@@ -103,7 +103,8 @@ abbr -a grba 'git rebase --abort'
 abbr -a grbi 'git rebase -i'
 abbr -a gf 'git fetch'
 abbr -a gsur 'git submodule update --recursive'
-abbr -a gr&c 'git restore --staged . && git restore . && git clean -fdx'
+abbr -a grc 'git restore --staged . && git restore . && git clean -fdx'
+abbr -a gfr 'git fetch origin master-passing-tests && git rebase origin/master-passing-tests'
 
 # Tmux aliases
 abbr -a t 'tmux'

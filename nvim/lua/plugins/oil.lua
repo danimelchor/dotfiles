@@ -1,34 +1,3 @@
-local function get_ignored(dir)
-  local cmd = string.format('git -C %s ls-files --ignored --exclude-standard --others --directory | grep -v \"/.*\\/\"',
-    dir)
-
-  local handle = io.popen(cmd)
-  if handle == nil then
-    return
-  end
-
-  local output = handle:read('*a')
-  handle:close()
-
-  local lines = vim.split(output, '\n')
-  local ignored_files = {}
-  for _, line in ipairs(lines) do
-    -- If line is a nested dir/file skip
-    if not line:match('/[^/]+$/?') then
-      -- Remove trailing slash
-      line = line:gsub('/$', '')
-      table.insert(ignored_files, line)
-    end
-  end
-  table.insert(ignored_files, '.git')
-  table.insert(ignored_files, '..')
-  return ignored_files
-end
-
-local Cache = require('utils').Cache
-local cache = Cache:new(get_ignored)
-
-
 return {
   {
     'stevearc/oil.nvim',
@@ -39,12 +8,6 @@ return {
         use_default_keymaps = false,
         delete_to_trash = true,
         skip_confirm_for_simple_edits = true,
-        view_options = {
-          is_hidden_file = function(name, _)
-            local ignored_files = cache:call(oil.get_current_dir())
-            return vim.tbl_contains(ignored_files, name)
-          end,
-        },
         keymaps = {
           ["g?"] = "actions.show_help",
           ["I"] = "actions.toggle_hidden",

@@ -49,11 +49,11 @@ fish_add_path "$HOME/.cargo/bin"
 abbr -a c clear
 abbr -a e exit
 
-if command -v exa > /dev/null
-    abbr -a l 'exa'
-    abbr -a ls 'exa'
-    abbr -a ll 'exa -l'
-    abbr -a lll 'exa -la'
+if command -v eza > /dev/null
+    abbr -a l 'eza'
+    abbr -a ls 'eza'
+    abbr -a ll 'eza -l'
+    abbr -a lll 'eza -la'
 else
     abbr -a l 'ls'
     abbr -a ll 'ls -l'

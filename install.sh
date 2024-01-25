@@ -16,6 +16,7 @@ files["sketchybar"]="$HOME/.config"
 files["yabai"]="$HOME/.config"
 files[".tmux.conf"]="$HOME"
 files[".skhdrc"]="$HOME"
+files[".ideavimrc"]="$HOME"
 files["starship.toml"]="$HOME/.config"
 
 # Backup existing files

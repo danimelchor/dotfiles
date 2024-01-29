@@ -1,3 +1,5 @@
+local is_stripe = require('utils').is_stripe()
+
 return {
   "nvim-lua/plenary.nvim",        -- Necessary dependency
   'kyazdani42/nvim-web-devicons', -- Cool icons
@@ -53,4 +55,23 @@ return {
     config = true,
     event = "BufEnter"
   },
+
+  -- not is_stripe and {
+  --   dir = "~/projects/fastboiii",
+  --   config = true,
+  -- } or nil
+  not is_stripe and {
+    dir = "~/projects/mindmap.nvim",
+    config = function()
+      require("mindmap").setup()
+
+      vim.keymap.set("n", "<LEADER>fm", function()
+        require("mindmap").fzf_lua()
+      end, { desc = "[F]ind in [M]indmap" })
+
+      vim.keymap.set("n", "<LEADER>ml", function()
+        require("mindmap").logs()
+      end, { desc = "[M]indmap [L]ogs" })
+    end,
+  } or nil
 }

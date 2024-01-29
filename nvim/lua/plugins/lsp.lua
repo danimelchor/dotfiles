@@ -126,6 +126,9 @@ return {
     }
   },
 
+  -- Lua stuff
+  'folke/neodev.nvim',
+
   -- LSP
   {
     "neovim/nvim-lspconfig",
@@ -182,7 +185,6 @@ return {
 
       { 'mrcjkb/rustaceanvim', version = '^3', ft = { 'rust' }, },
       is_stripe and { url = "git@git.corp.stripe.com:nms/nvim-lspconfig-stripe.git" } or nil,
-      'folke/neodev.nvim',
     }
   },
 

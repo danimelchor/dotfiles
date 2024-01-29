@@ -56,12 +56,8 @@ return {
     event = "BufEnter"
   },
 
-  -- not is_stripe and {
-  --   dir = "~/projects/fastboiii",
-  --   config = true,
-  -- } or nil
   not is_stripe and {
-    dir = "~/projects/mindmap.nvim",
+    dir = "~/projects/mindmap/mindmap.nvim",
     config = function()
       require("mindmap").setup()
 

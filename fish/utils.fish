@@ -22,6 +22,17 @@ function btest
 		continue
 	end
     end
-    
+
     bazel test $target --cache_test_results=no --test_arg=-vv --test_output=all $k_option $durations_option
+end
+
+function awsync
+    # Runs `pay await-sync --files && <cmd>`
+    set files (pay await-sync --files)
+    if test -n "$files"
+    	echo "Files not synced: $files"
+    	return 1
+    end
+    printf "Files synced. Running: "
+    $argv
 end

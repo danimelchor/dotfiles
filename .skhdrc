@@ -24,10 +24,13 @@ shift + ctrl - h : yabai -m window --resize right:-100:0 || yabai -m window --re
 shift + ctrl - j : yabai -m window --resize bottom:0:100 || yabai -m window --resize top:0:-100
 shift + ctrl - k : yabai -m window --resize bottom:0:-100 || yabai -m window --resize top:0:100
 shift + ctrl - l : yabai -m window --resize right:100:0 || yabai -m window --resize left:100:0
-shift + ctrl - r : yabai -m space --balance
 
 # move window to display left and right
 shift + alt - s : yabai -m window --display south; yabai -m display --focus south;
 shift + alt - n : yabai -m window --display north; yabai -m display --focus north;
 shift + alt - w : yabai -m window --display west; yabai -m display --focus west;
 shift + alt - e : yabai -m window --display east; yabai -m display --focus east;
+
+# restart
+shift + ctrl - r : yabai -m space --balance
+shift + ctrl + cmd - r : yabai --restart-service

@@ -29,6 +29,9 @@ if test -e ~/stripe
     set -Ux PGDATA '/usr/local/var/postgres'
 
     set -x PIPELINE_MODE dev
+    set -gx PYENV_VERSION 3.8.17
+
+    alias reldbctl="~/stripe/gocode/tools/reldb/reldbctl/reldbctl"
 else
     abbr -a --set-cursor=% sv 'nvim scp://dmelchor@dmelchorpi.local/%'
 end

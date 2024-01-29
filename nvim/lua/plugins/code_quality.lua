@@ -161,6 +161,15 @@ return {
       end, {
         desc = "Re-enable autoformat-on-save",
       })
+
+      vim.api.nvim_create_user_command('Format', function()
+        require('conform').format({
+          timeout_ms = 500,
+          lsp_fallback = true,
+        }, function()
+          vim.notify("Formatted buffer", vim.log.levels.INFO)
+        end)
+      end, {})
     end,
   },
 }

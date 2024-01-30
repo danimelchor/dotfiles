@@ -47,3 +47,13 @@ map Q <Nop>
 
 map <C-d> <C-d>zz
 map <C-u> <C-u>zz
+
+nmap gd <Action>(GotoDeclaration)
+nmap gc <Action>(CommentByBlockComment)
+nmap <space>f <Action>(ReformatCode)
+nmap <space>s <Action>(SplitVertically)
+nmap <space>S <Action>(SplitHorizontally)
+nmap <C-p> <Action>(GotoFile)
+nmap <space>fh <Action>(RecentFiles)
+nmap ]d <Action>(GotoNextError)
+nmap [d <Action>(GotoPreviousError)

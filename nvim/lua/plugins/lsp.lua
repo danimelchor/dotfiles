@@ -145,7 +145,6 @@ return {
           'html',
           'jsonls',
           'pyright',
-          'rust_analyzer',
           'yamlls',
         },
       })
@@ -165,18 +164,7 @@ return {
               Lua = {
                 diagnostics = {
                   globals = { "vim" },
-                },
-              },
-            }
-          })
-        end,
-        ['rust_analyzer'] = function()
-          require('lspconfig')['rust_analyzer'].setup({
-            capabilities = capabilities,
-            settings = {
-              ["rust-analyzer"] = {
-                cargo = {
-                  allFeatures = true,
+                  disable = { "missing-parameters", "missing-fields" }
                 },
               },
             }
@@ -195,9 +183,15 @@ return {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
 
-      { 'mrcjkb/rustaceanvim', version = '^3', ft = { 'rust' }, },
       is_stripe and { url = "git@git.corp.stripe.com:nms/nvim-lspconfig-stripe.git" } or nil,
     }
+  },
+
+  -- Rust config
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^4',
+    ft = { 'rust' },
   },
 
   -- Automatic docstrings

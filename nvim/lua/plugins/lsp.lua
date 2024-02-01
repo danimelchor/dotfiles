@@ -160,7 +160,7 @@ return {
         end,
         ['lua_ls'] = function()
           require('lspconfig')['lua_ls'].setup({
-            -- capabilities = capabilities,
+            capabilities = capabilities,
             settings = {
               Lua = {
                 diagnostics = {
@@ -169,7 +169,19 @@ return {
               },
             }
           })
-        end
+        end,
+        ['rust_analyzer'] = function()
+          require('lspconfig')['rust_analyzer'].setup({
+            capabilities = capabilities,
+            settings = {
+              ["rust-analyzer"] = {
+                cargo = {
+                  allFeatures = true,
+                },
+              },
+            }
+          })
+        end,
       })
 
       if is_stripe then

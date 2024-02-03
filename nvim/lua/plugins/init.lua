@@ -60,14 +60,9 @@ return {
     dir = "~/projects/mindmap/mindmap.nvim",
     config = function()
       require("mindmap").setup()
-
       vim.keymap.set("n", "<LEADER>fm", function()
         require("mindmap").fzf_lua()
       end, { desc = "[F]ind in [M]indmap" })
-
-      vim.keymap.set("n", "<LEADER>ml", function()
-        require("mindmap").logs()
-      end, { desc = "[M]indmap [L]ogs" })
     end,
   } or nil
 }

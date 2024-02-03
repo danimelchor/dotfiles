@@ -37,7 +37,9 @@ opt.title = true
 opt.ttimeoutlen = 0
 opt.undodir = vim.fn.expand('~') .. '/.config/nvim/undo'
 opt.undofile = true
-opt.wrap = false
+
+opt.textwidth = 80
+opt.wrap = true
 
 o.showmode = false
 o.breakindent = true

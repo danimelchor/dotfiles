@@ -3,12 +3,6 @@ vim.api.nvim_create_user_command('IntelliJ', '!idea %:p --line', { nargs = 0 })
 
 vim.api.nvim_create_user_command('IsStripe', function() print(require('utils').is_stripe()) end, { nargs = 0 })
 
-vim.api.nvim_command([[
-augroup AutoWrapLines
-autocmd BufEnter * :set wrap
-augroup END
-]])
-
 local YankHighlight = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()

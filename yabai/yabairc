@@ -1,5 +1,4 @@
 #!/bin/bash
-sudo yabai --load-sa
 
 # Custom config
 yabai -m config layout bsp \
@@ -9,21 +8,12 @@ yabai -m config layout bsp \
           left_padding 7 \
           right_padding 7 \
           window_gap 7 \
-          mouse_modifier alt \
-          mouse_action1 move \
-          mouse_action2 resize \
           window_animation_duration 0 \
-          active_window_border_color 0xffb4befe \
-          normal_window_border_color 0xff313244 \
-          insert_feedback_color 0xfffab387 \
           window_opacity off \
           window_border_blur off \
           active_window_opacity 1 \
           normal_window_opacity 1 \
           external_bar all:38:0 
-
-yabai -m mouse_drop_action swap
-
 # Rules
 yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off

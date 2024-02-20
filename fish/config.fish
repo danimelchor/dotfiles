@@ -34,6 +34,8 @@ if test -e ~/stripe
     alias reldbctl="~/stripe/gocode/tools/reldb/reldbctl/reldbctl"
 else
     abbr -a --set-cursor=% sv 'nvim scp://dmelchor@dmelchorpi.local/%'
+    set -gx LIBTORCH $(brew --cellar pytorch)/$(brew info --json pytorch | jq -r '.[0].installed[0].version')
+    set -gx LD_LIBRARY_PATH $LIBTORCH/lib
 end
 
 functions -e fish_right_prompt

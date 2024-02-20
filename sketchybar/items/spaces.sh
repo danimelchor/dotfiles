@@ -1,12 +1,12 @@
 #!/bin/sh
 
 # Spaces
-MAIN_DISPLAY_ICONS=("󰖟" "󰅩" "󰒱" "" "󰕧")
-SECONDARY_DISPLAY_ICONS=("󰖟" "󰅩" "󰒱" "" "󰕧")
+MAIN_DISPLAY_ICONS=("󰖟" "󰅩" "󰒱" "" "" "󰕧")
+SECONDARY_DISPLAY_ICONS=("󰖟" "󰅩" "󰒱" "" "" "󰕧")
 SPACE_ICONS=("${MAIN_DISPLAY_ICONS[@]}" "${SECONDARY_DISPLAY_ICONS[@]}")
 
 # Colors
-COLORS=("$BLUE" "$RED" "$PEACH" "$GREEN" "$MAUVE") 
+COLORS=("$BLUE" "$RED" "$PEACH" "$RED" "$GREEN" "$MAUVE") 
 COLORS=("${COLORS[@]}" "${COLORS[@]}")
 
 # Destroy space on right click, focus space on left click.

@@ -10,7 +10,7 @@ if test -e ~/stripe
 
     abbr -a pipe 'cd ~/stripe/zoolander/src/python/pipeline/'
     abbr -a zoo 'cd ~/stripe/zoolander/'
-    abbr -a viz 'cd ~/stripe/viz/'
+    abbr -a viz 'cd ~/stripe/pay-server/viz/'
     abbr -a gocode 'cd ~/stripe/gocode/'
     abbr -a redshift 'cd ~/stripe/redshift/'
     abbr -a dot 'cd ~/Documents/dotfiles/'
@@ -46,6 +46,11 @@ if command -v pyenv > /dev/null
     pyenv init - | source
 end
 
+# If nodenv exists
+if command -v nodenv > /dev/null
+    nodenv init - | source
+end
+
 fish_add_path /opt/homebrew/bin
 fish_add_path ~/.local/bin
 fish_add_path /usr/local/bin
@@ -75,7 +80,7 @@ end
 
 if command -v zoxide > /dev/null
     zoxide init fish | source
-    abbr -a cd 'z'
+    alias cd='z'
 end
 
 # Git aliases

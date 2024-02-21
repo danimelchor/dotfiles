@@ -90,8 +90,6 @@ return {
           ['<S-Tab>'] = cmp.mapping(function(fallback)
               if copilot.is_visible() then
                 copilot.accept()
-              elseif cmp.visible() then
-                cmp.confirm({ select = true })
               else
                 fallback()
               end

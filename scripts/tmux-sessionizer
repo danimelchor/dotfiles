@@ -6,11 +6,11 @@ if [ -d ~/stripe ]; then
     parents=(~/stripe ~/personal)
     folders=(
         ~/stripe/zoolander/src/python/pipeline
-        ~/stripe/zoolander/src/python/notebook
+        ~/notes
     )
 else
     parents=(~/projects ~/personal ~/work)
-    folders=()
+    folders=(~/notes)
 fi
 
 if [[ $# -eq 1 ]]; then
@@ -65,4 +65,3 @@ if [[ -z $TMUX ]]; then
 else
     tmux switch-client -t $selected_name
 fi
-

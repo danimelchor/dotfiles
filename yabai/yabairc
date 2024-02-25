@@ -8,11 +8,6 @@ yabai -m config layout bsp \
           left_padding 7 \
           right_padding 7 \
           window_gap 7 \
-          window_animation_duration 0 \
-          window_opacity off \
-          window_border_blur off \
-          active_window_opacity 1 \
-          normal_window_opacity 1 \
           external_bar all:38:0 
 # Rules
 yabai -m rule --add app="^System Settings$" manage=off

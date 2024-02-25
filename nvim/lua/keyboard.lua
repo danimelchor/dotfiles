@@ -22,6 +22,14 @@ vim.keymap.set("x", "<leader>p", [["_dP]])                                      
 vim.keymap.set("x", "<leader>d", [["_d]])                                                -- Delete without yanking
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]]) -- Replace the word under cursor
 
+-- Open links
+vim.keymap.set("n", "gx", function()
+  local current = vim.fn.expand("<cWORD>")
+  if current then
+    vim.fn.jobstart("open " .. current, { detach = true })
+  end
+end)
+
 -- LSP
 local DmelchorGroup = vim.api.nvim_create_augroup('DmelchorGroup', {})
 vim.api.nvim_create_autocmd('LspAttach', {

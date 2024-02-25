@@ -144,6 +144,7 @@ return {
           'jsonls',
           'pyright',
           'yamlls',
+          'svelte',
         },
       })
       local capabilities = vim.lsp.protocol.make_client_capabilities()

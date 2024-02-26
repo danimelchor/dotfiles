@@ -24,7 +24,7 @@ return {
             require('oil.actions').select_split.callback()
             require('oil.actions').close.callback()
           end,
-          ["h"] = function()
+          ["H"] = function()
             -- Function to add oil entry to harpoon
             local Path = require("plenary.path")
 

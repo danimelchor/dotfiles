@@ -1,0 +1,51 @@
+#!/usr/bin/env python3
+# vim: ft=python
+
+import re
+import subprocess
+from typing import Set
+
+import click
+
+
+def get_branches():
+    text = subprocess.check_output(["git", "branch", "--sort=-committerdate"])
+    text = text.decode("utf-8")
+    text = text.strip()
+    return text.split("\n")
+
+
+def delete_branches(branches: Set[str]):
+    for b in branches:
+        clean = re.sub(r"[^a-zA-Z\-_/]+", "", b)
+        subprocess.call(["git", "branch", "-D", clean])
+
+
+def main():
+    branches = get_branches()
+    res = click.edit("\n".join(branches), require_save=True)
+    if res is None:
+        return
+
+    new_branches = res.strip().split("\n")
+
+    deleted = set(branches) - set(new_branches)
+    if not deleted:
+        return
+
+    click.secho("Deleting branches", fg="red")
+    for d in deleted:
+        if not d:
+            continue
+        click.secho(f"- {d}", fg="red")
+    print()
+
+    conf = click.confirm("Are you sure you want to delete them?")
+    if not conf:
+        return
+
+    delete_branches(deleted)
+    click.secho("Branches deleted", fg="green")
+
+
+main()

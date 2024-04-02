@@ -11,14 +11,16 @@ import click
 def get_branches():
     text = subprocess.check_output(["git", "branch", "--sort=-committerdate"])
     text = text.decode("utf-8")
-    text = text.strip()
-    return text.split("\n")
+    return list(filter(None, text.split("\n")))
+
+
+def clean(branch: str):
+    return re.sub(r"[^a-zA-Z\-_/]+", "", branch)
 
 
 def delete_branches(branches: Set[str]):
     for b in branches:
-        clean = re.sub(r"[^a-zA-Z\-_/]+", "", b)
-        subprocess.call(["git", "branch", "-D", clean])
+        subprocess.call(["git", "branch", "-D", b])
 
 
 def main():
@@ -27,9 +29,10 @@ def main():
     if res is None:
         return
 
-    new_branches = res.strip().split("\n")
+    new_branches = set(map(lambda x: clean(x), filter(None, res.split("\n"))))
+    old_branches = set(map(lambda x: clean(x), filter(None, branches)))
 
-    deleted = set(branches) - set(new_branches)
+    deleted = old_branches - new_branches
     if not deleted:
         return
 

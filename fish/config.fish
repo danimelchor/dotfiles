@@ -24,6 +24,7 @@ if test -e ~/stripe
     abbr -a pu '~/payup.sh'
 
     abbr -a iceberg 'pay job:run bazel run src/scala/com/stripe/iceberg/cli --'
+    abbr -a mpt 'git switch master-passing-tests'
 
     # Postgres
     set -Ux PGDATA '/usr/local/var/postgres'

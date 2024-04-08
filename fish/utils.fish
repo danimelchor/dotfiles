@@ -36,3 +36,16 @@ function awsync
     printf "Files synced. Running: "
     $argv
 end
+
+function gif
+    set file $argv[1]
+    echo "Converting $file to gif"
+    set file_name_no_ext (path change-extension '' $file)
+    ffmpeg -i $file -vf "fps=10,scale=640:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" \
+          -loop 0 "$file_name_no_ext.gif"
+end
+
+function show-master
+    set file $argv[1]
+    git show origin/master:$file > $file
+end

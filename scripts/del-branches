@@ -15,7 +15,7 @@ def get_branches():
 
 
 def clean(branch: str):
-    return re.sub(r"[^a-zA-Z\-_/]+", "", branch)
+    return re.sub(r"[^a-zA-Z0-9\-_/]+", "", branch)
 
 
 def delete_branches(branches: Set[str]):

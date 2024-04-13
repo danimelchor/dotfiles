@@ -55,14 +55,4 @@ return {
     config = true,
     event = "BufEnter"
   },
-
-  not is_stripe and {
-    dir = "~/projects/mindmap/mindmap.nvim",
-    config = function()
-      require("mindmap").setup()
-      vim.keymap.set("n", "<LEADER>fm", function()
-        require("mindmap").fzf_lua()
-      end, { desc = "[F]ind in [M]indmap" })
-    end,
-  } or nil
 }

@@ -3,13 +3,13 @@ local is_stripe = require("utils").is_stripe()
 return not is_stripe and {
   dir = "~/projects/mindmap/mindmap.nvim",
   config = function()
-    require("mindmap").setup()
+    -- require("mindmap").setup()
 
-    vim.keymap.set("n", "<LEADER>fm", function()
-      require("mindmap").fzf_lua()
-    end, {
-      desc = "[F]ind in [M]indmap"
-    })
+    -- vim.keymap.set("n", "<LEADER>fm", function()
+    --   require("mindmap").fzf_lua()
+    -- end, {
+    --   desc = "[F]ind in [M]indmap"
+    -- })
 
     -- Open todo list
     vim.keymap.set("n", "<LEADER>ft", function()

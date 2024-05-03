@@ -9,27 +9,6 @@ return {
     end,
     keys = {
       {
-        '<C-p>',
-        function()
-          local opts = {
-            cwd = vim.fn.getcwd(),
-          }
-          local fzf = require('fzf-lua')
-          local ok = pcall(fzf.git_files, opts)
-          if not ok then fzf.files(opts) end
-        end,
-        desc = 'Find project files'
-      },
-      {
-        '<C-S-p>',
-        function()
-          local fzf = require('fzf-lua')
-          local ok = pcall(fzf.git_files)
-          if not ok then fzf.files() end
-        end,
-        desc = 'Find files'
-      },
-      {
         '<LEADER>lg',
         function()
           local fzf = require('fzf-lua')
@@ -44,7 +23,9 @@ return {
       { '<LEADER>fs', '<cmd>FzfLua lsp_document_symbols<CR>',                          desc = '[F]ind [S]ymbols' },
       { '<LEADER>fd', '<cmd>FzfLua diagnostics_document<CR>',                          desc = '[F]ind [D]iagnostics' },
       { '<LEADER>km', '<cmd>FzfLua keymaps<CR>',                                       desc = '[K]ey[M]aps' },
-      { '<LEADER>fv', '<cmd>FzfLua help_tags<CR>',                                     desc = '[F]ind [V]im help_tags' }
+      { '<LEADER>fv', '<cmd>FzfLua help_tags<CR>',                                     desc = '[F]ind [V]im help_tags' },
+      { '<C-p>',      '<cmd>FzfLua git_files<CR>',                                     desc = 'Find project files' },
+      { '<LEADER>ff', '<cmd>FzfLua files<CR>',                                         desc = 'Find files' },
     }
   }
 }

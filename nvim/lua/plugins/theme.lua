@@ -1,14 +1,22 @@
 local function configureTheme(name)
   vim.cmd("colorscheme " .. name)
 
-  vim.opt.termguicolors = true
-  vim.wo.fillchars = 'eob: '
-  vim.cmd("silent! syntax enable")
-  vim.cmd("silent! hi Normal guibg=NONE ctermbg=NONE")
-  vim.cmd("silent! hi EndOfBuffer guibg=NONE ctermbg=NONE")
+  local function onBufEnter()
+    vim.opt.termguicolors = true
+    vim.wo.fillchars = 'eob: '
+    vim.cmd("silent! syntax enable")
+    vim.cmd("silent! hi Normal guibg=NONE ctermbg=NONE")
+    vim.cmd("silent! hi EndOfBuffer guibg=NONE ctermbg=NONE")
 
-  -- Line numbers highlight fg
-  vim.cmd("silent! hi LineNr guifg=#b4befe")
+    -- Line numbers highlight fg
+    vim.cmd("silent! hi LineNr guifg=#b4befe")
+  end
+
+  local augroup = vim.api.nvim_create_augroup("ThemeConfig", {})
+  vim.api.nvim_create_autocmd("BufEnter", {
+    group = augroup,
+    callback = onBufEnter,
+  })
 end
 
 return {

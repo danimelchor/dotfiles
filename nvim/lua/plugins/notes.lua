@@ -1,16 +1,12 @@
 local is_stripe = require("utils").is_stripe()
 
-return not is_stripe and {
+if not is_stripe then
+  return {}
+end
+
+return {
   dir = "~/projects/mindmap/mindmap.nvim",
   config = function()
-    -- require("mindmap").setup()
-
-    -- vim.keymap.set("n", "<LEADER>fm", function()
-    --   require("mindmap").fzf_lua()
-    -- end, {
-    --   desc = "[F]ind in [M]indmap"
-    -- })
-
     -- Open todo list
     vim.keymap.set("n", "<LEADER>ft", function()
       local file = os.getenv("HOME") .. "/notes/todos.md"

@@ -14,6 +14,12 @@ return {
     cmd = "VimBeGood"
   },
 
+  -- Case sensitive search and replace
+  {
+    'tpope/vim-abolish',
+    event = "BufEnter"
+  },
+
   -- Improve at vim
   {
     "m4xshen/hardtime.nvim",

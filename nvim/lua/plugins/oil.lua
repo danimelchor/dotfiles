@@ -38,7 +38,7 @@ return {
               context = { row = 1, col = 0 },
               value = Path:new(dir .. filename):make_relative(vim.fn.getcwd()),
             }
-            require("harpoon"):list():append(listItem)
+            require("harpoon"):list():add(listItem)
           end
         }
       })

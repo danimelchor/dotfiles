@@ -56,9 +56,10 @@ return {
       }
 
       cmp.setup({
+        preselect = cmp.PreselectMode.Item,
         formatting = formatting,
         completion = {
-          completeopt = 'menu,menuone',
+          completeopt = 'menu,menuone,noinsert,preview',
         },
         snippet = {
           expand = function(args)

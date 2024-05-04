@@ -6,7 +6,6 @@ local o = vim.o
 opt.autoindent = true
 opt.autoread = true
 opt.backup = false
-opt.clipboard = "unnamed"
 opt.cmdheight = 0
 opt.completeopt = "menu,menuone,noinsert,preview"
 opt.errorbells = false

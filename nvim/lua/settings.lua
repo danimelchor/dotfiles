@@ -7,6 +7,7 @@ opt.autoread = true
 opt.autoindent = true
 opt.backup = false
 opt.cmdheight = 0
+opt.clipboard = "unnamed"
 opt.completeopt = "menu,menuone,noinsert,preview"
 opt.errorbells = false
 opt.expandtab = true

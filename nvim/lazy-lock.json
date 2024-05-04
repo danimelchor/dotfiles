@@ -29,6 +29,7 @@
   "mini.move": { "branch": "main", "commit": "251d541a8ab745e81295a53c128829cb2bff18e3" },
   "mini.notify": { "branch": "main", "commit": "0d9429b39ec104de33197169508b81d4ef69401d" },
   "mini.splitjoin": { "branch": "main", "commit": "a6b043b4afb075058a8c49325ff22e07f0e96170" },
+  "mini.surround": { "branch": "main", "commit": "0f528eb2e1bab420c0569d9e52615144c51db920" },
   "neodev.nvim": { "branch": "main", "commit": "ce9a2e8eaba5649b553529c5498acb43a6c317cd" },
   "neogen": { "branch": "main", "commit": "0daffcec249bf42275e322361fe55b89a05ff278" },
   "nvim-cmp": { "branch": "main", "commit": "8f3c541407e691af6163e2447f3af1bd6e17f9a3" },

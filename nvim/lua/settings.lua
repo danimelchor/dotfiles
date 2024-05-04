@@ -3,8 +3,8 @@ local g = vim.g
 local o = vim.o
 
 -- General settings
-opt.autoindent = true
 opt.autoread = true
+opt.autoindent = true
 opt.backup = false
 opt.cmdheight = 0
 opt.completeopt = "menu,menuone,noinsert,preview"
@@ -34,7 +34,6 @@ opt.swapfile = false
 opt.tabstop = 4
 opt.title = true
 opt.ttimeoutlen = 0
-opt.undodir = vim.fn.expand('~') .. '/.config/nvim/undo'
 opt.undofile = true
 
 o.showmode = false

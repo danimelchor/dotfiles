@@ -1,3 +1,28 @@
+local RecordingAugroup = vim.api.nvim_create_augroup("Recording", { clear = true })
+
+local function refresh_lualine()
+    local status_ok, lualine = pcall(require, "lualine")
+    if not status_ok then
+        return
+    end
+    lualine.refresh({
+        place = { "statusline" },
+    })
+end
+
+vim.api.nvim_create_autocmd("RecordingEnter", {
+    callback = refresh_lualine,
+    group = RecordingAugroup,
+})
+
+vim.api.nvim_create_autocmd("RecordingLeave", {
+    callback = function()
+        local timer = vim.loop.new_timer()
+        timer:start(50, 0, vim.schedule_wrap(refresh_lualine))
+    end,
+    group = RecordingAugroup,
+})
+
 return {
     -- Line at the bottom with status
     {
@@ -21,6 +46,15 @@ return {
                 return " " .. table.concat(linters, ", ")
             end
 
+            local function show_macro_recording()
+                local recording_register = vim.fn.reg_recording()
+                if recording_register == "" then
+                    return ""
+                else
+                    return "Recording @" .. recording_register
+                end
+            end
+
             lualine.setup({
                 options = {
                     theme = "auto",
@@ -29,11 +63,17 @@ return {
                 },
                 sections = {
                     lualine_a = { "mode" },
-                    lualine_b = { {
-                        "filename",
-                        file_status = true,
-                        path = 1,
-                    } },
+                    lualine_b = {
+                        {
+                            show_macro_recording,
+                            color = { gui = "bold" },
+                        },
+                        {
+                            "filename",
+                            file_status = true,
+                            path = 1,
+                        },
+                    },
                     lualine_c = {
                         {
                             "diagnostics",

@@ -33,6 +33,7 @@ if test -e ~/stripe
     set -gx PYENV_VERSION 3.8.17
 
     alias reldbctl="~/stripe/gocode/tools/reldb/reldbctl/reldbctl"
+    set -gx PAY_SKIP_REACHABILITY_CHECKS true
 else
     abbr -a --set-cursor=% sv 'nvim scp://dmelchor@dmelchorpi.local/%'
     set -gx LIBTORCH $(brew --cellar pytorch)/$(brew info --json pytorch | jq -r '.[0].installed[0].version')

@@ -1,12 +1,12 @@
 local is_stripe = require('utils').is_stripe()
 
 return {
-  "nvim-lua/plenary.nvim",        -- Necessary dependency
-  'kyazdani42/nvim-web-devicons', -- Cool icons
-  'farmergreg/vim-lastplace',     -- Remember last cursor place
-  'nvim-lua/popup.nvim',          -- Necessary dependency
+  "nvim-lua/plenary.nvim",       -- Necessary dependency
+  'nvim-tree/nvim-web-devicons', -- Cool icons
+  'farmergreg/vim-lastplace',    -- Remember last cursor place
+  'nvim-lua/popup.nvim',         -- Necessary dependency
   'christoomey/vim-tmux-navigator',
-  'tpope/vim-sleuth',             -- Automatically adjust tab size
+  'tpope/vim-sleuth',            -- Automatically adjust tab size
 
   -- Practice plugin
   {

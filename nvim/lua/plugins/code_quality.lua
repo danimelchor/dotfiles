@@ -1,16 +1,3 @@
-vim.diagnostic.config({
-  virtual_text = true,
-  signs = true,
-  update_in_insert = false,
-  float = {
-    source = "always",
-    border = "rounded",
-    severity_sort = true,
-  },
-  severity_sort = true,
-})
-
-
 local is_stripe = require('utils').is_stripe()
 
 return {

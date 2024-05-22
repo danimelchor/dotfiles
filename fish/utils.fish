@@ -39,10 +39,13 @@ end
 
 function gif
     set file $argv[1]
+    set size $argv[2]
     echo "Converting $file to gif"
     set file_name_no_ext (path change-extension '' $file)
-    ffmpeg -i $file -vf "fps=10,scale=640:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" \
-          -loop 0 "$file_name_no_ext.gif"
+    ffmpeg -i $file -r 10 -s $size -filter_complex "[0:v] split [a][b];[a] palettegen [p];[b][p] paletteuse" \
+          -loop 0 "tmp_$file_name_no_ext.gif"
+    gifsicle -O3 "tmp_$file_name_no_ext.gif" -o "$file_name_no_ext.gif"
+    rm "tmp_$file_name_no_ext.gif"
 end
 
 function show-master

@@ -61,9 +61,14 @@ return {
         }
       })
 
-      vim.keymap.set("n", "<leader>e", "<cmd>TroubleToggle document_diagnostics<cr>", { noremap = true, silent = true })
+      vim.keymap.set(
+        "n",
+        "<leader>e",
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        { noremap = true, silent = true }
+      )
     end,
-    cmd = "TroubleToggle",
+    event = "BufEnter"
   },
 
   -- Formatting

@@ -1,16 +1,3 @@
-vim.diagnostic.config({
-  virtual_text = true,
-  signs = true,
-  update_in_insert = false,
-  float = {
-    source = "always",
-    border = "rounded",
-    severity_sort = true,
-  },
-  severity_sort = true,
-})
-
-
 local is_stripe = require('utils').is_stripe()
 
 return {
@@ -74,9 +61,14 @@ return {
         }
       })
 
-      vim.keymap.set("n", "<leader>e", "<cmd>TroubleToggle document_diagnostics<cr>", { noremap = true, silent = true })
+      vim.keymap.set(
+        "n",
+        "<leader>e",
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        { noremap = true, silent = true }
+      )
     end,
-    cmd = "TroubleToggle",
+    event = "BufEnter"
   },
 
   -- Formatting

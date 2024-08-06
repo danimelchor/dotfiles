@@ -28,24 +28,3 @@ vim.keymap.set("n", "gx", function()
     vim.fn.jobstart("open " .. current, { detach = true })
   end
 end)
-
--- LSP
-local DmelchorGroup = vim.api.nvim_create_augroup('DmelchorGroup', {})
-vim.api.nvim_create_autocmd('LspAttach', {
-  group = DmelchorGroup,
-  callback = function(ev)
-    local opts = { buffer = ev.buf, remap = false }
-
-    vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-    vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
-    vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-    vim.keymap.set("n", "gi", function() vim.lsp.buf.implementation() end, opts)
-    vim.keymap.set("n", "<C-k>", function() vim.lsp.buf.signature_help() end, opts)
-    vim.keymap.set('n', '<LEADER>D', function() vim.lsp.buf.type_definition() end, opts)
-    vim.keymap.set('n', '<LEADER>r', function() vim.lsp.buf.rename() end, opts)
-    vim.keymap.set('n', '<LEADER>a', function() vim.lsp.buf.code_action() end, opts)
-    vim.keymap.set('n', '<LEADER>f', function() vim.lsp.buf.format({ async = true }) end, opts)
-    vim.keymap.set('n', 'gr', function() vim.lsp.buf.references() end, opts)
-    vim.keymap.set('n', 'ge', function() vim.diagnostic.open_float() end, opts)
-  end
-})

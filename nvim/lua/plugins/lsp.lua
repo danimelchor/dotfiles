@@ -1,133 +1,44 @@
 local is_stripe = require('utils').is_stripe()
 
-return {
-  -- Autocompletion
-  {
-    'hrsh7th/nvim-cmp',
-    config = function()
-      require("luasnip.loaders.from_vscode").lazy_load()
-      local luasnip = require("luasnip")
-      local cmp = require('cmp')
-
-      local copilot = require("copilot.suggestion")
-      vim.g.copilot_no_tab_map = true
-
-      local lspkind = require('lspkind')
-      local formatting = {
-        -- Taken from stevearc
-        format = lspkind.cmp_format({
-          mode = "symbol",
-          symbol_map = {
-            Copilot = " ",
-            Class = "󰆧 ",
-            Color = "󰏘 ",
-            Constant = "󰏿 ",
-            Constructor = " ",
-            Enum = " ",
-            EnumMember = " ",
-            Event = "",
-            Field = " ",
-            File = "󰈙 ",
-            Folder = "󰉋 ",
-            Function = "󰊕 ",
-            Interface = " ",
-            Keyword = "󰌋 ",
-            Method = "󰊕 ",
-            Module = " ",
-            Operator = "󰆕 ",
-            Property = " ",
-            Reference = "󰈇 ",
-            Snippet = " ",
-            Struct = "󰆼 ",
-            Text = "󰉿 ",
-            TypeParameter = "󰉿 ",
-            Unit = "󰑭",
-            Value = "󰎠 ",
-            Variable = "󰀫 ",
-          },
-          menu = {
-            buffer = "[buf]",
-            nvim_lsp = "[LSP]",
-            nvim_lua = "[api]",
-            path = "[path]",
-            luasnip = "[snip]",
-          }
-        }),
-      }
-
-      cmp.setup({
-        preselect = cmp.PreselectMode.Item,
-        formatting = formatting,
-        completion = {
-          completeopt = 'menu,menuone,noinsert,preview',
-        },
-        snippet = {
-          expand = function(args)
-            require('luasnip').lsp_expand(args.body)
-          end,
-        },
-        sources = {
-          { name = 'nvim_lsp' },
-          { name = "luasnip" },
-          { name = "path" },
-          { name = 'buffer' }
-        },
-        mapping = {
-          ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-          ['<C-j>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-          ['<Tab>'] = cmp.mapping(function(fallback)
-              if cmp.visible() then
-                cmp.confirm({ select = true })
-              elseif luasnip.expand_or_jumpable() then
-                luasnip.expand_or_jump()
-              else
-                fallback()
-              end
-            end,
-            {
-              "i",
-              "s"
-            }),
-          ['<S-Tab>'] = cmp.mapping(function(fallback)
-              if copilot.is_visible() then
-                copilot.accept()
-              else
-                fallback()
-              end
-            end,
-            {
-              "i",
-              "s"
-            }),
-        },
-      })
-
-      -- Copilot stuff
-      cmp.event:on("menu_opened", function()
-        vim.b.copilot_suggestion_hidden = false
-      end)
-
-      cmp.event:on("menu_closed", function()
-        vim.b.copilot_suggestion_hidden = false
-      end)
-    end,
-    dependencies = {
-      -- Autocompletion
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      "onsails/lspkind.nvim",
-
-      -- Snippets
-      'L3MON4D3/LuaSnip',
-      'saadparwaiz1/cmp_luasnip',
-      'rafamadriz/friendly-snippets',
-    }
+vim.diagnostic.config({
+  virtual_text = true,
+  signs = true,
+  update_in_insert = false,
+  float = {
+    source = "always",
+    border = "rounded",
+    focusable = false,
   },
+  severity_sort = true,
+})
 
-  -- Lua stuff
-  'folke/neodev.nvim',
+local toggle_inlay_hint = function()
+  local is_enabled = vim.lsp.inlay_hint.is_enabled()
+  vim.lsp.inlay_hint.enable(not is_enabled)
+end
 
+-- LSP
+local on_attach = function(client, bufnr)
+  local opts = { buffer = bufnr, remap = false }
+
+  vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+  vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
+  vim.keymap.set('n', '<LEADER>D', vim.lsp.buf.type_definition, opts)
+  vim.keymap.set('n', '<LEADER>r', vim.lsp.buf.rename, opts)
+  vim.keymap.set('n', '<LEADER>a', vim.lsp.buf.code_action, opts)
+  vim.keymap.set('n', '<LEADER>f', function() vim.lsp.buf.format({ async = true }) end, opts)
+  vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+  vim.keymap.set('n', 'ge', vim.diagnostic.open_float, opts)
+  vim.keymap.set('n', 'dh', toggle_inlay_hint, opts)
+
+  if client.server_capabilities.inlayHintProvider then
+    vim.lsp.inlay_hint.enable(true)
+  end
+end
+
+return {
   -- LSP
   {
     "neovim/nvim-lspconfig",
@@ -143,7 +54,8 @@ return {
           'eslint',
           'html',
           'jsonls',
-          'pyright',
+          'ruff',
+          'basedpyright',
           'yamlls',
           'svelte',
         },
@@ -155,21 +67,73 @@ return {
         function(server_name) -- default handler (optional)
           require("lspconfig")[server_name].setup({
             capabilities = capabilities,
+            on_attach = on_attach,
           })
         end,
         ['lua_ls'] = function()
           require('lspconfig')['lua_ls'].setup({
             capabilities = capabilities,
+            on_attach = on_attach,
             settings = {
               Lua = {
                 diagnostics = {
                   globals = { "vim" },
                   disable = { "missing-parameters", "missing-fields" }
                 },
+                hint = { enable = true },
+                telemetry = { enable = false },
               },
             }
           })
         end,
+        ['gopls'] = function()
+          require('lspconfig')['gopls'].setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+            settings = {
+              gopls = {
+                hints = {
+                  assignVariableTypes = true,
+                  compositeLiteralFields = true,
+                  compositeLiteralTypes = true,
+                  constantValues = true,
+                  functionTypeParameters = true,
+                  parameterNames = true,
+                  rangeVariableTypes = true,
+                },
+              },
+            }
+          })
+        end,
+        ['basedpyright'] = function()
+          require('lspconfig')['basedpyright'].setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+          })
+        end,
+        ['tsserver'] = function()
+          local inlayHints = {
+            includeInlayEnumMemberValueHints = true,
+            includeInlayFunctionLikeReturnTypeHints = true,
+            includeInlayFunctionParameterTypeHints = true,
+            includeInlayParameterNameHints = "all",
+            includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+            includeInlayPropertyDeclarationTypeHints = true,
+            includeInlayVariableTypeHints = false,
+          }
+          require('lspconfig')['tsserver'].setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+            settings = {
+              javascript = {
+                inlayHints = inlayHints,
+              },
+              typescript = {
+                inlayHints = inlayHints,
+              },
+            },
+          })
+        end
       })
 
       if is_stripe then
@@ -193,14 +157,4 @@ return {
     version = '^4',
     ft = { 'rust' },
   },
-
-  -- Automatic docstrings
-  {
-    "danymat/neogen",
-    dependencies = "nvim-treesitter/nvim-treesitter",
-    config = true,
-    keys = {
-      { '<leader>ds', function() require('neogen').generate() end, desc = 'Generate [D]oc[S]tring' },
-    }
-  }
 }

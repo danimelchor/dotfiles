@@ -48,6 +48,16 @@ function gif
     rm "tmp_$file_name_no_ext.gif"
 end
 
+function speed-up
+    set file $argv[1]
+    set speed $argv[2]
+
+    echo "Speeding up $file by $speed"
+    set file_name_no_ext (path change-extension '' $file)
+    ffmpeg -i $file -filter:v "setpts=PTS/$speed" "tmp_$file_name_no_ext.mp4"
+    mv "tmp_$file_name_no_ext.mp4" "$file_name_no_ext.mp4"
+end
+
 function show-master
     set file $argv[1]
     git show origin/master:$file > $file

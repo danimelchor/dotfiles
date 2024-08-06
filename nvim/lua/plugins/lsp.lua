@@ -32,10 +32,6 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
   vim.keymap.set('n', 'ge', vim.diagnostic.open_float, opts)
   vim.keymap.set('n', 'dh', toggle_inlay_hint, opts)
-
-  if client.server_capabilities.inlayHintProvider then
-    vim.lsp.inlay_hint.enable(true)
-  end
 end
 
 return {

@@ -1,17 +1,19 @@
 return {
-  -- Code snipet images
-  {
-    'narutoxy/silicon.lua',
-    config = true,
-    keys = {
-      {
-        '<Leader>s',
-        function()
-          require('silicon').visualise_api({ to_clip = true })
-        end,
-        mode = 'v',
-        desc = 'Screenshot code snippet'
-      }
-    }
-  }
+	-- Code snipet images
+	{
+		"mistricky/codesnap.nvim",
+		build = "make",
+		keys = {
+			{
+				"<Leader>s",
+				"<Cmd>CodeSnap<CR>",
+				mode = "v",
+				desc = "Screenshot code snippet",
+			},
+		},
+		opts = {
+			watermark = "",
+			bg_padding = 40,
+		},
+	},
 }

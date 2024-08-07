@@ -1,7 +1,7 @@
 vim.api.nvim_create_user_command('VSCode', '!code -g %:p', { nargs = 0 })
 vim.api.nvim_create_user_command('IntelliJ', '!idea %:p --line', { nargs = 0 })
 
-vim.api.nvim_create_user_command('IsStripe', function() print(require('utils').is_stripe()) end, { nargs = 0 })
+vim.api.nvim_create_user_command('IsStripe', function() print(require('config.utils').is_stripe()) end, { nargs = 0 })
 
 local YankHighlight = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {

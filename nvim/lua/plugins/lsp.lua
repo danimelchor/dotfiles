@@ -1,4 +1,4 @@
-local is_stripe = require('utils').is_stripe()
+local is_stripe = require('config.utils').is_stripe()
 
 vim.diagnostic.config({
   virtual_text = true,

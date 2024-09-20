@@ -9,7 +9,7 @@ if [ -d ~/stripe ]; then
         ~/notes
     )
 else
-    parents=(~/projects ~/personal ~/work)
+    parents=(~/projects ~/personal ~/work ~/projects/dmelchorpi)
     folders=(~/notes)
 fi
 

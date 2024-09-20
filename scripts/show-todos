@@ -1,0 +1,38 @@
+#!/usr/bin/env python3
+# vi: ft=python
+
+import re
+from pathlib import Path
+
+import click
+
+TODOS_PATH = Path.home() / "todo.md"
+
+
+def read_todos():
+    with TODOS_PATH.open() as f:
+        return f.read()
+
+
+def parse_todos() -> dict[str, bool]:
+    lines = read_todos().splitlines()
+    lines = [re.sub(r"^- ", "", line) for line in lines]
+    todos: dict[str, bool] = {}
+    for line in lines:
+        if line.startswith("[]") or line.startswith("[ ]"):
+            todo = line.lstrip("[] ")
+            todos[todo] = False
+        elif line.lower().startswith("[x]"):
+            todo = line.lstrip("[x] ")
+            todos[todo] = True
+    return todos
+
+
+if __name__ == "__main__":
+    todos = parse_todos()
+    not_done = [t for t, done in todos.items() if not done]
+
+    if not_done:
+        click.secho("You have some TODOs", fg="yellow", bold=True)
+        for t in not_done:
+            click.echo(f"- [] {t}")

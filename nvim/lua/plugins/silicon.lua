@@ -13,7 +13,7 @@ return {
 		},
 		opts = {
 			watermark = "",
-			bg_padding = 40,
+			bg_padding = 0,
 		},
 	},
 }

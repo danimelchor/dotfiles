@@ -142,7 +142,10 @@ set -x GIT_EDITOR $EDITOR
 set -gx SHELL /opt/homebrew/bin/fish
 
 # Todui
-abbr -a td 'todui'
+abbr -a td 'nvim ~/todo.md'
+
+# Raspberry Pi
+abbr -a pi 'ssh dmelchor@dmelchor.lan'
 
 # colored man output
 # from http://linuxtidbits.wordpress.com/2009/03/23/less-colors-for-man-pages/
@@ -161,7 +164,7 @@ starship init fish | source
 function fish_greeting
     echo
     neofetch
+    show-todos
 end
 
-source ~/.config/fish/autogen.fish
 source ~/.config/fish/utils.fish

@@ -2,6 +2,7 @@ local opt = vim.opt
 local g = vim.g
 local o = vim.o
 
+
 -- General settings
 opt.autoread = true
 opt.autoindent = true
@@ -33,6 +34,7 @@ opt.softtabstop = 4
 opt.splitright = true
 opt.swapfile = false
 opt.tabstop = 4
+opt.termguicolors = true
 opt.title = true
 opt.ttimeoutlen = 0
 opt.undofile = true

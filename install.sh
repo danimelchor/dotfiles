@@ -10,6 +10,7 @@ mkdir $BACKUP_DIR
 declare -A files
 files["fish"]="$HOME/.config"
 files["kitty"]="$HOME/.config"
+files["alacritty"]="$HOME/.config"
 files["neofetch"]="$HOME/.config"
 files["nvim"]="$HOME/.config"
 files["sketchybar"]="$HOME/.config"

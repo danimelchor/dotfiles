@@ -17,7 +17,7 @@ TERM = "xterm-256color"
 style = "Block"
 
 [mouse]
-hide_when_typing = true
+hide_when_typing = false
 
 [window]
 dimensions = { columns = 100, lines = 30 }

@@ -9,7 +9,7 @@ return {
         javascriptreact = { "eslint_d" },
         typescript = { "eslint_d" },
         typescriptreact = { "eslint_d" },
-        python = { "flake8", "mypy", "ruff" },
+        python = { "flake8", "mypy" },
         yaml = { "yamllint" },
         markdown = { "markdownlint" },
         json = { "jsonlint" },
@@ -125,12 +125,12 @@ return {
       require("conform").setup({
         formatters_by_ft = formatters_by_ft,
         formatters = formatters,
-        format_after_save = function(bufnr)
+        format_on_save = function(bufnr)
           -- Disable with a global or buffer-local variable
           if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
             return
           end
-          return { timeout_ms = 500, lsp_fallback = true }
+          return { timeout_ms = 500, lsp_format = "fallback" }
         end,
       })
 

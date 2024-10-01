@@ -54,8 +54,6 @@ return {
 					"eslint",
 					"html",
 					"jsonls",
-					"ruff",
-					-- "basedpyright",
 					"pyright",
 					"yamlls",
 					"svelte",
@@ -66,6 +64,7 @@ return {
 
 			require("mason-lspconfig").setup_handlers({
 				function(server_name) -- default handler (optional)
+					print(server_name)
 					require("lspconfig")[server_name].setup({
 						capabilities = capabilities,
 						on_attach = on_attach,
@@ -106,12 +105,6 @@ return {
 						},
 					})
 				end,
-				-- ["basedpyright"] = function()
-				-- 	require("lspconfig")["basedpyright"].setup({
-				-- 		capabilities = capabilities,
-				-- 		on_attach = on_attach,
-				-- 	})
-				-- end,
 				["ts_ls"] = function()
 					local inlayHints = {
 						includeInlayEnumMemberValueHints = true,

@@ -7,6 +7,7 @@ if test -e ~/stripe
     fish_add_path "$HOME/stripe/password-vault/bin"
     fish_add_path "$HOME/stripe/space-commander/bin"
     fish_add_path "$HOME/stripe/henson/bin"
+    fish_add_path "$HOME/go/bin"
 
     abbr -a pipe 'cd ~/stripe/zoolander/src/python/pipeline/'
     abbr -a zoo 'cd ~/stripe/zoolander/'

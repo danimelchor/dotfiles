@@ -1,10 +1,9 @@
 return {
-	"nvim-lua/plenary.nvim", -- Necessary dependency
+	"nvim-lua/plenary.nvim",    -- Necessary dependency
 	"nvim-tree/nvim-web-devicons", -- Cool icons
 	"farmergreg/vim-lastplace", -- Remember last cursor place
-	"nvim-lua/popup.nvim", -- Necessary dependency
-	"christoomey/vim-tmux-navigator",
-	"tpope/vim-sleuth", -- Automatically adjust tab size
+	"nvim-lua/popup.nvim",      -- Necessary dependency
+	"tpope/vim-sleuth",         -- Automatically adjust tab size
 
 	-- Practice plugin
 	{

@@ -2,7 +2,9 @@ return {
   {
     "ibhagwan/fzf-lua",
     config = function()
-      require('fzf-lua').setup({ 'telescope' })
+      require('fzf-lua').setup({
+        'telescope',
+      })
       if vim.fn.executable("fzf") ~= 1 then
         vim.notify("fzf not found. brew install fzf", vim.log.levels.WARN)
       end

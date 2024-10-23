@@ -1,21 +1,20 @@
+local is_stripe = require("config.utils").is_stripe()
 return {
 	{
 		"zbirenbaum/copilot.lua",
 		event = "InsertEnter",
+		enabled = is_stripe ~= nil and is_stripe ~= false,
 		config = function()
-			local is_stripe = require("config.utils").is_stripe()
-			local enabled = is_stripe ~= nil and is_stripe ~= false
-
 			require("copilot").setup({
 				filetypes = {
-					["*"] = enabled,
+					["*"] = true,
 				},
 				panel = {
 					enabled = false,
 				},
 				suggestion = {
-					enabled = enabled,
-					auto_trigger = enabled,
+					enabled = true,
+					auto_trigger = true,
 					keymap = {
 						accept = false,
 						accept_word = false,

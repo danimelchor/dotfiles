@@ -1,5 +1,6 @@
 if test -e ~/stripe
     source ~/stripe/space-commander/bin/sc-env-activate.fish
+    bass source /etc/profile
 
     fish_add_path "$PYENV_ROOT/bin"
     fish_add_path "$HOME/.rbenv/shims"

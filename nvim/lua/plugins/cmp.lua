@@ -133,35 +133,46 @@ return {
 			"rafamadriz/friendly-snippets",
 		},
 		version = "v0.*",
-		opts = {
-			keymap = {
-				accept = "<Tab>",
-				select_prev = "<C-k>",
-				select_next = "<C-j>",
-				show_documentation = "<S-k>",
-			},
-			highlight = {
-				use_nvim_cmp_as_default = true,
-			},
-			nerd_font_variant = "normal",
-			accept = {
-				auto_brackets = {
-					enabled = true,
+		config = function()
+			local copilot = require("copilot.suggestion")
+			vim.g.copilot_no_tab_map = true
+
+			vim.keymap.set("i", "<S-Tab>", function()
+				if copilot.is_visible() then
+					copilot.accept()
+				end
+			end)
+
+			require("blink.cmp").setup({
+				keymap = {
+					accept = "<Tab>",
+					select_prev = "<C-k>",
+					select_next = "<C-j>",
+					show_documentation = "<S-k>",
 				},
-			},
-			trigger = {
-				signature_help = {
-					enabled = true,
+				highlight = {
+					use_nvim_cmp_as_default = true,
 				},
-			},
-			windows = {
-				documentation = {
-					auto_show = true,
-					auto_show_delay_ms = 300,
-					update_delay_ms = 50,
+				nerd_font_variant = "normal",
+				accept = {
+					auto_brackets = {
+						enabled = true,
+					},
 				},
-			},
-		},
+				trigger = {
+					signature_help = {
+						enabled = true,
+					},
+				},
+				windows = {
+					documentation = {
+						auto_show = true,
+						auto_show_delay_ms = 300,
+						update_delay_ms = 50,
+					},
+				},
+			})
+		end
 	},
 
 	-- Automatic docstrings

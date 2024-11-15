@@ -25,7 +25,7 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
 	vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
-	vim.keymap.set("n", "<LEADER>D", vim.lsp.buf.type_definition, opts)
+	vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
 	vim.keymap.set("n", "<LEADER>r", vim.lsp.buf.rename, opts)
 	vim.keymap.set("n", "<LEADER>a", vim.lsp.buf.code_action, opts)
 	vim.keymap.set("n", "<LEADER>f", function()
@@ -57,6 +57,7 @@ return {
 					"pyright",
 					"yamlls",
 					"svelte",
+					"zls",
 				},
 			})
 			local capabilities = vim.lsp.protocol.make_client_capabilities()

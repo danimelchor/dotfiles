@@ -2,7 +2,6 @@ local opt = vim.opt
 local g = vim.g
 local o = vim.o
 
-
 -- General settings
 opt.autoread = true
 opt.autoindent = true
@@ -13,7 +12,7 @@ opt.completeopt = "menu,menuone,noinsert,preview"
 opt.errorbells = false
 opt.expandtab = true
 opt.exrc = true
-opt.fileencoding = 'utf-8'
+opt.fileencoding = "utf-8"
 opt.hidden = true
 opt.hlsearch = false
 opt.ignorecase = true
@@ -23,10 +22,10 @@ opt.mouse = "a"
 opt.number = true
 opt.relativenumber = true
 opt.ruler = false
-opt.scrolloff = 10
+opt.scrolloff = 4
 opt.shiftwidth = 4
 opt.showmatch = true
-opt.signcolumn = 'yes'
+opt.signcolumn = "yes"
 opt.smartcase = true
 opt.smartindent = true
 opt.smarttab = true
@@ -44,7 +43,6 @@ o.breakindent = true
 o.gdefault = true
 
 g.mapleader = " "
-
 
 -- Toggle relative line numbering
 vim.cmd("command! ToggleRelLines set relativenumber!")

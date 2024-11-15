@@ -1,6 +1,6 @@
 if test -e ~/stripe
     source ~/stripe/space-commander/bin/sc-env-activate.fish
-    bass source /etc/profile
+    bass source ~/.stripe/shellinit/zshrc 2> /dev/null
 
     fish_add_path "$PYENV_ROOT/bin"
     fish_add_path "$HOME/.rbenv/shims"
@@ -22,7 +22,7 @@ if test -e ~/stripe
 
     abbr -a qapay 'pay --host-type qa-mydata-standard'
     abbr -a pjk 'pay job:kill'
-    abbr -a pjl 'pay job:list'
+    abbr -a pjl 'pay job:logs'
     abbr -a pu '~/payup.sh'
 
     abbr -a iceberg 'pay job:run bazel run src/scala/com/stripe/iceberg/cli --'
@@ -89,14 +89,14 @@ end
 
 # Git aliases
 abbr -a gs 'git status'
-abbr -a gp 'git push --no-verify'
-abbr -a gpv 'git push'
+abbr -a gp 'git push'
+abbr -a gpv 'git push --no-verify'
 abbr -a gp! 'git push --force-with-lease'
 abbr -a ga 'git add'
 abbr -a gaa 'git add --all'
 abbr -a grm 'git rm'
-abbr -a gpu 'git push -u origin $(git rev-parse --abbrev-ref HEAD) --no-verify'
-abbr -a gpuv 'git push -u origin $(git rev-parse --abbrev-ref HEAD)'
+abbr -a gpu 'git push -u origin $(git rev-parse --abbrev-ref HEAD)'
+abbr -a gpuv 'git push -u origin $(git rev-parse --abbrev-ref HEAD) --no-verify'
 abbr -a gbd 'git branch -d'
 abbr -a gbdf 'git branch -d (git branch --sort=-committerdate | fzf | sed -e "s/[\*[:space:]]//g" | xargs)'
 abbr -a gbDf 'git branch -D (git branch --sort=-committerdate | fzf | sed -e "s/[\*[:space:]]//g" | xargs)'

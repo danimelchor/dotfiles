@@ -20,4 +20,8 @@ function M.is_stripe()
    return M.exists('~/stripe')
 end
 
+P = function(what)
+   print(vim.inspect(what))
+end
+
 return M

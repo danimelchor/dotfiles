@@ -28,3 +28,14 @@ vim.keymap.set("n", "gx", function()
     vim.fn.jobstart("open " .. current, { detach = true })
   end
 end)
+
+-- Copy current file path from git repo root
+vim.keymap.set("n", "<leader>cp", function()
+  local current = vim.fn.expand("%:p")
+  local root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+  if current and root then
+    local rel = current:gsub(root, ""):gsub("^/", "")
+    vim.fn.setreg("+", rel)
+    vim.notify("Copied: " .. rel)
+  end
+end)

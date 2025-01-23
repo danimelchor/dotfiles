@@ -18,6 +18,8 @@ if test -e ~/stripe
     abbr -a dot 'cd ~/Documents/dotfiles/'
     abbr -a personal 'cd ~/personal/'
 
+    abbr -a demo 'pipeline -v create https://hubble.corp.stripe.com/queries/dmelchor/e748ff3d --airflow2'
+
     abbr -a cimypy 'bazel build //tools/build_rules/linting/private/py_tools:mypy && ~/stripe/zoolander/bazel-bin/tools/build_rules/linting/private/py_tools/mypy'
 
     abbr -a qapay 'pay --host-type qa-mydata-standard'

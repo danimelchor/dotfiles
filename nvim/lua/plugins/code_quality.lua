@@ -1,4 +1,30 @@
-local is_stripe = require('config.utils').is_stripe()
+local enable_diagnostics = function(value)
+  vim.diagnostic.config({
+    virtual_text = value,
+    signs = value,
+    update_in_insert = false,
+    float = {
+      source = "always",
+      border = "rounded",
+      focusable = false,
+    },
+    severity_sort = true,
+  })
+end
+enable_diagnostics(true)
+
+vim.api.nvim_create_user_command("LintDisable", function()
+  enable_diagnostics(false)
+end, {
+  desc = "Disable linting",
+})
+
+vim.api.nvim_create_user_command("LintEnable", function()
+  enable_diagnostics(true)
+end, {
+  desc = "Re-enable linting",
+})
+
 
 return {
   {
@@ -92,42 +118,12 @@ return {
         ["_"] = { "trim_whitespace", "trim_newlines" },
         proto = { "buf" },
       }
-      local formatters = nil
-
-      if is_stripe then
-        local make_zoolander_formatter = function(cmd)
-          return {
-            command = "./dev/" .. cmd,
-            args = { "$FILENAME" },
-            cwd = function(self, ctx)
-              return vim.fs.find("zoolander", { upward = true, path = ctx.dirname })[1]
-            end,
-            require_cwd = true,
-            stdin = false,
-          }
-        end
-
-        formatters = {
-          format_sql = make_zoolander_formatter("format-sql"),
-          format_build = make_zoolander_formatter("format-build"),
-          format_java = make_zoolander_formatter("format-java"),
-          format_scala = make_zoolander_formatter("format-scala"),
-        }
-
-        formatters_by_ft = vim.tbl_extend("force", formatters_by_ft, {
-          sql = { "format_sql" },
-          bzl = { "format_build" },
-          java = { "format_java" },
-          scala = { "format_scala" },
-        })
-      end
 
       require("conform").setup({
         formatters_by_ft = formatters_by_ft,
-        formatters = formatters,
         format_on_save = function(bufnr)
           -- Disable with a global or buffer-local variable
-          if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+          if vim.g.disable_autoformat then
             return
           end
           return { timeout_ms = 3000, lsp_format = "fallback" }
@@ -136,19 +132,13 @@ return {
 
       -- https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md
       vim.api.nvim_create_user_command("FormatDisable", function(args)
-        if args.bang then
-          -- FormatDisable! will disable formatting just for this buffer
-          vim.b.disable_autoformat = true
-        else
-          vim.g.disable_autoformat = true
-        end
+        vim.g.disable_autoformat = true
       end, {
         desc = "Disable autoformat-on-save",
         bang = true,
       })
 
       vim.api.nvim_create_user_command("FormatEnable", function()
-        vim.b.disable_autoformat = false
         vim.g.disable_autoformat = false
       end, {
         desc = "Re-enable autoformat-on-save",

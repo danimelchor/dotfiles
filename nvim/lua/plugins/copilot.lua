@@ -14,7 +14,7 @@ return {
 				},
 				suggestion = {
 					enabled = true,
-					auto_trigger = true,
+					auto_trigger = false,
 					keymap = {
 						accept = false,
 						accept_word = false,

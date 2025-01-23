@@ -1,6 +1,9 @@
+[general]
 import = [
   "~/.config/alacritty/catppuccin-mocha.toml"
 ]
+
+[terminal]
 shell = "/opt/homebrew/bin/fish"
 
 [font]

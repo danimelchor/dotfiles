@@ -1,21 +1,12 @@
 local is_stripe = require("config.utils").is_stripe()
 
-vim.diagnostic.config({
-	virtual_text = true,
-	signs = true,
-	update_in_insert = false,
-	float = {
-		source = "always",
-		border = "rounded",
-		focusable = false,
-	},
-	severity_sort = true,
-})
-
 local toggle_inlay_hint = function()
 	local is_enabled = vim.lsp.inlay_hint.is_enabled()
 	vim.lsp.inlay_hint.enable(not is_enabled)
 end
+
+ZLSP_BIN =
+'/Users/dmelchor/.cache-zoolander/prebuilt-binaries-cache/zlsp/a9acdad424ac03972d85d7f07f90a712962b5f3c01d3fcbd6a92d647d353e090/bin'
 
 -- LSP
 local on_attach = function(client, bufnr)
@@ -129,6 +120,27 @@ return {
 					})
 				end,
 			})
+
+			if is_stripe then
+				local server_config = require('lspconfig.configs')
+				local root_pattern = require('lspconfig.util').root_pattern
+				server_config.zslp = {
+					default_config = {
+						cmd = {
+							ZLSP_BIN,
+							'lsp',
+							'--buildhelper=true',
+						},
+						name = 'zlsp',
+						filetypes = {
+							'bzl',
+							'BUILD.bazel',
+							'python',
+						},
+						root_dir = root_pattern('WORKSPACE')
+					}
+				}
+			end
 		end,
 		dependencies = {
 			-- LSP Support

@@ -1,6 +1,6 @@
 local is_stripe = require("config.utils").is_stripe()
 
-if not is_stripe then
+if is_stripe then
 	return {}
 end
 

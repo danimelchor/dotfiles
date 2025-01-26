@@ -30,11 +30,3 @@ decorations = "Buttonless"
 title = "Alacritty"
 dynamic_title = true
 opacity = 1
-
-[general]
-import = [
-  "~/.config/alacritty/catppuccin-mocha.toml"
-]
-
-[terminal]
-shell = "/opt/homebrew/bin/fish"

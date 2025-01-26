@@ -1,3 +1,4 @@
 nvim/undo
-nvim/plugin
+nvim/undo
+nvim/lazy-lock.json
 .DS_Store

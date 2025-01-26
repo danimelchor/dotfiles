@@ -39,13 +39,16 @@ return {
 	},
 
 	-- Highlights for
-	-- TODO: test
+	-- TODO(dmelchor): test
 	-- FIX: test
 	-- HACK: test
 	-- WARN: test
 	{
 		"folke/todo-comments.nvim",
-		config = true,
 		event = "BufEnter",
+		opts = {
+			search = { pattern = [[\b(KEYWORDS)(\([^\)]*\))?:]] },
+			highlight = { pattern = [[.*<((KEYWORDS)%(\(.{-1,}\))?):]] },
+		},
 	},
 }

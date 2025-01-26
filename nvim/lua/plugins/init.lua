@@ -1,9 +1,9 @@
 return {
-	"nvim-lua/plenary.nvim",    -- Necessary dependency
+	"nvim-lua/plenary.nvim", -- Necessary dependency
 	"nvim-tree/nvim-web-devicons", -- Cool icons
 	"farmergreg/vim-lastplace", -- Remember last cursor place
-	"nvim-lua/popup.nvim",      -- Necessary dependency
-	"tpope/vim-sleuth",         -- Automatically adjust tab size
+	"nvim-lua/popup.nvim", -- Necessary dependency
+	"tpope/vim-sleuth", -- Automatically adjust tab size
 
 	-- Practice plugin
 	{
@@ -17,10 +17,14 @@ return {
 		event = "BufEnter",
 	},
 
-	-- Disable some features for big files
+	-- Render code asap
 	{
-		"LunarVim/bigfile.nvim",
-		event = { "FileReadPre", "BufReadPre", "BufEnter" },
+		"folke/snacks.nvim",
+		---@type snacks.Config
+		opts = {
+			bigfile = {},
+			quickfile = {},
+		},
 	},
 
 	-- Markdown previewer

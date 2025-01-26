@@ -8,8 +8,8 @@ return {
 			require("luasnip.loaders.from_vscode").lazy_load()
 			local luasnip = require("luasnip")
 			local cmp = require("cmp")
+			local copilot, _ = pcall(require, "copilot.suggestion")
 
-			local copilot = require("copilot.suggestion")
 			vim.g.copilot_no_tab_map = true
 
 			local lspkind = require("lspkind")
@@ -88,7 +88,7 @@ return {
 						"s",
 					}),
 					["<S-Tab>"] = cmp.mapping(function(fallback)
-						if copilot.is_visible() then
+						if is_stripe and copilot.is_visible() then
 							copilot.accept()
 						else
 							fallback()

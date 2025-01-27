@@ -2,6 +2,7 @@ local enable_diagnostics = function(value)
   vim.diagnostic.config({
     virtual_text = value,
     signs = value,
+    underline = value,
     update_in_insert = false,
     float = {
       source = "always",

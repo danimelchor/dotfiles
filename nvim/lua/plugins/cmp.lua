@@ -142,25 +142,23 @@ return {
 					["<C-j>"] = { "select_next" },
 					["<S-k>"] = { "show_documentation", "fallback" },
 				},
-				highlight = {
+				appearance = {
 					use_nvim_cmp_as_default = true,
 				},
-				accept = {
-					auto_brackets = {
-						enabled = true,
+				completion = {
+					accept = {
+						auto_brackets = {
+							enabled = true,
+						},
 					},
-				},
-				trigger = {
-					signature_help = {
-						enabled = true,
-					},
-				},
-				windows = {
 					documentation = {
 						auto_show = true,
 						auto_show_delay_ms = 300,
 						update_delay_ms = 50,
 					},
+				},
+				signature = {
+					enabled = true,
 				},
 			})
 
@@ -172,6 +170,7 @@ return {
 					"n",
 					"<S-Tab>",
 					function()
+						print("Copilot")
 						if copilot.is_visible() then
 							copilot.accept()
 						end

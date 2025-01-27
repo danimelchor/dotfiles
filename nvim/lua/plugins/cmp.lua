@@ -8,7 +8,7 @@ return {
 			require("luasnip.loaders.from_vscode").lazy_load()
 			local luasnip = require("luasnip")
 			local cmp = require("cmp")
-			local copilot, _ = pcall(require, "copilot.suggestion")
+			local _, copilot = pcall(require, "copilot.suggestion")
 
 			vim.g.copilot_no_tab_map = true
 
@@ -122,45 +122,64 @@ return {
 			"rafamadriz/friendly-snippets",
 		},
 		event = "InsertEnter",
+		enabled = false,
 	},
 
 	{
-		enabled = false,
 		"saghen/blink.cmp",
 		lazy = false, -- lazy loading handled internally
 		dependencies = {
 			"L3MON4D3/LuaSnip",
 			"rafamadriz/friendly-snippets",
+			"onsails/lspkind.nvim",
 		},
-		version = "v0.*",
-		opts = {
-			keymap = {
-				["<Tab>"] = { "accept", "fallback" },
-				["<C-k>"] = { "select_prev" },
-				["<C-j>"] = { "select_next" },
-				["<S-k>"] = { "show_documentation", "fallback" },
-			},
-			highlight = {
-				use_nvim_cmp_as_default = true,
-			},
-			accept = {
-				auto_brackets = {
-					enabled = true,
+		version = "*",
+		config = function()
+			require("blink.cmp").setup({
+				keymap = {
+					["<Tab>"] = { "accept", "fallback" },
+					["<C-k>"] = { "select_prev" },
+					["<C-j>"] = { "select_next" },
+					["<S-k>"] = { "show_documentation", "fallback" },
 				},
-			},
-			trigger = {
-				signature_help = {
-					enabled = true,
+				highlight = {
+					use_nvim_cmp_as_default = true,
 				},
-			},
-			windows = {
-				documentation = {
-					auto_show = true,
-					auto_show_delay_ms = 300,
-					update_delay_ms = 50,
+				accept = {
+					auto_brackets = {
+						enabled = true,
+					},
 				},
-			},
-		},
+				trigger = {
+					signature_help = {
+						enabled = true,
+					},
+				},
+				windows = {
+					documentation = {
+						auto_show = true,
+						auto_show_delay_ms = 300,
+						update_delay_ms = 50,
+					},
+				},
+			})
+
+
+			if is_stripe then
+				local copilot = require("copilot.suggestion")
+				vim.g.copilot_no_tab_map = true
+				vim.keymap.set(
+					"n",
+					"<S-Tab>",
+					function()
+						if copilot.is_visible() then
+							copilot.accept()
+						end
+					end,
+					{ desc = "Accept Copilot Suggestions" }
+				)
+			end
+		end,
 	},
 
 	-- Automatic docstrings

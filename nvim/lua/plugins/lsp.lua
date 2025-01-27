@@ -53,6 +53,10 @@ return {
 			})
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			-- capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+			local ok, blink = pcall(require, 'blink.cmp')
+			if ok then
+				capabilities = blink.get_lsp_capabilities(capabilities)
+			end
 
 			require("mason-lspconfig").setup_handlers({
 				function(server_name) -- default handler (optional)

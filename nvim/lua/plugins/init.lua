@@ -17,16 +17,6 @@ return {
 		event = "BufEnter",
 	},
 
-	-- Render code asap
-	{
-		"folke/snacks.nvim",
-		---@type snacks.Config
-		opts = {
-			bigfile = {},
-			quickfile = {},
-		},
-	},
-
 	-- Markdown previewer
 	{
 		"iamcco/markdown-preview.nvim",

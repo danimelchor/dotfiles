@@ -1,12 +1,21 @@
 -- Render code asap
 return {
 	"folke/snacks.nvim",
-	---@type snacks.Config
+	priority = 1000,
 	opts = {
 		bigfile = {},
 		quickfile = {},
-		picker = {},
+		picker = {
+			sources = {
+				recent = {
+					filter = {
+						cwd = true,
+					},
+				},
+			},
+		},
 	},
+	lazy = false,
 	keys = {
 		{
 			"<LEADER>fh",

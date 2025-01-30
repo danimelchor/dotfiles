@@ -167,7 +167,7 @@ return {
 				local copilot = require("copilot.suggestion")
 				vim.g.copilot_no_tab_map = true
 				vim.keymap.set(
-					"n",
+					"i",
 					"<S-Tab>",
 					function()
 						print("Copilot")

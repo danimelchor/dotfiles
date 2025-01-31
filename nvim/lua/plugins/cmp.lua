@@ -147,8 +147,12 @@ return {
 				completion = {
 					documentation = {
 						auto_show = true,
-						auto_show_delay_ms = 100,
-						update_delay_ms = 50,
+						auto_show_delay_ms = 300,
+						window = {
+							border = 'single',
+							winhighlight =
+							'Normal:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenuSelection,Search:None',
+						}
 					},
 					list = {
 						selection = {
@@ -157,6 +161,7 @@ return {
 					},
 					menu = {
 						auto_show = function(ctx) return ctx.mode ~= 'cmdline' end,
+						border = 'single'
 					},
 				},
 				signature = {
@@ -164,7 +169,6 @@ return {
 					window = { border = 'single' }
 				},
 			})
-
 
 			if is_stripe then
 				local copilot = require("copilot.suggestion")

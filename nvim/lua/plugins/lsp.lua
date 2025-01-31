@@ -125,6 +125,10 @@ return {
 				end,
 			})
 
+			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+				border = "single",
+			})
+
 			if is_stripe then
 				local server_config = require('lspconfig.configs')
 				local root_pattern = require('lspconfig.util').root_pattern

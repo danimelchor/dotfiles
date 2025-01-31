@@ -140,25 +140,28 @@ return {
 					["<Tab>"] = { "accept", "fallback" },
 					["<C-k>"] = { "select_prev" },
 					["<C-j>"] = { "select_next" },
-					["<S-k>"] = { "show_documentation", "fallback" },
 				},
 				appearance = {
 					use_nvim_cmp_as_default = true,
 				},
 				completion = {
-					accept = {
-						auto_brackets = {
-							enabled = true,
-						},
-					},
 					documentation = {
 						auto_show = true,
-						auto_show_delay_ms = 300,
+						auto_show_delay_ms = 100,
 						update_delay_ms = 50,
+					},
+					list = {
+						selection = {
+							auto_insert = false,
+						},
+					},
+					menu = {
+						auto_show = function(ctx) return ctx.mode ~= 'cmdline' end,
 					},
 				},
 				signature = {
 					enabled = true,
+					window = { border = 'single' }
 				},
 			})
 

@@ -24,7 +24,13 @@ return {
 			end,
 			desc = "[F]ind [H]istory",
 		},
-		{ "<LEADER>fw", "<cmd>FzfLua grep<CR>", desc = "[F]ind [W]ords" },
+		{
+			"<LEADER>fw",
+			function()
+				Snacks.picker.grep()
+			end,
+			desc = "[F]ind [W]ords"
+		},
 		{
 			"<LEADER>fb",
 			function()

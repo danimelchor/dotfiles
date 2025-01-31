@@ -37,6 +37,7 @@ opt.termguicolors = true
 opt.title = true
 opt.ttimeoutlen = 0
 opt.undofile = true
+opt.fixeol = false
 
 o.showmode = false
 o.breakindent = true

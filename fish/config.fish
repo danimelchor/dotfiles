@@ -72,8 +72,15 @@ abbr -a ll 'ls -l'
 abbr -a lll 'ls -la'
 
 function v
+    # If no arg, open here
     if test -z $argv[1]
         nvim .
+    # If the arg is a dir, cd and open
+    else if test -d $argv[1]
+        pushd $argv[1]
+        nvim .
+        popd
+    # If the arg is a file, cd into base dir and open
     else
         pushd $(dirname $argv[1])
         nvim $(basename $argv[1])

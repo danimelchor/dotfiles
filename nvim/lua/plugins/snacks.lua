@@ -6,13 +6,6 @@ return {
 		bigfile = {},
 		quickfile = {},
 		picker = {
-			sources = {
-				recent = {
-					filter = {
-						cwd = true,
-					},
-				},
-			},
 		},
 	},
 	lazy = false,
@@ -20,14 +13,14 @@ return {
 		{
 			"<LEADER>fh",
 			function()
-				Snacks.picker.recent()
+				Snacks.picker.recent({ cwd = true })
 			end,
 			desc = "[F]ind [H]istory",
 		},
 		{
 			"<LEADER>fw",
 			function()
-				Snacks.picker.grep()
+				Snacks.picker.grep({ cwd = true })
 			end,
 			desc = "[F]ind [W]ords"
 		},
@@ -41,14 +34,14 @@ return {
 		{
 			"<LEADER>fs",
 			function()
-				Snacks.picker.lsp_symbols()
+				Snacks.picker.lsp_symbols({ cwd = true })
 			end,
 			desc = "[F]ind [S]ymbols",
 		},
 		{
 			"<LEADER>fd",
 			function()
-				Snacks.picker.diagnostics_buffer()
+				Snacks.picker.diagnostics_buffer({ cwd = true })
 			end,
 			desc = "[F]ind [D]iagnostics",
 		},
@@ -69,14 +62,14 @@ return {
 		{
 			"<C-p>",
 			function()
-				Snacks.picker.git_files()
+				Snacks.picker.git_files({ cwd = true })
 			end,
 			desc = "Find files in git repo",
 		},
 		{
 			"<LEADER>ff",
 			function()
-				Snacks.picker.files()
+				Snacks.picker.files({ cwd = true })
 			end,
 			desc = "Find files",
 		},

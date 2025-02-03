@@ -140,6 +140,8 @@ return {
 					["<Tab>"] = { "accept", "fallback" },
 					["<C-k>"] = { "select_prev" },
 					["<C-j>"] = { "select_next" },
+					['<Up>'] = {},
+					['<Down>'] = {},
 				},
 				appearance = {
 					use_nvim_cmp_as_default = true,
@@ -160,7 +162,6 @@ return {
 						},
 					},
 					menu = {
-						auto_show = function(ctx) return ctx.mode ~= 'cmdline' end,
 						border = 'single'
 					},
 				},
@@ -177,7 +178,6 @@ return {
 					"i",
 					"<S-Tab>",
 					function()
-						print("Copilot")
 						if copilot.is_visible() then
 							copilot.accept()
 						end

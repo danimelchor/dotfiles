@@ -66,21 +66,18 @@ abbr -a c clear
 abbr -a e exit
 
 if command -v eza > /dev/null
-    abbr -a l 'eza'
-    abbr -a ls 'eza'
-    abbr -a ll 'eza -l'
-    abbr -a lll 'eza -la'
-else
-    abbr -a l 'ls'
-    abbr -a ll 'ls -l'
-    abbr -a lll 'ls -la'
+    alias ls='eza'
 end
+abbr -a ll 'ls -l'
+abbr -a lll 'ls -la'
 
 function v
     if test -z $argv[1]
         nvim .
     else
-        nvim $argv[1]
+        pushd $(dirname $argv[1])
+        nvim $(basename $argv[1])
+        popd
     end
 end
 

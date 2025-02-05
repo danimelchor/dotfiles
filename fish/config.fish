@@ -124,6 +124,7 @@ abbr -a gri 'git rebase -i'
 abbr -a gf 'git fetch'
 abbr -a gsur 'git submodule update --recursive'
 abbr -a gfr 'git fetch origin master-passing-tests && git rebase origin/master-passing-tests'
+abbr -a gfrm 'git fetch origin master && git rebase origin/master'
 
 # Tmux aliases
 abbr -a t 'tmux'

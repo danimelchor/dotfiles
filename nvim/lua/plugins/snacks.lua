@@ -1,4 +1,8 @@
 -- Render code asap
+local get_opts = function()
+	return { cwd = vim.uv.cwd() }
+end
+
 return {
 	"folke/snacks.nvim",
 	priority = 1000,
@@ -13,14 +17,14 @@ return {
 		{
 			"<LEADER>fh",
 			function()
-				Snacks.picker.recent({ cwd = true })
+				Snacks.picker.recent(get_opts())
 			end,
 			desc = "[F]ind [H]istory",
 		},
 		{
 			"<LEADER>fw",
 			function()
-				Snacks.picker.grep({ cwd = true })
+				Snacks.picker.grep(get_opts())
 			end,
 			desc = "[F]ind [W]ords"
 		},
@@ -34,14 +38,14 @@ return {
 		{
 			"<LEADER>fs",
 			function()
-				Snacks.picker.lsp_symbols({ cwd = true })
+				Snacks.picker.lsp_symbols(get_opts())
 			end,
 			desc = "[F]ind [S]ymbols",
 		},
 		{
 			"<LEADER>fd",
 			function()
-				Snacks.picker.diagnostics_buffer({ cwd = true })
+				Snacks.picker.diagnostics_buffer(get_opts())
 			end,
 			desc = "[F]ind [D]iagnostics",
 		},
@@ -62,14 +66,14 @@ return {
 		{
 			"<C-p>",
 			function()
-				Snacks.picker.git_files({ cwd = true })
+				Snacks.picker.git_files(get_opts())
 			end,
 			desc = "Find files in git repo",
 		},
 		{
 			"<LEADER>ff",
 			function()
-				Snacks.picker.files({ cwd = true })
+				Snacks.picker.files(get_opts())
 			end,
 			desc = "Find files",
 		},

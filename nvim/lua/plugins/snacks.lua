@@ -9,8 +9,7 @@ return {
 	opts = {
 		bigfile = {},
 		quickfile = {},
-		picker = {
-		},
+		picker = {},
 	},
 	lazy = false,
 	keys = {

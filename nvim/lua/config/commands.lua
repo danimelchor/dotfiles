@@ -42,6 +42,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
       vim.bo.filetype = "python"
       vim.cmd("FormatDisable")
       vim.cmd("LintDisable")
+      vim.notify("Sky files treated as Python", vim.log.levels.INFO)
     end
   end,
   group = SkyFileType,

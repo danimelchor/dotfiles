@@ -143,7 +143,6 @@ starship init fish | source
 
 # === FISH GREETING ===
 function fish_greeting
-    echo
     show-todos
 end
 

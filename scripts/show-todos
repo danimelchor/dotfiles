@@ -5,35 +5,84 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
-import click
-
 TODOS_PATH = Path.home() / "todo.md"
 
+YELLOW = "\033[93m"
+BLUE = "\033[94m"
+BOLD = "\033[1m"
+RESET = "\033[0m"
+GREEN = "\033[92m"
 
-def read_todos():
-    with TODOS_PATH.open() as f:
-        return f.read()
+WARNING_ICON = ""
+SUCCESS_ICON = ""
+ARROW_ICON = "󰘍"
+
+ANSI_ESCAPE = re.compile(r"\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])")
 
 
-def parse_todos() -> dict[str, bool]:
-    lines = read_todos().splitlines()
+def yellow(msg: str) -> str:
+    return f"{YELLOW}{msg}{RESET}"
+
+
+def green(msg: str) -> str:
+    return f"{GREEN}{msg}{RESET}"
+
+
+def blue(msg: str) -> str:
+    return f"{BLUE}{msg}{RESET}"
+
+
+def bold(msg: str) -> str:
+    return f"{BOLD}{msg}{RESET}"
+
+
+def parse_todos() -> list[str]:
+    lines = TODOS_PATH.read_text().splitlines()
     lines = [re.sub(r"^- ", "", line) for line in lines]
-    todos: dict[str, bool] = {}
+    todos: list[str] = []
     for line in lines:
         if line.startswith("[]") or line.startswith("[ ]"):
             todo = line.lstrip("[] ")
-            todos[todo] = False
-        elif line.lower().startswith("[x]"):
-            todo = line.lstrip("[x] ")
-            todos[todo] = True
+            todos.append(todo)
     return todos
 
 
-if __name__ == "__main__":
-    todos = parse_todos()
-    not_done = [t for t, done in todos.items() if not done]
+def visible_len(s: str) -> int:
+    """Return the visible length of a string"""
+    return len(ANSI_ESCAPE.sub("", s))
 
-    if not_done:
-        click.secho("You have some TODOs", fg="yellow", bold=True)
-        for t in not_done:
-            click.echo(f"- [] {t}")
+
+def boxed(contents: list[str]) -> list[str]:
+    """Return a boxed version of the contents, with the given title"""
+    lines = [(line, visible_len(line)) for line in contents]
+    max_width = max(length for _, length in lines)
+
+    res = [" ┏" + "━" * (max_width + 2) + "┓"]
+
+    for line, length in lines:
+        missing = max_width - length
+        res.append(" ┃ " + line + " " * missing + " ┃")
+
+    res.append(" ┗" + "━" * (max_width + 2) + "┛")
+
+    return res
+
+
+def main():
+    todos = parse_todos()
+    print(bold("\n TODOs"))
+    if todos:
+        title = bold(yellow(f"{WARNING_ICON} You have some TODOs"))
+        contents = [title]
+        for t in todos:
+            contents.append(f"   {ARROW_ICON} {t}")
+        for line in boxed(contents):
+            print(line)
+    else:
+        title = bold(green(f"{SUCCESS_ICON}  No TODOs"))
+        for line in boxed([title]):
+            print(line)
+
+
+if __name__ == "__main__":
+    main()

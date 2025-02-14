@@ -1,8 +1,6 @@
 if test -e ~/stripe
     source ~/stripe/space-commander/bin/sc-env-activate.fish
-    bass source ~/.stripe/shellinit/zshrc 2> /dev/null
 
-    fish_add_path "$PYENV_ROOT/bin"
     fish_add_path "$HOME/.rbenv/shims"
     fish_add_path "$HOME/.rbenv/bin"
     fish_add_path "$HOME/stripe/password-vault/bin"
@@ -30,13 +28,14 @@ end
 functions -e fish_right_prompt
 
 # If pyenv exists
-if command -v pyenv > /dev/null
+if command -q pyenv
     set -Ux PYENV_ROOT $HOME/.pyenv
-    pyenv init - | source
+    fish_add_path "$PYENV_ROOT/bin"
+    pyenv init - fish | source
 end
 
 # If nodenv exists
-if command -v nodenv > /dev/null
+if command -q nodenv
     nodenv init - | source
 end
 
@@ -52,7 +51,7 @@ abbr -a c clear
 abbr -a e exit
 
 # Eza
-if command -v eza > /dev/null
+if command -q eza
     alias ls='eza'
 end
 abbr -a ll 'ls -l'
@@ -133,7 +132,10 @@ set -x GIT_EDITOR $EDITOR
 set -gx SHELL /opt/homebrew/bin/fish
 
 # Todui
-abbr -a td 'nvim ~/todo.md'
+function td
+    nvim ~/todo.md
+    show-todos
+end
 
 # Raspberry Pi
 abbr -a pi 'ssh dmelchor@dmelchor.lan'

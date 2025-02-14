@@ -18,29 +18,13 @@ if test -e ~/stripe
     abbr -a dot 'cd ~/Documents/dotfiles/'
     abbr -a personal 'cd ~/personal/'
 
-    abbr -a demo 'pipeline -v create https://hubble.corp.stripe.com/queries/dmelchor/e748ff3d --airflow2'
-
-    abbr -a cimypy 'bazel build //tools/build_rules/linting/private/py_tools:mypy && ~/stripe/zoolander/bazel-bin/tools/build_rules/linting/private/py_tools/mypy'
-
     abbr -a qapay 'pay --host-type qa-mydata-standard'
     abbr -a pjk 'pay job:kill'
     abbr -a pjl 'pay job:logs'
-    abbr -a pu '~/payup.sh'
 
-    abbr -a iceberg 'pay job:run bazel run src/scala/com/stripe/iceberg/cli --'
     abbr -a mpt 'git switch master-passing-tests'
-
-    # Postgres
-    set -Ux PGDATA '/usr/local/var/postgres'
-
-    set -x PIPELINE_MODE dev
-    set -gx PYENV_VERSION 3.8.17
-
-    set -gx PAY_SKIP_REACHABILITY_CHECKS true
 else
     abbr -a --set-cursor=% sv 'nvim scp://dmelchor@dmelchorpi.local/%'
-    set -gx LIBTORCH $(brew --cellar pytorch)/$(brew info --json pytorch | jq -r '.[0].installed[0].version')
-    set -gx LD_LIBRARY_PATH $LIBTORCH/lib
 end
 
 functions -e fish_right_prompt
@@ -56,21 +40,25 @@ if command -v nodenv > /dev/null
     nodenv init - | source
 end
 
+# PATH vars
 fish_add_path /opt/homebrew/bin
 fish_add_path ~/.local/bin
 fish_add_path /usr/local/bin
 fish_add_path "$HOME/.cargo/bin"
 fish_add_path /usr/local/go/bin
 
+# Utility aliases
 abbr -a c clear
 abbr -a e exit
 
+# Eza
 if command -v eza > /dev/null
     alias ls='eza'
 end
 abbr -a ll 'ls -l'
 abbr -a lll 'ls -la'
 
+# Neovim
 function v
     # If no arg, open here
     if test -z $argv[1]
@@ -86,11 +74,6 @@ function v
         nvim $(basename $argv[1])
         popd
     end
-end
-
-if command -v zoxide > /dev/null
-    zoxide init fish | source
-    alias cd='z'
 end
 
 # Git aliases

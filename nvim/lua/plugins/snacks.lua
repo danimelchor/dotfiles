@@ -74,7 +74,14 @@ return {
 			function()
 				Snacks.picker.files(get_opts())
 			end,
-			desc = "Find files",
+			desc = "[F]ind [F]iles",
+		},
+		{
+			"<LEADER>fi",
+			function()
+				Snacks.picker.icons()
+			end,
+			desc = "[F]ind [I]cons",
 		},
 	},
 }

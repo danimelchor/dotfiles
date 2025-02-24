@@ -64,12 +64,12 @@ function v
         nvim .
     # If the arg is a dir, cd and open
     else if test -d $argv[1]
-        pushd $argv[1]
+        pushd $argv[1] || return 1
         nvim .
         popd
     # If the arg is a file, cd into base dir and open
     else
-        pushd $(dirname $argv[1])
+        pushd $(dirname $argv[1]) || return 1
         nvim $(basename $argv[1])
         popd
     end

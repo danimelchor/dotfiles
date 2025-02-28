@@ -15,6 +15,8 @@ local set_up_zlsp_server = function(capabilities, on_attach, zlsp_bin)
 			cmd = {
 				zlsp_bin,
 				'lsp',
+				'--allowlists',
+				'src/python/monolint/python/allowlist',
 			},
 			name = 'zlsp',
 			filetypes = {

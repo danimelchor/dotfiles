@@ -15,7 +15,6 @@ local set_up_zlsp_server = function(capabilities, on_attach, zlsp_bin)
 			cmd = {
 				zlsp_bin,
 				'lsp',
-				'--buildhelper=true',
 			},
 			name = 'zlsp',
 			filetypes = {

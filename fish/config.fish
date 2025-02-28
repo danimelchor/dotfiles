@@ -139,7 +139,7 @@ starship init fish | source
 
 # === FISH GREETING ===
 function fish_greeting
-    show-todos
+    todo
 end
 
 source ~/.config/fish/utils.fish

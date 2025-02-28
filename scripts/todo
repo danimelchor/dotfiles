@@ -2,7 +2,10 @@
 # vi: ft=python
 from __future__ import annotations
 
+import os
 import re
+import subprocess
+import sys
 from pathlib import Path
 
 TODOS_PATH = Path.home() / "todo.md"
@@ -68,7 +71,7 @@ def boxed(contents: list[str]) -> list[str]:
     return res
 
 
-def main():
+def show_todos():
     todos = parse_todos()
     print(bold("\n TODOs"))
     if todos:
@@ -82,6 +85,18 @@ def main():
         title = bold(green(f"{SUCCESS_ICON}  No TODOs"))
         for line in boxed([title]):
             print(line)
+
+
+def edit():
+    editor = os.environ["EDITOR"]
+    subprocess.check_call([editor, TODOS_PATH])
+
+
+def main():
+    if "-e" in sys.argv:
+        edit()
+
+    show_todos()
 
 
 if __name__ == "__main__":

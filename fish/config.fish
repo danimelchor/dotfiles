@@ -131,12 +131,6 @@ set -x GIT_EDITOR $EDITOR
 # Shell
 set -gx SHELL /opt/homebrew/bin/fish
 
-# Todui
-function td
-    nvim ~/todo.md
-    show-todos
-end
-
 # Raspberry Pi
 abbr -a pi 'ssh dmelchor@dmelchor.lan'
 

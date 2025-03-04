@@ -40,6 +40,7 @@ return {
 				markdown = { "markdownlint" },
 				json = { "jsonlint" },
 				proto = { "buf_lint" },
+				lua = {},
 			}
 
 			-- Add "codespell" to all filetypes
@@ -50,28 +51,20 @@ return {
 			local lint = require("lint")
 			lint.linters_by_ft = linters_by_ft
 
-			local timer = assert(vim.loop.new_timer())
-			local DEBOUNCE_MS = 500
+			local codespell_args = { "-D", os.getenv("HOME") .. "/.config/codespell/custom.txt,-" }
+			for _, v in pairs(lint.linters.codespell.args) do
+				table.insert(codespell_args, v)
+			end
+			lint.linters.codespell.args = codespell_args
+
 			local LintGroup = vim.api.nvim_create_augroup("LintGroup", { clear = true })
-			vim.api.nvim_create_autocmd({ "BufWritePost", "TextChanged", "InsertLeave" }, {
+			vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
 				group = LintGroup,
 				callback = function()
-					local buf = vim.api.nvim_get_current_buf()
-					timer:stop()
-					timer:start(
-						DEBOUNCE_MS,
-						0,
-						vim.schedule_wrap(function()
-							if vim.api.nvim_buf_is_valid(buf) then
-								vim.api.nvim_buf_call(buf, function()
-									lint.try_lint(nil, { ignore_errors = true })
-								end)
-							end
-						end)
-					)
+					lint.try_lint()
+					vim.notify("Linted buffer", vim.log.levels.INFO)
 				end,
 			})
-			lint.try_lint(nil, { ignore_errors = true })
 		end,
 		event = "BufEnter",
 	},

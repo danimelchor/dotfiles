@@ -26,7 +26,7 @@ return {
 		end,
 	},
 
-	-- Notification pluggin & lsp loading
+	-- Notification plugin & lsp loading
 	{
 		"echasnovski/mini.notify",
 		version = false,

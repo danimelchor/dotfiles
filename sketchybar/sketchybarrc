@@ -65,7 +65,7 @@ source "$ITEM_DIR/utc.sh"
 # Forcing all item scripts to run (never do this outside of sketchybarrc)
 sketchybar --update
 
-echo "sketchybar configuation loaded.."
+echo "sketchybar configuration loaded.."
 
 # Force triggers
 sleep 1 && sketchybar --trigger refresh_spaces

@@ -1,5 +1,5 @@
 return {
-	-- Code snipet images
+	-- Code snippet images
 	{
 		"mistricky/codesnap.nvim",
 		build = "make",

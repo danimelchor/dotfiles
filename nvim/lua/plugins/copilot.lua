@@ -1,9 +1,7 @@
-local is_stripe = require("config.utils").is_stripe()
 return {
 	{
 		"zbirenbaum/copilot.lua",
 		event = "InsertEnter",
-		enabled = is_stripe ~= nil and is_stripe ~= false,
 		config = function()
 			require("copilot").setup({
 				filetypes = {

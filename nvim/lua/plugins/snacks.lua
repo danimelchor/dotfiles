@@ -9,7 +9,16 @@ return {
 	opts = {
 		bigfile = {},
 		quickfile = {},
-		picker = {},
+		picker = {
+			win = {
+				input = {
+					keys = {
+						["<C-j>"] = { "history_forward", mode = { "i", "n" } },
+						["<C-k>"] = { "history_back", mode = { "i", "n" } },
+					},
+				},
+			},
+		},
 	},
 	lazy = false,
 	keys = {
@@ -25,7 +34,7 @@ return {
 			function()
 				Snacks.picker.grep(get_opts())
 			end,
-			desc = "[F]ind [W]ords"
+			desc = "[F]ind [W]ords",
 		},
 		{
 			"<LEADER>fb",

@@ -16,8 +16,8 @@ return {
 					["<Tab>"] = { "accept", "fallback" },
 					["<C-k>"] = { "select_prev" },
 					["<C-j>"] = { "select_next" },
-					['<Up>'] = {},
-					['<Down>'] = {},
+					["<Up>"] = {},
+					["<Down>"] = {},
 				},
 				appearance = {
 					use_nvim_cmp_as_default = true,
@@ -27,10 +27,9 @@ return {
 						auto_show = true,
 						auto_show_delay_ms = 300,
 						window = {
-							border = 'single',
-							winhighlight =
-							'Normal:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenuSelection,Search:None',
-						}
+							border = "single",
+							winhighlight = "Normal:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
+						},
 					},
 					list = {
 						selection = {
@@ -38,28 +37,23 @@ return {
 						},
 					},
 					menu = {
-						border = 'single'
+						border = "single",
 					},
 				},
 				signature = {
 					enabled = true,
-					window = { border = 'single' }
+					window = { border = "single" },
 				},
 			})
 
-			if is_stripe then
-				local copilot = require("copilot.suggestion")
+			local ok, copilot = pcall(require, "copilot.suggestion")
+			if ok then
 				vim.g.copilot_no_tab_map = true
-				vim.keymap.set(
-					"i",
-					"<S-Tab>",
-					function()
-						if copilot.is_visible() then
-							copilot.accept()
-						end
-					end,
-					{ desc = "Accept Copilot Suggestions" }
-				)
+				vim.keymap.set("i", "<S-Tab>", function()
+					if copilot.is_visible() then
+						copilot.accept()
+					end
+				end, { desc = "Accept Copilot Suggestions" })
 			end
 		end,
 	},

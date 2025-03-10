@@ -13,8 +13,8 @@ return {
 			win = {
 				input = {
 					keys = {
-						["<C-j>"] = { "history_forward", mode = { "i", "n" } },
-						["<C-k>"] = { "history_back", mode = { "i", "n" } },
+						["<C-i>"] = { "history_forward", mode = { "i", "n" } },
+						["<C-o>"] = { "history_back", mode = { "i", "n" } },
 					},
 				},
 			},

@@ -1,0 +1,15 @@
+font-size = 22
+
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
+
+macos-non-native-fullscreen = true
+macos-titlebar-style = hidden
+
+background-opacity = 0.94
+background-blur = 15
+window-padding-x = 10
+window-padding-y = 10
+
+theme = catppuccin-mocha.conf

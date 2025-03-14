@@ -1,3 +1,4 @@
+font-family = Jetbrains Mono
 font-size = 22
 
 cursor-style = block
@@ -6,10 +7,13 @@ shell-integration-features = no-cursor
 
 macos-non-native-fullscreen = true
 macos-titlebar-style = hidden
+confirm-close-surface = false
 
 background-opacity = 0.94
 background-blur = 15
 window-padding-x = 10
 window-padding-y = 10
+
+link-url = true
 
 theme = catppuccin-mocha.conf

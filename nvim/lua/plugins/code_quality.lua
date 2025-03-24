@@ -10,6 +10,7 @@ local enable_diagnostics = function(value)
 			focusable = false,
 		},
 		severity_sort = true,
+		jump = { float = true },
 	})
 end
 enable_diagnostics(true)

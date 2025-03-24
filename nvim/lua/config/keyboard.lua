@@ -14,7 +14,7 @@ vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
--- Next/Previous occurence + center + unfold
+-- Next/Previous occurrence + center + unfold
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 

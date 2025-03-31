@@ -28,7 +28,8 @@ return {
 						auto_show_delay_ms = 300,
 						window = {
 							border = "single",
-							winhighlight = "Normal:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
+							winhighlight =
+							"Normal:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
 						},
 					},
 					list = {
@@ -43,6 +44,13 @@ return {
 				signature = {
 					enabled = true,
 					window = { border = "single" },
+				},
+				cmdline = {
+					enabled = true,
+					keymap = { preset = 'inherit' },
+					completion = {
+						menu = { auto_show = true },
+					},
 				},
 			})
 

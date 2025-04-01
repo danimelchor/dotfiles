@@ -1,6 +1,20 @@
 local enable_diagnostics = function(value)
+	local virtual_text = value and {
+		enabled = value,
+		severity = {
+			max = vim.diagnostic.severity.WARN,
+		},
+	} or false
+	local virtual_lines = value and {
+		enabled = value,
+		severity = {
+			min = vim.diagnostic.severity.ERROR,
+		},
+	} or false
+
 	vim.diagnostic.config({
-		virtual_text = value,
+		virtual_text = virtual_text,
+		virtual_lines = virtual_lines,
 		signs = value,
 		underline = value,
 		update_in_insert = false,

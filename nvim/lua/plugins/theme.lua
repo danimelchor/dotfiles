@@ -58,8 +58,8 @@ return {
 
   -- Highlight color codes with their code #ff00ff
   {
-    'norcalli/nvim-colorizer.lua',
+    'brenoprata10/nvim-highlight-colors',
     config = true,
-    event = "VimEnter"
+    event = "BufEnter"
   },
 }

@@ -59,7 +59,6 @@ abbr -a lll 'ls -la'
 
 # Neovim
 function v
-    set -gx NODENV_VERSION 20.19.0
     # If no arg, open here
     if test -z $argv[1]
         nvim .

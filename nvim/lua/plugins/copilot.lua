@@ -4,6 +4,7 @@ return {
 		event = "InsertEnter",
 		config = function()
 			require("copilot").setup({
+				copilot_node_command = vim.fn.expand("$HOME") .. '/.nodenv/versions/20.19.0/bin/node',
 				filetypes = {
 					["*"] = true,
 				},

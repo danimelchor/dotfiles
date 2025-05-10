@@ -7,24 +7,24 @@ local toggle_inlay_hint = function()
 end
 
 local set_up_zlsp_server = function(capabilities, on_attach, zlsp_bin)
-	local server_config = require('lspconfig.configs')
-	local root_pattern = require('lspconfig.util').root_pattern
+	local server_config = require("lspconfig.configs")
+	local root_pattern = require("lspconfig.util").root_pattern
 	server_config.zlsp = {
 		default_config = {
 			autostart = false,
 			cmd = {
 				zlsp_bin,
-				'lsp',
-				'--allowlists=src/python/monolint/python/allowlist',
+				"lsp",
+				"--allowlists=src/python/monolint/python/allowlist",
 			},
-			name = 'zlsp',
+			name = "zlsp",
 			filetypes = {
-				'bzl',
-				'BUILD.bazel',
-				'python',
+				"bzl",
+				"BUILD.bazel",
+				"python",
 			},
-			root_dir = root_pattern('WORKSPACE')
-		}
+			root_dir = root_pattern("WORKSPACE"),
+		},
 	}
 	require("lspconfig")["zlsp"].setup({
 		capabilities = capabilities,
@@ -37,7 +37,7 @@ local set_up_zlsp = function(capabilities, on_attach)
 	local cmd = {
 		"python3",
 		"-c",
-		"from src.python.util.scripting.prebuilt import download_platform_binary; print(download_platform_binary(\"zlsp\"), end=\"\")",
+		'from src.python.util.scripting.prebuilt import download_platform_binary; print(download_platform_binary("zlsp"), end="")',
 	}
 	utils.run_command(cmd, {
 		cwd = cwd,
@@ -79,7 +79,7 @@ return {
 
 			require("mason").setup()
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			local ok, blink = pcall(require, 'blink.cmp')
+			local ok, blink = pcall(require, "blink.cmp")
 			if ok then
 				capabilities = blink.get_lsp_capabilities(capabilities)
 			end
@@ -108,7 +108,7 @@ return {
 							},
 						})
 					end,
-					["gopls"]  = function()
+					["gopls"] = function()
 						require("lspconfig")["gopls"].setup({
 							capabilities = capabilities,
 							on_attach = on_attach,
@@ -127,7 +127,7 @@ return {
 							},
 						})
 					end,
-					["ts_ls"]  = function()
+					["ts_ls"] = function()
 						local inlayHints = {
 							includeInlayEnumMemberValueHints = true,
 							includeInlayFunctionLikeReturnTypeHints = true,
@@ -152,16 +152,17 @@ return {
 					end,
 				},
 				ensure_installed = {
-					"ts_ls",
-					"lua_ls",
 					"bashls",
 					"cssls",
 					"eslint",
 					"html",
 					"jsonls",
+					"lua_ls",
+					"ocaml-lsp",
 					"ruff",
-					"yamlls",
 					"svelte",
+					"ts_ls",
+					"yamlls",
 					"zls",
 				},
 			})

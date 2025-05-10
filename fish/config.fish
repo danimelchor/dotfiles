@@ -39,6 +39,10 @@ if command -q nodenv
     nodenv init - | source
 end
 
+if command -q opam
+    eval (opam env)
+end
+
 # PATH vars
 fish_add_path /opt/homebrew/bin
 fish_add_path ~/.local/bin

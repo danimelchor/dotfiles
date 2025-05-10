@@ -2,6 +2,7 @@ local enable_diagnostics = function(value)
 	vim.diagnostic.config({
 		signs = value,
 		underline = value,
+		virtual_text = value,
 		update_in_insert = false,
 		float = {
 			source = "always",
@@ -110,6 +111,7 @@ return {
 				sh = { "shfmt" },
 				["_"] = { "trim_whitespace", "trim_newlines" },
 				proto = { "buf" },
+				ocaml = { "ocamlformat" },
 			}
 
 			require("conform").setup({

@@ -158,7 +158,7 @@ return {
 					"html",
 					"jsonls",
 					"lua_ls",
-					"ocaml-lsp",
+					"ocamllsp",
 					"ruff",
 					"svelte",
 					"ts_ls",

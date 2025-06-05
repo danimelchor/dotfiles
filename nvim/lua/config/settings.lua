@@ -17,6 +17,7 @@ opt.hidden = true
 opt.hlsearch = false
 opt.ignorecase = true
 opt.incsearch = true
+opt.linebreak = true
 opt.linespace = 0
 opt.mouse = "a"
 opt.number = true

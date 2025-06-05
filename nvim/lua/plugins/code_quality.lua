@@ -112,6 +112,7 @@ return {
 				["_"] = { "trim_whitespace", "trim_newlines" },
 				proto = { "buf" },
 				ocaml = { "ocamlformat" },
+				markdown = { "markdownlint" },
 			}
 
 			require("conform").setup({

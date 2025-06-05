@@ -72,10 +72,13 @@ function v
         nvim .
         popd
     # If the arg is a file, cd into base dir and open
-    else
+    else if test -f $argv[1]
         pushd $(dirname $argv[1]) || return 1
         nvim $(basename $argv[1])
         popd
+    else
+        echo "Invalid file or directory"
+        return 1
     end
 end
 

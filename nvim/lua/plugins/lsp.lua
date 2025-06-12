@@ -6,7 +6,7 @@ local toggle_inlay_hint = function()
 	vim.lsp.inlay_hint.enable(not is_enabled)
 end
 
-local set_up_zlsp_server = function(capabilities, on_attach, zlsp_bin)
+local set_up_zlsp_server = function(on_attach, zlsp_bin)
 	local server_config = require("lspconfig.configs")
 	local root_pattern = require("lspconfig.util").root_pattern
 	server_config.zlsp = {
@@ -26,13 +26,12 @@ local set_up_zlsp_server = function(capabilities, on_attach, zlsp_bin)
 			root_dir = root_pattern("WORKSPACE"),
 		},
 	}
-	require("lspconfig")["zlsp"].setup({
-		capabilities = capabilities,
+	vim.lsp.config("zlsp", {
 		on_attach = on_attach,
 	})
 end
 
-local set_up_zlsp = function(capabilities, on_attach)
+local set_up_zlsp = function(on_attach)
 	local cwd = vim.uv.os_homedir() .. "/stripe/zoolander"
 	local cmd = {
 		"python3",
@@ -42,7 +41,7 @@ local set_up_zlsp = function(capabilities, on_attach)
 	utils.run_command(cmd, {
 		cwd = cwd,
 		callback = function(data)
-			set_up_zlsp_server(capabilities, on_attach, data)
+			set_up_zlsp_server(on_attach, data)
 		end,
 	})
 end
@@ -71,86 +70,14 @@ end
 return {
 	-- LSP
 	{
-		"neovim/nvim-lspconfig",
+		"mason-org/mason-lspconfig.nvim",
 		config = function()
 			if not is_stripe then
 				require("neodev").setup()
 			end
 
 			require("mason").setup()
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			local ok, blink = pcall(require, "blink.cmp")
-			if ok then
-				capabilities = blink.get_lsp_capabilities(capabilities)
-			end
-
 			require("mason-lspconfig").setup({
-				handlers = {
-					function(server_name) -- default handler (optional)
-						require("lspconfig")[server_name].setup({
-							capabilities = capabilities,
-							on_attach = on_attach,
-						})
-					end,
-					["lua_ls"] = function()
-						require("lspconfig")["lua_ls"].setup({
-							capabilities = capabilities,
-							on_attach = on_attach,
-							settings = {
-								Lua = {
-									diagnostics = {
-										globals = { "vim" },
-										disable = { "missing-parameters", "missing-fields" },
-									},
-									hint = { enable = true },
-									telemetry = { enable = false },
-								},
-							},
-						})
-					end,
-					["gopls"] = function()
-						require("lspconfig")["gopls"].setup({
-							capabilities = capabilities,
-							on_attach = on_attach,
-							settings = {
-								gopls = {
-									hints = {
-										assignVariableTypes = true,
-										compositeLiteralFields = true,
-										compositeLiteralTypes = true,
-										constantValues = true,
-										functionTypeParameters = true,
-										parameterNames = true,
-										rangeVariableTypes = true,
-									},
-								},
-							},
-						})
-					end,
-					["ts_ls"] = function()
-						local inlayHints = {
-							includeInlayEnumMemberValueHints = true,
-							includeInlayFunctionLikeReturnTypeHints = true,
-							includeInlayFunctionParameterTypeHints = true,
-							includeInlayParameterNameHints = "all",
-							includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-							includeInlayPropertyDeclarationTypeHints = true,
-							includeInlayVariableTypeHints = false,
-						}
-						require("lspconfig")["ts_ls"].setup({
-							capabilities = capabilities,
-							on_attach = on_attach,
-							settings = {
-								javascript = {
-									inlayHints = inlayHints,
-								},
-								typescript = {
-									inlayHints = inlayHints,
-								},
-							},
-						})
-					end,
-				},
 				ensure_installed = {
 					"bashls",
 					"cssls",
@@ -158,7 +85,7 @@ return {
 					"html",
 					"jsonls",
 					"lua_ls",
-					-- "ocamllsp",
+					"ocamllsp",
 					"pyright",
 					"ruff",
 					"svelte",
@@ -168,9 +95,17 @@ return {
 				},
 			})
 
-			require("lspconfig").pyright.setup({
-				capabilities = capabilities,
-				on_attach = on_attach,
+			vim.lsp.config("lua_ls", {
+				settings = {
+					Lua = {
+						diagnostics = {
+							globals = { "vim" },
+							disable = { "missing-parameters", "missing-fields" },
+						},
+						hint = { enable = true },
+						telemetry = { enable = false },
+					},
+				},
 			})
 
 			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
@@ -178,15 +113,13 @@ return {
 			})
 
 			if is_stripe then
-				set_up_zlsp(capabilities, on_attach)
+				set_up_zlsp(on_attach)
 			end
 		end,
 		dependencies = {
-			-- LSP Support
-			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
+			{ "mason-org/mason.nvim", opts = {} },
+			"neovim/nvim-lspconfig",
 		},
-		event = "BufEnter",
 	},
 
 	-- Rust config

@@ -6,7 +6,7 @@ local toggle_inlay_hint = function()
 	vim.lsp.inlay_hint.enable(not is_enabled)
 end
 
-local set_up_zlsp_server = function(on_attach, zlsp_bin)
+local set_up_zlsp_server = function(zlsp_bin)
 	local server_config = require("lspconfig.configs")
 	local root_pattern = require("lspconfig.util").root_pattern
 	server_config.zlsp = {
@@ -26,12 +26,10 @@ local set_up_zlsp_server = function(on_attach, zlsp_bin)
 			root_dir = root_pattern("WORKSPACE"),
 		},
 	}
-	vim.lsp.config("zlsp", {
-		on_attach = on_attach,
-	})
+	vim.lsp.enable("zlsp")
 end
 
-local set_up_zlsp = function(on_attach)
+local set_up_zlsp = function()
 	local cwd = vim.uv.os_homedir() .. "/stripe/zoolander"
 	local cmd = {
 		"python3",
@@ -41,34 +39,13 @@ local set_up_zlsp = function(on_attach)
 	utils.run_command(cmd, {
 		cwd = cwd,
 		callback = function(data)
-			set_up_zlsp_server(on_attach, data)
+			set_up_zlsp_server(data)
 		end,
 	})
 end
 
 -- LSP
-local on_attach = function(client, bufnr)
-	local opts = { buffer = bufnr, remap = false }
-
-	vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-	vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-	vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
-	vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
-	vim.keymap.set("n", "<LEADER>r", vim.lsp.buf.rename, opts)
-	vim.keymap.set("n", "<LEADER>a", vim.lsp.buf.code_action, opts)
-	vim.keymap.set("n", "<LEADER>f", function()
-		vim.lsp.buf.format({ async = true })
-	end, opts)
-	vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-	vim.keymap.set("n", "ge", vim.diagnostic.open_float, opts)
-	vim.keymap.set("n", "dh", toggle_inlay_hint, opts)
-
-	vim.notify("LSP Attached (" .. client.name .. ")", vim.log.levels.INFO)
-end
-
 return {
-	-- LSP
 	{
 		"mason-org/mason-lspconfig.nvim",
 		config = function()
@@ -95,6 +72,32 @@ return {
 				},
 			})
 
+			vim.lsp.config("*", {
+				on_attach = function(client, bufnr)
+					local opts = { buffer = bufnr, remap = false }
+
+					vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+					vim.keymap.set("n", "K", function()
+						vim.lsp.buf.hover({
+							border = "single",
+						})
+					end, opts)
+					vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+					vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
+					vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
+					vim.keymap.set("n", "<LEADER>r", vim.lsp.buf.rename, opts)
+					vim.keymap.set("n", "<LEADER>a", vim.lsp.buf.code_action, opts)
+					vim.keymap.set("n", "<LEADER>f", function()
+						vim.lsp.buf.format({ async = true })
+					end, opts)
+					vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+					vim.keymap.set("n", "ge", vim.diagnostic.open_float, opts)
+					vim.keymap.set("n", "dh", toggle_inlay_hint, opts)
+
+					vim.notify("LSP Attached (" .. client.name .. ")", vim.log.levels.INFO)
+				end,
+			})
+
 			vim.lsp.config("lua_ls", {
 				settings = {
 					Lua = {
@@ -108,12 +111,8 @@ return {
 				},
 			})
 
-			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-				border = "single",
-			})
-
 			if is_stripe then
-				set_up_zlsp(on_attach)
+				set_up_zlsp()
 			end
 		end,
 		dependencies = {

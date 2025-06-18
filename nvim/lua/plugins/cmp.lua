@@ -9,7 +9,7 @@ return {
 			"rafamadriz/friendly-snippets",
 			"onsails/lspkind.nvim",
 		},
-		version = "*",
+		version = "1.*",
 		config = function()
 			require("blink.cmp").setup({
 				keymap = {
@@ -18,9 +18,6 @@ return {
 					["<C-j>"] = { "select_next" },
 					["<Up>"] = {},
 					["<Down>"] = {},
-				},
-				appearance = {
-					use_nvim_cmp_as_default = true,
 				},
 				completion = {
 					documentation = {

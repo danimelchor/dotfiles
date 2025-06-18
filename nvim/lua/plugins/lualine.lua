@@ -82,10 +82,13 @@ return {
 						},
 					},
 					lualine_x = {
-						"filetype",
+						lint_progress,
 					},
 					lualine_y = {
-						lint_progress,
+						"filetype",
+					},
+					lualine_z = {
+						"lsp_status",
 					},
 				},
 				extensions = { "aerial", "nvim-tree", "fugitive", "fzf", "toggleterm", "quickfix", "overseer" },

@@ -31,6 +31,7 @@ return {
           "html",
           "json",
           "markdown",
+          "ocaml",
           "python",
           "scala",
           "scss",

@@ -26,7 +26,7 @@ return {
         end,
         desc = "Harpoon quick menu"
       },
-      unpack((
+      table.unpack((
         function()
           local keys = {}
           for i = 1, 9 do

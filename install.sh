@@ -21,6 +21,7 @@ files[".skhdrc"]="$HOME"
 files[".ideavimrc"]="$HOME"
 files["starship.toml"]="$HOME/.config"
 files["ghostty"]="$HOME/.config"
+files[".spacemacs"]="$HOME"
 
 # Backup existing files
 echo -e "\033[1m\033[92mBacking up existing files...\033[0m"

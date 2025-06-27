@@ -65,7 +65,9 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(
+                                      catppuccin-theme
+                                      )
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -210,9 +212,7 @@ It should only modify the values of Spacemacs settings."
    ;; package can be defined with `:package', or a theme can be defined with
    ;; `:location' to download the theme package, refer the themes section in
    ;; DOCUMENTATION.org for the full theme specifications.
-   dotspacemacs-themes '(
-                         spacemacs-dark
-                         spacemacs-light)
+   dotspacemacs-themes '(catppuccin-theme)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
@@ -221,7 +221,8 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
+   ;; dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
+   dotspacemacs-mode-line-theme 'spacemacs
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -560,6 +561,8 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
+  (setq catppuccin-flavor 'mocha)
+  (catppuccin-reload)
   )
 
 (defun dotspacemacs/user-config ()
@@ -584,51 +587,68 @@ This function is called at the very end of Spacemacs initialization."
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
    '(package-selected-packages
-     '(ace-jump-helm-line ace-link aggressive-indent all-the-icons auto-compile
-                          auto-highlight-symbol auto-yasnippet
-                          centered-cursor-mode clean-aindent-mode code-cells
-                          code-review column-enforce-mode cython-mode define-word
-                          devdocs diminish dired-quick-sort disable-mouse
-                          dotenv-mode drag-stuff dumb-jump eat edit-indirect
-                          elisp-def elisp-demos elisp-slime-nav emr esh-help
-                          eshell-prompt-extras eshell-z eval-sexp-fu evil-anzu
-                          evil-args evil-cleverparens evil-collection
-                          evil-easymotion evil-escape evil-evilified-state
-                          evil-exchange evil-goggles evil-iedit-state
-                          evil-indent-plus evil-lion evil-lisp-state evil-matchit
-                          evil-mc evil-nerd-commenter evil-numbers evil-org
-                          evil-surround evil-textobj-line evil-tutor
-                          evil-unimpaired evil-visual-mark-mode evil-visualstar
-                          expand-region eyebrowse fancy-battery flycheck-elsa
-                          flycheck-package flycheck-pos-tip flyspell-correct-helm
-                          gh-md git-link git-messenger git-modes git-timemachine
-                          gitignore-templates gnuplot golden-ratio
-                          google-translate helm-ag helm-c-yasnippet helm-comint
-                          helm-company helm-descbinds helm-git-grep helm-ls-git
-                          helm-lsp helm-make helm-mode-manager helm-org
-                          helm-org-rifle helm-projectile helm-purpose helm-pydoc
-                          helm-swoop helm-themes helm-xref hide-comnt
-                          highlight-indentation highlight-numbers
-                          highlight-parentheses hl-todo holy-mode htmlize
-                          hungry-delete hybrid-mode indent-guide info+ inspector
-                          link-hint live-py-mode lorem-ipsum lsp-origami
-                          lsp-treemacs lsp-ui macrostep markdown-toc multi-line
-                          multi-term multi-vterm nameless nerd-icons
-                          open-junk-file org-cliplink org-contrib org-download
-                          org-mime org-pomodoro org-present org-projectile
-                          org-rich-yank org-superstar orgit-forge overseer
-                          page-break-lines paradox password-generator pcre2el
-                          pip-requirements pipenv pippel poetry popwin py-isort
-                          pydoc pyenv-mode pylookup pytest quickrun
-                          rainbow-delimiters restart-emacs shell-pop smeargle
-                          space-doc spaceline spacemacs-purpose-popwin
-                          spacemacs-whitespace-cleanup sphinx-doc
-                          string-edit-at-point string-inflection symbol-overlay
-                          symon term-cursor terminal-here toc-org treemacs-evil
-                          treemacs-icons-dired treemacs-magit treemacs-persp
-                          treemacs-projectile undo-fu undo-fu-session
-                          vi-tilde-fringe volatile-highlights vundo wgrep winum
-                          writeroom-mode ws-butler yasnippet-snippets)))
+     '(a ace-jump-helm-line ace-link afternoon-theme aggressive-indent alect-themes
+         alert all-the-icons ample-theme ample-zen-theme anti-zenburn-theme
+         apropospriate-theme auto-compile auto-highlight-symbol auto-yasnippet
+         autothemer badwolf-theme birds-of-paradise-plus-theme bubbleberry-theme
+         busybee-theme catppuccin-theme centered-cursor-mode cherry-blossom-theme
+         chocolate-theme clean-aindent-mode closql clues-theme code-cells
+         code-review color-theme-sanityinc-solarized
+         color-theme-sanityinc-tomorrow column-enforce-mode company
+         cyberpunk-theme cython-mode dakrone-theme darkmine-theme darkokai-theme
+         darktooth-theme deferred define-word devdocs diminish dired-quick-sort
+         disable-mouse django-theme doom-themes dotenv-mode dracula-theme
+         drag-stuff dumb-jump eat edit-indirect ef-themes elisp-def elisp-demos
+         elisp-slime-nav emacsql emojify emr esh-help eshell-prompt-extras
+         eshell-z espresso-theme eval-sexp-fu evil-anzu evil-args
+         evil-cleverparens evil-collection evil-easymotion evil-escape
+         evil-evilified-state evil-exchange evil-goggles evil-iedit-state
+         evil-indent-plus evil-lion evil-lisp-state evil-matchit evil-mc
+         evil-nerd-commenter evil-numbers evil-org evil-surround evil-textobj-line
+         evil-tutor evil-unimpaired evil-visual-mark-mode evil-visualstar
+         exotica-theme expand-region eyebrowse eziam-themes fancy-battery
+         farmhouse-themes flatland-theme flatui-theme flycheck flycheck-elsa
+         flycheck-package flycheck-pos-tip flyspell-correct flyspell-correct-helm
+         forge gandalf-theme gh-md ghub git-link git-messenger git-modes
+         git-timemachine gitignore-templates gntp gnuplot golden-ratio
+         google-translate gotham-theme grandshell-theme gruber-darker-theme
+         gruvbox-theme hc-zenburn-theme helm-ag helm-c-yasnippet helm-comint
+         helm-company helm-descbinds helm-git-grep helm-ls-git helm-lsp helm-make
+         helm-mode-manager helm-org helm-org-rifle helm-projectile helm-purpose
+         helm-pydoc helm-swoop helm-themes helm-xref hemisu-theme heroku-theme
+         hide-comnt highlight-indentation highlight-numbers highlight-parentheses
+         hl-todo holy-mode htmlize hungry-delete hybrid-mode indent-guide info+
+         inkpot-theme inspector ir-black-theme jazz-theme jbeans-theme
+         kaolin-themes light-soap-theme link-hint live-py-mode llama load-env-vars
+         log4e lorem-ipsum lsp-mode lsp-origami lsp-treemacs lsp-ui lush-theme
+         macrostep madhat2r-theme magit magit-section markdown-mode markdown-toc
+         material-theme memoize minimal-theme modus-themes moe-theme molokai-theme
+         monochrome-theme monokai-theme multi-line multi-term multi-vterm
+         mustang-theme nameless naquadah-theme noctilux-theme obsidian-theme
+         occidental-theme oldlace-theme omtose-phellack-themes open-junk-file
+         org-category-capture org-cliplink org-contrib org-download org-mime
+         org-pomodoro org-present org-project-capture org-projectile org-rich-yank
+         org-superstar organic-green-theme orgit orgit-forge origami overseer
+         package-lint page-break-lines paradox password-generator pcre2el
+         phoenix-dark-mono-theme phoenix-dark-pink-theme pip-requirements pipenv
+         pippel planet-theme poetry popwin pos-tip powerline professional-theme
+         purple-haze-theme py-isort pydoc pyenv-mode pylookup pytest pythonic
+         pyvenv quickrun railscasts-theme rainbow-delimiters rebecca-theme
+         restart-emacs reverse-theme seti-theme shell-pop smeargle smyx-theme
+         soft-charcoal-theme soft-morning-theme soft-stone-theme solarized-theme
+         soothe-theme space-doc spacegray-theme spaceline spaceline-all-the-icons
+         spacemacs-purpose-popwin spacemacs-whitespace-cleanup sphinx-doc
+         string-edit-at-point string-inflection subatomic-theme subatomic256-theme
+         sublime-themes sunny-day-theme symbol-overlay symon tango-2-theme
+         tango-plus-theme tangotango-theme tao-theme term-cursor terminal-here
+         toc-org toxi-theme transient treemacs-evil treemacs-icons-dired
+         treemacs-magit treemacs-persp treemacs-projectile treepy
+         twilight-anti-bright-theme twilight-bright-theme twilight-theme
+         ujelly-theme underwater-theme undo-fu undo-fu-session uuidgen
+         vi-tilde-fringe vim-powerline volatile-highlights vterm vundo wgrep
+         white-sand-theme winum with-editor writeroom-mode ws-butler yaml
+         yasnippet yasnippet-snippets zen-and-art-theme zenburn-theme
+         zonokai-emacs)))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.

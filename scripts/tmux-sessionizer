@@ -1,17 +1,8 @@
 #!/usr/bin/env bash
 # vim: set ft=bash
 
-# If ~/stripe exists
-if [ -d ~/stripe ]; then
-    parents=(~/stripe ~/personal)
-    folders=(
-        ~/stripe/zoolander/src/python/pipeline
-        ~/notes
-    )
-else
-    parents=(~/projects ~/personal ~/work ~/projects/dmelchorpi)
-    folders=(~/notes)
-fi
+parents=(~/projects ~/personal ~/work ~/projects/dmelchorpi)
+folders=(~/notes)
 
 if [[ $# -eq 1 ]]; then
     selected=$1

@@ -1,5 +1,3 @@
-local is_stripe = require("config.utils").is_stripe()
-
 return {
 	{
 		"saghen/blink.cmp",
@@ -25,8 +23,7 @@ return {
 						auto_show_delay_ms = 300,
 						window = {
 							border = "single",
-							winhighlight =
-							"Normal:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
+							winhighlight = "Normal:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
 						},
 					},
 					list = {
@@ -44,7 +41,7 @@ return {
 				},
 				cmdline = {
 					enabled = true,
-					keymap = { preset = 'inherit' },
+					keymap = { preset = "inherit" },
 					completion = {
 						menu = { auto_show = true },
 					},

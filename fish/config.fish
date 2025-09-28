@@ -1,29 +1,4 @@
-if test -e ~/stripe
-    source ~/stripe/space-commander/bin/sc-env-activate.fish
-
-    fish_add_path "$HOME/.rbenv/shims"
-    fish_add_path "$HOME/.rbenv/bin"
-    fish_add_path "$HOME/stripe/password-vault/bin"
-    fish_add_path "$HOME/stripe/space-commander/bin"
-    fish_add_path "$HOME/stripe/henson/bin"
-    fish_add_path "$HOME/go/bin"
-
-    abbr -a pipe 'cd ~/stripe/zoolander/src/python/pipeline/'
-    abbr -a zoo 'cd ~/stripe/zoolander/'
-    abbr -a viz 'cd ~/stripe/pay-server/viz/'
-    abbr -a gocode 'cd ~/stripe/gocode/'
-    abbr -a redshift 'cd ~/stripe/redshift/'
-    abbr -a dot 'cd ~/Documents/dotfiles/'
-    abbr -a personal 'cd ~/personal/'
-
-    abbr -a qapay 'pay --host-type qa-mydata-standard'
-    abbr -a pjk 'pay job:kill'
-    abbr -a pjl 'pay job:logs'
-
-    abbr -a mpt 'git switch master-passing-tests'
-else
-    abbr -a --set-cursor=% sv 'nvim scp://dmelchor@dmelchorpi.local/%'
-end
+abbr -a --set-cursor=% sv 'nvim scp://dmelchor@dmelchorpi.local/%'
 
 functions -e fish_right_prompt
 

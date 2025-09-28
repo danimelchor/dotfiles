@@ -113,6 +113,7 @@ return {
 				proto = { "buf" },
 				ocaml = { "ocamlformat" },
 				markdown = { "markdownlint" },
+				rust = { "rustfmt" },
 			}
 
 			require("conform").setup({

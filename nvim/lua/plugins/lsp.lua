@@ -1,5 +1,4 @@
 local utils = require("config.utils")
-local is_stripe = utils.is_stripe()
 
 local toggle_inlay_hint = function()
 	local is_enabled = vim.lsp.inlay_hint.is_enabled()
@@ -29,30 +28,12 @@ local set_up_zlsp_server = function(zlsp_bin)
 	vim.lsp.enable("zlsp")
 end
 
-local set_up_zlsp = function()
-	local cwd = vim.uv.os_homedir() .. "/stripe/zoolander"
-	local cmd = {
-		"python3",
-		"-c",
-		'from src.python.util.scripting.prebuilt import download_platform_binary; print(download_platform_binary("zlsp"), end="")',
-	}
-	utils.run_command(cmd, {
-		cwd = cwd,
-		callback = function(data)
-			set_up_zlsp_server(data)
-		end,
-	})
-end
-
 -- LSP
 return {
 	{
 		"mason-org/mason-lspconfig.nvim",
 		config = function()
-			if not is_stripe then
-				require("neodev").setup()
-			end
-
+			require("neodev").setup()
 			require("mason").setup()
 			require("mason-lspconfig").setup({
 				ensure_installed = {
@@ -110,10 +91,6 @@ return {
 					},
 				},
 			})
-
-			if is_stripe then
-				set_up_zlsp()
-			end
 		end,
 		dependencies = {
 			{ "mason-org/mason.nvim", opts = {} },
@@ -124,7 +101,6 @@ return {
 	-- Rust config
 	{
 		"mrcjkb/rustaceanvim",
-		version = "^4",
-		ft = { "rust" },
+		lazy = false,
 	},
 }

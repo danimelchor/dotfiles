@@ -1,31 +1,6 @@
-local utils = require("config.utils")
-
 local toggle_inlay_hint = function()
 	local is_enabled = vim.lsp.inlay_hint.is_enabled()
 	vim.lsp.inlay_hint.enable(not is_enabled)
-end
-
-local set_up_zlsp_server = function(zlsp_bin)
-	local server_config = require("lspconfig.configs")
-	local root_pattern = require("lspconfig.util").root_pattern
-	server_config.zlsp = {
-		default_config = {
-			autostart = false,
-			cmd = {
-				zlsp_bin,
-				"lsp",
-				"--allowlists=src/python/monolint/python/allowlist",
-			},
-			name = "zlsp",
-			filetypes = {
-				"bzl",
-				"BUILD.bazel",
-				"python",
-			},
-			root_dir = root_pattern("WORKSPACE"),
-		},
-	}
-	vim.lsp.enable("zlsp")
 end
 
 -- LSP

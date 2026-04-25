@@ -3,6 +3,30 @@ local toggle_inlay_hint = function()
 	vim.lsp.inlay_hint.enable(not is_enabled)
 end
 
+local on_attach = function(client, bufnr)
+	local opts = { buffer = bufnr, remap = false }
+
+	vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+	vim.keymap.set("n", "K", function()
+		vim.lsp.buf.hover({
+			border = "single",
+		})
+	end, opts)
+	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+	vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
+	vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
+	vim.keymap.set("n", "<LEADER>r", vim.lsp.buf.rename, opts)
+	vim.keymap.set("n", "<LEADER>a", vim.lsp.buf.code_action, opts)
+	vim.keymap.set("n", "<LEADER>f", function()
+		vim.lsp.buf.format({ async = true })
+	end, opts)
+	vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+	vim.keymap.set("n", "ge", vim.diagnostic.open_float, opts)
+	vim.keymap.set("n", "dh", toggle_inlay_hint, opts)
+
+	vim.notify("LSP Attached (" .. client.name .. ")", vim.log.levels.INFO)
+end
+
 -- LSP
 return {
 	{
@@ -19,39 +43,18 @@ return {
 					"jsonls",
 					"lua_ls",
 					"ocamllsp",
-					"pyright",
+					-- "pyright",
 					"ruff",
 					"svelte",
 					"ts_ls",
+					"ty",
 					"yamlls",
 					"zls",
 				},
 			})
 
 			vim.lsp.config("*", {
-				on_attach = function(client, bufnr)
-					local opts = { buffer = bufnr, remap = false }
-
-					vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-					vim.keymap.set("n", "K", function()
-						vim.lsp.buf.hover({
-							border = "single",
-						})
-					end, opts)
-					vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-					vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
-					vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
-					vim.keymap.set("n", "<LEADER>r", vim.lsp.buf.rename, opts)
-					vim.keymap.set("n", "<LEADER>a", vim.lsp.buf.code_action, opts)
-					vim.keymap.set("n", "<LEADER>f", function()
-						vim.lsp.buf.format({ async = true })
-					end, opts)
-					vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-					vim.keymap.set("n", "ge", vim.diagnostic.open_float, opts)
-					vim.keymap.set("n", "dh", toggle_inlay_hint, opts)
-
-					vim.notify("LSP Attached (" .. client.name .. ")", vim.log.levels.INFO)
-				end,
+				on_attach = on_attach,
 			})
 
 			vim.lsp.config("lua_ls", {
@@ -77,5 +80,12 @@ return {
 	{
 		"mrcjkb/rustaceanvim",
 		lazy = false,
+		config = function()
+			vim.g.rustaceanvim = {
+				server = {
+					on_attach = on_attach,
+				},
+			}
+		end,
 	},
 }
